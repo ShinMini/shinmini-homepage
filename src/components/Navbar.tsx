@@ -2,8 +2,6 @@ import React from 'react';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { signIn, signOut } from '../utils';
-import { auth } from '../lib/firebase/firebase';
-
 const style = {
   navbar: `bg-blue-500 text-white flex justify-between items-center p-4`,
   logo: `text-2xl font-bold cursor-pointer`,
