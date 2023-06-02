@@ -1,8 +1,28 @@
 {
   "name": "shinmini-homepage",
+  "version": "0.0.1",
   "private": true,
-  "version": "0.0.0",
+  "description": "Shinmini's Homepage",
+  "keywords": [
+    "shinmini",
+    "homepage",
+    "react",
+    "typescript",
+    "vite",
+    "tailwindcss",
+    "firebase"
+  ],
   "type": "module",
+  "homepage": "https://shinmini.com",
+  "author": {
+    "name": "Shinmini",
+    "email": "gusals121234@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShinMini/shinmini-homepage"
+  },
+  "license": "Apache-2.0",
   "scripts": {
     "ci": "rm -rf node_modules && yarn install",
     "dev": "vite",
