@@ -1,7 +1,10 @@
 import Navbar from './components/Navbar';
 
-import { auth } from './lib/firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './lib/firebase/firebase';
+
+import { store } from './store';
+import { Provider } from 'react-redux';
 
 const style = {
   container: `max-w-4xl mx-auto p-4 text-center`,
@@ -14,7 +17,6 @@ const style = {
 
 function App() {
   const [user] = useAuthState(auth);
-  console.log(user);
 
   return (
     <div className={style.container}>
