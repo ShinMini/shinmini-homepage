@@ -1,7 +1,4 @@
 import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
-import { useEmulator } from './useEmulator';
-
-type FireStoreType = ReturnType<typeof getFirestore>;
 
 /**
  * Returns the existing default Firestore instance that is associated with the default @firebase/app#FirebaseApp.
@@ -10,13 +7,10 @@ type FireStoreType = ReturnType<typeof getFirestore>;
  * @param {FireStoreType} firestore a firestore object.
  * @returns {FireStoreType}
  */
-export const useFirestore = (firestore: FireStoreType) => {
-  if (!firestore) {
-    firestore = getFirestore();
-    const emulator = useEmulator();
-    if (emulator) {
-      connectFirestoreEmulator(firestore, 'localhost', 8080);
-    }
+export const useFirestore = () => {
+  const firestore = getFirestore();
+  if (import.meta.env.VITE_USE_FIRESTORE_EMULATOR) {
+    connectFirestoreEmulator(firestore, 'localhost', 8080);
   }
   return firestore;
 };
