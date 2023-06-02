@@ -1,9 +1,8 @@
-import { getAuth, connectAuthEmulator } from 'firebase/auth';
+import { connectAuthEmulator, getAuth } from 'firebase/auth';
 
 import type { FirebaseApp } from 'firebase/app';
 import type { Auth } from 'firebase/auth';
-
-// import { EMULATOR } from '../constants';
+import { useEmulator } from './useEmulator';
 
 /**
  * Check if the user is logged in.
@@ -14,9 +13,10 @@ import type { Auth } from 'firebase/auth';
  * @returns {Auth} true if the user is logged in.
  */
 export const useAuth = (firebaseApp: FirebaseApp) => {
-  const auth = getAuth(firebaseApp);
-  //   if (EMULATOR) {
-  //     connectAuthEmulator(auth, 'http://localhost:9099');
-  //   }
-  return auth satisfies Auth;
+  const _auth = getAuth(firebaseApp);
+  const emulator = useEmulator();
+  if (emulator) {
+    connectAuthEmulator(_auth, 'http://localhost:9099');
+  }
+  return _auth satisfies Auth;
 };

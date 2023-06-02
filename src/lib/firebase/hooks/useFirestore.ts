@@ -1,5 +1,5 @@
 import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
-import { EMULATOR } from '../constants';
+import { useEmulator } from './useEmulator';
 
 type FireStoreType = ReturnType<typeof getFirestore>;
 
@@ -13,7 +13,8 @@ type FireStoreType = ReturnType<typeof getFirestore>;
 export const useFirestore = (firestore: FireStoreType) => {
   if (!firestore) {
     firestore = getFirestore();
-    if (EMULATOR) {
+    const emulator = useEmulator();
+    if (emulator) {
       connectFirestoreEmulator(firestore, 'localhost', 8080);
     }
   }
