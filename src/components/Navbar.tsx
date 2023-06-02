@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { auth } from '../lib/firebase/firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
-
 import SignIn from '../pages/SignIn';
+import { useAppSelector } from '../store/hooks';
 
 const style = {
   navbar: `bg-blue-500 text-white flex justify-between items-center p-4`,
@@ -14,17 +12,21 @@ const style = {
 };
 
 const Navbar: React.FC = () => {
-  const [user] = useAuthState(auth);
+  const user = useAppSelector(state => state.user);
 
   return (
     <nav className={style.navbar}>
-      <div className={style.logo}>Logo</div>
-      <SignIn />
-      <ul className={style.navItems}>
-        <li className={style.navItem}>Home</li>
-        <li className={style.navItem}>About</li>
-        <li className={style.navItem}>Contact</li>
-      </ul>
+      <div className={style.logo}>dev-ShinMini</div>
+      {!user?.displayName ? (
+        <SignIn />
+      ) : (
+        <ul className={style.navItems}>
+          <li className={style.navItem}>{user.displayName}</li>
+          <li className={style.navItem}>Home</li>
+          <li className={style.navItem}>About</li>
+          <li className={style.navItem}>Contact</li>
+        </ul>
+      )}
     </nav>
   );
 };
