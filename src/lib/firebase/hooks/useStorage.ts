@@ -1,17 +1,19 @@
 import { connectStorageEmulator, getStorage } from 'firebase/storage';
-type StorageType = ReturnType<typeof getStorage>;
+
+import type { FirebaseApp } from 'firebase/app';
 
 /**
  * Gets a FirebaseStorage instance for the given Firebase app.
- * @param {StorageType || undefined} storage
- * @returns {StorageType}
+ * Using a storage instance, you can create references, get references, and delete references.
+ *
+ * @param {FirebaseApp} firebaseAppInstance
+ * @returns {FirebaseStorage}
  */
-export const useStorage = (storage?: StorageType) => {
-  if (!storage) {
-    storage = getStorage();
-    if (import.meta.env.VITE_USE_FIREBASE_EMULATOR) {
-      connectStorageEmulator(storage, 'localhost', 9199);
-    }
+export const useStorage = (firebaseAppInstance: FirebaseApp) => {
+  const storage = getStorage(firebaseAppInstance);
+
+  if (import.meta.env.VITE_USE_FIREBASE_EMULATOR) {
+    connectStorageEmulator(storage, 'localhost', 9199);
   }
 
   return storage;
