@@ -1,10 +1,11 @@
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { auth } from '../lib/firebase/firebase';
+import auth from '@lib/firebase';
+
 import { FirebaseError } from 'firebase/app';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 const provider = new GoogleAuthProvider();
 
-export async function signIn() {
+export async function signIn(callback: () => void) {
   let token = undefined;
   let user = undefined;
   try {
@@ -12,6 +13,8 @@ export async function signIn() {
     const credential = GoogleAuthProvider.credentialFromResult(result);
     token = credential?.accessToken;
     user = result.user;
+
+    callback();
   } catch (error) {
     if (error instanceof FirebaseError) {
       const errorCode = error.code;
