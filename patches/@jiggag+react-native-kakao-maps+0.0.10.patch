@@ -1,0 +1,18 @@
+# diff --git a/node_modules/@jiggag/react-native-kakao-maps/android/src/main/java/com/jiggag/rnkakaomaps/KakaoMapManager.java b/node_modules/@jiggag/react-native-kakao-maps/android/src/main/java/com/jiggag/rnkakaomaps/KakaoMapManager.java
+# index f82171a..24f7ec1 100644
+# --- a/node_modules/@jiggag/react-native-kakao-maps/android/src/main/java/com/jiggag/rnkakaomaps/KakaoMapManager.java
+# +++ b/node_modules/@jiggag/react-native-kakao-maps/android/src/main/java/com/jiggag/rnkakaomaps/KakaoMapManager.java
+# @@ -66,9 +66,10 @@ public class KakaoMapManager extends ViewGroupManager<FrameLayout> {
+#          int commandIdInt = Integer.parseInt(commandId);
+ 
+#          if (commandIdInt == COMMAND_CREATE) {
+# -            if (fragment == null) {
+# -                createFragment(root);
+# -            }
+# +            createFragment(root);
+# +            // if (fragment == null) {
+# +            //     createFragment(root);
+# +            // }
+#          }
+#      }
+ 
