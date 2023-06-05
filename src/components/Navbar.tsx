@@ -17,10 +17,9 @@ const Navbar: React.FC = () => {
   const user = useAppSelector(state => state.user);
 
   const googleSignIn = async () => {
-    const { token, user } = await signIn();
+    const { token, user } = await signIn(() => dispatch({ type: 'user/setUser', payload: user }));
     if (!user) return;
 
-    dispatch({ type: 'user/setUser', payload: user });
     console.log(token, user);
   };
 
@@ -38,7 +37,6 @@ const Navbar: React.FC = () => {
         </button>
       ) : (
         <ul className={style.navItems}>
-          <li className={style.navItem}>{user.displayName}</li>
           <li className={style.navItem}>Home</li>
           <li className={style.navItem}>About</li>
           <li className={style.navItem}>Contact</li>
