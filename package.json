@@ -2,6 +2,68 @@
   "name": "shinmini-homepage",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "ci": "rm -rf node_modules && rm -rf yarn.lock && yarn install",
+    "dev": "vite",
+    "test": "jest",
+    "build": "tsc && vite build",
+    "compile": "ts-node scripts/compile.ts",
+    "tslint": "tsc --noEmit && eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "firebase": "^9.22.1",
+    "jest": "^29.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-firebase-hooks": "^5.1.1",
+    "react-google-button": "^0.7.2",
+    "react-redux": "^8.0.7",
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.2.3",
+    "styled-components": "^6.0.0-rc.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@types/redux-persist": "^4.3.1",
+    "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.41.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "loadtest": "^5.2.0",
+    "postcss": "^8.4.24",
+    "spinnies": "^0.5.1",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-tsconfig-paths": "^4.2.0"
+  },
+  "resolutions": {
+    "crypto-js": "3.3.0"
+  },
+  "jest": {
+    "preset": "react",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "pre-push": [
+    "compile"
+  ],
   "description": "Shinmini's Homepage",
   "keywords": [
     "shinmini",
@@ -22,40 +84,5 @@
     "type": "git",
     "url": "https://github.com/ShinMini/shinmini-homepage"
   },
-  "license": "Apache-2.0",
-  "scripts": {
-    "ci": "rm -rf node_modules && yarn install",
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "tslint": "tsc --noEmit && eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@reduxjs/toolkit": "^1.9.5",
-    "firebase": "^9.22.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-firebase-hooks": "^5.1.1",
-    "react-google-button": "^0.7.2",
-    "react-redux": "^8.0.7"
-  },
-  "devDependencies": {
-    "@types/react": "^18.0.37",
-    "@types/react-dom": "^18.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
-    "@vitejs/plugin-react": "^4.0.0",
-    "autoprefixer": "^10.4.14",
-    "eslint": "^8.41.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.3.4",
-    "postcss": "^8.4.24",
-    "tailwindcss": "^3.3.2",
-    "typescript": "^5.0.2",
-    "vite": "^4.3.9",
-    "vite-plugin-eslint": "^1.8.1",
-    "vite-tsconfig-paths": "^4.2.0"
-  }
+  "license": "Apache-2.0"
 }

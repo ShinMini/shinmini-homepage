@@ -5,6 +5,8 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "esModuleInterop": true,
+
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -22,6 +24,22 @@
 
     /* Type checking */
     "typeRoots": ["./node_modules/@types", "./src/@types"],
+    "paths": { 
+      "@src/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+
+      "@assets/*": ["./src/assets/*"],
+      "@types/*": ["./src/@types/*"],
+      "@config/*": ["./src/config/*"],
+
+      "@hooks/*": ["./src/hooks/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@utils/*": ["./src/utils/*"],
+
+      "@store/*": ["./src/store/*"],
+      "@lib/*": ["./src/lib/*"],
+   },
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
