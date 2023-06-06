@@ -1,4 +1,3 @@
-import { signIn } from './signIn';
-import { signOut } from './signOut';
+import { GoogleAuth } from './googleAuth';
 
-export { signIn, signOut };
+export { GoogleAuth };

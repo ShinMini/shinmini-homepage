@@ -1,19 +1,19 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
 
+    "baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
+
+    "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
+    "module": "commonjs" /* Specify what module code is generated. */,
+    "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "noEmit": true /* Disable emitting files from a compilation. */,
     "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react-jsx",
 
     /* Linting */
@@ -21,6 +21,28 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+
+    "types": [
+      "vite",
+      "vite/client",
+      "react",
+      "jest",
+      "node"
+    ] /* Specify type package names to be included without being referenced in a source file. */,
+
+    "allowJs": true /* Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files. */,
+
+    "isolatedModules": true /* Ensure that each file can be safely transpiled without relying on other imports. */,
+    "allowSyntheticDefaultImports": true /* Allow 'import x from y' when a module doesn't have a default export. */,
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */,
+    "noImplicitAny": false,
+    "resolveJsonModule": true /* Enable importing .json files */,
+
+    "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
+    "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "sourceMap": true /* Create source map files for emitted JavaScript files. */,
+    "pretty": true /* Stylize errors and messages using color and context (experimental). */,
 
     /* Type checking */
     "typeRoots": ["./node_modules/@types", "./src/@types"],
@@ -30,7 +52,7 @@
       "@pages/*": ["./src/pages/*"],
 
       "@assets/*": ["./src/assets/*"],
-      "@types/*": ["./src/@types/*"],
+      "types/*": ["./src/types/*"],
       "@config/*": ["./src/config/*"],
 
       "@hooks/*": ["./src/hooks/*"],
@@ -41,6 +63,6 @@
       "@lib/*": ["./src/lib/*"],
    },
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src/**/*","global.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "index.js", "metro.config.js", "babel.config.js"],
+  "exclude": ["node_modules", "jest.config.js", "tailwind.config.js", "postcss.config.js" ],
 }

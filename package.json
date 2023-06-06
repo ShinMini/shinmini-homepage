@@ -4,16 +4,17 @@
   "private": true,
   "scripts": {
     "ci": "rm -rf node_modules && rm -rf yarn.lock && yarn install",
-    "dev": "vite",
+    "dev": "ENVFILE=.env.development vite",
     "test": "jest",
-    "build": "tsc && vite build",
-    "compile": "ts-node scripts/compile.ts",
+    "build": "ENVFILE=.env.development tsc && vite build",
+    "compile": "ENVFILE=.env.staging ts-node scripts/compile.ts",
     "tslint": "tsc --noEmit && eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "dotenv": "^16.1.4",
     "firebase": "^9.22.1",
     "jest": "^29.5.0",
     "react": "^18.2.0",
@@ -23,12 +24,15 @@
     "react-redux": "^8.0.7",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.2.3",
-    "styled-components": "^6.0.0-rc.3"
+    "styled-components": "^6.0.0-rc.3",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
+    "@types/node": "^20.2.5",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@types/redux-persist": "^4.3.1",
+    "@types/spinnies": "^0.5.0",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
@@ -42,6 +46,7 @@
     "postcss": "^8.4.24",
     "spinnies": "^0.5.1",
     "tailwindcss": "^3.3.2",
+    "tslib": "^2.5.3",
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
     "vite-plugin-eslint": "^1.8.1",
@@ -74,7 +79,6 @@
     "tailwindcss",
     "firebase"
   ],
-  "type": "module",
   "homepage": "https://shinmini.com",
   "author": {
     "name": "Shinmini",

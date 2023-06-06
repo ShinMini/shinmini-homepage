@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { signIn, signOut } from '../utils';
+import { GoogleAuth } from '../utils';
+import auth from '@src/lib/firebase';
+
 const style = {
   navbar: `bg-blue-500 text-white flex justify-between items-center p-4`,
   logo: `text-2xl font-bold cursor-pointer`,
@@ -15,17 +17,17 @@ const style = {
 const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user);
+  const googleAuth = new GoogleAuth(auth);
 
   const googleSignIn = async () => {
-    const { token, user } = await signIn(() => dispatch({ type: 'user/setUser', payload: user }));
+    const { token, user } = await googleAuth.signIn(() => dispatch({ type: 'user/setUser', payload: user }));
     if (!user) return;
 
     console.log(token, user);
   };
 
   const googleSignOut = async () => {
-    dispatch({ type: 'user/clearUser' });
-    await signOut();
+    await googleAuth.signOut(() => dispatch({ type: 'user/clearUser' }));
   };
 
   return (

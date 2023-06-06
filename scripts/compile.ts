@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { exec as execCb } from 'child_process';
 import Spinnies from 'spinnies';
 import { promisify } from 'util';
@@ -17,6 +18,8 @@ async function lint(): Promise<boolean> {
     return true;
   } catch (e) {
     spinnies.fail('lint', { text: 'Lint error detected 🤡' });
+
+    // @ts-ignore
     const message = e?.stdout?.toString();
     if (message) {
       console.log(message);
@@ -38,6 +41,8 @@ async function compile(): Promise<boolean> {
     return true;
   } catch (e) {
     spinnies.fail('compile', { text: "Couldn't compile 😔" });
+
+    // @ts-ignore
     console.log(e.stdout);
     return false;
   }
