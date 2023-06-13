@@ -1,27 +1,17 @@
-import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { ReactNode } from 'react';
+import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from './GlobalStyle';
-
-import { darkColors, lightColors, themes } from './themes';
 import { useAppSelector } from '@src/store/hooks';
 
-export type Theme = 'light' | 'dark';
-
-type Props = {
-  children: React.ReactNode;
-};
-
-const StyledProvider = ({ children }: Props) => {
-  const color = useAppSelector(state => state.theme.theme);
-
-  const colors = color === 'light' ? lightColors : darkColors;
-  const theme = { ...themes, colors };
+const StyledProvider = ({ children }: { children: ReactNode }) => {
+  const theme = useAppSelector(state => state.theme.themes);
 
   return (
-    <StyledThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       {children}
-    </StyledThemeProvider>
+    </ThemeProvider>
   );
 };
 
