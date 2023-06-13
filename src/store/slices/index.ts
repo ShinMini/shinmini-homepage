@@ -1,3 +1,4 @@
 import userSlice from './userSlice';
+import themeSlice from './themeSlice';
 
-export { userSlice };
+export { userSlice, themeSlice };

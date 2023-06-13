@@ -4,10 +4,11 @@ import { persistStore, persistReducer } from 'redux-persist';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 
 import { persistConfig } from './persist';
-import userSlice from './slices/userSlice';
+import { themeSlice, userSlice } from './slices';
 
 export const rootReducer = combineReducers({
   user: userSlice,
+  theme: themeSlice,
 });
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);
