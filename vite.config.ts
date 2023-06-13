@@ -2,15 +2,12 @@
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { config as dotEnvConfig } from 'dotenv';
 
 /** @type {import('vite').UserConfig} */
-export default ({ mode }) => {
-  dotEnvConfig();
+export default defineConfig(() => {
+  // const env = loadEnv(mode, process.cwd(), '');
 
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-
-  return defineConfig({
+  return {
     plugins: [react(), tsconfigPaths()],
     build: {
       sourcemap: true,
@@ -22,5 +19,8 @@ export default ({ mode }) => {
     esbuild: {
       target: 'ESNext',
     },
-  });
-};
+    // define: {
+    //   __APP_ENV__: env.APP_ENV,
+    // },
+  };
+});

@@ -1,31 +1,34 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './constants';
 import { getAnalytics, logEvent } from 'firebase/analytics';
-import { useFirestore, useAuth, useStorage } from './hooks';
-// Your web app's Firebase configuration
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
+
+import { GoogleAuthProvider } from 'firebase/auth';
 
 // Initialize Firebase
-const firebaseAppInstance = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 // Auth for using firebase features
-export const auth = useAuth(firebaseAppInstance);
+const auth = getAuth(app);
 
-// Firebase custom features - optional
-const firestore = useFirestore(firebaseAppInstance);
-const storage = useStorage(firebaseAppInstance);
-const analytics = getAnalytics(firebaseAppInstance);
+const firestore = getFirestore(app);
+const storage = getStorage(app);
+const analytics = getAnalytics(app);
+
+const provider = new GoogleAuthProvider();
 
 // export firebase optional feature object
 const firebase = {
-  firebaseAppInstance,
+  app,
+  auth,
+  provider,
   firestore,
   storage,
   analytics,
 };
 
-export { firebase };
-
-// turn on the Firebase analytics option
 logEvent(analytics, 'notification_received');
+
+export { firebase };

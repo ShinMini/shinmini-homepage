@@ -1,5 +1,3 @@
-import { auth, firebase } from './firebase';
+import { firebase } from './firebase';
 
-export default auth;
-
-export { firebase };
+export default firebase;

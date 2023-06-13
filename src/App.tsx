@@ -4,10 +4,10 @@ import Navbar from '@components/Navbar';
 import Comment from '@components/Comment';
 
 import { useAppSelector } from '@store/hooks';
-import { auth } from '@lib/firebase/firebase';
+import firebase from '@lib/firebase';
 
 function App() {
-  useAuthState(auth);
+  useAuthState(firebase.auth);
   const user = useAppSelector(state => state.user);
 
   return (

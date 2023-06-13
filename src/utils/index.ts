@@ -1,3 +1,3 @@
-import { GoogleAuth } from './googleAuth';
+import signInWithGooglePopup from './signInWithGooglePopup';
 
-export { GoogleAuth };
+export { signInWithGooglePopup };
