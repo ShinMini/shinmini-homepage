@@ -14,18 +14,27 @@ const defaultColors = {
   error: '#ff0000',
   warning: '#f1c40f',
   info: '#3498db',
+
+  oppositeBackground: '#333333',
+  oppositeText: '#ffffff',
 };
 
 const lightColors = {
   ...defaultColors,
   background: '#ffffff',
   text: '#333333',
+
+  oppositeBackground: '#333333',
+  oppositeText: '#ffffff',
 };
 
 const darkColors = {
   ...defaultColors,
   background: '#333333',
   text: '#ffffff',
+
+  oppositeBackground: '#ffffff',
+  oppositeText: '#333333',
 };
 
 const themes = {
