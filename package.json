@@ -21,6 +21,7 @@
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
     "react-google-button": "^0.7.2",
+    "react-icons": "^4.9.0",
     "react-redux": "^8.0.7",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.2.3",

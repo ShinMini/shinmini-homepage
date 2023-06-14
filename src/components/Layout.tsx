@@ -6,6 +6,8 @@ const Wrapper = styled.div`
   color: ${props => props.theme.colors.oppositeText};
 
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+  overflow: hidden;
 `;
 
 const Container = styled.div`
@@ -16,6 +18,8 @@ const Container = styled.div`
 
   background-color: ${props => props.theme.colors.background};
   color: ${props => props.theme.colors.text};
+
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
 type Props = {
@@ -25,7 +29,7 @@ type Props = {
 const Layout = ({ children }: Props) => {
   return (
     <Wrapper>
-      <Container>{children}</Container>;
+      <Container>{children}</Container>
     </Wrapper>
   );
 };

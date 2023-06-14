@@ -1,21 +1,57 @@
 import React from 'react';
 
+import { HiSun, HiMoon } from 'react-icons/hi';
+
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { signInWithGooglePopup } from '@src/utils';
+import { styled } from 'styled-components';
+import { toggleTheme } from '@src/store/slices/themeSlice';
+
+const Logo = styled.a`
+  font-size: 2rem;
+  font-weight: bold;
+
+  color: ${props => props.theme.colors.text};
+
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: ${props => props.theme.colors.oppositeText};
+  }
+`;
+
+const LoginButton = styled.button`
+  background-color: ${props => props.theme.colors.oppositeBackground};
+  color: ${props => props.theme.colors.oppositeText};
+
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+  padding: 0.5rem 1rem;
+
+  border-radius: 0.25rem;
+
+  font-size: 1rem;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.oppositeText};
+    color: ${props => props.theme.colors.oppositeText};
+  }
+`;
 
 const style = {
-  navbar: `bg-blue-500 text-white flex justify-between items-center p-4`,
-  logo: `text-2xl font-bold cursor-pointer`,
+  navbar: `bg-blue-500 text-white flex justify-between items-center px-8 py-4 box-border`,
   navItems: `flex gap-4`,
   navItem: `hover:text-blue-300 cursor-pointer`,
   navItemActive: `text-blue-300`,
-
-  button: `bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-1/3`,
 };
 
 const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
+  const currentColor = useAppSelector(state => state.theme.type);
+
   const user = useAppSelector(state => state.user);
+
+  const colorChangeHandler = () => dispatch(toggleTheme());
 
   const googleSignIn = async () => {
     console.log('called googleSignIn');
@@ -29,21 +65,24 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className={style.navbar}>
-      <div className={style.logo}>dev-ShinMini</div>
-      {!user?.displayName ? (
-        <button className={style.button} onClick={googleSignIn}>
-          SignIn
-        </button>
-      ) : (
-        <ul className={style.navItems}>
-          <li className={style.navItem}>Home</li>
-          <li className={style.navItem}>About</li>
-          <li className={style.navItem}>Contact</li>
-          <button className=" border-amber-200 rounded text-gray-300  hover:bg-amber-600" onClick={googleSignOut}>
-            SignOut
-          </button>
-        </ul>
-      )}
+      <Logo>ShinMini</Logo>
+      <div className="flex flex-row gap-4 align-middle">
+        {currentColor === 'light' ? (
+          <HiMoon onClick={colorChangeHandler} size={30} color="yellow" className="cursor-pointer shadow-lg" />
+        ) : (
+          <HiSun onClick={colorChangeHandler} size={30} color="f3AEBE" className="cursor-pointer shadow-lg" />
+        )}
+        {!user?.displayName ? (
+          <LoginButton onClick={googleSignIn}>Log In</LoginButton>
+        ) : (
+          <ul className={style.navItems}>
+            <li className={style.navItem}>Home</li>
+            <li className={style.navItem}>About</li>
+            <li className={style.navItem}>Contact</li>
+            <LoginButton onClick={googleSignOut}>Log Out</LoginButton>
+          </ul>
+        )}
+      </div>
     </nav>
   );
 };

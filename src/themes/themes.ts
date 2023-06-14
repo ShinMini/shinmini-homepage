@@ -15,8 +15,8 @@ const defaultColors = {
   warning: '#f1c40f',
   info: '#3498db',
 
-  oppositeBackground: '#333333',
-  oppositeText: '#ffffff',
+  oppositeBackground: '#d9b99b',
+  oppositeText: '#F5F5DC',
 };
 
 const lightColors = {
@@ -24,8 +24,8 @@ const lightColors = {
   background: '#ffffff',
   text: '#333333',
 
-  oppositeBackground: '#333333',
-  oppositeText: '#ffffff',
+  oppositeBackground: '#737373',
+  oppositeText: '#efefef',
 };
 
 const darkColors = {
@@ -33,8 +33,8 @@ const darkColors = {
   background: '#333333',
   text: '#ffffff',
 
-  oppositeBackground: '#ffffff',
-  oppositeText: '#333333',
+  oppositeBackground: '#efefef',
+  oppositeText: '#737373',
 };
 
 const themes = {
