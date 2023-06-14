@@ -10,7 +10,7 @@ export default function signInWithGooglePopup(dispatch: AppDispatch) {
       const token = credential?.accessToken;
       const user = result.user;
 
-      console.log(`token: ${token}, user: ${user}`);
+      console.dir(`token: ${token}, user: ${user}`);
       dispatch(setUser(user));
     })
     .catch(error => {

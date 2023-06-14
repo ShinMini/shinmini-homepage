@@ -19,9 +19,6 @@ const Comment: React.FC = () => {
     const name = inputRef.current?.value;
     if (!name) return;
     setNameArr(prevNameArr => [...prevNameArr, name]);
-
-    console.log(nameArr);
-
     inputRef.current.value = '';
   };
 
