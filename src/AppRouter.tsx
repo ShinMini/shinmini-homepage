@@ -1,9 +1,11 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
 import Home from './pages/home';
-import Error from './pages/Error';
-import Login from './pages/Login';
+import Login from './pages/login';
 import About from './pages/about';
 import Lab from './pages/lab';
+
+import Error from './pages/Error';
 
 export enum RoutePath {
   Home = '/',
