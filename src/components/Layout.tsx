@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-import Navbar from '@src/components/navbar/Navbar';
+import Navbar from '@src/components/navbar';
 
 const Wrapper = styled.div`
   background-color: ${props => props.theme.colors.gray};
@@ -25,6 +25,11 @@ const Container = styled.div`
   box-shadow: 0px 10px 20px -3px rgba(0, 0, 0, 0.1);
 `;
 
+const InnerSpacing = styled.div`
+  width: calc(100% - 2vw);
+  margin: 0 auto;
+`;
+
 type Props = {
   children: React.ReactNode;
 };
@@ -34,7 +39,7 @@ const Layout = ({ children }: Props) => {
     <Wrapper>
       <Container>
         <Navbar />
-        {children}
+        <InnerSpacing>{children}</InnerSpacing>
       </Container>
     </Wrapper>
   );

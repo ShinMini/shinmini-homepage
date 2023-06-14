@@ -1,3 +1,15 @@
+// ICONS
 import FavIcon from './icons/logo.svg';
 
-export { FavIcon };
+// IMAGES
+import GreetingBackground from './images/greeting-background.png';
+
+const Icons = {
+  FavIcon,
+};
+
+const Images = {
+  GreetingBackground,
+};
+
+export { Icons, Images };
