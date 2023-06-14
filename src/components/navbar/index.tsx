@@ -8,6 +8,7 @@ import { toggleTheme } from '@src/store/slices/themeSlice';
 import ThemeIcon from './ThemeIcon';
 import firebase from '@lib/firebase';
 import { Link } from 'react-router-dom';
+import { RoutePath } from '@src/AppRouter';
 
 const NavContainer = styled.nav`
   display: flex;
@@ -117,9 +118,9 @@ const Navbar: React.FC = () => {
           <LoginButton onClick={() => signInWithGooglePopup(dispatch)}>Log In</LoginButton>
         ) : (
           <ul>
-            <NavItem to="/">Home</NavItem>
-            <NavItem to="/contacts/123">Contact</NavItem>
-            <NavItem to="/Error">Error</NavItem>
+            <NavItem to={RoutePath.Home}>Home</NavItem>
+            <NavItem to={RoutePath.About}>About</NavItem>
+            <NavItem to={RoutePath.Lab}>Lab</NavItem>
             <LoginButton onClick={() => logout(dispatch, firebase.auth)}>Log Out</LoginButton>
           </ul>
         )}
