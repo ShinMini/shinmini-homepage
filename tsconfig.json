@@ -22,14 +22,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "types": [
-      "vite",
-      "vite/client",
-      "react",
-      "jest",
-      "node"
-    ] /* Specify type package names to be included without being referenced in a source file. */,
-
     "allowJs": true /* Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files. */,
 
     "isolatedModules": true /* Ensure that each file can be safely transpiled without relying on other imports. */,
