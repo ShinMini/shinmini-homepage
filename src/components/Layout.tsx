@@ -1,11 +1,12 @@
 import React from 'react';
 import { styled } from 'styled-components';
 
-const Wrapper = styled.div`
-  background-color: ${props => props.theme.colors.oppositeBackground};
-  color: ${props => props.theme.colors.oppositeText};
+import Navbar from '@src/components/navbar/Navbar';
 
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+const Wrapper = styled.div`
+  background-color: ${props => props.theme.colors.gray};
+
+  transition: background-color 700ms linear 300ms;
 
   overflow: hidden;
 `;
@@ -19,7 +20,9 @@ const Container = styled.div`
   background-color: ${props => props.theme.colors.background};
   color: ${props => props.theme.colors.text};
 
-  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 300ms linear, color 300ms linear;
+
+  box-shadow: 0px 10px 20px -3px rgba(0, 0, 0, 0.1);
 `;
 
 type Props = {
@@ -29,7 +32,10 @@ type Props = {
 const Layout = ({ children }: Props) => {
   return (
     <Wrapper>
-      <Container>{children}</Container>
+      <Container>
+        <Navbar />
+        {children}
+      </Container>
     </Wrapper>
   );
 };

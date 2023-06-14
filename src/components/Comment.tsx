@@ -11,7 +11,7 @@ const style = {
 
 const Comment: React.FC = () => {
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [nameArr, setNameArr] = React.useState<string[]>(['명진']);
+  const [nameArr, setNameArr] = React.useState<string[]>(['ShinMini']);
 
   const addName = (e: FormEvent) => {
     e.preventDefault();
@@ -34,7 +34,7 @@ const Comment: React.FC = () => {
         </form>
         {nameArr.map((name, index) => (
           <p key={index} className="border rounded p-3 text-amber-800 text-3xl">
-            안녕 {name}아!
+            Hello {name}!
           </p>
         ))}
 
