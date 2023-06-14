@@ -7,6 +7,7 @@ import { toggleTheme } from '@src/store/slices/themeSlice';
 
 import ThemeIcon from './ThemeIcon';
 import firebase from '@lib/firebase';
+import { Link } from 'react-router-dom';
 
 const NavContainer = styled.nav`
   display: flex;
@@ -108,7 +109,9 @@ const Navbar: React.FC = () => {
   return (
     <NavContainer>
       <div className="flex flex-row gap-3 ">
-        <Logo>ShinMini</Logo>
+        <Logo>
+          <Link to="/">ShinMini</Link>
+        </Logo>
         <ThemeIcon currentColor={currentColor} colorChangeHandler={() => dispatch(toggleTheme())} />
       </div>
       <NavItems>
@@ -116,9 +119,15 @@ const Navbar: React.FC = () => {
           <LoginButton onClick={() => signInWithGooglePopup(dispatch)}>Log In</LoginButton>
         ) : (
           <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/contacts/123">Contact</Link>
+            </li>
+            <li>
+              <Link to="/Error">Error</Link>
+            </li>
             <LoginButton onClick={() => logout(dispatch, firebase.auth)}>Log Out</LoginButton>
           </ul>
         )}

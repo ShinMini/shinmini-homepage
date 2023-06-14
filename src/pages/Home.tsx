@@ -1,15 +1,12 @@
-import React from 'react';
-
 import Greeting from './Greeting';
-import Login from './Login';
 import Comment from '@src/components/Comment';
+import { Layout } from '@src/components';
 
 export default function Home() {
-  return /*#__PURE__*/ React.createElement(
-    'div',
-    null,
-    /*#__PURE__*/ React.createElement(Greeting, null),
-    /*#__PURE__*/ React.createElement(Comment, null),
-    /*#__PURE__*/ React.createElement(Login, null),
+  return (
+    <Layout>
+      <Greeting />
+      <Comment />
+    </Layout>
   );
 }
