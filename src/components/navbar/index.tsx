@@ -39,35 +39,35 @@ const NavItems = styled.ul`
     gap: 1rem;
 
     list-style: none;
+  }
+`;
 
-    li {
-      font-size: 1.2rem;
-      font-weight: bold;
+const NavItem = styled(Link)`
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: ${props => props.theme.colors.oppositeText};
+
+    cursor: pointer;
+
+    text-decoration: underline;
+
+    transition: color 0.2s ease-in-out;
+
+    &:last-child {
+      text-decoration: none;
+
+      color: ${props => props.theme.colors.text};
 
       transition: color 0.2s ease-in-out;
-
-      &:hover {
-        color: ${props => props.theme.colors.oppositeText};
-
-        cursor: pointer;
-
-        text-decoration: underline;
-
-        transition: color 0.2s ease-in-out;
-
-        &:last-child {
-          text-decoration: none;
-
-          color: ${props => props.theme.colors.text};
-
-          transition: color 0.2s ease-in-out;
-        }
-      }
     }
   }
 `;
 
-const Logo = styled.a`
+const Logo = styled(Link)`
   font-size: 2.5rem;
   font-weight: bold;
 
@@ -109,9 +109,7 @@ const Navbar: React.FC = () => {
   return (
     <NavContainer>
       <div className="flex flex-row gap-3 ">
-        <Logo>
-          <Link to="/">ShinMini</Link>
-        </Logo>
+        <Logo to="/">ShinMini</Logo>
         <ThemeIcon currentColor={currentColor} colorChangeHandler={() => dispatch(toggleTheme())} />
       </div>
       <NavItems>
@@ -119,15 +117,9 @@ const Navbar: React.FC = () => {
           <LoginButton onClick={() => signInWithGooglePopup(dispatch)}>Log In</LoginButton>
         ) : (
           <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/contacts/123">Contact</Link>
-            </li>
-            <li>
-              <Link to="/Error">Error</Link>
-            </li>
+            <NavItem to="/">Home</NavItem>
+            <NavItem to="/contacts/123">Contact</NavItem>
+            <NavItem to="/Error">Error</NavItem>
             <LoginButton onClick={() => logout(dispatch, firebase.auth)}>Log Out</LoginButton>
           </ul>
         )}
