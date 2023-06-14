@@ -49,7 +49,7 @@
 
       "@hooks/*": ["./src/hooks/*"],
       "@styles/*": ["./src/styles/*"],
-      "@utils/*": ["./src/utils/*"],
+      "@features/*": ["src/features/*"],
 
       "@store/*": ["./src/store/*"],
       "@lib/*": ["./src/lib/*"],

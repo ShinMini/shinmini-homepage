@@ -24,6 +24,7 @@
     "react-google-button": "^0.7.2",
     "react-icons": "^4.9.0",
     "react-redux": "^8.0.7",
+    "react-router-dom": "^6.12.1",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.2.3",
     "styled-components": "^6.0.0-rc.3",

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { logout, signInWithGooglePopup } from '@src/utils';
+import { logout, signInWithGooglePopup } from '@src/features/authentication';
 import { styled } from 'styled-components';
 import { toggleTheme } from '@src/store/slices/themeSlice';
 
