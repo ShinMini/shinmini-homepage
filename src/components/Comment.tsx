@@ -11,7 +11,7 @@ const style = {
 
 const Comment: React.FC = () => {
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [nameArr, setNameArr] = React.useState<string[]>(['ShinMini']);
+  const [nameArr, setNameArr] = React.useState<string[]>(['']);
 
   const addName = (e: FormEvent) => {
     e.preventDefault();
@@ -28,15 +28,19 @@ const Comment: React.FC = () => {
   return (
     <div className="mt-4 flex flex-col justify-center">
       <div className="mt-4">
-        <form className="flex" onSubmit={addName}>
-          <input ref={inputRef} className="border border-gray-400 p-2 rounded flex-grow mr-2" placeholder="Title" />
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-1/3">Submit</button>
-        </form>
         {nameArr.map((name, index) => (
-          <p key={index} className="border rounded p-3 text-amber-800 text-3xl">
-            Hello {name}!
+          <p key={index} className="border rounded p-3 text-gray-800 text-4xl font-bold italic">
+            {name || 'Leave your name...'}
           </p>
         ))}
+        <form className="flex" onSubmit={addName}>
+          <input
+            ref={inputRef}
+            className="border border-gray-400 p-2 rounded flex-grow mr-2"
+            placeholder="Put your name"
+          />
+          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-1/3">Submit</button>
+        </form>
 
         <div className="mt-4">
           <p className={style.error}>Error</p>
