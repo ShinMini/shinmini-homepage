@@ -15,14 +15,18 @@ const defaultColors = {
   warning: '#f1c40f',
   info: '#3498db',
 
+  yellow: '#ffe700',
+
   oppositeBackground: '#d9b99b',
   oppositeText: '#F5F5DC',
 };
 
 const lightColors = {
   ...defaultColors,
-  background: '#ffffff',
+  background: '#f3f4f6',
   text: '#333333',
+
+  gray: '#aaaaaa',
 
   oppositeBackground: '#737373',
   oppositeText: '#efefef',
@@ -31,7 +35,9 @@ const lightColors = {
 const darkColors = {
   ...defaultColors,
   background: '#333333',
-  text: '#ffffff',
+  text: '#f3f4f6',
+
+  gray: '#f1f1f1',
 
   oppositeBackground: '#efefef',
   oppositeText: '#737373',
