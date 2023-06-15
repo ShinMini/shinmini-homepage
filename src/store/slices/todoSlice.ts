@@ -1,29 +1,33 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface TodoState {
+export interface TodoListProps {
   date: Date;
   title: string;
-  detail: string | null;
+  detail?: string;
 }
 
-const initialState: TodoState = {
-  date: new Date(),
-  title: '',
-  detail: '',
+export interface TodoListState {
+  uid?: string;
+  todoList: TodoListProps[];
+}
+
+const initialState: TodoListState = {
+  uid: '',
+  todoList: [],
 };
 
 export const todoSlice = createSlice({
-  name: 'todo',
+  name: 'todoList',
   initialState,
   reducers: {
-    setTodo: (state, action: PayloadAction<TodoState>) => {
-      state.date = action.payload.date;
-      state.title = action.payload.title;
-      state.detail = action.payload.detail;
+    pushTodoList: (state, action: PayloadAction<TodoListState>) => {
+      console.log('action.payload', action.payload);
+      state.uid = action.payload.uid;
+      state.todoList = action.payload.todoList;
     },
   },
 });
 
-export const { setTodo } = todoSlice.actions;
+export const { pushTodoList } = todoSlice.actions;
 
 export default todoSlice.reducer;
