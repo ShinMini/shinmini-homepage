@@ -9,14 +9,10 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
+  margin-bottom: 2rem;
   gap: 1rem;
 
   color: ${props => props.theme.colors.oppositeText};
-  background-color: ${props => props.theme.colors.oppositeBackground};
-
-  padding: 2rem 0.5rem;
-
-  width: 100%;
 `;
 
 const Header = styled.div`
@@ -79,10 +75,10 @@ const SubTitle = styled.h2`
 
 const Content = styled.div<{ isOpen: boolean }>`
   width: 95%;
-  height: ${props => (props.isOpen ? 'auto' : '0')};
+  display: ${props => (props.isOpen ? 'flex' : 'none')};
 
-  transition: all 300ms ease-in-out;
-  transform: ${props => (props.isOpen ? 'scaleY(1)' : 'scaleY(0)')};
+  transition: all 150ms ease-in-out;
+  transform: ${props => (props.isOpen ? 'scaleY(1)' : 'scaleY(0) rotateX(90deg)')};
 
   box-sizing: border-box;
 
@@ -102,7 +98,15 @@ const Description = styled.p`
   font-weight: normal;
 `;
 
-const DropDown: React.FC = () => {
+type DropDownProps = {
+  key: string;
+  title: string;
+  createdDate: string;
+  diffDate: string | number;
+  detail?: string;
+};
+
+const DropDown: React.FC<DropDownProps> = ({ key, title, createdDate, diffDate, detail }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleDropDown = () => {
@@ -110,54 +114,23 @@ const DropDown: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container key={key}>
       <Header>
-        <div>
-          <Title>Title</Title>
-          <SubTitle>SubTitle</SubTitle>
+        <div className=" w-[60%]">
+          <Title>{title}</Title>
+          <SubTitle>
+            {createdDate} - {diffDate} hours ago
+          </SubTitle>
         </div>
-        <DropDownButton onClick={handleDropDown}>Details</DropDownButton>
+        <div className="flex">
+          <button className="text-green-500 hover:text-green-600 ml-2">Save</button>
+          <button className="text-blue-500 hover:text-blue-600 ml-2">Edit</button>
+          <button className="text-red-500 hover:text-red-600 ml-2">Delete</button>
+          <DropDownButton onClick={handleDropDown}>Details</DropDownButton>
+        </div>
       </Header>
       <Content isOpen={isOpen}>
-        <Description>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, ea soluta voluptate deleniti enim ullam
-          rem ad consequatur vel iure voluptatum aliquid numquam est possimus nemo laudantium! Soluta, iste sint?
-          Temporibus similique, sint esse, sequi ullam dolores quis et facilis atque qui, ipsam vero rem doloremque
-          asperiores ad. Sequi earum facere voluptatibus nihil quo nobis qui exercitationem. Ratione, cupiditate
-          consequuntur. Pariatur nulla culpa odio necessitatibus. A dolorum, illo officia itaque qui error minus vitae
-          repudiandae ipsa unde dicta veniam aliquid assumenda eius quidem id, perspiciatis corporis, vel sed odit!
-          Culpa. Amet quo fugiat minus. Adipisci commodi iste laudantium voluptates veritatis corporis odio velit saepe
-          sit quo ad, beatae accusantium harum nisi. Illo expedita repellat at quis error hic architecto aspernatur?
-          Iure fugiat autem, maiores officiis libero esse excepturi odit molestias ratione enim consequuntur quas,
-          voluptatem possimus sapiente earum assumenda necessitatibus, et nisi optio aliquam hic voluptate
-          exercitationem! Cum, consectetur inventore. Rerum, officia magnam architecto, debitis omnis praesentium vero,
-          distinctio exercitationem optio non molestiae. Ut, incidunt ex sapiente quasi laudantium voluptate quo,
-          soluta, totam obcaecati ducimus ratione ea quas deserunt eius. Maiores, consequatur minus itaque corrupti
-          velit, et nostrum excepturi fugit quia officia, architecto ipsum dolores accusantium perspiciatis unde dolor
-          illo pariatur nesciunt enim asperiores? Ullam blanditiis corporis labore? Ut, necessitatibus. Numquam pariatur
-          distinctio illo possimus. Fuga dolore doloremque hic temporibus! Ipsam explicabo tenetur eligendi accusamus
-          quasi. Eveniet iure sequi adipisci magni ipsum at vel possimus repellendus perspiciatis? Quaerat, perspiciatis
-          doloremque. Provident quibusdam reprehenderit ab, qui aspernatur itaque, ipsam ducimus quis dolores totam illo
-          unde sapiente repellat officiis molestiae laudantium sequi impedit obcaecati assumenda harum. Esse accusamus
-          officia distinctio placeat voluptate. Accusamus laboriosam necessitatibus voluptatum, quos provident quis
-          earum ut ratione dicta molestiae ad accusantium dolores harum delectus incidunt perferendis omnis alias autem
-          nulla enim! Iusto velit nam asperiores. Fugit, aliquid! Quaerat voluptatem amet quae incidunt repellat fuga
-          corrupti omnis nesciunt hic? Dolorem vel quisquam at dignissimos earum, nulla deserunt laborum consequuntur
-          quibusdam id molestias amet, nisi blanditiis, laboriosam doloremque! Praesentium. Culpa officiis aliquid,
-          quae, placeat debitis neque dolor nulla ad repellat, fuga eum excepturi iusto nostrum. Nulla ratione, Quos
-          corporis neque, voluptas maiores expedita architecto iusto repellat atque ea error aliquam laborum nam
-          distinctio ullam vel soluta animi! Aliquam aut dolores magnam sed eum accusantium corrupti doloribus
-          obcaecati. Quaerat nisi consectetur rerum atque tempore quae veritatis placeat illo eaque nesciunt veniam
-          dolores voluptates deserunt illum consequuntur, vero, autem dolorem repudiandae! Iste ipsum est quas earum
-          ducimus voluptas autem. Sapiente, nobis. Obcaecati impedit, eos itaque assumenda nulla fuga quisquam
-          recusandae nihil atque voluptate velit ratione saepe blanditiis quas in dolore illo iusto soluta voluptatum
-          labore ducimus eaque doloribus! Id. Culpa debitis corporis, aliquam odit sunt saepe distinctio sed nisi, esse
-          doloribus consequuntur architecto quasi adipisci eaque neque excepturi. Ut nemo quibusdam laudantium adipisci
-          corrupti, similique quidem distinctio a natus? Tempora, ipsam adipisci. Deserunt nihil et numquam
-          reprehenderit, natus ab. Odit unde modi veniam officia autem, quibusdam perferendis, architecto itaque, magnam
-          repellendus dolor magni inventore voluptates? Id omnis fuga quis? Totam iste repellat, corrupti quia cumque
-          suscipit?
-        </Description>
+        <Description>{detail}</Description>
       </Content>
     </Container>
   );

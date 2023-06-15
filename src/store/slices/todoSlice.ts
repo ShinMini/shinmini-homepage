@@ -23,7 +23,7 @@ export const todoSlice = createSlice({
     pushTodoList: (state, action: PayloadAction<TodoListState>) => {
       console.log('action.payload', action.payload);
       state.uid = action.payload.uid;
-      state.todoList = action.payload.todoList;
+      state.todoList = [...state.todoList, ...action.payload.todoList];
     },
   },
 });

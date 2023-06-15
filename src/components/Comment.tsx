@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { useAppDispatch, useAppSelector } from '@src/store/hooks';
 import { TodoListState, pushTodoList } from '@src/store/slices/todoSlice';
 import dayjs from 'dayjs';
+import DropDown from './DropDown';
 
 const FormData = z.object({
   date: z.date().default(() => new Date()),
@@ -34,7 +35,6 @@ const Comment: React.FC = () => {
     const todo = {
       uid,
       todoList: [
-        ...currentTodoList,
         {
           date: isValidData.date,
           title: isValidData.title,
@@ -77,28 +77,11 @@ const Comment: React.FC = () => {
 
         {currentTodoList &&
           currentTodoList.map(({ date, title, detail }, index) => {
-            const formattedDate = dayjs(date).format('YYYY-MM-DD, HH:mm:ss');
-            return (
-              <div
-                key={`currentTodoList-${title}${index}`}
-                className="bottom-0 left-2 right-2 mb-2 border rounded box-border pt-2 pr-2 pl-2 mt-2">
-                <div className="flex flex-col">
-                  <div className="flex justify-between box-border p-2 bg-slate-50 rounded">
-                    <div className="text-blue-500 ">
-                      <span className="font-bold text-black">Todo:</span> {title}
-                      <span className="text-gray-400"> {detail}</span>
-                      <span className="text-gray-400"> {formattedDate}</span>
-                      <span className="text-gray-400"> - 3 days ago</span>
-                    </div>
-                    <div className="flex">
-                      <button className="text-green-500 hover:text-green-600 ml-2">Save</button>
-                      <button className="text-blue-500 hover:text-blue-600 ml-2">Edit</button>
-                      <button className="text-red-500 hover:text-red-600 ml-2">Delete</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
+            const key = `currentTodoList-${title}${index}`;
+            const createdDate = dayjs(date).format('YYYY-MM-DD, HH:mm:ss');
+            const diffDate = dayjs().diff(createdDate, 'hour');
+
+            return <DropDown key={key} title={title} createdDate={createdDate} diffDate={diffDate} detail={detail} />;
           })}
       </div>
     </div>
