@@ -3,14 +3,19 @@ import React from 'react';
 import { z } from 'zod';
 
 import { useAppDispatch, useAppSelector } from '@src/store/hooks';
-import { TodoListState, pushTodoList } from '@src/store/slices/todoSlice';
+import { TodoListState, deleteTodoList, pushTodoList, updateTodoList } from '@src/store/slices/todoSlice';
 import dayjs from 'dayjs';
 import DropDown from './DropDown';
+import { TodoListProps } from '../store/slices/todoSlice';
 
 const FormData = z.object({
   date: z.date().default(() => new Date()),
-  title: z.string().min(1).max(18),
-  detail: z.string().max(300).optional(),
+  title: z
+    .string()
+    .min(1)
+    .max(300, { message: "the title can't over the 120 sizes" })
+    .refine(check => check !== '', { message: 'title is required' }),
+  detail: z.string().max(5000).optional(),
 });
 
 const validateFormData = (inputs: unknown) => {
@@ -51,6 +56,25 @@ const Comment: React.FC = () => {
     detailTextArea.current!.value = '';
   };
 
+  const editTodo = (date: Date) => {
+    const title = titleInput.current?.value;
+    const detail = detailTextArea.current?.value;
+
+    const isValidData = validateFormData({ title, detail });
+
+    const todo = {
+      date,
+      title: isValidData.title,
+      detail: isValidData.detail,
+    } satisfies TodoListProps;
+
+    dispatch(updateTodoList(todo));
+  };
+
+  const deleteTodo = (targetDate: Date) => {
+    dispatch(deleteTodoList({ uid, targetDate }));
+  };
+
   return (
     <div className="mt-4 flex flex-col justify-center">
       <div className="mt-4 border rounded">
@@ -81,7 +105,17 @@ const Comment: React.FC = () => {
             const createdDate = dayjs(date).format('YYYY-MM-DD, HH:mm:ss');
             const diffDate = dayjs().diff(createdDate, 'hour');
 
-            return <DropDown key={key} title={title} createdDate={createdDate} diffDate={diffDate} detail={detail} />;
+            return (
+              <DropDown
+                key={key}
+                editTodo={() => editTodo(date)}
+                deleteTodo={() => deleteTodo(date)}
+                title={title}
+                createdDate={createdDate}
+                diffDate={diffDate}
+                detail={detail}
+              />
+            );
           })}
       </div>
     </div>

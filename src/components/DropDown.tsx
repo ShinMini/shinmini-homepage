@@ -75,9 +75,9 @@ const SubTitle = styled.h2`
 
 const Content = styled.div<{ isOpen: boolean }>`
   width: 95%;
-  display: ${props => (props.isOpen ? 'flex' : 'none')};
+  height: ${props => (props.isOpen ? 'auto' : '0')};
 
-  transition: all 150ms ease-in-out;
+  transition: all 300ms ease-in-out;
   transform: ${props => (props.isOpen ? 'scaleY(1)' : 'scaleY(0) rotateX(90deg)')};
 
   box-sizing: border-box;
@@ -99,14 +99,16 @@ const Description = styled.p`
 `;
 
 type DropDownProps = {
-  key: string;
   title: string;
   createdDate: string;
   diffDate: string | number;
   detail?: string;
+
+  editTodo?: () => void;
+  deleteTodo?: () => void;
 };
 
-const DropDown: React.FC<DropDownProps> = ({ key, title, createdDate, diffDate, detail }) => {
+const DropDown: React.FC<DropDownProps> = ({ title, createdDate, diffDate, detail, editTodo, deleteTodo }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleDropDown = () => {
@@ -114,7 +116,7 @@ const DropDown: React.FC<DropDownProps> = ({ key, title, createdDate, diffDate, 
   };
 
   return (
-    <Container key={key}>
+    <Container>
       <Header>
         <div className=" w-[60%]">
           <Title>{title}</Title>
@@ -123,9 +125,12 @@ const DropDown: React.FC<DropDownProps> = ({ key, title, createdDate, diffDate, 
           </SubTitle>
         </div>
         <div className="flex">
-          <button className="text-green-500 hover:text-green-600 ml-2">Save</button>
-          <button className="text-blue-500 hover:text-blue-600 ml-2">Edit</button>
-          <button className="text-red-500 hover:text-red-600 ml-2">Delete</button>
+          <button className="text-blue-500 hover:text-blue-600 ml-2" onClick={editTodo}>
+            Edit
+          </button>
+          <button className="text-red-500 hover:text-red-600 ml-2" onClick={deleteTodo}>
+            Delete
+          </button>
           <DropDownButton onClick={handleDropDown}>Details</DropDownButton>
         </div>
       </Header>
@@ -136,4 +141,4 @@ const DropDown: React.FC<DropDownProps> = ({ key, title, createdDate, diffDate, 
   );
 };
 
-export default DropDown;
+export default React.memo(DropDown);
