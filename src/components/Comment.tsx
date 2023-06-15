@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 const FormData = z.object({
   date: z.date().default(() => new Date()),
   title: z.string().min(1).max(18),
-  detail: z.string().min(1).max(18).optional(),
+  detail: z.string().max(300).optional(),
 });
 
 const validateFormData = (inputs: unknown) => {
@@ -81,7 +81,7 @@ const Comment: React.FC = () => {
             return (
               <div
                 key={`currentTodoList-${title}${index}`}
-                className="bottom-0 left-2 right-2 mb-2 border rounded box-border pt-2 pr-2 pl-2 mt-2 overflow-scroll">
+                className="bottom-0 left-2 right-2 mb-2 border rounded box-border pt-2 pr-2 pl-2 mt-2">
                 <div className="flex flex-col">
                   <div className="flex justify-between box-border p-2 bg-slate-50 rounded">
                     <div className="text-blue-500 ">
