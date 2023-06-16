@@ -8,7 +8,7 @@ import { toggleTheme } from '@src/store/slices/themeSlice';
 import ThemeIcon from './ThemeIcon';
 import firebase from '@lib/firebase';
 import { Link } from 'react-router-dom';
-import { RoutePath } from '@src/AppRouter';
+import { RoutePath, routeName } from '@src/pages/AppRouter';
 
 const NavContainer = styled.nav`
   display: flex;
@@ -114,15 +114,17 @@ const Navbar: React.FC = () => {
         <ThemeIcon currentColor={currentColor} colorChangeHandler={() => dispatch(toggleTheme())} />
       </div>
       <NavItems>
+        <ul>
+          {routeName.map((value, index) => (
+            <NavItem key={`nav-item-${index}-${value}`} to={RoutePath.get(value) || '/'}>
+              {value}
+            </NavItem>
+          ))}
+        </ul>
         {!user?.displayName ? (
           <LoginButton onClick={() => signInWithGooglePopup(dispatch)}>Log In</LoginButton>
         ) : (
-          <ul>
-            <NavItem to={RoutePath.Home}>Home</NavItem>
-            <NavItem to={RoutePath.About}>About</NavItem>
-            <NavItem to={RoutePath.Lab}>Lab</NavItem>
-            <LoginButton onClick={() => logout(dispatch, firebase.auth)}>Log Out</LoginButton>
-          </ul>
+          <LoginButton onClick={() => logout(dispatch, firebase.auth)}>Log Out</LoginButton>
         )}
       </NavItems>
     </NavContainer>
