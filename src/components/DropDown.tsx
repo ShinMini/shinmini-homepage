@@ -6,12 +6,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  justify-content: center;
-  align-items: center;
-
-  margin-bottom: 2rem;
-  gap: 1rem;
-
   color: ${props => props.theme.colors.oppositeText};
 `;
 
@@ -22,7 +16,8 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  width: 95%;
+  width: 98%;
+  margin: auto;
 
   border-radius: 0.5rem;
 
@@ -30,7 +25,7 @@ const Header = styled.div`
   background-color: ${props => props.theme.colors.primary};
 
   box-sizing: border-box;
-  padding: 1rem;
+  padding: 0.5rem;
 
   box-shadow: 5px 2px 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
 
@@ -50,42 +45,55 @@ const Header = styled.div`
   }
 `;
 
+const RightButtonBox = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 0.5rem;
+`;
+
 const DropDownButton = styled.button`
-  padding: 0.5rem 1rem;
-  font-size: 1.5rem;
+  padding: 0.3rem 0.4rem;
+  font-size: 1rem;
   font-weight: bold;
 
   color: ${props => props.theme.colors.oppositeText};
-  background-color: ${props => props.theme.colors.oppositeBackground};
+  background-color: ${props => props.theme.colors.yellow};
 
   border-radius: 0.5rem;
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
+  font-size: 1.2rem;
   font-weight: bold;
 `;
 
 const SubTitle = styled.h2`
   font-size: 1rem;
-  font-weight: bold;
+  font-style: italic;
 
-  color: ${props => props.theme.colors.gray};
+  color: ${props => props.theme.colors.info};
 `;
 
 const Content = styled.div<{ isOpen: boolean }>`
-  width: 95%;
+  width: 98%;
   height: ${props => (props.isOpen ? 'auto' : '0')};
 
-  transition: all 300ms ease-in-out;
+  transition: all 200ms ease-in-out;
   transform: ${props => (props.isOpen ? 'scaleY(1)' : 'scaleY(0) rotateX(90deg)')};
 
   box-sizing: border-box;
 
-  margin: auto;
-  padding: 1rem;
+  word-wrap: break-word;
 
-  border-radius: 1.5rem;
+  margin: 0.5rem auto;
+
+  padding: ${props => (props.isOpen ? '1rem' : '0')};
+
+  border-radius: 0.5rem;
 
   color: ${props => props.theme.colors.oppositeText};
   background-color: ${props => props.theme.colors.oppositeBackground};
@@ -118,21 +126,21 @@ const DropDown: React.FC<DropDownProps> = ({ title, createdDate, diffDate, detai
   return (
     <Container>
       <Header>
-        <div className=" w-[60%]">
+        <div className="min-w-[60%]">
           <Title>{title}</Title>
           <SubTitle>
-            {createdDate} - {diffDate} hours ago
+            {createdDate} - {diffDate} minutes ago
           </SubTitle>
         </div>
-        <div className="flex">
-          <button className="text-blue-500 hover:text-blue-600 ml-2" onClick={editTodo}>
+        <RightButtonBox>
+          <button className="text-blue-500 hover:text-blue-600" onClick={editTodo}>
             Edit
           </button>
-          <button className="text-red-500 hover:text-red-600 ml-2" onClick={deleteTodo}>
+          <button className="text-red-500 hover:text-red-600" onClick={deleteTodo}>
             Delete
           </button>
           <DropDownButton onClick={handleDropDown}>Details</DropDownButton>
-        </div>
+        </RightButtonBox>
       </Header>
       <Content isOpen={isOpen}>
         <Description>{detail}</Description>
