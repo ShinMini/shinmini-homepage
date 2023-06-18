@@ -5,7 +5,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin: 2rem auto;
+  margin-top: 2rem;
   padding: 2rem 0;
 
   color: ${props => props.theme.colors.text};
