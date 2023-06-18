@@ -58,11 +58,14 @@ const Context = styled.div`
   h1 {
     font-size: 4.5rem;
     line-height: 1.4;
+
+    font-family: ${props => props.theme.fonts.poppins.medium};
   }
   h2 {
     font-size: 1.6rem;
 
     color: ${props => props.theme.colors.grayDark};
+    font-family: ${props => props.theme.fonts.poppins.medium};
   }
   footer {
     display: flex;
@@ -71,6 +74,8 @@ const Context = styled.div`
     align-items: center;
 
     gap: 2rem;
+
+    font-family: ${props => props.theme.fonts.poppins.medium};
   }
 `;
 
@@ -79,7 +84,7 @@ const TakeALookButton = styled.button<{ borderColor: string }>`
   height: 100%;
 
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 400;
 
   padding: 1rem 1.5rem;
 
@@ -100,7 +105,7 @@ const Greeting: React.FC = () => {
         <Context>
           <header>
             <h1>
-              Hi, I&apos;m <span style={{ color: '#FFD700' }}>HyeonMin Shin</span>
+              Hi, I&apos;m <span style={{ color: '#FFD700', fontWeight: 600 }}>HyeonMin Shin</span>
             </h1>
             <h2>A Full Stack Developer</h2>
           </header>

@@ -46,8 +46,13 @@ const darkColors = {
 };
 
 const fonts = {
-  primary: 'Roboto, sans-serif',
-  secondary: 'Roboto, sans-serif',
+  poppins: {
+    light: 'PoppinsLight',
+    regular: 'PoppinsRegular',
+    medium: 'PoppinsMedium',
+    semiBold: 'PoppinsSemiBold',
+    bold: 'PoppinsBold',
+  },
 };
 
 const themes = {
