@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "ci": "rm -rf node_modules && yarn install",
-    "dev": "ENVFILE=.env.development vite",
+    "dev": "vite",
     "test": "jest",
-    "build": "ENVFILE=.env.development tsc && vite build",
-    "compile": "ENVFILE=.env.staging ts-node scripts/compile.ts",
+    "build": "tsc && vite build",
+    "compile": "ts-node scripts/compile.ts",
     "tslint": "tsc --noEmit && eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
