@@ -5,6 +5,7 @@ import Navbar from '@src/components/navbar';
 import { hexToRGBA } from '@src/features/authentication';
 
 const Wrapper = styled.div`
+  min-width: 390px;
   background-color: ${props => props.theme.colors.gray};
 
   transition: background-color 700ms linear 300ms;
@@ -14,6 +15,7 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   max-width: 1980px;
+
   min-height: 100vh;
 
   margin: 0 auto;

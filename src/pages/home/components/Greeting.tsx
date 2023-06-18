@@ -6,7 +6,7 @@ const Container = styled.div`
   margin: 2rem auto;
 
   width: 100%;
-  height: max(80vh, 50rem);
+  min-height: max(80vh, 50rem);
 
   display: flex;
   flex-direction: column;
@@ -29,8 +29,7 @@ const Container = styled.div`
 
 const Content = styled.div`
   display: grid;
-  grid-template-columns: 2fr 3fr;
-  grid-gap: 2rem;
+  grid-template-columns: 1fr 1fr;
 
   justify-content: center;
   align-items: center;
@@ -50,22 +49,27 @@ const Context = styled.div`
   justify-content: center;
   align-items: flex-start;
 
-  gap: min(2rem, 4vh);
+  gap: max(1.5rem, 2.5vh);
 
   width: 100%;
   height: 100%;
 
   h1 {
-    font-size: 4.5rem;
-    line-height: 1.4;
+    font-size: max(3rem, 2vw);
+    line-height: 1;
 
     font-family: ${props => props.theme.fonts.poppins.medium};
   }
   h2 {
-    font-size: 1.6rem;
+    font-size: max(1.2rem, 1.5vw);
 
     color: ${props => props.theme.colors.grayDark};
     font-family: ${props => props.theme.fonts.poppins.medium};
+  }
+
+  p {
+    font-size: max(0.9rem, 1.4vw);
+    line-height: 1.2;
   }
   footer {
     display: flex;
@@ -80,17 +84,17 @@ const Context = styled.div`
 `;
 
 const TakeALookButton = styled.button<{ borderColor: string }>`
-  width: max(10rem, 8vw);
+  width: max(9rem, 7vw);
   height: 100%;
 
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
 
   padding: 1rem 1.5rem;
 
   border-color: ${props => props.borderColor};
   border-width: 2px;
-  border-radius: max(5rem, 4vw);
+  border-radius: min(5rem, 4vw);
 
   color: ${props => props.theme.colors.opposite.text};
   background-color: ${props => props.theme.colors.opposite.background};
@@ -110,8 +114,8 @@ const Greeting: React.FC = () => {
             <h2>A Full Stack Developer</h2>
           </header>
           <article>
-            <p>Hello, my name is HyeonMin Shin.</p>I am a 23-year-old frontend developer with experience building
-            complex user interfaces,
+            <p>Hello, my name is HyeonMin Shin.</p>
+            <p>I am a 23-year-old frontend developer with experience building complex user interfaces,</p>
             <p>managing state, and optimizing performance using React and React Native with TypeScript.</p>
             <p>I live in Seoul, South Korea,</p>
           </article>
