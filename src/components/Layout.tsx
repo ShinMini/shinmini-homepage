@@ -2,6 +2,7 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 import Navbar from '@src/components/navbar';
+import { hexToRGBA } from '@src/features/authentication';
 
 const Wrapper = styled.div`
   background-color: ${props => props.theme.colors.gray};
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  max-width: 1440px;
+  max-width: 1900px;
   min-height: 100vh;
 
   margin: 0 auto;
@@ -22,7 +23,7 @@ const Container = styled.div`
 
   transition: background-color 300ms linear, color 300ms linear;
 
-  box-shadow: 0px 10px 20px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 0.4rem 0.4rem ${props => hexToRGBA(props.theme.colors.opposite.background, 0.1)};
 `;
 
 const InnerSpacing = styled.div`

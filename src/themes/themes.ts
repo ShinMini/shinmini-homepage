@@ -3,6 +3,11 @@ const defaultColors = {
   secondary: '#ff0000',
   background: '#f5f5f5',
   text: '#333333',
+
+  surface: '#ececec',
+  surfaceLight: '#f1f1f1',
+  surfaceDark: '#333333',
+
   white: '#ffffff',
   black: '#000000',
   gray: '#cccccc',
@@ -10,26 +15,22 @@ const defaultColors = {
   grayDark: '#333333',
   grayDarker: '#111111',
   grayDarkest: '#000000',
+  yellow: '#ffe700',
+
   success: '#0070f3',
   error: '#ff0000',
   warning: '#f1c40f',
   info: '#3498db',
 
-  yellow: '#ffe700',
+  shadow: 'rgba(0, 0, 0, 0.1)',
+  shadowLight: 'rgba(0, 0, 0, 0.05)',
+  shadowDark: 'rgba(0, 0, 0, 0.2)',
 
-  oppositeBackground: '#d9b99b',
-  oppositeText: '#F5F5DC',
+  transparent: 'transparent',
 };
 
 const lightColors = {
   ...defaultColors,
-  background: '#f3f4f6',
-  text: '#333333',
-
-  gray: '#aaaaaa',
-
-  oppositeBackground: '#737373',
-  oppositeText: '#efefef',
 };
 
 const darkColors = {
@@ -37,22 +38,28 @@ const darkColors = {
   background: '#333333',
   text: '#f3f4f6',
 
-  gray: '#f1f1f1',
+  surface: '#555555',
+  surfaceLight: '#777777',
+  surfaceDark: '#111111',
 
-  oppositeBackground: '#efefef',
-  oppositeText: '#737373',
+  gray: '#aaaaaa',
+};
+
+const fonts = {
+  primary: 'Roboto, sans-serif',
+  secondary: 'Roboto, sans-serif',
 };
 
 const themes = {
   colors: {
-    ...defaultColors,
+    opposite: {
+      ...darkColors,
+    },
+    ...lightColors,
   },
-  fonts: {
-    primary: 'Roboto, sans-serif',
-    secondary: 'Roboto, sans-serif',
-  },
+  fonts,
 };
 
 export type ThemesType = typeof themes;
 
-export { themes, lightColors, darkColors };
+export { themes, lightColors, darkColors, fonts };

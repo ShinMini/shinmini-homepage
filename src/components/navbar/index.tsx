@@ -50,7 +50,7 @@ const NavItem = styled(Link)`
   transition: color 0.2s ease-in-out;
 
   &:hover {
-    color: ${props => props.theme.colors.oppositeText};
+    color: ${props => props.theme.colors.opposite.text};
 
     cursor: pointer;
 
@@ -79,7 +79,7 @@ const Logo = styled(Link)`
   transition: color 0.2s ease-in-out;
 
   &:hover {
-    color: ${props => props.theme.colors.oppositeText};
+    color: ${props => props.theme.colors.opposite.text};
   }
 `;
 

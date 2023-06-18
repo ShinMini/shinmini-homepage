@@ -19,14 +19,17 @@ const themeSlice = createSlice({
     toggleTheme: state => {
       const isCurrentLightType = state.type === 'light';
       state.type = isCurrentLightType ? 'dark' : 'light';
-      state.themes = isCurrentLightType ? { ...themes, colors: darkColors } : { ...themes, colors: lightColors };
+      state.themes.colors = isCurrentLightType
+        ? { ...darkColors, opposite: lightColors }
+        : { ...lightColors, opposite: darkColors };
     },
     setTheme: (state, payload: PayloadAction<ThemeType>) => {
       const selectType = payload.payload;
-      const colors = selectType === 'dark' ? lightColors : darkColors;
+      const colors: ThemesType['colors'] =
+        selectType === 'dark' ? { ...lightColors, opposite: darkColors } : { ...darkColors, opposite: lightColors };
 
       state.type = selectType;
-      state.themes = { ...themes, colors };
+      state.themes.colors = { ...themes.fonts, ...colors };
     },
   },
 });

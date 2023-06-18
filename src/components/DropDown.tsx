@@ -6,7 +6,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  color: ${props => props.theme.colors.oppositeText};
+  color: ${props => props.theme.colors.opposite.text};
 `;
 
 const Header = styled.div`
@@ -60,7 +60,7 @@ const DropDownButton = styled.button`
   font-size: 1rem;
   font-weight: bold;
 
-  color: ${props => props.theme.colors.oppositeText};
+  color: ${props => props.theme.colors.opposite.text};
   background-color: ${props => props.theme.colors.yellow};
 
   border-radius: 0.5rem;
@@ -95,8 +95,8 @@ const Content = styled.div<{ isOpen: boolean }>`
 
   border-radius: 0.5rem;
 
-  color: ${props => props.theme.colors.oppositeText};
-  background-color: ${props => props.theme.colors.oppositeBackground};
+  color: ${props => props.theme.colors.opposite.text};
+  background-color: ${props => props.theme.colors.opposite.background};
 
   box-shadow: 5px 2px 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
 `;
