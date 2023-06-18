@@ -1,3 +1,4 @@
+import { hexToRGBA } from '@src/features/authentication';
 import React from 'react';
 
 import styled from 'styled-components';
@@ -6,7 +7,16 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  color: ${props => props.theme.colors.opposite.text};
+  color: ${props => props.theme.colors.text};
+  background-color: ${props => props.theme.colors.primary};
+
+  width: 99%;
+
+  box-sizing: border-box;
+  padding: 0.6rem 0.5rem;
+
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 0.2rem 0.2rem ${props => hexToRGBA(props.theme.colors.primary, 0.3)};
 `;
 
 const Header = styled.div`
@@ -15,19 +25,6 @@ const Header = styled.div`
 
   justify-content: space-between;
   align-items: center;
-
-  width: 98%;
-  margin: auto;
-
-  border-radius: 0.5rem;
-
-  color: ${props => props.theme.colors.white};
-  background-color: ${props => props.theme.colors.primary};
-
-  box-sizing: border-box;
-  padding: 0.5rem;
-
-  box-shadow: 5px 2px 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
 
   & > div {
     display: flex;
@@ -39,9 +36,7 @@ const Header = styled.div`
 
     border-radius: 0.5rem;
 
-    padding: 0.5rem 1rem;
-
-    gap: 2rem;
+    padding: 0.6rem 1.2rem;
   }
 `;
 
@@ -52,7 +47,7 @@ const RightButtonBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  gap: 0.5rem;
+  gap: 1rem;
 `;
 
 const DropDownButton = styled.button`
@@ -79,26 +74,28 @@ const SubTitle = styled.h2`
 `;
 
 const Content = styled.div<{ isOpen: boolean }>`
-  width: 98%;
+  width: 100%;
   height: ${props => (props.isOpen ? 'auto' : '0')};
 
-  transition: all 200ms ease-in-out;
-  transform: ${props => (props.isOpen ? 'scaleY(1)' : 'scaleY(0) rotateX(90deg)')};
+  transition: height 150ms linear, transform 200ms linear, opacity 10ms linear;
+
+  transform: ${props => (props.isOpen ? 'scaleY(1) translateY(0.2em)' : 'scaleY(0) rotateX(90deg) translateY(0px)')};
+  opacity: ${props => (props.isOpen ? '1' : '0')};
 
   box-sizing: border-box;
 
   word-wrap: break-word;
 
-  margin: 0.5rem auto;
+  margin: auto;
 
-  padding: ${props => (props.isOpen ? '1rem' : '0')};
+  padding: ${props => (props.isOpen ? '1rem 1.2rem' : '0')};
 
   border-radius: 0.5rem;
 
   color: ${props => props.theme.colors.opposite.text};
   background-color: ${props => props.theme.colors.opposite.background};
 
-  box-shadow: 5px 2px 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: inset -1px 1px 0 0.1rem rgba(0, 0, 0, 0.2);
 `;
 
 const Description = styled.p`
@@ -126,7 +123,7 @@ const DropDown: React.FC<DropDownProps> = ({ title, createdDate, diffDate, detai
   return (
     <Container>
       <Header>
-        <div className="min-w-[60%]">
+        <div className="min-w-[60%] flex justify-between">
           <Title>{title}</Title>
           <SubTitle>
             {createdDate} - {diffDate} minutes ago

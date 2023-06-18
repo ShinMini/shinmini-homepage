@@ -5,5 +5,6 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     colors: ThemesType['colors'];
     fonts: ThemesType['fonts'];
+    shadows: ThemesType['shadows'];
   }
 }

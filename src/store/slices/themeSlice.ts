@@ -29,7 +29,7 @@ const themeSlice = createSlice({
         selectType === 'dark' ? { ...lightColors, opposite: darkColors } : { ...darkColors, opposite: lightColors };
 
       state.type = selectType;
-      state.themes.colors = { ...themes.fonts, ...colors };
+      state.themes.colors = { ...themes, ...colors };
     },
   },
 });

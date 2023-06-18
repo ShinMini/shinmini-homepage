@@ -17,6 +17,11 @@ const defaultColors = {
   grayDarkest: '#000000',
   yellow: '#ffe700',
 
+  green: '#3aab58',
+  greenLight: '#4fc879',
+  greenDark: '#1b842c',
+  greenDeep: '#046306',
+
   success: '#0070f3',
   error: '#ff0000',
   warning: '#f1c40f',
@@ -43,6 +48,11 @@ const darkColors = {
   surfaceDark: '#111111',
 
   gray: '#aaaaaa',
+
+  green: '#1b842c',
+  greenLight: '#3aab58',
+  greenDark: '#046306',
+  greenDeep: '#046306',
 };
 
 const fonts = {
@@ -55,6 +65,13 @@ const fonts = {
   },
 };
 
+const shadows = {
+  shadow: '2px 2px 0.3rem 0.3rem rgba(0, 0, 0, 0.1)',
+  shadowSmall: '2px 2px 0.4rem 0.3rem rgba(0, 0, 0, 0.05)',
+  shadowMedium: '2px 2px 0.5rem 0.6rem rgba(0, 0, 0, 0.05)',
+  shadowLarge: '2px 2px 0.6rem 0.9rem rgba(0, 0, 0, 0.2)',
+};
+
 const themes = {
   colors: {
     opposite: {
@@ -63,6 +80,7 @@ const themes = {
     ...lightColors,
   },
   fonts,
+  shadows,
 };
 
 export type ThemesType = typeof themes;

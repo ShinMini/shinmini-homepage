@@ -11,6 +11,7 @@ import React from 'react';
 import { validateFormData } from './utils/validateFormData';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
+import { hexToRGBA } from '@src/features/authentication';
 
 const Container = styled.div`
   display: flex;
@@ -18,6 +19,54 @@ const Container = styled.div`
 
   color: ${props => props.theme.colors.text};
   background-color: ${props => props.theme.colors.background};
+`;
+
+const Header = styled.div`
+  display: flex;
+
+  margin: 0;
+  padding: 0.5rem 1rem;
+
+  color: ${props => props.theme.colors.text};
+  background-color: ${props => props.theme.colors.background};
+
+  h1 {
+    margin: 0;
+    padding: 0;
+
+    font-family: 'PoppinsMedium';
+    font-size: 2.5rem;
+    font-weight: 800;
+  }
+`;
+
+const TodoListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 0.5rem;
+
+  height: max(35rem, 60vh);
+
+  background-color: ${props => hexToRGBA(props.theme.colors.opposite.background, 0.7)};
+
+  box-sizing: border-box;
+
+  padding: 1rem 0;
+  overflow-y: scroll;
+
+  border-radius: 10px;
+
+  box-shadow: inset -2px 1px 0 0.2rem rgba(0, 0, 0, 0.2);
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+
+    background-color: ${props => hexToRGBA(props.theme.colors.greenDark, 0.5)};
+    border-radius: 0.5rem;
+  }
 `;
 
 const Todo: React.FC = () => {
@@ -74,28 +123,31 @@ const Todo: React.FC = () => {
 
   return (
     <Layout>
+      <Header>
+        <h1>This is To Do List</h1>
+      </Header>
       <Container>
-        <h1 className="p-3 m-3 text-4xl text-yellow-400 font-bold italic border-b-2">To Do List </h1>
-        {currentTodoList &&
-          currentTodoList.map(({ date, title, detail }, index) => {
-            const key = `currentTodoList-${title}${index}`;
-            const createdDate = dayjs(date).format('YYYY MM DD, HH:mm:ss');
-            const diffDate = dayjs().diff(createdDate, 'minute');
+        <TodoListContainer>
+          {currentTodoList &&
+            currentTodoList.map(({ date, title, detail }, index) => {
+              const key = `currentTodoList-${title}${index}`;
+              const createdDate = dayjs(date).format('YYYY MM DD, HH:mm:ss');
+              const diffDate = dayjs().diff(createdDate, 'minute');
 
-            return (
-              <DropDown
-                key={key}
-                editTodo={() => editTodo(date)}
-                deleteTodo={() => deleteTodo(date)}
-                title={title}
-                createdDate={createdDate}
-                diffDate={diffDate}
-                detail={detail}
-              />
-            );
-          })}
-
-        <div className="flex flex-col my-2 box-border p-2">
+              return (
+                <DropDown
+                  key={key}
+                  editTodo={() => editTodo(date)}
+                  deleteTodo={() => deleteTodo(date)}
+                  title={title}
+                  createdDate={createdDate}
+                  diffDate={diffDate}
+                  detail={detail}
+                />
+              );
+            })}
+        </TodoListContainer>
+        <div className="flex flex-col mt-2 box-border p-2">
           <div className="flex">
             <input
               ref={titleInput}
