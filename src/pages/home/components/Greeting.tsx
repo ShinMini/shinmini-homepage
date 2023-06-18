@@ -36,8 +36,18 @@ const Content = styled.div`
   margin: auto;
   padding: 2rem;
 
+  img {
+    width: 80%;
+  }
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+
+    img {
+      width: 60%;
+
+      margin: auto;
+    }
   }
 `;
 
@@ -62,14 +72,14 @@ const Context = styled.div`
     font-family: ${props => props.theme.fonts.poppins.medium};
   }
   h2 {
-    font-size: max(1.2rem, 1.5vw);
+    font-size: max(1.2rem, 1.2vw);
 
     color: ${props => props.theme.colors.grayDark};
     font-family: ${props => props.theme.fonts.poppins.medium};
   }
 
   p {
-    font-size: max(0.9rem, 1.4vw);
+    font-size: max(0.8rem, 1vw);
     line-height: 1.2;
   }
   footer {
@@ -89,7 +99,7 @@ const TakeALookButton = styled.button<{ borderColor: string }>`
   height: 100%;
 
   font-size: 0.8rem;
-  font-weight: 400;
+  font-weight: 600;
 
   padding: 1rem 1.5rem;
 
@@ -99,6 +109,17 @@ const TakeALookButton = styled.button<{ borderColor: string }>`
 
   color: ${props => props.theme.colors.opposite.text};
   background-color: ${props => props.theme.colors.opposite.background};
+
+  box-shadow: 1px 2px 0.2rem 0.1rem ${props => props.theme.colors.opposite.background};
+
+  transition: box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 1px 0.1rem 0.1rem ${props => props.theme.colors.opposite.background};
+
+    color: ${props => props.theme.colors.yellow};
+  }
 `;
 
 const Greeting: React.FC = () => {
