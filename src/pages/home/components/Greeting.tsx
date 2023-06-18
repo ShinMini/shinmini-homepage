@@ -3,10 +3,9 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 const Container = styled.div`
-  margin: 2rem auto;
+  margin-top: 2rem;
 
-  width: 100%;
-  min-height: max(80vh, 50rem);
+  min-height: max(70vh, 50rem);
 
   display: flex;
   flex-direction: column;
@@ -50,6 +49,8 @@ const Context = styled.div`
   align-items: flex-start;
 
   gap: max(1.5rem, 2.5vh);
+
+  margin: 0 auto;
 
   width: 100%;
   height: 100%;

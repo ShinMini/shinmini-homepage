@@ -6,25 +6,20 @@ import { hexToRGBA } from '@src/features/authentication';
 
 const Wrapper = styled.div`
   min-width: 390px;
+  margin: 0;
+  padding: 0;
   background-color: ${props => props.theme.colors.gray};
-
   transition: background-color 700ms linear 300ms;
-
   overflow: hidden;
 `;
 
 const Container = styled.div`
   max-width: 1980px;
-
   min-height: 100vh;
-
   margin: 0 auto;
-
   background-color: ${props => props.theme.colors.background};
   color: ${props => props.theme.colors.text};
-
   transition: background-color 300ms linear, color 300ms linear;
-
   box-shadow: 0px 0px 0.4rem 0.4rem ${props => hexToRGBA(props.theme.colors.opposite.background, 0.1)};
 `;
 
