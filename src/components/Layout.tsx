@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  max-width: 1900px;
+  max-width: 1980px;
   min-height: 100vh;
 
   margin: 0 auto;

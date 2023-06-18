@@ -21,6 +21,8 @@ const NavContainer = styled.nav`
   padding: 0.5rem 1rem;
 
   overflow: hidden;
+
+  box-shadow: 0px 0.3rem 0.3rem 0.1rem ${props => props.theme.colors.shadow};
 `;
 
 const NavItems = styled.ul`
