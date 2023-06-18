@@ -74,10 +74,10 @@ const shadows = {
 
 const themes = {
   colors: {
+    ...lightColors,
     opposite: {
       ...darkColors,
     },
-    ...lightColors,
   },
   fonts,
   shadows,

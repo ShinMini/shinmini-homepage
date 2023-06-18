@@ -50,7 +50,7 @@ const TodoListContainer = styled.div`
 
   height: max(35rem, 60vh);
 
-  background-color: ${props => hexToRGBA(props.theme.colors.opposite.background, 0.7)};
+  background-color: ${props => hexToRGBA(props.theme.colors.opposite.green, 0.9)};
 
   box-sizing: border-box;
 
