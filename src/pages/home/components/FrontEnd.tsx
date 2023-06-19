@@ -1,3 +1,4 @@
+import Spacing from '@src/themes/Spacing';
 import React from 'react';
 import { styled } from 'styled-components';
 
@@ -48,7 +49,7 @@ const Content = styled.div`
   background-color: ${props => props.theme.colors.opposite.gray};
   border-radius: 10px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${Spacing.mobile}) {
     grid-template-columns: 1fr;
 
     height: max(50rem, 80vh);
@@ -92,7 +93,7 @@ const FEDesign = styled.div`
     gap: 0.5rem;
     font-family: 'PoppinsMedium';
 
-    @media (max-width: 768px) {
+    @media (max-width: ${Spacing.mobile}) {
       grid-template-columns: 1fr;
     }
     h2 {
@@ -105,7 +106,7 @@ const FEDesign = styled.div`
       background-color: ${props => props.theme.colors.opposite.green};
       font-family: 'PoppinsBold';
 
-      @media (max-width: 768px) {
+      @media (max-width: ${Spacing.mobile}) {
         font-size: 1.2rem;
         text-align: center;
         width: 100%;
@@ -171,7 +172,7 @@ const CodingSkills = styled.div`
     gap: 0.5rem;
     font-family: 'PoppinsMedium';
 
-    @media (max-width: 768px) {
+    @media (max-width: ${Spacing.mobile}) {
       grid-template-columns: 1fr;
     }
   }

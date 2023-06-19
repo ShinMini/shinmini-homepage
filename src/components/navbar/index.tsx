@@ -1,7 +1,8 @@
 import React from 'react';
+import { AiOutlineMenu } from 'react-icons/ai';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { logout, signInWithGooglePopup } from '@src/features/authentication';
+import { hexToRGBA, logout, signInWithGooglePopup } from '@src/features/authentication';
 import { styled } from 'styled-components';
 import { toggleTheme } from '@src/store/slices/themeSlice';
 
@@ -9,98 +10,115 @@ import ThemeIcon from './ThemeIcon';
 import firebase from '@lib/firebase';
 import { Link } from 'react-router-dom';
 import { RoutePath, routeName } from '@src/pages/AppRouter';
+import Spacing from '@src/themes/Spacing';
 
-const NavContainer = styled.nav`
+const Container = styled.nav`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
   background-color: ${props => props.theme.colors.primary};
-  color: ${props => props.theme.colors.text};
-
   padding: 0.5rem 1rem;
-
   overflow: hidden;
-
-  box-shadow: 0px 0.3rem 0.3rem 0.1rem ${props => props.theme.colors.shadow};
+  box-shadow: 0px 0.3rem 0.3rem 0.1rem ${props => hexToRGBA(props.theme.colors.opposite.background)};
 `;
 
-const NavItems = styled.ul`
+const LogoBox = styled.div`
   display: flex;
-  flex-direction: row;
-
-  align-items: center;
-
   gap: 1rem;
+`;
 
-  ul {
+const MenuBox = styled.ul`
+  display: flex;
+  gap: min(0.6rem, 1.5vw);
+  align-items: center;
+  @media (max-width: ${Spacing.mobile}) {
+    flex-direction: row-reverse;
+  }
+`;
+
+const MenuButton = styled.button`
+  display: none;
+
+  @media (max-width: ${Spacing.mobile}) {
     display: flex;
-    flex-direction: row;
-
+    justify-content: center;
     align-items: center;
+    color: ${props => props.theme.colors.text};
+    background-color: ${props => hexToRGBA(props.theme.colors.background)};
+    border-radius: 0.25rem;
+    font-size: 1.5rem;
+    transition: scale 0.2s ease-in-out;
+    scale: 1;
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+    cursor: pointer;
+    &:hover {
+      color: ${props => props.theme.colors.opposite.text};
+      scale: 1.1;
+    }
+  }
+`;
 
-    gap: 1rem;
+const DropDownBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: min(0.8rem, 2vw);
+`;
 
-    list-style: none;
+const NavBox = styled.nav<{ ismenuopen: boolean }>`
+  display: flex;
+  gap: min(0.8rem, 2vw);
+  padding: 0.6rem 1.2rem;
+
+  @media (max-width: ${Spacing.mobile}) {
+    flex-direction: column;
+    position: absolute;
+
+    border-radius: 5px;
+    right: 0.1rem;
+    top: 5.5rem;
+    background-color: ${props => hexToRGBA(props.theme.colors.yellow, 0.9)};
+
+    transition: transform 0.2s ease-in-out;
+    transform: ${props => (props.ismenuopen ? 'translateX(0)' : 'translateX(85%)')};
+
+    &:hover {
+      transform: translateX(0);
+    }
   }
 `;
 
 const NavItem = styled(Link)`
   font-size: 1.2rem;
   font-weight: bold;
-
   transition: color 0.2s ease-in-out;
-
+  cursor: pointer;
   &:hover {
     color: ${props => props.theme.colors.opposite.text};
-
-    cursor: pointer;
-
     text-decoration: underline;
-
-    transition: color 0.2s ease-in-out;
-
-    &:last-child {
-      text-decoration: none;
-
-      color: ${props => props.theme.colors.text};
-
-      transition: color 0.2s ease-in-out;
-    }
   }
 `;
 
 const Logo = styled(Link)`
+  font-family: 'PoppinsBold';
   font-size: 2.5rem;
-  font-weight: bold;
-
   font-style: italic;
-
-  color: ${props => props.theme.colors.text};
-
-  transition: color 0.2s ease-in-out;
-
   &:hover {
     color: ${props => props.theme.colors.opposite.text};
   }
 `;
 
 const LoginButton = styled.button`
-  background-color: ${props => props.theme.colors.background};
   color: ${props => props.theme.colors.text};
+  background-color: ${props => props.theme.colors.background};
 
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-
-  padding: 0.5rem 1rem;
-
+  padding: 0.3rem 0.6rem;
   border-radius: 0.25rem;
-
   font-size: 1.2rem;
   font-weight: bold;
-
   &:hover {
-    background-color: ${props => props.theme.colors.yellow};
-    color: ${props => props.theme.colors.info};
+    background-color: ${props => props.theme.colors.opposite.background};
+    color: ${props => props.theme.colors.opposite.text};
   }
 `;
 
@@ -108,28 +126,33 @@ const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
   const currentColor = useAppSelector(state => state.theme.type);
   const user = useAppSelector(state => state.user);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <NavContainer>
-      <div className="flex flex-row gap-3 ">
+    <Container>
+      <LogoBox>
         <Logo to="/">ShinMini</Logo>
         <ThemeIcon currentColor={currentColor} colorChangeHandler={() => dispatch(toggleTheme())} />
-      </div>
-      <NavItems>
-        <ul>
-          {routeName.map((value, index) => (
-            <NavItem key={`nav-item-${index}-${value}`} to={RoutePath.get(value) || '/'}>
-              {value}
-            </NavItem>
-          ))}
-        </ul>
-        {!user?.displayName ? (
-          <LoginButton onClick={() => signInWithGooglePopup(dispatch)}>Log In</LoginButton>
-        ) : (
-          <LoginButton onClick={() => logout(dispatch, firebase.auth)}>Log Out</LoginButton>
-        )}
-      </NavItems>
-    </NavContainer>
+      </LogoBox>
+      <MenuBox>
+        <DropDownBox>
+          <MenuButton onClick={() => setIsMenuOpen(prev => !prev)}>
+            <AiOutlineMenu />
+          </MenuButton>
+          <NavBox ismenuopen={isMenuOpen}>
+            {routeName.map((value, index) => (
+              <NavItem key={`nav-item-${index}-${value}`} to={RoutePath.get(value) || '/'}>
+                {value}
+              </NavItem>
+            ))}
+          </NavBox>
+        </DropDownBox>
+        <LoginButton
+          onClick={!user?.displayName ? () => signInWithGooglePopup(dispatch) : () => logout(dispatch, firebase.auth)}>
+          {user?.displayName ? user.displayName : 'Log In'}
+        </LoginButton>
+      </MenuBox>
+    </Container>
   );
 };
 

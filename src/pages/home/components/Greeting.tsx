@@ -1,4 +1,5 @@
 import { Images } from '@src/assets';
+import Spacing from '@src/themes/Spacing';
 import React from 'react';
 import { styled } from 'styled-components';
 
@@ -40,7 +41,7 @@ const Content = styled.div`
     width: 80%;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${Spacing.mobile}) {
     grid-template-columns: 1fr;
 
     img {

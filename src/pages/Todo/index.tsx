@@ -1,4 +1,5 @@
-import { DropDown, Layout } from '@src/components';
+import { Layout } from '@src/components';
+import DropDown from './components/DropDown';
 import { useAppSelector, useAppDispatch } from '@src/store/hooks';
 import {
   TodoListState,
