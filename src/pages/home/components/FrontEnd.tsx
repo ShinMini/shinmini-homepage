@@ -1,210 +1,169 @@
 import Spacing from '@src/themes/Spacing';
 import React from 'react';
 import { styled } from 'styled-components';
+import { RiReactjsFill } from 'react-icons/ri';
+import { BiCodeAlt } from 'react-icons/bi';
+import { BsGraphUpArrow } from 'react-icons/bs';
+import { hexToRGBA } from '@src/features/authentication';
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
   margin-top: 2rem;
   padding: 2rem 0;
-
-  color: ${props => props.theme.colors.text};
-  background-color: ${props => props.theme.colors.background};
 `;
 
 const Header = styled.header`
-  display: flex;
-
-  margin: 0;
   padding: 0.5rem 1rem;
-
-  color: ${props => props.theme.colors.text};
-  background-color: ${props => props.theme.colors.background};
-
   h1 {
-    margin: 0;
-    padding: 0;
-
-    font-family: 'PoppinsMedium';
+    font-family: 'PoppinsBold';
     font-size: 2.5rem;
-    font-weight: 800;
   }
 `;
 
 const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-
-  height: max(35rem, 60vh);
-
   justify-content: center;
-  align-items: center;
 
-  margin: auto;
+  box-sizing: border-box;
   padding: 2rem;
+  gap: 2rem;
 
-  gap: 0.5rem;
-
-  background-color: ${props => props.theme.colors.opposite.gray};
   border-radius: 10px;
+  background-color: ${props => hexToRGBA(props.theme.colors.opposite.background)};
+  box-shadow: 2px 2px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
 
   @media (max-width: ${Spacing.mobile}) {
     grid-template-columns: 1fr;
-
-    height: max(50rem, 80vh);
   }
 `;
 
 const FEDesign = styled.div`
   display: flex;
   flex-direction: column;
-
-  width: 100%;
-  max-width: 50rem;
-
-  box-sizing: border-box;
-
-  margin: auto;
-  padding: 1rem;
-
-  gap: 0.5rem;
-
-  color: ${props => props.theme.colors.text};
-  background-color: ${props => props.theme.colors.opposite.gray};
-
+  gap: 1rem;
   h1 {
-    margin-left: 0.5rem;
-    padding: 0;
-
-    font-family: 'PoppinsBold';
-    font-size: 2.5rem;
-  }
-
-  section {
-    display: grid;
-    grid-template-columns: 1fr 6fr;
-    justify-content: space-around;
-    align-items: baseline;
-    width: 100%;
-    max-width: 50rem;
-    margin: auto;
-    padding: 1rem;
-    gap: 0.5rem;
-    font-family: 'PoppinsMedium';
-
-    @media (max-width: ${Spacing.mobile}) {
-      grid-template-columns: 1fr;
-    }
-    h2 {
-      margin: 0 auto;
-      padding: 0;
-
-      font-size: 1.5rem;
-
-      color: ${props => props.theme.colors.text};
-      background-color: ${props => props.theme.colors.opposite.green};
-      font-family: 'PoppinsBold';
-
-      @media (max-width: ${Spacing.mobile}) {
-        font-size: 1.2rem;
-        text-align: center;
-        width: 100%;
-        padding: 0.5rem;
-      }
-    }
-    article {
-      display: flex;
-      flex-direction: column;
-
-      gap: 0.5rem;
-
-      width: 100%;
-      h3 {
-        margin: 0;
-        padding: 0;
-
-        font-size: 1.2rem;
-        font-family: 'PoppinsSemiBold';
-      }
-      p {
-        word-wrap: break-word;
-        word-break: break-word;
-      }
-    }
+    color: ${props => props.theme.colors.primary};
+    font-family: 'PoppinsSemiBold';
+    font-size: 1.5rem;
+    text-decoration: underline;
   }
 `;
 
-const CodingSkills = styled.div`
+const FEContent = styled.div`
   display: flex;
   flex-direction: column;
-
-  width: 100%;
-  max-width: 50rem;
-
-  box-sizing: border-box;
-
-  margin: auto;
-  padding: 1rem;
-
   gap: 0.5rem;
+`;
 
-  color: ${props => props.theme.colors.text};
-  background-color: ${props => props.theme.colors.opposite.gray};
+const FEHeader = styled.div`
+  display: flex;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 
-  h1 {
-    margin-left: 0.5rem;
-    padding: 0;
+  align-items: center;
 
-    font-family: 'PoppinsBold';
-    font-size: 2.5rem;
+  h3 {
+    font-family: 'PoppinsSemiBold';
   }
+`;
 
-  section {
-    display: grid;
-    grid-template-columns: 1fr 6fr;
-    justify-content: space-around;
-    align-items: baseline;
-    width: 100%;
-    max-width: 50rem;
-    margin: auto;
-    padding: 1rem;
-    gap: 0.5rem;
-    font-family: 'PoppinsMedium';
+const Icon = styled.div<{ color?: string }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    @media (max-width: ${Spacing.mobile}) {
-      grid-template-columns: 1fr;
+  font-size: 2rem;
+  color: ${props => props.color || props.theme.colors.primary};
+  margin-right: 0.5rem;
+`;
+
+const FEIcon = styled(Icon)`
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
     }
   }
+
+  animation: spin 4s linear infinite;
+`;
+
+const FEContext = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+`;
+
+const Border = styled.div`
+  width: 80%;
+  margin: 1rem auto;
+  height: 3px;
+  background-color: ${props => props.theme.colors.primary};
+  border-radius: 10px;
 `;
 
 const FrontEnd: React.FC = () => {
   return (
     <Container>
       <Header>
-        <h1>Front-end</h1>
+        <h1>Front End</h1>
       </Header>
       <Content>
         <FEDesign>
           <h1>FE / Design</h1>
-          <section>
-            <h2>Icon</h2>
-            <article>
+          <FEContent>
+            <FEHeader>
+              <FEIcon>
+                <RiReactjsFill />
+              </FEIcon>
               <h3>UI / UX Design</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed minima eius quisquam, reiciendis ea minus
-                velit porro blanditiis impedit voluptatibus obcaecati, aspernatur totam perspiciatis saepe ut. Quas est
-                necessitatibus numquam?
-              </p>
-            </article>
-          </section>
+            </FEHeader>
+            <FEContext>
+              <span>
+                Understanding of design principles and user experience (UX) - Frontend Developers work closely with UX
+              </span>
+              <span>
+                designers and need to have an understanding of design principles to create visually appealing and
+                intuitive user interfaces.
+              </span>
+            </FEContext>
+          </FEContent>
+          <Border />
         </FEDesign>
-        <CodingSkills>
-          <h1>Coding Skills</h1>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure illo maiores saepe possimus nesciunt temporibus
-          provident veritatis reprehenderit corrupti! Voluptate laborum velit eligendi consectetur praesentium harum
-          expedita veniam facere quasi!
-        </CodingSkills>
+        <FEDesign>
+          <FEHeader>
+            <Icon>
+              <BiCodeAlt />
+            </Icon>
+            <h3>Programming Skills</h3>
+          </FEHeader>
+          <FEContext>
+            <span>
+              Proficiency in HTML, CSS, and JavaScript - these are the foundational languages of web development and are
+            </span>
+            <span>essential for creating the user interface and user experience of a website or web application.</span>
+          </FEContext>
+          <Border />
+        </FEDesign>
+        <FEDesign>
+          <FEHeader>
+            <Icon>
+              <BsGraphUpArrow />
+            </Icon>
+            <h3>Optimizes the performance</h3>
+          </FEHeader>
+          <FEContext>
+            <span>
+              Knowledge of web performance optimization - Frontend Developers need to ensure that their websites
+            </span>
+            <span>
+              and applications load quickly and perform well on different devices and platforms. essential for creating
+              the user interface and user experience of a website or web application.
+            </span>
+          </FEContext>
+        </FEDesign>
       </Content>
     </Container>
   );

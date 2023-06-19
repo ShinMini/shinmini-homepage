@@ -14,7 +14,6 @@ import Spacing from '@src/themes/Spacing';
 
 const Container = styled.nav`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   background-color: ${props => props.theme.colors.primary};
   padding: 0.5rem 1rem;
@@ -80,7 +79,7 @@ const NavBox = styled.nav<{ ismenuopen: boolean }>`
     background-color: ${props => hexToRGBA(props.theme.colors.yellow, 0.9)};
 
     transition: transform 0.2s ease-in-out;
-    transform: ${props => (props.ismenuopen ? 'translateX(0)' : 'translateX(85%)')};
+    transform: ${props => (props.ismenuopen ? 'translateX(0)' : 'translateX(90%)')};
 
     &:hover {
       transform: translateX(0);
