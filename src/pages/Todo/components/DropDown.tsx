@@ -1,4 +1,4 @@
-import { hexToRGBA } from '@src/features/authentication';
+import { hexToRGBA } from '@src/features';
 import React from 'react';
 
 import styled from 'styled-components';

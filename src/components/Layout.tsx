@@ -2,7 +2,7 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 import Navbar from '@src/components/navbar';
-import { hexToRGBA } from '@src/features/authentication';
+import { hexToRGBA } from '@src/features';
 
 const Wrapper = styled.div`
   min-width: 390px;
