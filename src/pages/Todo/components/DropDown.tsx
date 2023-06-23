@@ -1,4 +1,5 @@
-import { hexToRGBA } from '@src/features/authentication';
+import { hexToRGBA } from '@src/features';
+import dayjs from 'dayjs';
 import React from 'react';
 
 import styled from 'styled-components';
@@ -6,41 +7,36 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-
   color: ${props => props.theme.colors.text};
   background-color: ${props => props.theme.colors.primary};
-
-  width: 99%;
+  width: 96%;
+  gap: 0.5rem;
+  margin: 0.1rem auto;
 
   box-sizing: border-box;
   padding: 0.6rem 0.5rem;
-
   border-radius: 0.5rem;
-  box-shadow: 2px 2px 0.2rem 0.2rem ${props => hexToRGBA(props.theme.colors.primary, 0.3)};
+  box-shadow: -2px 2px 1px 1px ${props => hexToRGBA(props.theme.colors.opposite.background)};
 `;
 
 const Header = styled.div`
   display: flex;
-  flex-direction: row;
-
   justify-content: space-between;
   align-items: center;
+  color: ${props => props.theme.colors.text};
+  background-color: ${props => props.theme.colors.background};
+
+  min-width: 360px;
+  border-radius: 5px;
+  padding: 0.6rem 1.2rem;
 
   & > div {
     display: flex;
-
     align-items: center;
-
-    color: ${props => props.theme.colors.text};
-    background-color: ${props => props.theme.colors.background};
-
-    border-radius: 0.5rem;
-
-    padding: 0.6rem 1.2rem;
   }
 `;
 
-const RightButtonBox = styled.div`
+const ControlPanel = styled.div`
   display: flex;
   flex-direction: row;
 
@@ -50,15 +46,9 @@ const RightButtonBox = styled.div`
   gap: 1rem;
 `;
 
-const DropDownButton = styled.button`
-  padding: 0.3rem 0.4rem;
+const Button = styled.button`
   font-size: 1rem;
   font-weight: bold;
-
-  color: ${props => props.theme.colors.opposite.text};
-  background-color: ${props => props.theme.colors.yellow};
-
-  border-radius: 0.5rem;
 `;
 
 const Title = styled.h1`
@@ -67,40 +57,31 @@ const Title = styled.h1`
 `;
 
 const SubTitle = styled.h2`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2px;
   font-size: 1rem;
   font-style: italic;
 
   color: ${props => props.theme.colors.info};
 `;
 
-const Content = styled.div<{ isOpen: boolean }>`
+const Content = styled.div`
   width: 100%;
-  height: ${props => (props.isOpen ? 'auto' : '0')};
-
-  transition: height 150ms linear, transform 200ms linear, opacity 10ms linear;
-
-  transform: ${props => (props.isOpen ? 'scaleY(1) translateY(0.2em)' : 'scaleY(0) rotateX(90deg) translateY(0px)')};
-  opacity: ${props => (props.isOpen ? '1' : '0')};
-
+  transition: height 150ms linear 50ms, transform 200ms linear 50ms;
   box-sizing: border-box;
-
-  word-wrap: break-word;
-
   margin: auto;
-
-  padding: ${props => (props.isOpen ? '1rem 1.2rem' : '0')};
-
   border-radius: 0.5rem;
-
   color: ${props => props.theme.colors.opposite.text};
   background-color: ${props => props.theme.colors.opposite.background};
-
-  box-shadow: inset -1px 1px 0 0.1rem rgba(0, 0, 0, 0.2);
+  box-shadow: inset -2px 1px 1px 1px ${props => hexToRGBA(props.theme.colors.background, 0.3)};
 `;
 
 const Description = styled.p`
   font-size: 1rem;
   font-weight: normal;
+  padding: 1rem 1.2rem;
 `;
 
 type DropDownProps = {
@@ -113,37 +94,68 @@ type DropDownProps = {
   deleteTodo?: () => void;
 };
 
-const DropDown: React.FC<DropDownProps> = ({ title, createdDate, diffDate, detail, editTodo, deleteTodo }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+const DISPLAY_DATE = ['day', 'hour', 'minutes'];
 
-  const handleDropDown = () => {
-    setIsOpen(!isOpen);
-  };
+const DropDown: React.FC<DropDownProps> = ({ title, createdDate, diffDate, detail, editTodo, deleteTodo }) => {
+  const [isLongDescription, setIsLongDescription] = React.useState(isLongContext(detail).status);
+  const mm = dayjs(diffDate)
+    .format('DD,,mm')
+    .split(',')
+    .map((value, index) => {
+      if (+value === 0) return null;
+
+      if (index === 0) {
+        if (+value === 1) return null;
+        return `${+value - 1} ${DISPLAY_DATE[index]} `;
+      }
+      return `${+value} ${DISPLAY_DATE[index]} `;
+    });
 
   return (
     <Container>
       <Header>
-        <div className="min-w-[60%] flex justify-between">
-          <Title>{title}</Title>
-          <SubTitle>
-            {createdDate} - {diffDate} minutes ago
-          </SubTitle>
-        </div>
-        <RightButtonBox>
-          <button className="text-blue-500 hover:text-blue-600" onClick={editTodo}>
+        <Title>{title}</Title>
+        <ControlPanel>
+          <Button className="text-blue-500 hover:text-blue-600" onClick={editTodo}>
             Edit
-          </button>
-          <button className="text-red-500 hover:text-red-600" onClick={deleteTodo}>
+          </Button>
+          <Button className="text-red-500 hover:text-red-600" onClick={deleteTodo}>
             Delete
-          </button>
-          <DropDownButton onClick={handleDropDown}>Details</DropDownButton>
-        </RightButtonBox>
+          </Button>
+        </ControlPanel>
       </Header>
-      <Content isOpen={isOpen}>
-        <Description>{detail}</Description>
+      <Content>
+        {isLongDescription ? (
+          <Description>
+            <SubTitle>
+              {createdDate} | {mm.map(e => e)}ago
+            </SubTitle>
+            {isLongContext(detail).context}
+            <span
+              style={{ cursor: 'pointer', textAlign: 'right' }}
+              className="text-green-300 hover:text-green-600"
+              onClick={() => setIsLongDescription(false)}>
+              {' '}
+              Show more
+            </span>
+          </Description>
+        ) : (
+          <Description>
+            <SubTitle>
+              {createdDate} | {mm.map(e => e)}ago
+            </SubTitle>
+            {detail}
+          </Description>
+        )}
       </Content>
     </Container>
   );
 };
 
 export default React.memo(DropDown);
+
+function isLongContext(context?: string) {
+  if (!context) return { status: false, context: null };
+
+  return { status: context.trim().length > 100, context: context.trim().slice(0, 100) + '...' };
+}
