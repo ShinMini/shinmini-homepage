@@ -2,7 +2,7 @@ import React from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { hexToRGBA, logout, signInWithGooglePopup } from '@src/features/authentication';
+import { hexToRGBA, logout, signInWithGooglePopup } from '@src/features';
 import { styled } from 'styled-components';
 import { toggleTheme } from '@src/store/slices/themeSlice';
 

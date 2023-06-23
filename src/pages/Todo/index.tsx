@@ -12,7 +12,7 @@ import React from 'react';
 import { validateFormData } from './utils/validateFormData';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
-import { hexToRGBA } from '@src/features/authentication';
+import { hexToRGBA } from '@src/features';
 
 const Container = styled.div`
   display: flex;

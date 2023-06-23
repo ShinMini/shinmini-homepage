@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 import { RiReactjsFill } from 'react-icons/ri';
 import { BiCodeAlt } from 'react-icons/bi';
 import { BsGraphUpArrow } from 'react-icons/bs';
-import { hexToRGBA } from '@src/features/authentication';
+import { hexToRGBA } from '@src/features';
 
 const Container = styled.div`
   margin-top: 2rem;
