@@ -1,9 +1,11 @@
-import { hexToRGBA } from '@src/features/hex-to-rgb';
+import { hexToRGBA } from '@src/features';
 import Spacing from '@src/themes/Spacing';
 import React from 'react';
 import { styled } from 'styled-components';
 import FrontEnd from '../components/FrontEnd';
 import { frontEndContext } from '../contexts/front-end';
+import CodingSkill from '../components/CodingSkill';
+import { codingSkillContext } from '../contexts/coding-skill';
 
 const Container = styled.div`
   margin-top: 2rem;
@@ -20,19 +22,29 @@ const Header = styled.header`
 
 const Content = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
+
   justify-content: center;
 
   box-sizing: border-box;
   padding: 2rem;
   gap: 2rem;
 
-  border-radius: 10px;
-  background-color: ${props => hexToRGBA(props.theme.colors.opposite.background)};
-  box-shadow: 2px 2px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
+  border-radius: 5px;
+  box-shadow: inset -2px 2px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
 
   @media (max-width: ${Spacing.mobile}) {
     grid-template-columns: 1fr;
+  }
+
+  & > article {
+    h1 {
+      color: ${props => props.theme.colors.primary};
+      font-family: 'PoppinsSemiBold';
+      font-size: 1.8rem;
+      text-decoration: underline;
+      margin-bottom: 1.5rem;
+    }
   }
 `;
 
@@ -43,9 +55,29 @@ const FrontEndSkills: React.FC = () => {
         <h1>Front-End Skills</h1>
       </Header>
       <Content>
-        {frontEndContext.map((item, index) => (
-          <FrontEnd key={index} title={item.title} icon={item.icon} description={item.description} />
-        ))}
+        <article>
+          <h1>FE / Design</h1>
+          {frontEndContext.map((item, index) => (
+            <FrontEnd
+              key={`frontend-context-${index}-${item}`}
+              title={item.title}
+              icon={item.icon}
+              animation={!+index}
+              description={item.description}
+            />
+          ))}
+        </article>
+        <article>
+          <h1>Coding Skills</h1>
+          {codingSkillContext.map((item, index) => (
+            <CodingSkill
+              key={`coding-skill-${item}-${index}`}
+              title={item.title}
+              icon={item.icon}
+              percentage={item.percentage}
+            />
+          ))}
+        </article>
       </Content>
     </Container>
   );
