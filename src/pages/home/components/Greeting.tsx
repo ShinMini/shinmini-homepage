@@ -146,7 +146,10 @@ const Greeting: React.FC = () => {
             <TakeALookButton type="button" borderColor="#007CED">
               Contact Me
             </TakeALookButton>
-            <TakeALookButton type="button" borderColor="#F84F4F">
+            <TakeALookButton
+              type="button"
+              onClick={() => window.open('https://github.com/ShinMini', '_blank')}
+              borderColor="#F84F4F">
               See My Work
             </TakeALookButton>
           </footer>
