@@ -35,39 +35,22 @@ const Header = styled.div`
     margin: 0;
     padding: 0;
 
-    font-family: 'PoppinsMedium';
-    font-size: 2.5rem;
-    font-weight: 800;
+    font-family: 'PoppinsSemiBold';
+    font-size: 2rem;
   }
 `;
 
 const TodoListContainer = styled.div`
   display: flex;
   flex-direction: column;
-
   align-items: center;
-
   gap: 0.5rem;
-
   height: max(35rem, 60vh);
-
-  background-color: ${props => hexToRGBA(props.theme.colors.opposite.green, 0.9)};
-
   box-sizing: border-box;
-
-  padding: 1rem 0;
+  padding: 0.7rem 0;
+  border-radius: 0.2rem;
   overflow-y: scroll;
-
-  border-radius: 10px;
-
-  box-shadow: inset -2px 1px 0 0.2rem rgba(0, 0, 0, 0.2);
-
-  &::-webkit-scrollbar {
-    width: 0.5rem;
-
-    background-color: ${props => hexToRGBA(props.theme.colors.greenDark, 0.5)};
-    border-radius: 0.5rem;
-  }
+  box-shadow: inset -2px 4px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
 `;
 
 const Todo: React.FC = () => {
@@ -125,15 +108,17 @@ const Todo: React.FC = () => {
   return (
     <Layout>
       <Header>
-        <h1>This is To Do List</h1>
+        <h1>
+          What you going <span className=" font-bold text-blue-500">To Do</span>
+        </h1>
       </Header>
       <Container>
         <TodoListContainer>
           {currentTodoList &&
             currentTodoList.map(({ date, title, detail }, index) => {
               const key = `currentTodoList-${title}${index}`;
-              const createdDate = dayjs(date).format('YYYY MM DD, HH:mm:ss');
-              const diffDate = dayjs().diff(createdDate, 'minute');
+              const createdDate = dayjs(date).format('YY MM.DD HH:mm');
+              const diffDate = dayjs().diff(date);
 
               return (
                 <DropDown
