@@ -2,10 +2,10 @@ import { hexToRGBA } from '@src/features';
 import Spacing from '@src/themes/Spacing';
 import React from 'react';
 import { styled } from 'styled-components';
-import FrontEnd from '../components/FrontEnd';
-import { frontEndContext } from '../contexts/front-end';
-import CodingSkill from '../components/CodingSkill';
-import { codingSkillContext } from '../contexts/coding-skill';
+import FrontEnd from './components/FrontEnd';
+import { frontEndContext } from './contexts/front-end';
+import CodingSkill from './components/CodingSkill';
+import { codingSkillContext } from './contexts/coding-skill';
 
 const Container = styled.div`
   margin-top: 2rem;
