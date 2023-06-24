@@ -13,6 +13,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.3",
+    "@mui/material": "^5.13.6",
     "@reduxjs/toolkit": "^1.9.5",
     "d3": "^7.8.5",
     "dayjs": "^1.11.8",
@@ -59,6 +64,10 @@
     "vite": "^4.3.9",
     "vite-plugin-eslint": "^1.8.1",
     "vite-tsconfig-paths": "^4.2.0"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   },
   "resolutions": {
     "crypto-js": "3.3.0"
