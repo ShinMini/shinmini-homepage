@@ -3,6 +3,25 @@ import { Button, Checkbox, FormControlLabel, Grid, TextField } from '@mui/materi
 import emailjs from '@emailjs/browser';
 import { emailjsConfig } from '@src/lib/emailjs/constants';
 import { z, ZodError } from 'zod';
+import styled from 'styled-components';
+import { hexToRGBA } from '@src/features';
+
+const Form = styled.form`
+  /* className="flex flex-col gap-6 rounded-xl border-4 px-5 py-8 border-teal-900 mx-auto bg-slate-200 shadow-xl text-slate-800"> */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: rgb(19 78 74) 2px solid;
+  border-radius: 15px;
+  padding: 15px 10px;
+  background-color: #e0e7ff;
+  box-shadow: 1px 1px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
+  margin-top: 2rem;
+  margin-left: min(6vw, 3rem);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  width: 80%;
+`;
 
 // Defining schema for validation
 const schema = z.object({
@@ -50,9 +69,7 @@ const SendMail: React.FC = () => {
   };
 
   return (
-    <form
-      ref={form}
-      className="flex flex-col gap-6 w-[60%] rounded-xl border-4 px-5 py-8 border-teal-900 mx-auto bg-slate-200 shadow-xl text-slate-800">
+    <Form ref={form}>
       <h4 className="text-2xl font-bold">Contact to Me!</h4>
       <Grid className="flex gap-6 mb-2 box-border px-2">
         <TextField
@@ -92,7 +109,7 @@ const SendMail: React.FC = () => {
           Send
         </Button>
       </Grid>
-    </form>
+    </Form>
   );
 };
 

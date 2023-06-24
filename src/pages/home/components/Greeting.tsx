@@ -5,25 +5,19 @@ import { styled } from 'styled-components';
 
 const Container = styled.div`
   margin-top: 2rem;
-
   min-height: max(70vh, 50rem);
-
+  padding-bottom: max(4rem, 8vh);
   display: flex;
   flex-direction: column;
-
   justify-content: center;
   align-items: center;
-
   color: ${props => props.theme.colors.text};
-
   background: rgb(212, 211, 236);
   background: linear-gradient(
     ${props => props.theme.colors.opposite.background} 0%,
     ${props => props.theme.colors.background} 100%
   );
-
   border-radius: 10px;
-
   box-shadow: 0px 0px 0.4rem 0.4rem ${props => props.theme.colors.shadow};
 `;
 
@@ -96,25 +90,18 @@ const Context = styled.div`
 `;
 
 const TakeALookButton = styled.button<{ borderColor: string }>`
-  width: max(9rem, 7vw);
+  width: max(10rem, 13vw);
   height: 100%;
-
   font-size: 0.8em;
   font-weight: 600;
-
   padding: 0.8rem 1rem;
-
   border-color: ${props => props.borderColor};
   border-width: 2px;
   border-radius: min(5rem, 4vw);
-
   color: ${props => props.theme.colors.opposite.text};
   background-color: ${props => props.theme.colors.opposite.background};
-
   box-shadow: 1px 2px 0.2rem 0.1rem ${props => props.theme.colors.opposite.background};
-
   transition: box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
-
   &:hover {
     cursor: pointer;
     box-shadow: 0px 1px 0.1rem 0.1rem ${props => props.theme.colors.opposite.background};
