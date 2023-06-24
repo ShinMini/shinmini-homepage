@@ -16,6 +16,10 @@ interface ImportMetaEnv {
 
   VITE_API_ORIGIN?: string;
   VITE_USE_FIREBASE_EMULATOR?: string;
+
+  VITE_EMAILJS_SERVICE_ID: string;
+  VITE_EMAILJS_TEMPLATE_ID: string;
+  VITE_EMAILJS_PUBLIC_KEY: string;
 }
 
 interface ImportMeta {
