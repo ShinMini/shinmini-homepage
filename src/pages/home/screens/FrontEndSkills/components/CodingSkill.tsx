@@ -44,14 +44,14 @@ const GraphBox = styled.div`
   height: 100%;
 
   border-radius: 7px;
-  background-color: ${props => hexToRGBA(props.theme.colors.opposite.background)};
+  background-color: ${props => hexToRGBA(props.theme.colors.opposite.background, 0.1)};
   padding: 5px;
 `;
 
 const Bar = styled.div<{ percentage }>`
   width: ${props => props.percentage}%;
   height: 0.5rem;
-  background-color: ${props => props.theme.colors.primary};
+  background-color: ${props => props.theme.colors.info};
   border-radius: 10px;
   transition: width 1s ease-in-out, scale 1s ease-in-out;
 `;

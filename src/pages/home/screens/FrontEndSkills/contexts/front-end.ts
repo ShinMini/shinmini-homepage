@@ -5,7 +5,7 @@ import { RiReactjsFill } from 'react-icons/ri';
 
 export const frontEndContext: FrontEndContext[] = [
   {
-    title: 'Front-end',
+    title: 'UI / UX Design',
     icon: RiReactjsFill,
     description: [
       'Understanding of design principles and user experience (UX) - Frontend Developers work closely with UX',
@@ -13,7 +13,7 @@ export const frontEndContext: FrontEndContext[] = [
     ],
   },
   {
-    title: 'Programming Skills',
+    title: 'Client Side',
     icon: BiCodeAlt,
     description: [
       'Proficiency in HTML, CSS, and JavaScript - these are the foundational languages of web development and are',

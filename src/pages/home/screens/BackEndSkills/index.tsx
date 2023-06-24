@@ -39,7 +39,7 @@ const Content = styled.div`
 
   & > article {
     h1 {
-      color: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.greenDark};
       font-family: 'PoppinsSemiBold';
       font-size: 1.8rem;
       text-decoration: underline;
@@ -56,7 +56,7 @@ const BackEndSkills: React.FC = () => {
       </Header>
       <Content>
         <article>
-          <h1>FE / Design</h1>
+          <h1>BE / DB</h1>
           {backEndContext.map((item, index) => (
             <BackEnd
               key={`backend-context-${index}-${item}`}
@@ -68,7 +68,7 @@ const BackEndSkills: React.FC = () => {
           ))}
         </article>
         <article>
-          <h1>Coding Skills</h1>
+          <h1>BE Stacks</h1>
           {codingSkillContext.map((item, index) => (
             <CodingSkill
               key={`coding-skill-${item}-${index}`}

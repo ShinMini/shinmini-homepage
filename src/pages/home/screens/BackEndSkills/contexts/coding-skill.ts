@@ -1,38 +1,57 @@
-import { IoLogoCss3, IoLogoJavascript } from 'react-icons/io';
-import { RiReactjsFill } from 'react-icons/ri';
-import { SiReact, SiTypescript } from 'react-icons/si';
-import { TbBrandReactNative } from 'react-icons/tb';
+import { SiFirebase, SiMongodb, SiMysql, SiNestjs, SiPostgresql, SiRedis, SiSpring } from 'react-icons/si';
 import { CodingSkillContext } from '../components/CodingSkill';
+import { FaAws, FaFlask } from 'react-icons/fa';
+import { IoLogoNodejs } from 'react-icons/io';
 
 export const codingSkillContext: CodingSkillContext[] = [
   {
-    title: 'HTML',
-    icon: RiReactjsFill,
-    percentage: 65,
+    title: 'Node.js / Express.js',
+    icon: IoLogoNodejs,
+    percentage: 75,
   },
   {
-    title: 'CSS',
-    icon: IoLogoCss3,
-    percentage: 73,
+    title: 'Java Spring',
+    icon: SiSpring,
+    percentage: 43,
   },
   {
-    title: 'Javascript',
-    icon: IoLogoJavascript,
-    percentage: 91,
+    title: 'Flask',
+    icon: FaFlask,
+    percentage: 34,
   },
   {
-    title: 'React',
-    icon: SiReact,
-    percentage: 79,
+    title: 'Nest.js',
+    icon: SiNestjs,
+    percentage: 55,
   },
   {
-    title: 'React Native',
-    icon: TbBrandReactNative,
+    title: 'MySQL',
+    icon: SiMysql,
+    percentage: 59,
+  },
+  {
+    title: 'MongoDB',
+    icon: SiMongodb,
+    percentage: 74,
+  },
+  {
+    title: 'PostgreSQL',
+    icon: SiPostgresql,
+    percentage: 54,
+  },
+  {
+    title: 'Redis',
+    icon: SiRedis,
+    percentage: 34,
+  },
+  {
+    title: 'Firebase',
+    icon: SiFirebase,
+    percentage: 72,
+  },
+  {
+    title: 'AWS',
+    icon: FaAws,
     percentage: 64,
-  },
-  {
-    title: 'Typescript',
-    icon: SiTypescript,
-    percentage: 84,
   },
 ];

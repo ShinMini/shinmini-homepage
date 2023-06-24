@@ -26,19 +26,7 @@ const Icon = styled.div<{ color?: string }>`
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  color: ${props => props.color || props.theme.colors.primary};
-`;
-
-const FEIcon = styled(Icon)`
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  animation: spin 4s linear infinite;
+  color: ${props => props.color || props.theme.colors.green};
 `;
 
 const FEContext = styled.div`
@@ -54,7 +42,7 @@ const Border = styled.div`
   width: 80%;
   margin: 1rem auto;
   height: 3px;
-  background-color: ${props => props.theme.colors.primary};
+  background-color: ${props => props.theme.colors.green};
   border-radius: 10px;
 `;
 
@@ -72,7 +60,7 @@ const BackEnd: React.FC<BackEndContext> = ({ title, icon = RiReactjsFill, descri
   return (
     <FEContent>
       <FEHeader>
-        {animation ? <FEIcon>{reactIcon}</FEIcon> : <Icon>{reactIcon}</Icon>}
+        <Icon>{reactIcon}</Icon>
         <h3>{title}</h3>
       </FEHeader>
       <FEContext>

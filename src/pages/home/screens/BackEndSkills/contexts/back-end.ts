@@ -1,31 +1,31 @@
-import { BiCodeAlt } from 'react-icons/bi';
-import { BsGraphUpArrow } from 'react-icons/bs';
+import { BsFillDatabaseFill } from 'react-icons/bs';
 import { BackEndContext } from '../components/BackEnd';
-import { RiReactjsFill } from 'react-icons/ri';
+import { FaToolbox } from 'react-icons/fa';
+import { BiServer } from 'react-icons/bi';
 
 export const backEndContext: BackEndContext[] = [
   {
-    title: 'Back-end',
-    icon: RiReactjsFill,
+    title: 'Proficiency',
+    icon: FaToolbox,
     description: [
-      'Understanding of design principles and user experience (UX) - BackEnd Developers work closely with UX',
-      'designers and need to have an understanding of design principles to create visually appealing and intuitive user interfaces.',
+      'Proficiency in programming languages - Backend Developers often work with languages',
+      'such as Java, Python, Ruby, or PHP, which are commonly used for server-side development.',
     ],
   },
   {
-    title: 'Programming Skills',
-    icon: BiCodeAlt,
+    title: 'DataBase',
+    icon: BsFillDatabaseFill,
     description: [
-      'Proficiency in HTML, CSS, and JavaScript - these are the foundational languages of web development and are',
-      'essential for creating the user interface and user experience of a website or web application.',
+      'Understanding of databases and data storage - Backend Developers need to be familiar with different types of databases and how to design, implement,',
+      'and maintain them to support web applications.',
     ],
   },
   {
-    title: 'Optimizes the performance',
-    icon: BsGraphUpArrow,
+    title: 'Server',
+    icon: BiServer,
     description: [
-      'Knowledge of web performance optimization - BackEnd Developers need to ensure that their websites',
-      'and applications load quickly and perform well on different devices and platforms. essential for creating the user interface and user experience of a website or web application.',
+      'Knowledge of server-side architecture and deployment - Backend Developers need to understand how to set up and deploy servers,',
+      'and how to design scalable and fault-tolerant architecture for web applications.',
     ],
   },
 ];
