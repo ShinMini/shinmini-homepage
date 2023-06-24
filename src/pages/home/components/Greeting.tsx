@@ -150,7 +150,10 @@ const Greeting: React.FC = () => {
             <p>Now, I live in Seoul (서울), South Korea (한국)</p>
           </article>
           <footer>
-            <TakeALookButton type="button" borderColor="#007CED">
+            <TakeALookButton
+              type="button"
+              borderColor="#007CED"
+              onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
               Contact Me
             </TakeALookButton>
             <TakeALookButton
