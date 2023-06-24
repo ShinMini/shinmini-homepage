@@ -10,6 +10,8 @@ const Wrapper = styled.div`
   padding: 0;
   background-color: ${props => props.theme.colors.gray};
   transition: background-color 700ms linear 300ms;
+
+  position: relative;
   overflow: hidden;
 `;
 

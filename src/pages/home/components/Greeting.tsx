@@ -39,16 +39,11 @@ const Content = styled.div`
 
   img {
     width: 80%;
+    margin: auto;
   }
 
   @media (max-width: ${Spacing.mobile}) {
     grid-template-columns: 1fr;
-
-    img {
-      width: 60%;
-
-      margin: auto;
-    }
   }
 `;
 
@@ -66,22 +61,27 @@ const Context = styled.div`
   width: 100%;
   height: 100%;
 
-  h1 {
-    font-size: max(3rem, 2vw);
-    line-height: 1;
-
-    font-family: ${props => props.theme.fonts.poppins.medium};
+  & > header {
+    h1 {
+      font-size: max(2rem, 3.5vw);
+      font-family: ${props => props.theme.fonts.poppins.semiBold};
+    }
+    h2 {
+      font-size: max(1rem, 1.5vw);
+      color: ${props => props.theme.colors.grayDark};
+      font-family: ${props => props.theme.fonts.poppins.medium};
+    }
   }
-  h2 {
-    font-size: max(1.2rem, 1.2vw);
 
-    color: ${props => props.theme.colors.grayDark};
-    font-family: ${props => props.theme.fonts.poppins.medium};
-  }
-
-  p {
-    font-size: max(0.8rem, 1vw);
-    line-height: 1.2;
+  & > article {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    p {
+      max-width: 90%;
+      font-size: min(0.8rem, 10vh);
+      line-height: 1.2;
+    }
   }
   footer {
     display: flex;
@@ -99,10 +99,10 @@ const TakeALookButton = styled.button<{ borderColor: string }>`
   width: max(9rem, 7vw);
   height: 100%;
 
-  font-size: 0.8rem;
+  font-size: 0.8em;
   font-weight: 600;
 
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1rem;
 
   border-color: ${props => props.borderColor};
   border-width: 2px;
@@ -127,7 +127,12 @@ const Greeting: React.FC = () => {
   return (
     <Container id="#Greeting">
       <Content>
-        <img src={Images.ProfileImage} alt="Profile" />
+        <img
+          src={Images.ProfileImage.Medium}
+          srcSet={`${Images.ProfileImage.Small} 260w, ${Images.ProfileImage.Medium} 400w, ${Images.ProfileImage.Large} 628w`}
+          sizes="(max-width: 628px) 260px, (max-width: 1024px) 400px, 628px"
+          alt="Profile"
+        />
 
         <Context>
           <header>
@@ -138,9 +143,11 @@ const Greeting: React.FC = () => {
           </header>
           <article>
             <p>Hello, my name is HyeonMin Shin.</p>
-            <p>I am a 23-year-old frontend developer with experience building complex user interfaces,</p>
-            <p>managing state, and optimizing performance using React and React Native with TypeScript.</p>
-            <p>I live in Seoul, South Korea,</p>
+            <p>
+              I am a 23-year-old frontend developer with experience building complex user interfaces, managing state,
+              and optimizing performance using React and React Native with TypeScript.
+            </p>
+            <p>Now, I live in Seoul (서울), South Korea (한국)</p>
           </article>
           <footer>
             <TakeALookButton type="button" borderColor="#007CED">

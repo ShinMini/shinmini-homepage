@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import { IconType } from 'react-icons';
 import { RiReactjsFill } from 'react-icons/ri';
 import { hexToRGBA } from '@src/features';
+import { useObserver } from '@src/hooks/useObserver';
 
 const CSContent = styled.div`
   display: flex;
@@ -53,11 +54,6 @@ const Bar = styled.div<{ percentage }>`
   background-color: ${props => props.theme.colors.primary};
   border-radius: 10px;
   transition: width 1s ease-in-out, scale 1s ease-in-out;
-  scale: 0;
-
-  &:visible {
-    scale: 1;
-  }
 `;
 
 export type CodingSkillContext = {
@@ -69,6 +65,19 @@ export type CodingSkillContext = {
 
 const CodingSkill: React.FC<CodingSkillContext> = ({ title, icon = RiReactjsFill, iconColor, percentage }) => {
   const reactIcon = React.createElement(icon);
+  const [isObserved, setIsObserved] = React.useState(false);
+
+  const { setElement, entry } = useObserver({
+    root: null,
+    rootMargin: '0px',
+    threshold: 1.0,
+  });
+
+  React.useEffect(() => {
+    if (entry?.isIntersecting) {
+      setIsObserved(true);
+    }
+  }, [entry]);
 
   return (
     <CSContent>
@@ -79,11 +88,11 @@ const CodingSkill: React.FC<CodingSkillContext> = ({ title, icon = RiReactjsFill
         </CSTitle>
         <p>{`${percentage}%`}</p>
       </CSHeader>
-      <GraphBox>
-        <Bar percentage={percentage} />
+      <GraphBox ref={setElement}>
+        <Bar percentage={isObserved ? percentage : 0} />
       </GraphBox>
     </CSContent>
   );
 };
 
-export default CodingSkill;
+export default React.memo(CodingSkill);
