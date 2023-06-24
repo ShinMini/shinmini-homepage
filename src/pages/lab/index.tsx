@@ -1,7 +1,7 @@
 import { Layout } from '@src/components';
 import React from 'react';
 import Vector from './components/Vector';
-import SendMail from './components/SendMail';
+import SendMail from '../home/components/SendMail';
 
 const Lab: React.FC = () => {
   return (
