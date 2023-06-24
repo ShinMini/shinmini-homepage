@@ -62,7 +62,6 @@ const BackEndSkills: React.FC = () => {
               key={`backend-context-${index}-${item}`}
               title={item.title}
               icon={item.icon}
-              animation={!+index}
               description={item.description}
             />
           ))}

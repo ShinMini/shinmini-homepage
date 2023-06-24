@@ -50,11 +50,10 @@ export type BackEndContext = {
   title: string;
   icon: IconType;
   iconColor?: string;
-  animation?: boolean;
   description: string[];
 };
 
-const BackEnd: React.FC<BackEndContext> = ({ title, icon = RiReactjsFill, description, animation = false }) => {
+const BackEnd: React.FC<BackEndContext> = ({ title, icon = RiReactjsFill, description }) => {
   const reactIcon = React.createElement(icon);
 
   return (
