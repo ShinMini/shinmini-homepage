@@ -1,10 +1,9 @@
 import React from 'react';
-import { styled } from 'styled-components';
+import { keyframes, styled } from 'styled-components';
 
 import { IconType } from 'react-icons';
 import { RiReactjsFill } from 'react-icons/ri';
 import { hexToRGBA } from '@src/features';
-import { useObserver } from '@src/hooks/useObserver';
 
 const CSContent = styled.div`
   display: flex;
@@ -26,7 +25,7 @@ const CSTitle = styled.div`
   font-size: 1.2rem;
   gap: 0.5rem;
   h3 {
-    font-family: 'PoppinsSemiBold';
+    font-family: ${props => props.theme.fonts.poppins.medium};
   }
 `;
 
@@ -34,8 +33,9 @@ const Icon = styled.div<{ color?: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
+
   font-size: 2rem;
-  color: ${props => props.color || props.theme.colors.green};
+  color: ${props => props.color || props.theme.colors.primary};
 `;
 
 const GraphBox = styled.div`
@@ -47,12 +47,19 @@ const GraphBox = styled.div`
   padding: 5px;
 `;
 
-const Bar = styled.div<{ percentage }>`
-  width: ${props => props.percentage}%;
+const fillUpAnimation = (percentage: number) => keyframes`
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: ${percentage}%;
+  }
+`;
+const Bar = styled.div<{ percentage: number; delay: number }>`
   height: 0.5rem;
-  background-color: ${props => props.theme.colors.warning};
+  background-color: ${props => props.theme.colors.info};
   border-radius: 10px;
-  transition: width 1s ease-in-out, scale 1s ease-in-out;
+  animation: ${props => fillUpAnimation(props.percentage)} 1s ease-in-out ${props => props.delay * 50 + 100}ms forwards;
 `;
 
 export type CodingSkillContext = {
@@ -60,23 +67,19 @@ export type CodingSkillContext = {
   icon?: IconType;
   iconColor?: string;
   percentage: number;
+  index: number;
+  animate?: boolean;
 };
 
-const CodingSkill: React.FC<CodingSkillContext> = ({ title, icon = RiReactjsFill, iconColor, percentage }) => {
+const CodingSkill: React.FC<CodingSkillContext> = ({
+  title,
+  icon = RiReactjsFill,
+  iconColor,
+  percentage,
+  index,
+  animate,
+}) => {
   const reactIcon = React.createElement(icon);
-  const [isObserved, setIsObserved] = React.useState(false);
-
-  const { setElement, entry } = useObserver({
-    root: null,
-    rootMargin: '0px',
-    threshold: 1.0,
-  });
-
-  React.useEffect(() => {
-    if (entry?.isIntersecting) {
-      setIsObserved(true);
-    }
-  }, [entry]);
 
   return (
     <CSContent>
@@ -87,11 +90,11 @@ const CodingSkill: React.FC<CodingSkillContext> = ({ title, icon = RiReactjsFill
         </CSTitle>
         <p>{`${percentage}%`}</p>
       </CSHeader>
-      <GraphBox ref={setElement}>
-        <Bar percentage={isObserved ? percentage : 0} />
+      <GraphBox>
+        <Bar percentage={animate ? percentage : 50} delay={index} />
       </GraphBox>
     </CSContent>
   );
 };
 
-export default React.memo(CodingSkill);
+export default CodingSkill;

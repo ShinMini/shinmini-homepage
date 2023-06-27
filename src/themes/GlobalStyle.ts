@@ -7,6 +7,10 @@ import { createGlobalStyle } from 'styled-components';
 import { Poppins } from '@src/assets/fonts';
 
 const GlobalStyle = createGlobalStyle`
+@font-face {
+  font-family: 'Poppins';
+  src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap') format('truetype');
+}
 
 @font-face {
   font-family: 'PoppinsMedium';
@@ -35,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
 
   *, *::before, *::after {
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', 'Roboto', sans-serif;
 
     margin: 0;
     padding: 0;

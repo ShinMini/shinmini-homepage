@@ -94,7 +94,7 @@ const TakeALookButton = styled.button<{ borderColor: string }>`
   height: 100%;
   font-size: 0.8em;
   font-weight: 600;
-  padding: 0.8rem 1rem;
+  padding: 0.6rem 0.3rem;
   border-color: ${props => props.borderColor};
   border-width: 2px;
   border-radius: min(5rem, 4vw);

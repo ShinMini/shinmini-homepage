@@ -2,7 +2,7 @@ import { IoLogoCss3, IoLogoJavascript } from 'react-icons/io';
 import { RiReactjsFill } from 'react-icons/ri';
 import { SiReact, SiTypescript } from 'react-icons/si';
 import { TbBrandReactNative } from 'react-icons/tb';
-import { CodingSkillContext } from '../components/CodingSkill';
+import { CodingSkillContext } from '../../../components/CodingSkill';
 
 export const codingSkillContext: CodingSkillContext[] = [
   {

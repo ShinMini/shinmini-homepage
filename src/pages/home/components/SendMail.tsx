@@ -7,18 +7,15 @@ import styled from 'styled-components';
 import { hexToRGBA } from '@src/features';
 
 const Form = styled.form`
-  /* className="flex flex-col gap-6 rounded-xl border-4 px-5 py-8 border-teal-900 mx-auto bg-slate-200 shadow-xl text-slate-800"> */
   display: flex;
   flex-direction: column;
   gap: 1rem;
   border: rgb(19 78 74) 2px solid;
   border-radius: 15px;
-  padding: 15px 10px;
+  padding: 1.5rem 1rem;
   background-color: #e0e7ff;
   box-shadow: 1px 1px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
-  margin-top: 2rem;
-  margin-left: min(6vw, 3rem);
-  margin-bottom: 2rem;
+  margin: 2rem auto;
   max-width: 600px;
   width: 80%;
 `;
@@ -34,6 +31,7 @@ const schema = z.object({
 const SendMail: React.FC = () => {
   const form = useRef(null);
   const [formErrors, setFormErrors] = useState({ user_name: '', user_email: '', message: '', anonymous: '' });
+  // const [isAnonymous, setIsAnonymous] = useState(false); // TODO: Implement anonymous checkbox
 
   const sendEmail = async e => {
     e.preventDefault();
@@ -57,9 +55,7 @@ const SendMail: React.FC = () => {
         },
       );
     } catch (error) {
-      // Check if it is a ZodError
       if (error instanceof ZodError) {
-        // Handle validation errors
         const errorMap = error.formErrors.fieldErrors;
         setFormErrors(prevErrors => ({ ...prevErrors, ...errorMap }));
       } else {

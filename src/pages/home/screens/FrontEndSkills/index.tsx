@@ -1,11 +1,12 @@
 import { hexToRGBA } from '@src/features';
 import Spacing from '@src/themes/Spacing';
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { styled } from 'styled-components';
 import FrontEnd from './components/FrontEnd';
 import { frontEndContext } from './contexts/front-end';
-import CodingSkill from './components/CodingSkill';
+import CodingSkill from '../../components/CodingSkill';
 import { codingSkillContext } from './contexts/coding-skill';
+import { useObserver } from '@src/hooks/useObserver';
 
 const Container = styled.div`
   margin-top: 2rem;
@@ -15,7 +16,7 @@ const Container = styled.div`
 const Header = styled.header`
   padding: 0.5rem 1rem;
   h1 {
-    font-family: 'PoppinsBold';
+    font-family: ${props => props.theme.fonts.poppins.bold};
     font-size: 2.5rem;
   }
 `;
@@ -40,7 +41,8 @@ const Content = styled.div`
   & > article {
     h1 {
       color: ${props => props.theme.colors.primary};
-      font-family: 'PoppinsSemiBold';
+      font-family: ${props => props.theme.fonts.poppins.bold};
+
       font-size: 1.8rem;
       text-decoration: underline;
       margin-bottom: 1.5rem;
@@ -49,8 +51,23 @@ const Content = styled.div`
 `;
 
 const FrontEndSkills: React.FC = () => {
+  const [isObserved, setIsObserved] = React.useState(false);
+  const { setElement, entry } = useObserver({
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.3,
+  });
+
+  useLayoutEffect(() => {
+    if (isObserved) return;
+
+    if (entry?.isIntersecting) {
+      setIsObserved(true);
+    }
+  }, [entry, isObserved]);
+
   return (
-    <Container>
+    <Container ref={setElement}>
       <Header>
         <h1>Front-End Skills</h1>
       </Header>
@@ -72,9 +89,11 @@ const FrontEndSkills: React.FC = () => {
           {codingSkillContext.map((item, index) => (
             <CodingSkill
               key={`coding-skill-${item}-${index}`}
+              index={index}
               title={item.title}
               icon={item.icon}
               percentage={item.percentage}
+              animate={isObserved}
             />
           ))}
         </article>

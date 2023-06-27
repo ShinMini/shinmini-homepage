@@ -17,7 +17,7 @@ const FEHeader = styled.div`
   gap: 0.5rem;
   margin-bottom: 0.5rem;
   h3 {
-    font-family: 'PoppinsSemiBold';
+    font-family: ${props => props.theme.fonts.poppins.semiBold};
   }
 `;
 

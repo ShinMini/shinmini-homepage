@@ -1,11 +1,12 @@
 import { hexToRGBA } from '@src/features';
 import Spacing from '@src/themes/Spacing';
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { styled } from 'styled-components';
 import BackEnd from './components/BackEnd';
 import { backEndContext } from './contexts/back-end';
-import CodingSkill from './components/CodingSkill';
+import CodingSkill from '../../components/CodingSkill';
 import { codingSkillContext } from './contexts/coding-skill';
+import { useObserver } from '@src/hooks/useObserver';
 
 const Container = styled.div`
   margin-top: 2rem;
@@ -49,8 +50,23 @@ const Content = styled.div`
 `;
 
 const BackEndSkills: React.FC = () => {
+  const [isObserved, setIsObserved] = React.useState(false);
+  const { setElement, entry } = useObserver({
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.3,
+  });
+
+  useLayoutEffect(() => {
+    if (isObserved) return;
+
+    if (entry?.isIntersecting) {
+      setIsObserved(true);
+    }
+  }, [entry, isObserved]);
+
   return (
-    <Container>
+    <Container ref={setElement}>
       <Header>
         <h1>back-End Skills</h1>
       </Header>
@@ -74,6 +90,8 @@ const BackEndSkills: React.FC = () => {
               title={item.title}
               icon={item.icon}
               percentage={item.percentage}
+              index={index}
+              animate={isObserved}
             />
           ))}
         </article>
