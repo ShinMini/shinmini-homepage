@@ -68,7 +68,7 @@ export type CodingSkillContext = {
   iconColor?: string;
   percentage: number;
   index: number;
-  animate?: boolean;
+  animate: boolean;
 };
 
 const CodingSkill: React.FC<CodingSkillContext> = ({

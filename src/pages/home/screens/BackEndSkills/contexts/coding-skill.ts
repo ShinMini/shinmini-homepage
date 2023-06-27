@@ -1,9 +1,9 @@
 import { SiFirebase, SiMongodb, SiMysql, SiNestjs, SiPostgresql, SiRedis, SiSpring } from 'react-icons/si';
-import { CodingSkillContext } from '../components/CodingSkill';
 import { FaAws, FaFlask } from 'react-icons/fa';
 import { IoLogoNodejs } from 'react-icons/io';
+import { CodingSkillContext } from '@src/pages/home/components/CodingSkill';
 
-export const codingSkillContext: CodingSkillContext[] = [
+export const codingSkillContext: Array<Omit<CodingSkillContext, 'index' | 'animate'>> = [
   {
     title: 'Node.js / Express.js',
     icon: IoLogoNodejs,

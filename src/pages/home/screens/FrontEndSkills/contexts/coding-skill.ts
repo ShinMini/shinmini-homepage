@@ -4,7 +4,7 @@ import { SiReact, SiTypescript } from 'react-icons/si';
 import { TbBrandReactNative } from 'react-icons/tb';
 import { CodingSkillContext } from '../../../components/CodingSkill';
 
-export const codingSkillContext: CodingSkillContext[] = [
+export const codingSkillContext: Array<Omit<CodingSkillContext, 'index' | 'animate'>> = [
   {
     title: 'HTML',
     icon: RiReactjsFill,
