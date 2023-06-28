@@ -64,7 +64,7 @@ const DropDownBox = styled.div`
   gap: min(0.8rem, 2vw);
 `;
 
-const NavBox = styled.nav<{ ismenuopen: boolean }>`
+const NavBox = styled.nav<{ isMenuOpen: boolean }>`
   display: flex;
   gap: min(0.8rem, 2vw);
   padding: 0.6rem 1.2rem;
@@ -79,7 +79,7 @@ const NavBox = styled.nav<{ ismenuopen: boolean }>`
     background-color: ${props => hexToRGBA(props.theme.colors.yellow, 0.9)};
 
     transition: all 0.2s ease-in-out;
-    transform: ${props => (props.ismenuopen ? 'translateX(0)' : 'translateX(90%)')};
+    transform: ${props => (props.isMenuOpen ? 'translateX(0)' : 'translateX(90%)')};
 
     &:hover {
       border-radius: 2px;
@@ -139,7 +139,7 @@ const Navbar: React.FC = () => {
           <MenuButton onClick={() => setIsMenuOpen(prev => !prev)}>
             <AiOutlineMenu />
           </MenuButton>
-          <NavBox ismenuopen={isMenuOpen} onClick={() => setIsMenuOpen(prev => !prev)}>
+          <NavBox isMenuOpen={isMenuOpen} onClick={() => setIsMenuOpen(prev => !prev)}>
             {routeName.map((value, index) => (
               <NavItem key={`nav-item-${index}-${value}`} to={RoutePath.get(value) || '/'}>
                 {value}

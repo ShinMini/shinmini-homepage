@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Checkbox, FormControlLabel, Grid, TextField } from '@mui/material';
 import emailjs from '@emailjs/browser';
 import { emailjsConfig } from '@src/lib/emailjs/constants';
-import { z, ZodError } from 'zod';
+import { set, z, ZodError } from 'zod';
 import styled from 'styled-components';
-import { hexToRGBA } from '@src/features';
+import { hexToRGBA, randomEmail, randomName } from '@src/features';
 
 const Form = styled.form`
   display: flex;
@@ -31,7 +31,10 @@ const schema = z.object({
 const SendMail: React.FC = () => {
   const form = useRef(null);
   const [formErrors, setFormErrors] = useState({ user_name: '', user_email: '', message: '', anonymous: '' });
-  // const [isAnonymous, setIsAnonymous] = useState(false); // TODO: Implement anonymous checkbox
+  const [isAnonymous, setIsAnonymous] = useState(false);
+  const [anonymousUser, setAnonymousUser] = useState({ user_name: '', user_email: '' });
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
 
   const sendEmail = async e => {
     e.preventDefault();
@@ -39,6 +42,11 @@ const SendMail: React.FC = () => {
 
     const formFields = new FormData(form.current);
     const formData = Object.fromEntries(formFields);
+
+    if (formData.anonymous) {
+      formData.user_name = anonymousUser.user_name;
+      formData.user_email = anonymousUser.user_email;
+    }
 
     // Perform form validation using Zod
     try {
@@ -64,29 +72,57 @@ const SendMail: React.FC = () => {
     }
   };
 
+  const handleAnonymousChange = e => {
+    const { checked } = e.target;
+    setIsAnonymous(checked);
+
+    const _randomName = randomName();
+    const _randomEmail = randomEmail(_randomName);
+    setAnonymousUser({ user_name: _randomName, user_email: _randomEmail });
+  };
+
+  useEffect(() => {
+    console.log(`
+    current user name: ${nameRef.current?.value} 
+    current user email: ${emailRef.current?.value}
+    anonymousUser: ${JSON.stringify(anonymousUser)} 
+    isAnonymous: ${isAnonymous}
+    `);
+  }, [isAnonymous]);
+
   return (
     <Form ref={form}>
       <h4 className="text-2xl font-bold">Contact to Me!</h4>
       <Grid className="flex gap-6 mb-2 box-border px-2">
-        <TextField
-          fullWidth
-          required
-          name="user_name"
-          label="Name"
-          autoComplete="name"
-          variant="standard"
-          error={Boolean(formErrors.user_name)}
-          helperText={formErrors.user_name}
-        />
-        <TextField
-          fullWidth
-          required
-          name="user_email"
-          label="Email"
-          variant="standard"
-          error={Boolean(formErrors.user_email)}
-          helperText={formErrors.user_email}
-        />
+        {!isAnonymous ? (
+          <TextField
+            ref={nameRef}
+            fullWidth
+            required
+            name="user_name"
+            label="Name"
+            autoComplete="name"
+            variant="standard"
+            error={Boolean(formErrors.user_name)}
+            helperText={formErrors.user_name}
+          />
+        ) : (
+          <TextField fullWidth name="user_name" autoComplete="name" value={anonymousUser.user_name} disabled />
+        )}
+        {!isAnonymous ? (
+          <TextField
+            ref={emailRef}
+            fullWidth
+            required
+            name="user_email"
+            label="Email"
+            variant="standard"
+            error={Boolean(formErrors.user_email)}
+            helperText={formErrors.user_email}
+          />
+        ) : (
+          <TextField fullWidth name="user_email" value={anonymousUser.user_email} disabled />
+        )}
       </Grid>
       <Grid>
         <TextField
@@ -100,7 +136,10 @@ const SendMail: React.FC = () => {
         />
       </Grid>
       <Grid className="flex justify-between box-border px-2">
-        <FormControlLabel control={<Checkbox color="secondary" name="anonymous" value="yes" />} label="Anonymous" />
+        <FormControlLabel
+          control={<Checkbox color="secondary" name="anonymous" value="yes" onChange={handleAnonymousChange} />}
+          label="Anonymous"
+        />
         <Button type="submit" variant="contained" color="primary" onClick={sendEmail}>
           Send
         </Button>
