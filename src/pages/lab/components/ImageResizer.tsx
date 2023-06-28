@@ -123,7 +123,7 @@ const ImageResizer: React.FC = () => {
   };
 
   return (
-    <Card className="flex flex-col items-center justify-center w-80 min-h-80 mx-auto my-6 p-6 bg-white rounded-xl shadow-lg">
+    <Card className="flex flex-col items-center justify-center w-80 max-w-[30rem] min-h-80 mx-auto my-6 p-6 bg-white rounded-xl shadow-lg">
       <CardContent className="flex flex-col gap-5">
         <div className="mb-6 w-full">
           <input
