@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Card, CardContent, TextField, Select, MenuItem, InputLabel, FormControl, Button } from '@mui/material';
-import { saveAs } from 'file-saver';
+import imageDownload from '@src/features/image-resizer';
 
 const ImageResizer: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -10,6 +10,40 @@ const ImageResizer: React.FC = () => {
   const [fileSize, setFileSize] = useState({ width: 0, height: 0 });
   const [resizedImage, setResizedImage] = useState({ width: 500, height: 0 });
 
+  // feature function
+  const imageResizer = (image: HTMLImageElement) => {
+    const canvas = document.createElement('canvas');
+
+    let width = image.width;
+    let height = image.height;
+
+    setFileSize({ width, height });
+
+    if (width > height) {
+      if (width > maxSize) {
+        height *= maxSize / width;
+        width = maxSize;
+      }
+    } else {
+      if (height > maxSize) {
+        width *= maxSize / height;
+        height = maxSize;
+      }
+    }
+
+    canvas.width = width;
+    canvas.height = height;
+
+    setResizedImage({ width, height });
+
+    const context = canvas.getContext('2d');
+    context?.drawImage(image, 0, 0, width, height);
+
+    const resizedImage = canvas.toDataURL(`image/${outputFormat}`);
+    setSelectedImage(resizedImage);
+  };
+
+  // event handler functions
   const handleChangeDimensions = (event: ChangeEvent<HTMLInputElement>) => {
     setMaxSize(parseInt(event.target.value));
     if (!selectedImage) return;
@@ -35,35 +69,7 @@ const ImageResizer: React.FC = () => {
     image.src = URL.createObjectURL(file);
 
     image.onload = () => {
-      const canvas = document.createElement('canvas');
-
-      let width = image.width;
-      let height = image.height;
-
-      setFileSize({ width, height });
-
-      if (width > height) {
-        if (width > maxSize) {
-          height *= maxSize / width;
-          width = maxSize;
-        }
-      } else {
-        if (height > maxSize) {
-          width *= maxSize / height;
-          height = maxSize;
-        }
-      }
-
-      canvas.width = width;
-      canvas.height = height;
-
-      setResizedImage({ width, height });
-
-      const context = canvas.getContext('2d');
-      context?.drawImage(image, 0, 0, width, height);
-
-      const resizedImage = canvas.toDataURL(`image/${outputFormat}`);
-      setSelectedImage(resizedImage);
+      imageResizer(image);
     };
   };
 
@@ -73,53 +79,12 @@ const ImageResizer: React.FC = () => {
     image.src = selectedImage;
 
     image.onload = () => {
-      const canvas = document.createElement('canvas');
-
-      let width = image.width;
-      let height = image.height;
-
-      setFileSize({ width, height });
-
-      if (width > height) {
-        if (width > maxSize) {
-          height *= maxSize / width;
-          width = maxSize;
-        }
-      } else {
-        if (height > maxSize) {
-          width *= maxSize / height;
-          height = maxSize;
-        }
-      }
-
-      canvas.width = width;
-      canvas.height = height;
-
-      const context = canvas.getContext('2d');
-      context?.drawImage(image, 0, 0, width, height);
-
-      const resizedImage = canvas.toDataURL(`image/${outputFormat}`);
-      setSelectedImage(resizedImage);
+      imageResizer(image);
     };
   };
 
   const handleImageDownload = () => {
-    if (!selectedImage) return;
-
-    // Convert base64/URLEncoded data component to raw binary data held in a string
-    let byteString;
-    if (selectedImage.split(',')[0].indexOf('base64') >= 0) byteString = atob(selectedImage.split(',')[1]);
-    else byteString = unescape(selectedImage.split(',')[1]);
-
-    // Write the bytes of the string to an ArrayBuffer
-    const ia = new Uint8Array(byteString.length);
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-
-    // Create blob from ArrayBuffer and initiate download
-    const blob = new Blob([ia], { type: `image/${outputFormat}` });
-    saveAs(blob, `resized-image.${outputFormat}`);
+    imageDownload(selectedImage, fileName);
   };
 
   return (
@@ -135,7 +100,7 @@ const ImageResizer: React.FC = () => {
           />
           <label
             htmlFor="upload-button"
-            className="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-teal-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 cursor-pointer">
+            className="w-full p-2 mt-2 text-base text-black transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-100 focus:border-teal-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 cursor-pointer">
             {fileName}
           </label>
           <div className="mt-6">
