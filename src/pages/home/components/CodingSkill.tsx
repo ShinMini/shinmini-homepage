@@ -49,17 +49,22 @@ const GraphBox = styled.div`
 
 const fillUpAnimation = (percentage: number) => keyframes`
   0% {
+    opacity: 0;
     width: 0%;
   }
+  20% {
+  }
   100% {
+    opacity: 1;
     width: ${percentage}%;
   }
 `;
 const Bar = styled.div<{ percentage: number; delay: number }>`
   height: 0.5rem;
-  background-color: ${props => props.theme.colors.info};
+  background-color: ${({ theme, percentage }) => (percentage === 1 ? 'transparent' : theme.colors.info)};
   border-radius: 10px;
-  animation: ${props => fillUpAnimation(props.percentage)} 1s ease-in-out ${props => props.delay * 50 + 100}ms forwards;
+  animation: ${props => fillUpAnimation(props.percentage)} 1500ms ease-in-out ${props => props.delay * 70 + 500}ms
+    forwards;
 `;
 
 export type CodingSkillContext = {
@@ -91,7 +96,7 @@ const CodingSkill: React.FC<CodingSkillContext> = ({
         <p>{`${percentage}%`}</p>
       </CSHeader>
       <GraphBox>
-        <Bar percentage={animate ? percentage : 50} delay={index} />
+        <Bar percentage={animate ? percentage : 1} delay={index} />
       </GraphBox>
     </CSContent>
   );
