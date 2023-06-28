@@ -8,14 +8,20 @@ import ImageResizer from './components/ImageResizer';
 const Lab: React.FC = () => {
   return (
     <Layout>
-      <h1 className="text-xl">Lab</h1>
+      <h1 className="text-3xl p-5 underline text-bold">This is a Laboratory</h1>
+
+      <h2 className="text-2xl p-5 underline text-bold my-10 text-fuchsia-500">This is a Image Resizer</h2>
       <ImageResizer />
       <hr />
+      <h2 className="text-2xl p-5 underline text-bold my-10 text-fuchsia-500">This is a D3 & SVG components</h2>
       <Vector />
       <hr />
+      <h2 className="text-2xl p-5 underline text-bold my-10 text-fuchsia-500">This is a Mark Down creator</h2>
       <MarkDown />
       <hr />
+      <h2 className="text-2xl p-5 underline text-bold my-10 text-fuchsia-500">This is a Email Sender</h2>
       <SendMail />
+      <br />
     </Layout>
   );
 };

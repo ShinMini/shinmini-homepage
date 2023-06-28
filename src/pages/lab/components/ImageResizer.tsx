@@ -123,7 +123,7 @@ const ImageResizer: React.FC = () => {
   };
 
   return (
-    <Card className="flex flex-col items-center justify-center min-h-[20rem] w-1/3 mx-auto my-6 p-6 bg-white rounded-xl shadow-lg">
+    <Card className="flex flex-col items-center justify-center w-80 min-h-80 mx-auto my-6 p-6 bg-white rounded-xl shadow-lg">
       <CardContent className="flex flex-col gap-5">
         <div className="mb-6 w-full">
           <input
@@ -175,10 +175,10 @@ const ImageResizer: React.FC = () => {
               <img src={selectedImage} alt="Resized" className="object-contain mt-4 w-full h-64 rounded shadow-lg" />
               <div className="flex w-full justify-between mt-6">
                 <Button variant="contained" color="info" className="mt-4" onClick={handleImageResize}>
-                  Resize Image
+                  Resize
                 </Button>
                 <Button variant="contained" color="warning" className="mt-4" onClick={handleImageDownload}>
-                  Download Image
+                  Download
                 </Button>
               </div>
             </div>
