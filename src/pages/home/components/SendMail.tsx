@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button, Checkbox, FormControlLabel, Grid, TextField } from '@mui/material';
 import emailjs from '@emailjs/browser';
 import { emailjsConfig } from '@src/lib/emailjs/constants';
-import { set, z, ZodError } from 'zod';
+import { z, ZodError } from 'zod';
 import styled from 'styled-components';
 import { hexToRGBA, randomEmail, randomName } from '@src/features';
 
@@ -80,15 +80,6 @@ const SendMail: React.FC = () => {
     const _randomEmail = randomEmail(_randomName);
     setAnonymousUser({ user_name: _randomName, user_email: _randomEmail });
   };
-
-  useEffect(() => {
-    console.log(`
-    current user name: ${nameRef.current?.value} 
-    current user email: ${emailRef.current?.value}
-    anonymousUser: ${JSON.stringify(anonymousUser)} 
-    isAnonymous: ${isAnonymous}
-    `);
-  }, [isAnonymous]);
 
   return (
     <Form ref={form}>
