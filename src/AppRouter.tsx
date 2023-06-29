@@ -1,10 +1,11 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { lazy } from 'react';
 
-import Home from './home';
-import Todo from './Todo';
-import Lab from './lab';
+import Home from './pages/home';
+const Todo = lazy(() => import('./pages/todo'));
+const Lab = lazy(() => import('./pages/lab'));
+const Error = lazy(() => import('./pages/Error'));
 
-import Error from './Error';
 export const routeName = ['Home', 'Todo', 'Lab'];
 
 function createRoutePath(routeName: Array<string>) {

@@ -9,7 +9,7 @@ import { toggleTheme } from '@src/store/slices/themeSlice';
 import ThemeIcon from './ThemeIcon';
 import firebase from '@lib/firebase';
 import { Link } from 'react-router-dom';
-import { RoutePath, routeName } from '@src/pages/AppRouter';
+import { RoutePath, routeName } from '@src/AppRouter';
 import Spacing from '@src/themes/Spacing';
 
 const Container = styled.nav`
