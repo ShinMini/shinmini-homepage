@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 
 import Navbar from '@src/components/navbar';
 import { hexToRGBA } from '@src/features';
+import { ScrollRestoration } from 'react-router-dom';
 
 const Wrapper = styled.div`
   min-width: 390px;
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
   transition: background-color 700ms linear 300ms;
 
   position: relative;
-  overflow: hidden;
+  overflow: clip;
 `;
 
 const Container = styled.div`
@@ -41,6 +42,7 @@ const Layout = ({ children }: Props) => {
         <Navbar />
         <InnerSpacing>{children}</InnerSpacing>
       </Container>
+      <ScrollRestoration />
     </Wrapper>
   );
 };

@@ -71,7 +71,7 @@ const NavBox = styled.nav<{ isMenuOpen: boolean }>`
 
   @media (max-width: ${Spacing.mobile}) {
     flex-direction: column;
-    position: absolute;
+    position: fixed;
 
     border-radius: 5px;
     right: 0.1rem;
@@ -79,11 +79,12 @@ const NavBox = styled.nav<{ isMenuOpen: boolean }>`
     background-color: ${props => hexToRGBA(props.theme.colors.yellow, 0.9)};
 
     transition: all 0.2s ease-in-out;
-    transform: ${props => (props.isMenuOpen ? 'translateX(0)' : 'translateX(90%)')};
+    transform: ${props => (props.isMenuOpen ? 'translateX(0) rotateZ(0deg)' : 'translateX(80%) rotateZ(-5deg)')};
 
     &:hover {
       border-radius: 2px;
       padding: 0.6rem 1.4rem;
+      transform: ${props => (props.isMenuOpen ? 'translateX(-5%)' : 'translateX(75%)')} scale(1.1);
     }
   }
 `;
