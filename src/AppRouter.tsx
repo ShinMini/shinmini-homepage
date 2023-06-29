@@ -2,7 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { lazy } from 'react';
 
 import Home from './pages/home';
-const Todo = lazy(() => import('./pages/todo'));
+const Todo = lazy(() => import('./pages/Todo'));
 const Lab = lazy(() => import('./pages/lab'));
 const Error = lazy(() => import('./pages/Error'));
 
