@@ -1,5 +1,5 @@
 import { BsFillDatabaseFill } from 'react-icons/bs';
-import { BackEndContext } from '../components/BackEnd';
+import { BackEndContext } from '../../../components/SkillContext';
 import { FaToolbox } from 'react-icons/fa';
 import { BiServer } from 'react-icons/bi';
 

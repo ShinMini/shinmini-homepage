@@ -1,9 +1,22 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 export const useObserver = ({ root, rootMargin, threshold }: IntersectionObserverInit) => {
   const [element, setElement] = useState<Element | null>(null);
   const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);
   const observer = useRef<IntersectionObserver | null>(null);
+
+  const {
+    root: _root,
+    rootMargin: _rootMargin,
+    threshold: _threshold,
+  } = useMemo(
+    () => ({
+      root,
+      rootMargin,
+      threshold,
+    }),
+    [root, rootMargin, threshold],
+  ); // Dependence array
 
   useEffect(() => {
     if (element) {
@@ -12,9 +25,9 @@ export const useObserver = ({ root, rootMargin, threshold }: IntersectionObserve
           setEntry(entry);
         },
         {
-          root,
-          rootMargin,
-          threshold,
+          root: _root,
+          rootMargin: _rootMargin,
+          threshold: _threshold,
         },
       );
 
@@ -25,7 +38,7 @@ export const useObserver = ({ root, rootMargin, threshold }: IntersectionObserve
         observer.current.disconnect();
       }
     };
-  }, [element, root, rootMargin, threshold]); // Dependence array
+  }, [_root, _rootMargin, _threshold, element]); // Dependence array
 
   return { setElement, entry };
 };

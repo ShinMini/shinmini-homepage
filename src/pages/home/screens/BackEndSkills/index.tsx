@@ -1,8 +1,8 @@
 import { hexToRGBA } from '@src/features';
 import Spacing from '@src/themes/Spacing';
-import React, { useLayoutEffect } from 'react';
+import React, { memo, useLayoutEffect } from 'react';
 import { styled } from 'styled-components';
-import BackEnd from './components/BackEnd';
+import BackEnd from '../../components/SkillContext';
 import { backEndContext } from './contexts/back-end';
 import CodingSkill from '../../components/CodingSkill';
 import { codingSkillContext } from './contexts/coding-skill';
@@ -66,7 +66,7 @@ const BackEndSkills: React.FC = () => {
   }, [entry, isObserved]);
 
   return (
-    <Container ref={setElement}>
+    <Container>
       <Header>
         <h1>back-End Skills</h1>
       </Header>
@@ -82,7 +82,7 @@ const BackEndSkills: React.FC = () => {
             />
           ))}
         </article>
-        <article>
+        <article ref={setElement}>
           <h1>BE Stacks</h1>
           {codingSkillContext.map((item, index) => (
             <CodingSkill
@@ -100,4 +100,4 @@ const BackEndSkills: React.FC = () => {
   );
 };
 
-export default BackEndSkills;
+export default memo(BackEndSkills);

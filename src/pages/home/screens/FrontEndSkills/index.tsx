@@ -1,8 +1,8 @@
 import { hexToRGBA } from '@src/features';
 import Spacing from '@src/themes/Spacing';
-import React, { useLayoutEffect } from 'react';
+import React, { memo, useLayoutEffect } from 'react';
 import { styled } from 'styled-components';
-import FrontEnd from './components/FrontEnd';
+import SkillContext from '../../components/SkillContext';
 import { frontEndContext } from './contexts/front-end';
 import CodingSkill from '../../components/CodingSkill';
 import { codingSkillContext } from './contexts/coding-skill';
@@ -67,7 +67,7 @@ const FrontEndSkills: React.FC = () => {
   }, [entry, isObserved]);
 
   return (
-    <Container ref={setElement}>
+    <Container>
       <Header>
         <h1>Front-End Skills</h1>
       </Header>
@@ -75,16 +75,15 @@ const FrontEndSkills: React.FC = () => {
         <article>
           <h1>FE / Design</h1>
           {frontEndContext.map((item, index) => (
-            <FrontEnd
+            <SkillContext
               key={`frontend-context-${index}-${item}`}
               title={item.title}
               icon={item.icon}
-              animation={!+index}
               description={item.description}
             />
           ))}
         </article>
-        <article>
+        <article ref={setElement}>
           <h1>Coding Skills</h1>
           {codingSkillContext.map((item, index) => (
             <CodingSkill
@@ -102,4 +101,4 @@ const FrontEndSkills: React.FC = () => {
   );
 };
 
-export default FrontEndSkills;
+export default memo(FrontEndSkills);
