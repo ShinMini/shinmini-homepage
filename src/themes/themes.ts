@@ -66,10 +66,10 @@ const fonts = {
 };
 
 const shadows = {
-  shadow: '2px 2px 0.3rem 0.3rem rgba(0, 0, 0, 0.1)',
-  shadowSmall: '2px 2px 0.4rem 0.3rem rgba(0, 0, 0, 0.05)',
-  shadowMedium: '2px 2px 0.5rem 0.6rem rgba(0, 0, 0, 0.05)',
-  shadowLarge: '2px 2px 0.6rem 0.9rem rgba(0, 0, 0, 0.2)',
+  shadows: '2px 2px 4px 3px rgba(0, 0, 0, 0.2)',
+  sm: '2px 2px 4px 3px rgba(0, 0, 0, 0.2)',
+  md: '2px 2px 5px 6px rgba(0, 0, 0, 0.2)',
+  xl: '2px 2px 6px 9px rgba(0, 0, 0, 0.2)',
 };
 
 const themes = {
