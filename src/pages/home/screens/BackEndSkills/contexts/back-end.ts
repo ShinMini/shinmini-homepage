@@ -1,9 +1,9 @@
 import { BsFillDatabaseFill } from 'react-icons/bs';
-import { BackEndContext } from '../../../components/SkillContext';
 import { FaToolbox } from 'react-icons/fa';
 import { BiServer } from 'react-icons/bi';
+import { SkillContextContext } from '@src/pages/home/components/SkillContext';
 
-export const backEndContext: BackEndContext[] = [
+export const backEndContext: SkillContextContext[] = [
   {
     title: 'Proficiency',
     icon: FaToolbox,

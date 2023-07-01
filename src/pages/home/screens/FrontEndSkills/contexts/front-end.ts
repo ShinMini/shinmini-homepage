@@ -1,9 +1,9 @@
+import { SkillContextContext } from '@src/pages/home/components/SkillContext';
 import { BiCodeAlt } from 'react-icons/bi';
 import { BsGraphUpArrow } from 'react-icons/bs';
-import { FrontEndContext } from '../components/FrontEnd';
 import { RiReactjsFill } from 'react-icons/ri';
 
-export const frontEndContext: FrontEndContext[] = [
+export const frontEndContext: SkillContextContext[] = [
   {
     title: 'UI / UX Design',
     icon: RiReactjsFill,

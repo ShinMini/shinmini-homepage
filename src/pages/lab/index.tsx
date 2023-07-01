@@ -1,8 +1,7 @@
 import { Layout } from '@src/components';
 import React from 'react';
 import Vector from './components/Vector';
-import SendMail from '../home/components/SendMail';
-import MarkDown from './components/MarkDown';
+import MarkDownConvertor from './components/MarkDownConvertor';
 import ImageResizer from './components/ImageResizer';
 import CustomStyledComponent from './components/CustomStyledComponent';
 import RawCodes from '@src/components/RawCodes';
@@ -19,7 +18,7 @@ const Lab: React.FC = () => {
       <Vector />
       <hr />
       <h2 className="text-2xl p-5 underline text-bold my-10 text-blue-500">This is a Mark Down creator</h2>
-      <MarkDown />
+      <MarkDownConvertor />
       <hr />
       <h2 className="text-2xl p-5 underline text-bold my-10 text-emerald-400">
         This is a component which get params type of styled component
