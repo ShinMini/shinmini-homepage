@@ -17,9 +17,8 @@ const Form = styled.form`
   box-shadow: 1px 1px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
   margin: 2rem auto;
   min-width: 330px;
-  max-width: 600px;
   width: 80%;
-  aspect-ratio: 2/1;
+  aspect-ratio: 3/1;
 `;
 
 // Defining schema for validation
