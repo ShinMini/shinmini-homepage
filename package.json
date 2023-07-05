@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "ci": "rm -rf node_modules && yarn install",
-    "dev": "vite",
+    "dev": "vite --mode development",
     "test": "NODE_ENV=development jest --config=jest.config.ts --coverage",
     "build": "tsc && vite build",
     "compile": "ts-node scripts/compile.ts",
@@ -57,6 +57,7 @@
     "@typescript-eslint/parser": "^5.59.0",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.14",
+    "cookie": "^0.5.0",
     "eslint": "^8.41.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-react-hooks": "^4.6.0",

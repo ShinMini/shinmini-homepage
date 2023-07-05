@@ -14,32 +14,35 @@ const GlobalStyle = createGlobalStyle`
 
 @font-face {
   font-family: 'PoppinsMedium';
-  src: url(${Poppins.PoppinsMedium}) format('truetype');
+  src: url(${Poppins.PoppinsMedium}) format('woff2');
 }
 
 @font-face {
   font-family: 'PoppinsRegular';
-  src: url(${Poppins.PoppinsRegular}) format('truetype');
+  src: url(${Poppins.PoppinsRegular}) format('woff2');
 }
 
 @font-face {
   font-family: 'PoppinsSemiBold';
-  src: url(${Poppins.PoppinsSemiBold}) format('truetype');
+  src: url(${Poppins.PoppinsSemiBold}) format('woff2');
 }
 
 @font-face {
   font-family: 'PoppinsBold';
-  src: url(${Poppins.PoppinsBold}) format('truetype');
+  src: url(${Poppins.PoppinsBold}) format('woff2');
 }
 
 @font-face {
   font-family: 'PoppinsLight';
-  src: url(${Poppins.PoppinsLight}) format('truetype');
+  src: url(${Poppins.PoppinsLight}) format('woff2');
 }
 
   *, *::before, *::after {
     box-sizing: border-box;
-    font-family: 'Poppins', 'Roboto', sans-serif;
+      font-family: '맑은 고딕', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
 
     margin: 0;
     padding: 0;

@@ -1,35 +1,35 @@
 const defaultColors = {
-  primary: '#0070f3',
-  secondary: '#ff0000',
-  background: '#f5f5f5',
-  text: '#333333',
+  primary: '#6D83F2',
+  secondary: '#FF7C7C',
+  background: '#FCFCFC',
+  text: '#4F4F4F',
 
-  surface: '#ececec',
-  surfaceLight: '#f1f1f1',
-  surfaceDark: '#333333',
+  surface: '#D6D6D6',
+  surfaceLight: '#F2F2F2',
+  surfaceDark: '#4F4F4F',
 
   white: '#ffffff',
   black: '#000000',
-  gray: '#cccccc',
-  grayLight: '#f1f1f1',
-  grayDark: '#333333',
-  grayDarker: '#111111',
-  grayDarkest: '#000000',
-  yellow: '#ffe700',
+  gray: '#BDBDBD',
+  grayLight: '#E0E0E0',
+  grayDark: '#4F4F4F',
+  grayDarker: '#333333',
+  grayDarkest: '#212121',
+  yellow: '#FFE97C',
 
-  green: '#3aab58',
-  greenLight: '#4fc879',
-  greenDark: '#1b842c',
-  greenDeep: '#046306',
+  green: '#58AB6F',
+  greenLight: '#79C88B',
+  greenDark: '#2C8451',
+  greenDeep: '#096835',
 
-  success: '#0070f3',
-  error: '#ff0000',
-  warning: '#f1c40f',
-  info: '#3498db',
+  success: '#6D83F2',
+  error: '#FF7C7C',
+  warning: '#FFC107',
+  info: '#1989fa',
 
-  shadow: 'rgba(0, 0, 0, 0.1)',
-  shadowLight: 'rgba(0, 0, 0, 0.05)',
-  shadowDark: 'rgba(0, 0, 0, 0.2)',
+  shadow: 'rgba(0, 0, 0, 0.08)',
+  shadowLight: 'rgba(0, 0, 0, 0.04)',
+  shadowDark: 'rgba(0, 0, 0, 0.16)',
 
   transparent: 'transparent',
 };
@@ -41,18 +41,18 @@ const lightColors = {
 const darkColors = {
   ...defaultColors,
   background: '#333333',
-  text: '#f3f4f6',
+  text: '#F2F2F2',
 
-  surface: '#555555',
-  surfaceLight: '#777777',
-  surfaceDark: '#111111',
+  surface: '#5D5D5D',
+  surfaceLight: '#7C7C7C',
+  surfaceDark: '#212121',
 
-  gray: '#aaaaaa',
+  gray: '#949494',
 
-  green: '#1b842c',
-  greenLight: '#3aab58',
-  greenDark: '#046306',
-  greenDeep: '#046306',
+  green: '#2C8451',
+  greenLight: '#58AB6F',
+  greenDark: '#096835',
+  greenDeep: '#096835',
 };
 
 const fonts = {

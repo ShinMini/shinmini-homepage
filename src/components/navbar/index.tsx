@@ -18,7 +18,7 @@ const Container = styled.nav`
   background-color: ${props => props.theme.colors.primary};
   padding: 0.5rem 1rem;
   overflow: hidden;
-  box-shadow: 0px 0.3rem 0.3rem 0.1rem ${props => hexToRGBA(props.theme.colors.opposite.background)};
+  box-shadow: ${props => props.theme.shadows.md};
 `;
 
 const LogoBox = styled.div`
@@ -104,6 +104,8 @@ const Logo = styled(Link)`
   font-family: 'PoppinsBold';
   font-size: 2.5rem;
   font-style: italic;
+  text-shadow: ${props => props.theme.shadows.xl};
+  transition: color 0.2s ease-in-out;
   &:hover {
     color: ${props => props.theme.colors.opposite.text};
   }
@@ -133,7 +135,9 @@ const Navbar: React.FC = () => {
     <Container>
       <LogoBox>
         <Logo to="/">ShinMini</Logo>
-        <ThemeIcon currentColor={currentColor} colorChangeHandler={() => dispatch(toggleTheme())} />
+        <div onClick={() => dispatch(toggleTheme())} className="cursor-pointer">
+          <ThemeIcon currentColor={currentColor} />
+        </div>
       </LogoBox>
       <MenuBox>
         <DropDownBox>
