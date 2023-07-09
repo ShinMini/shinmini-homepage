@@ -57,4 +57,5 @@
   },
   "include": ["src/**/*","global.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "index.js", "metro.config.js", "babel.config.js"],
   "exclude": ["node_modules", "jest.config.ts", "tailwind.config.js", "postcss.config.js" ],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
