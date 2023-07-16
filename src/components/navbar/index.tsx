@@ -12,7 +12,7 @@ import { toggleTheme } from '@store/slices/themeSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/useRedux';
 
 import { RoutePath, routeName } from '@src/AppRouter';
-import { provider } from '@lib/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Container = styled.nav`
   display: flex;
@@ -129,17 +129,10 @@ const LoginButton = styled.button`
 
 const Navbar: React.FC = () => {
   const auth = getAuth();
+  const [user] = useAuthState(auth);
   const dispatch = useAppDispatch();
   const currentColor = useAppSelector(state => state.theme.type);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const handleLogin = () => {
-    signInWithGooglePopup(auth, provider);
-  };
-
-  const handleLogout = () => {
-    logout(auth);
-  };
 
   return (
     <Container>
@@ -162,10 +155,10 @@ const Navbar: React.FC = () => {
             ))}
           </NavBox>
         </DropDownBox>
-        {auth.currentUser?.displayName ? (
-          <LoginButton onClick={handleLogout}>Log Out</LoginButton>
+        {user?.displayName ? (
+          <LoginButton onClick={logout}>Log Out</LoginButton>
         ) : (
-          <LoginButton onClick={handleLogin}>Log In</LoginButton>
+          <LoginButton onClick={signInWithGooglePopup}>Log In</LoginButton>
         )}
       </MenuBox>
     </Container>

@@ -1,5 +1,6 @@
-import { Auth } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 
-export default function logout(auth: Auth) {
+export default function logout() {
+  const auth = getAuth();
   auth.signOut();
 }

@@ -1,6 +1,8 @@
-import { signInWithPopup, GoogleAuthProvider, Auth } from 'firebase/auth';
+import { provider } from '@src/lib/firebase';
+import { signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth';
 
-export default function signInWithGooglePopup(auth: Auth, provider: GoogleAuthProvider) {
+export default function signInWithGooglePopup() {
+  const auth = getAuth();
   signInWithPopup(auth, provider)
     // .then(result => {
     // const credential = GoogleAuthProvider.credentialFromResult(result);
