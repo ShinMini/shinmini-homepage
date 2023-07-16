@@ -1,5 +1,5 @@
 const defaultColors = {
-  primary: '#6D83F2',
+  primary: '#F31559',
   secondary: '#FF7C7C',
   background: '#FCFCFC',
   text: '#4F4F4F',
@@ -22,7 +22,6 @@ const defaultColors = {
   greenDark: '#2C8451',
   greenDeep: '#096835',
 
-  bar: '#F31559',
   deepPink: '#FF52A2',
 
   success: '#6D83F2',

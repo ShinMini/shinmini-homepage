@@ -21,7 +21,7 @@ const Form = styled.form`
   min-height: 600px;
 
   margin: auto;
-  width: 80%;
+  width: 95%;
 `;
 
 // Defining schema for validation

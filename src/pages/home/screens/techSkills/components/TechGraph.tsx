@@ -78,7 +78,7 @@ const fillUpAnimation = (percentage: number) => keyframes`
 
 const Bar = styled.div<{ percentage: number; delay: number }>`
   height: 0.5rem;
-  background-color: ${({ theme }) => hexToRGBA(theme.colors.bar, 0.9)};
+  background-color: ${({ theme }) => hexToRGBA(theme.colors.primary, 0.9)};
   border-radius: 10px;
   opacity: 0;
   animation: ${({ percentage }) => fillUpAnimation(percentage)} 1500ms ease-in-out ${({ delay }) => delay * 70}ms

@@ -11,7 +11,7 @@
     "compile": "ts-node scripts/compile.ts",
     "tslint": "tsc --noEmit && eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview --mode production"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
