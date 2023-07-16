@@ -7,10 +7,10 @@ import { styled } from 'styled-components';
 import { toggleTheme } from '@src/store/slices/themeSlice';
 
 import ThemeIcon from './ThemeIcon';
-import firebase from '@lib/firebase';
 import { Link } from 'react-router-dom';
 import { RoutePath, routeName } from '@src/AppRouter';
 import Spacing from '@src/themes/Spacing';
+import { getAuth } from 'firebase/auth';
 
 const Container = styled.nav`
   display: flex;
@@ -126,6 +126,7 @@ const LoginButton = styled.button`
 `;
 
 const Navbar: React.FC = () => {
+  const auth = getAuth();
   const dispatch = useAppDispatch();
   const currentColor = useAppSelector(state => state.theme.type);
   const user = useAppSelector(state => state.user);
@@ -153,7 +154,7 @@ const Navbar: React.FC = () => {
           </NavBox>
         </DropDownBox>
         <LoginButton
-          onClick={!user?.displayName ? () => signInWithGooglePopup(dispatch) : () => logout(dispatch, firebase.auth)}>
+          onClick={!user?.displayName ? () => signInWithGooglePopup(dispatch) : () => logout(dispatch, auth)}>
           {user?.displayName ? user.displayName : 'Log In'}
         </LoginButton>
       </MenuBox>

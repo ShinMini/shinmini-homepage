@@ -1,10 +1,10 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import firebase from '@lib/firebase';
 import AppRouter from './AppRouter';
+import { auth } from './lib/firebase';
 
 function App() {
-  useAuthState(firebase.auth);
+  useAuthState(auth);
 
   return <AppRouter />;
 }
