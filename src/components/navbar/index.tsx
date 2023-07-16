@@ -1,16 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { styled } from 'styled-components';
+import { getAuth } from 'firebase/auth';
 import { AiOutlineMenu } from 'react-icons/ai';
 
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { hexToRGBA, logout, signInWithGooglePopup } from '@src/features';
-import { styled } from 'styled-components';
-import { toggleTheme } from '@src/store/slices/themeSlice';
-
 import ThemeIcon from './ThemeIcon';
-import { Link } from 'react-router-dom';
-import { RoutePath, routeName } from '@src/AppRouter';
+
+import { hexToRGBA, logout, signInWithGooglePopup } from '@src/features';
 import Spacing from '@src/themes/Spacing';
-import { getAuth } from 'firebase/auth';
+import { toggleTheme } from '@store/slices/themeSlice';
+import { useAppDispatch, useAppSelector } from '@hooks/useRedux';
+
+import { RoutePath, routeName } from '@src/AppRouter';
+import { provider } from '@lib/firebase';
 
 const Container = styled.nav`
   display: flex;
@@ -129,8 +131,15 @@ const Navbar: React.FC = () => {
   const auth = getAuth();
   const dispatch = useAppDispatch();
   const currentColor = useAppSelector(state => state.theme.type);
-  const user = useAppSelector(state => state.user);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const handleLogin = () => {
+    signInWithGooglePopup(auth, provider);
+  };
+
+  const handleLogout = () => {
+    logout(auth);
+  };
 
   return (
     <Container>
@@ -153,10 +162,11 @@ const Navbar: React.FC = () => {
             ))}
           </NavBox>
         </DropDownBox>
-        <LoginButton
-          onClick={!user?.displayName ? () => signInWithGooglePopup(dispatch) : () => logout(dispatch, auth)}>
-          {user?.displayName ? user.displayName : 'Log In'}
-        </LoginButton>
+        {auth.currentUser?.displayName ? (
+          <LoginButton onClick={handleLogout}>Log Out</LoginButton>
+        ) : (
+          <LoginButton onClick={handleLogin}>Log In</LoginButton>
+        )}
       </MenuBox>
     </Container>
   );

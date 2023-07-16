@@ -1,6 +1,6 @@
 import { Layout } from '@src/components';
 import DropDown from './components/DropDown';
-import { useAppSelector, useAppDispatch } from '@src/store/hooks';
+import { useAppSelector, useAppDispatch } from '@src/hooks/useRedux';
 import {
   TodoListState,
   pushTodoList,
@@ -13,6 +13,7 @@ import { validateFormData } from './utils/validateFormData';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { hexToRGBA } from '@src/features';
+import { getAuth } from 'firebase/auth';
 
 const Container = styled.div`
   display: flex;
@@ -58,7 +59,8 @@ const Todo: React.FC = () => {
   const detailTextArea = React.useRef<HTMLTextAreaElement>(null);
 
   const currentTodoList = useAppSelector(state => state.todo.todoList);
-  const uid = useAppSelector(state => state.user.uid);
+  const auth = getAuth();
+  const uid = auth.currentUser?.uid;
   const dispatch = useAppDispatch();
 
   const pushTodo = () => {

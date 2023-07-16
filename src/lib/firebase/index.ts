@@ -11,5 +11,6 @@ const storage = getStorage(app);
 const analytics = getAnalytics(app);
 const provider = new GoogleAuthProvider();
 logEvent(analytics, 'notification_received');
+console.log('firebase app', app);
 
 export { app, auth, provider, firestore, storage, analytics };
