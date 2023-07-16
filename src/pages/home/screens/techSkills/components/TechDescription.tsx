@@ -13,11 +13,16 @@ const Content = styled.div`
 
 const Header = styled.div`
   display: flex;
-  font-size: 1.2rem;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  gap: 0.7rem;
+  margin-bottom: 0.4rem;
+
   h3 {
+    color: ${props => props.theme.colors.grayDarkest};
+    font-size: 1.4rem;
     font-family: ${props => props.theme.fonts.poppins.semiBold};
+
+    transform: translateY(2px);
   }
 `;
 
@@ -25,7 +30,6 @@ const Icon = styled.div<{ color?: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
 `;
 
 const Context = styled.div`
@@ -36,7 +40,8 @@ const Context = styled.div`
   border-radius: 5px;
   box-shadow: inset -1px 1px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
 
-  background-color: ${props => props.theme.colors.background};
+  background-color: ${props => hexToRGBA(props.theme.colors.opposite.background, 0.3)};
+  mix-blend-mode: difference;
 `;
 
 const Border = styled.div`

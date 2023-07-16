@@ -1,4 +1,5 @@
 import { Images } from '@src/assets';
+import { hexToRGBA } from '@src/features';
 import Spacing from '@src/themes/Spacing';
 import React from 'react';
 import { styled } from 'styled-components';
@@ -12,9 +13,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   color: ${props => props.theme.colors.text};
-  background: rgb(212, 211, 236);
   background: linear-gradient(
-    ${props => props.theme.colors.opposite.background} 0%,
+    ${props => hexToRGBA(props.theme.colors.opposite.background)} 30%,
     ${props => props.theme.colors.background} 100%
   );
   border-radius: 10px;
@@ -61,8 +61,8 @@ const Context = styled.div`
       font-family: ${props => props.theme.fonts.poppins.semiBold};
     }
     h2 {
-      font-size: max(1rem, 1.5vw);
-      color: ${props => props.theme.colors.grayDark};
+      font-size: max(1.3rem, 1.5vw);
+      color: ${props => props.theme.colors.error};
       font-family: ${props => props.theme.fonts.poppins.medium};
     }
   }

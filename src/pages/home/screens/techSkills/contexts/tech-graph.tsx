@@ -13,36 +13,35 @@ export type TechGraphProps = {
   iconColor?: string;
   percentage: number;
 };
-
 const frontEndGraphs: TechGraphProps[] = [
   {
     title: 'HTML',
-    icon: <SiHtml5 color="red" />,
+    icon: <SiHtml5 color="#E34F26" />,
     percentage: 65,
   },
   {
     title: 'CSS',
-    icon: <SiCss3 color="blue" />,
+    icon: <SiCss3 color="#264DE4" />,
     percentage: 73,
   },
   {
     title: 'Javascript',
-    icon: <SiJavascript color="#ffc93c" />,
+    icon: <SiJavascript color="#F7DF1E" />,
     percentage: 91,
   },
   {
     title: 'React',
-    icon: <SiReact color="lightblue" />,
+    icon: <SiReact color="#61DAFB" />,
     percentage: 79,
   },
   {
     title: 'React Native',
-    icon: <TbBrandReactNative color="skyblue" />,
+    icon: <TbBrandReactNative color="#61DAFB" />,
     percentage: 64,
   },
   {
     title: 'Typescript',
-    icon: <SiTypescript color="darkblue" />,
+    icon: <SiTypescript color="#3178C6" />,
     percentage: 84,
   },
 ];
@@ -50,52 +49,52 @@ const frontEndGraphs: TechGraphProps[] = [
 const backendGraphs: Array<TechGraphProps> = [
   {
     title: 'Node.js / Express.js',
-    icon: <IoLogoNodejs />,
+    icon: <IoLogoNodejs color="#8CC84B" />,
     percentage: 75,
   },
   {
     title: 'Java Spring',
-    icon: <SiSpring />,
+    icon: <SiSpring color="#6DB33F" />,
     percentage: 43,
   },
   {
     title: 'Flask',
-    icon: <FaFlask />,
+    icon: <FaFlask color="#000000" />,
     percentage: 34,
   },
   {
     title: 'Nest.js',
-    icon: <SiNestjs />,
+    icon: <SiNestjs color="#E0234E" />,
     percentage: 55,
   },
   {
     title: 'MySQL',
-    icon: <SiMysql />,
+    icon: <SiMysql color="#4479A1" />,
     percentage: 59,
   },
   {
     title: 'MongoDB',
-    icon: <SiMongodb />,
+    icon: <SiMongodb color="#47A248" />,
     percentage: 44,
   },
   {
     title: 'PostgreSQL',
-    icon: <SiPostgresql />,
+    icon: <SiPostgresql color="#336791" />,
     percentage: 34,
   },
   {
     title: 'Redis',
-    icon: <SiRedis />,
+    icon: <SiRedis color="#DC382D" />,
     percentage: 4,
   },
   {
     title: 'Firebase',
-    icon: <SiFirebase />,
+    icon: <SiFirebase color="#FFCA28" />,
     percentage: 72,
   },
   {
     title: 'AWS',
-    icon: <FaAws />,
+    icon: <FaAws color="#232F3E" />,
     percentage: 64,
   },
 ];

@@ -22,6 +22,9 @@ const defaultColors = {
   greenDark: '#2C8451',
   greenDeep: '#096835',
 
+  bar: '#F31559',
+  deepPink: '#FF52A2',
+
   success: '#6D83F2',
   error: '#FF7C7C',
   warning: '#FFC107',

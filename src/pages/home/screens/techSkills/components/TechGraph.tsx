@@ -11,24 +11,29 @@ const Content = styled.div`
   flex-direction: column;
   margin: 1.5rem 0;
   gap: 1rem;
+
+  box-sizing: content-box;
+  padding: 1.5rem 1rem;
+
+  border-radius: 10px;
+  background-color: ${props => hexToRGBA(props.theme.colors.background, 0.1)};
 `;
 
 const Header = styled.div`
   display: flex;
   width: 100%;
-
   justify-content: space-between;
-  align-items: center;
-
-  margin-bottom: 0.5rem;
+  align-items: space-between;
 `;
 
 const Title = styled.div`
   display: flex;
-  font-size: 1.2rem;
   gap: 0.5rem;
+  align-items: center;
+
   h3 {
     font-family: ${props => props.theme.fonts.poppins.medium};
+    font-size: 1rem;
   }
 `;
 
@@ -48,9 +53,7 @@ const Icon = styled.div<{ jump: boolean; delay: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  font-size: 2rem;
-
+  font-size: 1.6rem;
   animation: ${({ jump }) => jump && jumpAnimation} 500ms ease-in-out ${({ delay }) => delay * 70 + 50}ms;
 `;
 
@@ -75,7 +78,7 @@ const fillUpAnimation = (percentage: number) => keyframes`
 
 const Bar = styled.div<{ percentage: number; delay: number }>`
   height: 0.5rem;
-  background-color: ${({ theme }) => theme.colors.info};
+  background-color: ${({ theme }) => hexToRGBA(theme.colors.bar, 0.9)};
   border-radius: 10px;
   opacity: 0;
   animation: ${({ percentage }) => fillUpAnimation(percentage)} 1500ms ease-in-out ${({ delay }) => delay * 70}ms
@@ -95,7 +98,7 @@ const TechGraph = memo(({ field }: { field: TechField }) => {
   return (
     <Content ref={setElement}>
       {graphs.map((graph, index) => (
-        <div key={`tech-graph-${index}-${graph.title}`}>
+        <div className="flex flex-col gap-2 mb-2" key={`tech-graph-${index}-${graph.title}`}>
           <Header>
             <Title>
               <Icon jump={!!entry?.isIntersecting} delay={index}>
@@ -103,7 +106,7 @@ const TechGraph = memo(({ field }: { field: TechField }) => {
               </Icon>
               <h3>{graph.title}</h3>
             </Title>
-            <p>{`${graph.percentage}%`}</p>
+            <p className="text-sm font-bold">{`${graph.percentage}%`}</p>
           </Header>
           <GraphBox>
             <Bar percentage={entry?.isIntersecting ? graph.percentage : 1} delay={index} />

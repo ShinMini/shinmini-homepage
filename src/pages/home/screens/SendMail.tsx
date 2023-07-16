@@ -9,16 +9,19 @@ import { hexToRGBA, randomEmail, randomName } from '@src/features';
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  border: rgb(19 78 74) 2px solid;
+
+  gap: 2rem;
+  border: ${props => props.theme.colors.greenDark} 2px solid;
+  background-color: ${props => hexToRGBA(props.theme.colors.green, 0.7)};
   border-radius: 15px;
   padding: 1.5rem 1rem;
-  background-color: #e0e7ff;
-  box-shadow: 1px 1px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
-  margin: 2rem auto;
+  box-shadow: -2px 2px 2px 2px ${props => hexToRGBA(props.theme.colors.greenDark)};
+  padding-bottom: 2rem;
   min-width: 330px;
+  min-height: 600px;
+
+  margin: auto;
   width: 80%;
-  aspect-ratio: 3/1;
 `;
 
 // Defining schema for validation
@@ -84,7 +87,7 @@ const SendMail: React.FC = () => {
 
   return (
     <Form id="contact-me" ref={form}>
-      <h4 className="text-2xl font-bold">Contact to Me!</h4>
+      <h4 className="text-4xl font-bold text-slate-800 italic">Say Hello to Me!</h4>
       <Grid className="flex gap-6 mb-2 box-border px-2">
         {!isAnonymous ? (
           <TextField
@@ -121,7 +124,7 @@ const SendMail: React.FC = () => {
           name="message"
           label="Message"
           multiline
-          rows={4}
+          rows={12}
           fullWidth
           error={Boolean(formErrors.message)}
           helperText={formErrors.message}

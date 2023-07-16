@@ -18,10 +18,11 @@ type SkillContextType = {
   description: string[];
 };
 
+const techDescription = new Map<TechField, SkillContextType[]>();
 const frontEndContext: SkillContextType[] = [
   {
     title: 'UI / UX Design',
-    icon: <RiReactjsFill color="lightblue" />,
+    icon: <RiReactjsFill color="#61DAFB" />,
     description: [
       'Understanding of design principles and user experience (UX) - Frontend Developers work closely with UX',
       'designers and need to have an understanding of design principles to create visually appealing and intuitive user interfaces.',
@@ -29,7 +30,7 @@ const frontEndContext: SkillContextType[] = [
   },
   {
     title: 'Client Side',
-    icon: <BiCodeAlt color="pink" />,
+    icon: <BiCodeAlt color="#F0DB4F" />,
     description: [
       'Proficiency in HTML, CSS, and JavaScript - these are the foundational languages of web development and are',
       'essential for creating the user interface and user experience of a website or web application.',
@@ -37,7 +38,7 @@ const frontEndContext: SkillContextType[] = [
   },
   {
     title: 'Optimizes the performance',
-    icon: <BsGraphUpArrow color="darkblue" />,
+    icon: <BsGraphUpArrow color="#F34B7D" />,
     description: [
       'Knowledge of web performance optimization - Frontend Developers need to ensure that their websites',
       'and applications load quickly and perform well on different devices and platforms. essential for creating the user interface and user experience of a website or web application.',
@@ -48,7 +49,7 @@ const frontEndContext: SkillContextType[] = [
 const backEndContext: SkillContextType[] = [
   {
     title: 'Proficiency',
-    icon: <FaToolbox color="darkgray" />,
+    icon: <FaToolbox color="#264653" />,
     description: [
       'Proficiency in programming languages - Backend Developers often work with languages',
       'such as Java, Python, Ruby, or PHP, which are commonly used for server-side development.',
@@ -56,7 +57,7 @@ const backEndContext: SkillContextType[] = [
   },
   {
     title: 'DataBase',
-    icon: <BsFillDatabaseFill color="lightblue" />,
+    icon: <BsFillDatabaseFill color="#F9C74F" />,
     description: [
       'Understanding of databases and data storage - Backend Developers need to be familiar with different types of databases and how to design, implement,',
       'and maintain them to support web applications.',
@@ -64,15 +65,13 @@ const backEndContext: SkillContextType[] = [
   },
   {
     title: 'Server',
-    icon: <BiServer color="darkblue" />,
+    icon: <BiServer color="#14213D" />,
     description: [
       'Knowledge of server-side architecture and deployment - Backend Developers need to understand how to set up and deploy servers,',
       'and how to design scalable and fault-tolerant architecture for web applications.',
     ],
   },
 ];
-
-const techDescription = new Map<TechField, SkillContextType[]>();
 
 techDescription.set('front-end', frontEndContext);
 techDescription.set('back-end', backEndContext);

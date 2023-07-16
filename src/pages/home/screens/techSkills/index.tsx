@@ -5,7 +5,6 @@ import { hexToRGBA } from '@src/features';
 import Spacing from '@src/themes/Spacing';
 import SkillDescription from './components/TechDescription';
 import TechGraph from './components/TechGraph';
-import { Switch } from '@mui/material';
 
 const Container = styled.div`
   margin-top: 2rem;
@@ -14,15 +13,38 @@ const Container = styled.div`
 
 const Header = styled.header`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+
+  overflow: hidden;
+`;
+
+const HeaderButton = styled.h1<{ isActive: boolean }>`
+  color: ${props => (props.isActive ? props.theme.colors.text : props.theme.colors.gray)};
+
+  background-color: ${props => hexToRGBA(props.theme.colors.background)};
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: ${props => props.theme.colors.grayDark};
+  }
+
+  &:not(:last-child) {
+    margin-right: 15px;
+  }
+
+  text-transform: capitalize;
+  font-family: ${props => props.theme.fonts.poppins.bold};
+  font-size: 2.5rem;
+
   padding: 0.5rem 1rem;
 
-  h1 {
-    text-transform: capitalize;
-    font-family: ${props => props.theme.fonts.poppins.bold};
-    font-size: 2.5rem;
-  }
+  box-shadow: ${props => (props.isActive ? props.theme.shadows.sm : `inset ${props.theme.shadows.sm}`)};
+
+  border-top-left-radius: 3px;
+  border-top-right-radius: 15px;
+
+  /* transform: translateY(5px); */
 `;
 
 const Content = styled.div`
@@ -30,15 +52,15 @@ const Content = styled.div`
   grid-template-columns: repeat(2, 1fr);
 
   justify-content: center;
-
   box-sizing: border-box;
   padding: 2rem;
   gap: 2rem;
 
-  border-radius: 5px;
-  box-shadow: inset -2px 2px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  /* box-shadow: -2px 2px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)}; */
 
-  background-color: ${props => hexToRGBA(props.theme.colors.grayLight)};
+  background-color: ${props => hexToRGBA(props.theme.colors.background)};
   @media (max-width: ${Spacing.mobile}) {
     grid-template-columns: 1fr;
   }
@@ -65,13 +87,12 @@ const TechSkills = memo(() => {
   return (
     <Container>
       <Header>
-        <h1>{field}</h1>
-        <Switch
-          checked={field === frontEnd}
-          onChange={() => {
-            setField(field === frontEnd ? backEnd : frontEnd);
-          }}
-        />
+        <HeaderButton isActive={frontEnd === field} onClick={() => setField(frontEnd)}>
+          {frontEnd}
+        </HeaderButton>
+        <HeaderButton isActive={backEnd === field} onClick={() => setField(backEnd)}>
+          {backEnd}
+        </HeaderButton>
       </Header>
       <Content>
         <SkillDescription field={field} />

@@ -6,7 +6,7 @@
     "ci": "rm -rf node_modules && yarn install",
     "dev": "vite --mode dev",
     "test": "NODE_ENV=dev jest --config=jest.config.ts --coverage",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --mode production",
     "electron-build": "yarn build && electron-builder",
     "compile": "ts-node scripts/compile.ts",
     "tslint": "tsc --noEmit && eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
