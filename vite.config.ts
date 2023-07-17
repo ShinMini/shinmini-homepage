@@ -15,7 +15,6 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [react(), tsconfigPaths()],
     build: {
-      sourcemap: true,
       outDir: 'public',
     },
     server: {
