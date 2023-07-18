@@ -8,6 +8,12 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   },
   "emulators": {
@@ -30,5 +36,8 @@
       "enabled": true
     },
     "singleProjectMode": true
+  },
+  "functions": {
+    "source": "functions"
   }
 }
