@@ -5,7 +5,8 @@
   "scripts": {
     "ci": "rm -rf node_modules && yarn install",
     "dev": "vite --mode dev",
-    "test": "NODE_ENV=development jest --config=jest.config.ts --coverage",    "build": "NODE_ENV=production tsc && vite build --mode production",
+    "test": "NODE_ENV=development jest --config=jest.config.ts --coverage",
+    "build": "NODE_ENV=production tsc && vite build --mode production",
     "compile": "NODE_ENV=production ts-node scripts/compile.ts",
     "tslint": "tsc --noEmit && eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

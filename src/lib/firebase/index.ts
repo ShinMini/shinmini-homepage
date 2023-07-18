@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+// import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import type { FirebaseOptions } from 'firebase/app';
@@ -17,8 +17,8 @@ export const firebaseConfig: FirebaseOptions = {
 
 const app = initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
-const auth = getAuth(app);
+// const provider = new GoogleAuthProvider();
+// const auth = getAuth(app);
 
 const firestore = getFirestore(app);
 const storage = getStorage(app);
@@ -28,4 +28,11 @@ const analytics = getAnalytics(app);
 //   logEvent(analytics, event, data);
 // };
 
-export { app, auth, provider, firestore, storage, analytics };
+export {
+  app,
+  // auth,
+  //  provider,
+  firestore,
+  storage,
+  analytics,
+};

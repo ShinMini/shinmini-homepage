@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { getAuth } from 'firebase/auth';
+// import { getAuth } from 'firebase/auth';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import ThemeIcon from './ThemeIcon';
 
-import { hexToRGBA, logout, signInWithGooglePopup } from '@src/features';
+import { hexToRGBA } from '@src/features';
 import Spacing from '@src/themes/Spacing';
 import { toggleTheme } from '@store/slices/themeSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/useRedux';
 
 import { RoutePath, routeName } from '@src/AppRouter';
-import { useAuthState } from 'react-firebase-hooks/auth';
+// import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Container = styled.nav`
   display: flex;
@@ -128,8 +128,8 @@ const LoginButton = styled.button`
 `;
 
 const Navbar: React.FC = () => {
-  const auth = getAuth();
-  const [user] = useAuthState(auth);
+  // const auth = getAuth();
+  // const [user] = useAuthState(auth);
   const dispatch = useAppDispatch();
   const currentColor = useAppSelector(state => state.theme.type);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -155,11 +155,18 @@ const Navbar: React.FC = () => {
             ))}
           </NavBox>
         </DropDownBox>
-        {user?.displayName ? (
+
+        <LoginButton
+          onClick={() => {
+            alert('파이어베이스 요금제 다씀..');
+          }}>
+          Log In
+        </LoginButton>
+        {/* {user?.displayName ? (
           <LoginButton onClick={logout}>Log Out</LoginButton>
         ) : (
           <LoginButton onClick={signInWithGooglePopup}>Log In</LoginButton>
-        )}
+        )} */}
       </MenuBox>
     </Container>
   );
