@@ -13,8 +13,8 @@ import { validateFormData } from './utils/validateFormData';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { hexToRGBA } from '@src/features';
-import { randomUUID } from 'crypto';
-// import { getAuth } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
+import { app } from '@src/lib/firebase';
 
 const Container = styled.div`
   display: flex;
@@ -60,8 +60,8 @@ const Todo: React.FC = () => {
   const detailTextArea = React.useRef<HTMLTextAreaElement>(null);
 
   const currentTodoList = useAppSelector(state => state.todo.todoList);
-  // const auth = getAuth();
-  // const uid = auth.currentUser?.uid;
+  const auth = getAuth(app);
+  const uid = auth.currentUser?.uid;
   const dispatch = useAppDispatch();
 
   const pushTodo = () => {
@@ -71,7 +71,7 @@ const Todo: React.FC = () => {
     const isValidData = validateFormData({ title, detail });
 
     const todo = {
-      uid: randomUUID(),
+      uid: uid,
       todoList: [
         {
           date: isValidData.date,

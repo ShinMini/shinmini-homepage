@@ -28,6 +28,26 @@ async function lint(): Promise<boolean> {
   }
 }
 
+async function format(): Promise<boolean> {
+  spinnies.add('format', { text: 'Formatting it...' });
+  try {
+    const { stdout } = await exec('node ./node_modules/.bin/prettier --write .');
+    if (stdout) {
+      console.log(stdout);
+      spinnies.fail('format', { text: "Couldn't format 😔" });
+      return false;
+    }
+    spinnies.succeed('format', { text: 'All formatted!' });
+    return true;
+  } catch (e) {
+    spinnies.fail('format', { text: "Couldn't format 😔" });
+
+    // @ts-ignore
+    console.log(e.stdout);
+    return false;
+  }
+}
+
 async function compile(): Promise<boolean> {
   spinnies.add('compile', { text: 'Compiling it...' });
   try {
@@ -49,7 +69,7 @@ async function compile(): Promise<boolean> {
 }
 
 async function lintAndCompile() {
-  const results: boolean[] = await Promise.all([lint(), compile()]);
+  const results: boolean[] = await Promise.all([lint(), compile(), format()]);
   if (!results.every(Boolean)) {
     return process.exit(1);
   }
