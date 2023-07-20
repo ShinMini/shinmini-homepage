@@ -31,7 +31,9 @@ const Container = styled.div`
   min-height: 100vh;
   margin: 0 auto;
   color: ${props => props.theme.colors.text};
-  transition: background-color 300ms linear, color 300ms linear;
+  transition:
+    background-color 300ms linear,
+    color 300ms linear;
   box-shadow: 0px 0px 0.4rem 0.4rem ${props => hexToRGBA(props.theme.colors.opposite.background, 0.1)};
 `;
 

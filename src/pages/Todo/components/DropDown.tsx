@@ -69,7 +69,9 @@ const SubTitle = styled.h2`
 
 const Content = styled.div`
   width: 100%;
-  transition: height 150ms linear 50ms, transform 200ms linear 50ms;
+  transition:
+    height 150ms linear 50ms,
+    transform 200ms linear 50ms;
   box-sizing: border-box;
   margin: auto;
   border-radius: 0.5rem;

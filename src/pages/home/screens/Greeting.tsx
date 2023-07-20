@@ -101,7 +101,9 @@ const TakeALookButton = styled.button<{ borderColor: string }>`
   color: ${props => props.theme.colors.opposite.text};
   background-color: ${props => props.theme.colors.opposite.background};
   box-shadow: 1px 2px 0.2rem 0.1rem ${props => props.theme.colors.opposite.background};
-  transition: box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition:
+    box-shadow 0.2s ease-in-out,
+    color 0.2s ease-in-out;
   &:hover {
     cursor: pointer;
     box-shadow: 0px 1px 0.1rem 0.1rem ${props => props.theme.colors.opposite.background};
