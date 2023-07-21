@@ -92,7 +92,7 @@ const TechGraph = memo(({ field }: { field: TechField }) => {
   const { setElement, entry } = useObserver({
     root: null,
     rootMargin: '0px',
-    threshold: 0.3,
+    threshold: 0.1,
   });
 
   if (!graphs) return null;

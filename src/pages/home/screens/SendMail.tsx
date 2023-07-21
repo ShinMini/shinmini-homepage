@@ -10,7 +10,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
 
-  gap: clamp(0.5rem, 5vw, 5rem);
+  gap: clamp(1rem, 6vw, 8rem);
   border: ${props => props.theme.colors.info} 2px solid;
   background-color: ${props => hexToRGBA(props.theme.colors.gray, 0.9)};
   mix-blend-mode: hard-light;
@@ -19,7 +19,7 @@ const Form = styled.form`
   padding-bottom: 2rem;
 
   width: clamp(300px, 100%, 900px);
-  height: clamp(300px, 60vh, 800px);
+  height: clamp(400px, 100%, 460px);
 
   margin: 5rem auto;
 `;
@@ -56,15 +56,26 @@ const SendMail: React.FC = () => {
       const parsedData = schema.parse(formData);
       console.log('anonymous: ', parsedData.anonymous);
 
-      emailjs.sendForm(emailjsConfig.serviceID, emailjsConfig.templateID, form.current, emailjsConfig.publicKey).then(
-        _ => {
-          alert('Message Sent, I will get back to you shortly');
-        },
-        error => {
-          console.log(error.text);
-          alert('There was an error sending the message, please try again later. :(');
-        },
-      );
+      emailjs
+        .send(
+          emailjsConfig.serviceID,
+          emailjsConfig.templateID,
+          {
+            from_name: formData.user_name,
+            message: formData.message,
+            reply_to: formData.user_email,
+          },
+          emailjsConfig.publicKey,
+        )
+        .then(
+          _ => {
+            alert('Message Sent, I will get back to you shortly');
+          },
+          error => {
+            console.log(error.text);
+            alert('There was an error sending the message, please try again later. :(');
+          },
+        );
     } catch (error) {
       console.error('zod parse error occur:', error);
       if (error instanceof ZodError) {
