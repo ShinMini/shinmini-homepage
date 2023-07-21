@@ -5,10 +5,9 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 const Container = styled.div`
-  margin-top: 2rem;
-  min-height: max(70vh, 50rem);
-  padding-bottom: max(4rem, 8vh);
   display: flex;
+  margin: 0 auto;
+  padding: clamp(1rem, 5vh, 2rem) 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -43,6 +42,7 @@ const Content = styled.div`
 
 const Context = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
 
   justify-content: center;
@@ -52,17 +52,14 @@ const Context = styled.div`
 
   margin: 0 auto;
 
-  width: 100%;
-  height: 100%;
-
   & > header {
     h1 {
-      font-size: max(2rem, 3.5vw);
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
       font-family: ${props => props.theme.fonts.poppins.semiBold};
     }
     h2 {
-      font-size: max(1.3rem, 1.5vw);
-      color: ${props => props.theme.colors.error};
+      font-size: clamp(1.4rem, 2vw, 1.5rem);
+      color: ${props => props.theme.colors.primary};
       font-family: ${props => props.theme.fonts.poppins.medium};
     }
   }
@@ -72,42 +69,41 @@ const Context = styled.div`
     flex-direction: column;
     gap: 0.5rem;
     p {
-      max-width: 90%;
-      font-size: min(0.8rem, 10vh);
+      color: ${props => props.theme.colors.black};
+      font-size: clamp(0.9rem, 1vw, 1.5rem);
       line-height: 1.2;
     }
   }
-  footer {
+  & > footer {
+    width: 100%;
     display: flex;
-    flex-direction: row;
 
     align-items: center;
-
-    gap: 2rem;
+    margin-top: 1rem;
+    gap: clamp(1.5rem, 2vw, 2rem);
+    @media (max-width: 600px) {
+      justify-content: space-around;
+    }
 
     font-family: ${props => props.theme.fonts.poppins.medium};
   }
 `;
 
 const TakeALookButton = styled.button<{ borderColor: string }>`
-  width: max(10rem, 13vw);
-  height: 100%;
-  font-size: 0.8em;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
   font-weight: 600;
-  padding: 0.9rem 0.3rem;
+  padding: clamp(0.5rem, 3vw, 1rem) clamp(1rem, 4vw, 2rem);
   border-color: ${props => props.borderColor};
   border-width: 2px;
-  border-radius: min(5rem, 4vw);
+  border-radius: 15px;
+
   color: ${props => props.theme.colors.opposite.text};
-  background-color: ${props => props.theme.colors.opposite.background};
-  box-shadow: 1px 2px 0.2rem 0.1rem ${props => props.theme.colors.opposite.background};
-  transition:
-    box-shadow 0.2s ease-in-out,
-    color 0.2s ease-in-out;
+  background-color: ${props => hexToRGBA(props.borderColor, 0.9)};
+  box-shadow: 1px 2px 2px 1px ${props => props.theme.colors.opposite.background};
+  transition: color 0.2s ease-in-out;
+
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 1px 0.1rem 0.1rem ${props => props.theme.colors.opposite.background};
-
     color: ${props => props.theme.colors.yellow};
   }
 `;

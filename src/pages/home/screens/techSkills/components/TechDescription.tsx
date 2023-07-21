@@ -13,15 +13,15 @@ const Content = styled.div`
 
 const Header = styled.div`
   display: flex;
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+
   gap: 0.7rem;
   margin-bottom: 0.4rem;
 
   h3 {
+    font-size: clamp(1rem, 2vw, 1.4rem);
     color: ${props => props.theme.colors.grayDarkest};
-    font-size: 1.4rem;
     font-family: ${props => props.theme.fonts.poppins.semiBold};
-
     transform: translateY(2px);
   }
 `;
@@ -36,7 +36,9 @@ const Context = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  padding: 0.5rem 1rem;
+
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  padding: 1rem;
   border-radius: 5px;
   box-shadow: inset -1px 1px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
 
@@ -45,10 +47,11 @@ const Context = styled.div`
 `;
 
 const Border = styled.div`
-  width: 80%;
-  margin: 1rem auto;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
   height: 3px;
-  background-color: ${props => props.theme.colors.grayDark};
+  background-color: ${props => props.theme.colors.gray};
   border-radius: 10px;
 `;
 

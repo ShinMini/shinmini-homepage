@@ -25,12 +25,12 @@ const Container = styled.nav`
 
 const LogoBox = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: clamp(0.5rem, 2vw, 1rem);
 `;
 
 const MenuBox = styled.ul`
   display: flex;
-  gap: min(0.6rem, 1.5vw);
+  gap: clamp(0.5rem, 2vw, 1rem);
   align-items: center;
   @media (max-width: ${Spacing.mobile}) {
     flex-direction: row-reverse;
@@ -47,11 +47,10 @@ const MenuButton = styled.button`
     color: ${props => props.theme.colors.text};
     background-color: ${props => hexToRGBA(props.theme.colors.background)};
     border-radius: 0.25rem;
-    font-size: 1.5rem;
-    transition: scale 0.2s ease-in-out;
     scale: 1;
-    padding: 0.5rem;
-    margin: 0 0.25rem;
+    transition: scale 0.2s ease-in-out;
+    padding: 0.6rem;
+    margin-left: 0.2rem;
     cursor: pointer;
     &:hover {
       color: ${props => props.theme.colors.opposite.text};
@@ -69,31 +68,36 @@ const DropDownBox = styled.div`
 const NavBox = styled.nav<{ isMenuOpen: boolean }>`
   display: flex;
   gap: min(0.8rem, 2vw);
-  padding: 0.6rem 1.2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 1.2rem;
   z-index: 100;
 
   @media (max-width: ${Spacing.mobile}) {
-    flex-direction: column;
     position: fixed;
+    & > p {
+      color: ${props => props.theme.colors.success};
+      font-size: 1.2rem;
+      margin: 0 0.2rem;
+      text-align: center;
+      writing-mode: vertical-lr;
+      transform: rotate(180deg);
+    }
 
+    mix-blend-mode: multiply;
+    backdrop-filter: blur(10px);
     border-radius: 5px;
-    right: 0.1rem;
-    top: 5.5rem;
+    right: 0;
+    top: 3rem;
     background-color: ${props => hexToRGBA(props.theme.colors.yellow, 0.9)};
 
     transition: all 0.2s ease-in-out;
-    transform: ${props => (props.isMenuOpen ? 'translateX(0) rotateZ(0deg)' : 'translateX(80%) rotateZ(-5deg)')};
-
-    &:hover {
-      border-radius: 2px;
-      padding: 0.6rem 1.4rem;
-      transform: ${props => (props.isMenuOpen ? 'translateX(-5%)' : 'translateX(75%)')} scale(1.1);
-    }
+    transform: ${props => (props.isMenuOpen ? 'translateX(10%) rotateZ(0deg)' : 'translateX(72%) rotateZ(-3deg)')};
   }
 `;
 
 const NavItem = styled(Link)`
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-weight: bold;
   transition: color 0.2s ease-in-out;
   cursor: pointer;
@@ -105,7 +109,7 @@ const NavItem = styled(Link)`
 
 const Logo = styled(Link)`
   font-family: 'PoppinsBold';
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
   font-style: italic;
   text-shadow: ${props => props.theme.shadows.xl};
   transition: color 0.2s ease-in-out;
@@ -118,9 +122,8 @@ const LoginButton = styled.button`
   color: ${props => props.theme.colors.text};
   background-color: ${props => props.theme.colors.background};
 
-  padding: 0.3rem 0.6rem;
+  padding: 0.4rem 0.6rem;
   border-radius: 0.25rem;
-  font-size: 1.2rem;
   font-weight: bold;
   &:hover {
     background-color: ${props => props.theme.colors.opposite.background};
@@ -155,12 +158,16 @@ const Navbar: React.FC = () => {
           <MenuButton onClick={() => setIsMenuOpen(prev => !prev)}>
             <AiOutlineMenu />
           </MenuButton>
+
           <NavBox isMenuOpen={isMenuOpen} onClick={() => setIsMenuOpen(prev => !prev)}>
-            {routeName.map((value, index) => (
-              <NavItem key={`nav-item-${index}-${value}`} to={RoutePath.get(value) || '/'}>
-                {value}
-              </NavItem>
-            ))}
+            <p>menu</p>
+            <div className="flex flex-col gap-2">
+              {routeName.map((value, index) => (
+                <NavItem key={`nav-item-${index}-${value}`} to={RoutePath.get(value) || '/'}>
+                  {value}
+                </NavItem>
+              ))}
+            </div>
           </NavBox>
         </DropDownBox>
 

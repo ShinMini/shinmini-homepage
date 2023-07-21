@@ -33,5 +33,4 @@ dist-electron
 # Security
 *.pem
 .env
-.env
 .env.*

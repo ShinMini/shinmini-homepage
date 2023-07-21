@@ -10,17 +10,15 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
 
-  gap: 2rem;
+  gap: clamp(0.5rem, 2vh, 1rem);
   border: ${props => props.theme.colors.greenDark} 2px solid;
   background-color: ${props => hexToRGBA(props.theme.colors.gray, 0.9)};
-  backdrop-filter: sepia(60%);
   mix-blend-mode: hard-light;
   border-radius: 15px;
   padding: 1.5rem 1rem;
-  box-shadow: -2px 2px 2px 2px ${props => hexToRGBA(props.theme.colors.greenDark)};
   padding-bottom: 2rem;
-  width: clamp(300px, 90%, 600px);
-  min-height: 600px;
+  width: clamp(300px, 90%, 900px);
+  height: clamp(500px, 90%, 800px);
 
   margin: auto;
   width: 95%;
@@ -31,7 +29,7 @@ const schema = z.object({
   user_name: z.string().nonempty({ message: 'Name is required' }),
   user_email: z.string().email({ message: 'Invalid email address' }),
   message: z.string().nonempty({ message: 'Message is required' }),
-  anonymous: z.boolean().default(false),
+  anonymous: z.boolean().or(z.string()).default(false),
 });
 
 const SendMail: React.FC = () => {
@@ -44,20 +42,19 @@ const SendMail: React.FC = () => {
 
   const sendEmail = async e => {
     e.preventDefault();
-    if (form.current === null) return;
+    if (form.current === null) return console.error('Form is null');
 
     const formFields = new FormData(form.current);
     const formData = Object.fromEntries(formFields);
 
-    if (formData.anonymous) {
+    if (formData.anonymous === 'yes') {
       formData.user_name = anonymousUser.user_name;
       formData.user_email = anonymousUser.user_email;
     }
 
-    // Perform form validation using Zod
     try {
       const parsedData = schema.parse(formData);
-      console.log(parsedData);
+      console.log('anonymous: ', parsedData.anonymous);
 
       emailjs.sendForm(emailjsConfig.serviceID, emailjsConfig.templateID, form.current, emailjsConfig.publicKey).then(
         _ => {
@@ -69,6 +66,7 @@ const SendMail: React.FC = () => {
         },
       );
     } catch (error) {
+      console.error('zod parse error occur:', error);
       if (error instanceof ZodError) {
         const errorMap = error.formErrors.fieldErrors;
         setFormErrors(prevErrors => ({ ...prevErrors, ...errorMap }));
@@ -82,6 +80,7 @@ const SendMail: React.FC = () => {
     const { checked } = e.target;
     setIsAnonymous(checked);
 
+    if (!checked) return setAnonymousUser({ user_name: '', user_email: '' });
     const _randomName = randomName();
     const _randomEmail = randomEmail(_randomName);
     setAnonymousUser({ user_name: _randomName, user_email: _randomEmail });
@@ -89,7 +88,7 @@ const SendMail: React.FC = () => {
 
   return (
     <Form id="contact-me" ref={form}>
-      <h4 className="text-4xl font-bold text-slate-800 italic">Say Hello to Me!</h4>
+      <h4 className="lg:text-4xl text-2xl font-bold text-slate-800 italic">Hello HyeonMin :)</h4>
       <Grid className="flex gap-6 mb-2 box-border px-2">
         {!isAnonymous ? (
           <TextField

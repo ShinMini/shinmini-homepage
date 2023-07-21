@@ -7,7 +7,7 @@ import SkillDescription from './components/TechDescription';
 import TechGraph from './components/TechGraph';
 
 const Container = styled.div`
-  margin-top: 2rem;
+  margin: 0 auto;
   padding: 2rem 0;
 `;
 
@@ -35,7 +35,7 @@ const HeaderButton = styled.h1<{ isActive: boolean }>`
 
   text-transform: capitalize;
   font-family: ${props => props.theme.fonts.poppins.bold};
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
 
   padding: 0.5rem 1rem;
 
