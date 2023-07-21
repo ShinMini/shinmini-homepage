@@ -21,8 +21,5 @@ export default defineConfig(({ mode }) => {
       open: true,
       port: 3000,
     },
-    esbuild: {
-      target: 'ESNext',
-    },
   };
 });
