@@ -70,6 +70,7 @@ const NavBox = styled.nav<{ isMenuOpen: boolean }>`
   display: flex;
   gap: min(0.8rem, 2vw);
   padding: 0.6rem 1.2rem;
+  z-index: 100;
 
   @media (max-width: ${Spacing.mobile}) {
     flex-direction: column;
