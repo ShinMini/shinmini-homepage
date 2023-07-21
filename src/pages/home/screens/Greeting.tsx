@@ -7,7 +7,7 @@ import { styled } from 'styled-components';
 const Container = styled.div`
   display: flex;
   margin: 0 auto;
-  padding: clamp(1rem, 5vh, 2rem) 0;
+  padding: clamp(0.5rem, 2vw, 2rem) 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -54,11 +54,11 @@ const Context = styled.div`
 
   & > header {
     h1 {
-      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-size: clamp(1.6rem, 3.5vw, 2.5rem);
       font-family: ${props => props.theme.fonts.poppins.semiBold};
     }
     h2 {
-      font-size: clamp(1.4rem, 2vw, 1.5rem);
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
       color: ${props => props.theme.colors.primary};
       font-family: ${props => props.theme.fonts.poppins.medium};
     }
@@ -69,7 +69,10 @@ const Context = styled.div`
     flex-direction: column;
     gap: 0.5rem;
     p {
-      color: ${props => props.theme.colors.black};
+      width: 95%;
+      word-wrap: break-word;
+      word-break: break-word;
+      color: ${props => props.theme.colors.text};
       font-size: clamp(0.9rem, 1vw, 1.5rem);
       line-height: 1.2;
     }
@@ -82,7 +85,7 @@ const Context = styled.div`
     margin-top: 1rem;
     gap: clamp(1.5rem, 2vw, 2rem);
     @media (max-width: 600px) {
-      justify-content: space-around;
+      justify-content: space-between;
     }
 
     font-family: ${props => props.theme.fonts.poppins.medium};
@@ -90,7 +93,7 @@ const Context = styled.div`
 `;
 
 const TakeALookButton = styled.button<{ borderColor: string }>`
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-size: clamp(0.8rem, 1.5vw, 1.2rem);
   font-weight: 600;
   padding: clamp(0.5rem, 3vw, 1rem) clamp(1rem, 4vw, 2rem);
   border-color: ${props => props.borderColor};

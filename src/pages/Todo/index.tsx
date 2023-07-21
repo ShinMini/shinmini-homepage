@@ -15,7 +15,7 @@ import styled from 'styled-components';
 import { hexToRGBA } from '@src/features';
 import { getAuth } from 'firebase/auth';
 import { app } from '@src/lib/firebase';
-import { Button, TextField, TextareaAutosize } from '@mui/material';
+import { Button } from '@mui/material';
 
 const Todo: React.FC = () => {
   const titleInput = React.useRef<HTMLInputElement>(null);
@@ -30,8 +30,12 @@ const Todo: React.FC = () => {
     const title = titleInput.current?.value;
     const detail = detailTextArea.current?.value;
 
+    console.log(titleInput.current);
+    console.log('title: ', title, 'detail: ', detail);
+
     const isValidData = validateFormData({ title, detail });
 
+    console.log(isValidData);
     const todo = {
       uid: uid,
       todoList: [
@@ -100,7 +104,7 @@ const Todo: React.FC = () => {
         </S.TodoListContainer>
         <div className="flex flex-col mt-2 box-border p-2">
           <div className="flex gap-4">
-            <TextField fullWidth ref={titleInput} placeholder="What do you going to do today?" />
+            <input ref={titleInput} placeholder="Todo Title" className="w-full rounded px-2 bg-blue-100" />
             <Button
               variant="contained"
               onClick={pushTodo}
@@ -108,10 +112,9 @@ const Todo: React.FC = () => {
               Add
             </Button>
           </div>
-          <TextareaAutosize
+          <textarea
             ref={detailTextArea}
-            minRows={3}
-            className="p-2 rounded w-full text-slate-900 mt-2 backdrop-blur-md bg-transparent"
+            className="p-2 rounded w-full min-h-[6rem] text-slate-900 mt-2 backdrop-blur-md bg-yellow-100"
             placeholder="details..."
           />
         </div>

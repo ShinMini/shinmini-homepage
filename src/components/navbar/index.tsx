@@ -15,11 +15,13 @@ import { auth } from '@src/lib/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Container = styled.nav`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   background-color: ${props => props.theme.colors.primary};
+  box-sizing: border-box;
   padding: 0.5rem 1rem;
-  overflow: hidden;
+  overflow-x: hidden;
   box-shadow: ${props => props.theme.shadows.md};
 `;
 
@@ -73,9 +75,14 @@ const NavBox = styled.nav<{ isMenuOpen: boolean }>`
   padding-right: 1.2rem;
   z-index: 100;
 
+  & > p {
+    display: none;
+  }
+
   @media (max-width: ${Spacing.mobile}) {
     position: fixed;
     & > p {
+      display: block;
       color: ${props => props.theme.colors.success};
       font-size: 1.2rem;
       margin: 0 0.2rem;
@@ -88,16 +95,16 @@ const NavBox = styled.nav<{ isMenuOpen: boolean }>`
     backdrop-filter: blur(10px);
     border-radius: 5px;
     right: 0;
-    top: 3rem;
+    top: 4rem;
     background-color: ${props => hexToRGBA(props.theme.colors.yellow, 0.9)};
 
     transition: all 0.2s ease-in-out;
-    transform: ${props => (props.isMenuOpen ? 'translateX(10%) rotateZ(0deg)' : 'translateX(72%) rotateZ(-3deg)')};
+    transform: ${props => (props.isMenuOpen ? 'translateX(10%)' : 'translateX(72%) ')};
   }
 `;
 
 const NavItem = styled(Link)`
-  font-size: 0.9rem;
+  font-size: clamp(0.9rem, 5vw, 1.4rem);
   font-weight: bold;
   transition: color 0.2s ease-in-out;
   cursor: pointer;
@@ -121,6 +128,7 @@ const Logo = styled(Link)`
 const LoginButton = styled.button`
   color: ${props => props.theme.colors.text};
   background-color: ${props => props.theme.colors.background};
+  font-size: clamp(0.9rem, 3vw, 1.4rem);
 
   padding: 0.4rem 0.6rem;
   border-radius: 0.25rem;
@@ -161,7 +169,7 @@ const Navbar: React.FC = () => {
 
           <NavBox isMenuOpen={isMenuOpen} onClick={() => setIsMenuOpen(prev => !prev)}>
             <p>menu</p>
-            <div className="flex flex-col gap-2">
+            <div className="flex sm:flex-row sm:gap-4 md:gap-6 flex-col gap-2">
               {routeName.map((value, index) => (
                 <NavItem key={`nav-item-${index}-${value}`} to={RoutePath.get(value) || '/'}>
                   {value}

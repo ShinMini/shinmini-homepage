@@ -46,14 +46,14 @@ const GlobalStyle = createGlobalStyle`
 
     margin: 0;
     padding: 0;
-
     scroll-behavior: smooth;
   }
 
   body {
-    background-color: #f5f5f5;
+    width: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
   }
 
   li {

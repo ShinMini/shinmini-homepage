@@ -7,7 +7,7 @@ import SkillDescription from './components/TechDescription';
 import TechGraph from './components/TechGraph';
 
 const Container = styled.div`
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 2rem 0;
 `;
 
@@ -19,14 +19,20 @@ const Header = styled.header`
 `;
 
 const HeaderButton = styled.h1<{ isActive: boolean }>`
-  color: ${props => (props.isActive ? props.theme.colors.text : props.theme.colors.gray)};
+  color: ${props => (props.isActive ? props.theme.colors.warning : props.theme.colors.text)};
 
   background-color: ${props => hexToRGBA(props.theme.colors.background)};
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 
-  &:hover {
-    color: ${props => props.theme.colors.grayDark};
+  @media (min-width: 600px) {
+    &:hover {
+      color: ${props => props.theme.colors.info};
+    }
+  }
+
+  &:active {
+    color: ${props => props.theme.colors.warning};
   }
 
   &:not(:last-child) {
@@ -35,7 +41,7 @@ const HeaderButton = styled.h1<{ isActive: boolean }>`
 
   text-transform: capitalize;
   font-family: ${props => props.theme.fonts.poppins.bold};
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-size: clamp(1.2rem, 5vw, 2rem);
 
   padding: 0.5rem 1rem;
 

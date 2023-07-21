@@ -10,18 +10,18 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
 
-  gap: clamp(0.5rem, 2vh, 1rem);
-  border: ${props => props.theme.colors.greenDark} 2px solid;
+  gap: clamp(0.5rem, 5vw, 5rem);
+  border: ${props => props.theme.colors.info} 2px solid;
   background-color: ${props => hexToRGBA(props.theme.colors.gray, 0.9)};
   mix-blend-mode: hard-light;
-  border-radius: 15px;
+  border-radius: 10px;
   padding: 1.5rem 1rem;
   padding-bottom: 2rem;
-  width: clamp(300px, 90%, 900px);
-  height: clamp(500px, 90%, 800px);
 
-  margin: auto;
-  width: 95%;
+  width: clamp(300px, 100%, 900px);
+  height: clamp(300px, 60vh, 800px);
+
+  margin: 5rem auto;
 `;
 
 // Defining schema for validation
@@ -125,7 +125,7 @@ const SendMail: React.FC = () => {
           name="message"
           label="Message"
           multiline
-          rows={12}
+          minRows={4}
           fullWidth
           error={Boolean(formErrors.message)}
           helperText={formErrors.message}

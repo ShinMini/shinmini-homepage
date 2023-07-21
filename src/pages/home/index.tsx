@@ -9,7 +9,6 @@ export default function Home() {
       <Greeting />
       <TechSkills />
       <SendMail />
-      <br className="h-4" />
     </Layout>
   );
 }

@@ -5,6 +5,7 @@ import Home from './pages/home';
 import Error from './pages/Error';
 import { app } from './lib/firebase';
 import { getAuth } from 'firebase/auth';
+import Loading from './pages/Loading';
 
 const Todo = lazy(() => import('./pages/Todo'));
 const Lab = lazy(() => import('./pages/lab'));
@@ -42,14 +43,5 @@ const router = createBrowserRouter([
 export default function AppRouter() {
   getAuth(app);
 
-  return (
-    <RouterProvider
-      router={router}
-      fallbackElement={
-        <div className="w-full h-full items-center justify-center bg-slate-700">
-          <h1 className="m-auto text-5xl text-cyan-500">Loading...</h1>
-        </div>
-      }
-    />
-  );
+  return <RouterProvider router={router} fallbackElement={<Loading />} />;
 }
