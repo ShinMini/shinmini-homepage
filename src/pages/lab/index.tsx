@@ -2,7 +2,7 @@ import { Layout } from '@src/components';
 import React from 'react';
 import Vector from './components/Vector';
 import MarkDownConvertor from './components/MarkDownConvertor';
-// import ImageResizer from './components/ImageResizer';
+import ImageResizer from './components/ImageResizer';
 import CustomStyledComponent from './components/CustomStyledComponent';
 import RawCodes from '@src/components/RawCodes';
 
@@ -10,8 +10,8 @@ const Lab: React.FC = () => {
   return (
     <Layout>
       <h1 className="text-3xl p-5 underline text-bold">This is a Laboratory</h1>
-      {/* <h2 className="text-2xl p-5 underline text-bold my-10 text-fuchsia-500">This is a Image Resizer</h2> */}
-      {/* <ImageResizer /> */}
+      <h2 className="text-2xl p-5 underline text-bold my-10 text-fuchsia-500">This is a Image Resizer</h2>
+      <ImageResizer />
       <hr />
       <h2 className="text-2xl p-5 underline text-bold my-10 text-yellow-500">This is a D3 & SVG components</h2>
       <Vector />
