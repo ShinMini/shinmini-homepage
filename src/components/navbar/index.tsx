@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { getAuth } from 'firebase/auth';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import ThemeIcon from './ThemeIcon';
@@ -12,7 +11,8 @@ import { toggleTheme } from '@store/slices/themeSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/useRedux';
 
 import { RoutePath, routeName } from '@src/AppRouter';
-import { app } from '@src/lib/firebase';
+import { auth } from '@src/lib/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Container = styled.nav`
   display: flex;
@@ -128,10 +128,18 @@ const LoginButton = styled.button`
 `;
 
 const Navbar: React.FC = () => {
-  const auth = getAuth(app);
+  const [user] = useAuthState(auth);
   const dispatch = useAppDispatch();
   const currentColor = useAppSelector(state => state.theme.type);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const handleLogin = () => {
+    if (user?.displayName) {
+      window.confirm('로그아웃 하시겠습니까?') && logout();
+    } else {
+      signInWithGooglePopup();
+    }
+  };
 
   return (
     <Container>
@@ -155,11 +163,7 @@ const Navbar: React.FC = () => {
           </NavBox>
         </DropDownBox>
 
-        {auth.currentUser?.displayName ? (
-          <LoginButton onClick={logout}>Log Out</LoginButton>
-        ) : (
-          <LoginButton onClick={signInWithGooglePopup}>Log In</LoginButton>
-        )}
+        <LoginButton onClick={handleLogin}>{user?.displayName || 'Log In'}</LoginButton>
       </MenuBox>
     </Container>
   );

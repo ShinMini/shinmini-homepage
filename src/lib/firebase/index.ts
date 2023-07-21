@@ -15,7 +15,7 @@ export const firebaseConfig: FirebaseOptions = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-const provider = new GoogleAuthProvider();
+const googleAuthProvider = new GoogleAuthProvider();
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
@@ -31,4 +31,4 @@ logEvent(analytics, 'page_view', {
   page_path: '/',
 });
 
-export { app, auth, provider, firestore, storage, analytics };
+export { app, auth, googleAuthProvider, firestore, storage, analytics };

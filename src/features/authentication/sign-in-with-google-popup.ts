@@ -1,16 +1,15 @@
-import { provider } from '@src/lib/firebase';
+import { app, googleAuthProvider } from '@src/lib/firebase';
 import { signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth';
 
 export default function signInWithGooglePopup() {
-  const auth = getAuth();
-  signInWithPopup(auth, provider)
+  const auth = getAuth(app);
+  signInWithPopup(auth, googleAuthProvider)
     .then(result => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential?.accessToken;
       const user = result.user;
 
-      // if node mode === 'development' then console.log
-      if (import.meta.env.MODE === 'development') return console.log(token, user);
+      if (import.meta.env.MODE === 'development') console.log(token, user);
     })
     .catch(error => {
       const errorCode = error.code;

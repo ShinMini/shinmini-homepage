@@ -3,6 +3,8 @@ import { lazy } from 'react';
 
 import Home from './pages/home';
 import Error from './pages/Error';
+import { app } from './lib/firebase';
+import { getAuth } from 'firebase/auth';
 
 const Todo = lazy(() => import('./pages/Todo'));
 const Lab = lazy(() => import('./pages/lab'));
@@ -38,6 +40,8 @@ const router = createBrowserRouter([
 ]);
 
 export default function AppRouter() {
+  getAuth(app);
+
   return (
     <RouterProvider
       router={router}
