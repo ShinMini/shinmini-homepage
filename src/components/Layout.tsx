@@ -39,6 +39,7 @@ const Container = styled.div`
 
 const InnerSpacing = styled.div`
   width: calc(100% - 2vw);
+  padding: 1rem 0;
   margin: 0 auto;
 `;
 

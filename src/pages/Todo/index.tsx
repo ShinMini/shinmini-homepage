@@ -15,45 +15,7 @@ import styled from 'styled-components';
 import { hexToRGBA } from '@src/features';
 import { getAuth } from 'firebase/auth';
 import { app } from '@src/lib/firebase';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  color: ${props => props.theme.colors.text};
-  background-color: ${props => props.theme.colors.background};
-`;
-
-const Header = styled.div`
-  display: flex;
-
-  margin: 0;
-  padding: 0.5rem 1rem;
-
-  color: ${props => props.theme.colors.text};
-  background-color: ${props => props.theme.colors.background};
-
-  h1 {
-    margin: 0;
-    padding: 0;
-
-    font-family: 'PoppinsSemiBold';
-    font-size: 2rem;
-  }
-`;
-
-const TodoListContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  height: max(35rem, 60vh);
-  box-sizing: border-box;
-  padding: 0.7rem 0;
-  border-radius: 0.2rem;
-  overflow-y: scroll;
-  box-shadow: inset -2px 4px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
-`;
+import { Button, TextField, TextareaAutosize } from '@mui/material';
 
 const Todo: React.FC = () => {
   const titleInput = React.useRef<HTMLInputElement>(null);
@@ -108,20 +70,21 @@ const Todo: React.FC = () => {
     dispatch(deleteTodoList({ targetDate }));
   };
 
+  const S = createStyled();
+
   return (
     <Layout>
-      <Header>
-        <h1>
-          What you going <span className=" font-bold text-blue-500">To Do</span>
-        </h1>
-      </Header>
-      <Container>
-        <TodoListContainer>
+      <S.Container>
+        <S.Header>
+          <h1>
+            What's you going <span className=" font-bold text-blue-600">to do</span>
+          </h1>
+        </S.Header>
+        <S.TodoListContainer>
           {currentTodoList &&
             currentTodoList.map(({ date, title, detail }, index) => {
               const key = `currentTodoList-${title}${index}`;
-              const createdDate = dayjs(date).format('YY MM.DD HH:mm');
-              const diffDate = dayjs().diff(date);
+              const createdDate = dayjs(date);
 
               return (
                 <DropDown
@@ -130,34 +93,105 @@ const Todo: React.FC = () => {
                   deleteTodo={() => deleteTodo(date)}
                   title={title}
                   createdDate={createdDate}
-                  diffDate={diffDate}
                   detail={detail}
                 />
               );
             })}
-        </TodoListContainer>
+        </S.TodoListContainer>
         <div className="flex flex-col mt-2 box-border p-2">
-          <div className="flex">
-            <input
-              ref={titleInput}
-              className="border border-gray-400 p-2 rounded flex-grow mr-2 text-slate-900"
-              placeholder="What do you going to do today?"
-            />
-            <button
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-1/3"
-              onClick={pushTodo}>
+          <div className="flex gap-4">
+            <TextField fullWidth ref={titleInput} placeholder="What do you going to do today?" />
+            <Button
+              variant="contained"
+              onClick={pushTodo}
+              sx={{ paddingRight: 4, paddingLeft: 4, fontWeight: 700, fontSize: 20 }}>
               Add
-            </button>
+            </Button>
           </div>
-          <textarea
+          <TextareaAutosize
             ref={detailTextArea}
-            className="border border-gray-400 p-2 rounded w-full text-slate-900 mt-2"
+            minRows={3}
+            className="p-2 rounded w-full text-slate-900 mt-2 backdrop-blur-md bg-transparent"
             placeholder="details..."
           />
         </div>
-      </Container>
+      </S.Container>
     </Layout>
   );
 };
 
 export default Todo;
+
+function createStyled() {
+  const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    color: ${props => props.theme.colors.text};
+    background-color: ${props => hexToRGBA(props.theme.colors.background, 0.5)};
+    border-radius: 0.4rem;
+
+    backdrop-filter: blur(5px);
+  `;
+
+  const Header = styled.div`
+    display: flex;
+    text-align: center;
+    padding: 0.5rem 2rem;
+
+    color: ${props => props.theme.colors.text};
+    mix-blend-mode: luminosity;
+
+    h1 {
+      font-family: 'PoppinsSemiBold';
+      font-size: 1.8rem;
+    }
+  `;
+
+  const TodoListContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    height: max(35rem, 60vh);
+    box-sizing: border-box;
+    padding: 0.7rem 0;
+    border-radius: 0.2rem;
+    overflow-y: scroll;
+    box-shadow: inset -2px 4px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
+  `;
+
+  const TodoList = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    height: max(35rem, 60vh);
+    box-sizing: border-box;
+    padding: 0.7rem 0;
+    border-radius: 0.2rem;
+    overflow-y: scroll;
+    box-shadow: inset -2px 4px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
+  `;
+
+  const TodoItem = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.7rem 0;
+    border-radius: 0.2rem;
+    overflow-y: scroll;
+    box-shadow: inset -2px 4px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
+  `;
+
+  return {
+    Container,
+    Header,
+    TodoListContainer,
+    TodoList,
+    TodoItem,
+  };
+}

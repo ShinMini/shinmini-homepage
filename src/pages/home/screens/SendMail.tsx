@@ -12,12 +12,14 @@ const Form = styled.form`
 
   gap: 2rem;
   border: ${props => props.theme.colors.greenDark} 2px solid;
-  background-color: ${props => hexToRGBA(props.theme.colors.green, 0.7)};
+  background-color: ${props => hexToRGBA(props.theme.colors.gray, 0.9)};
+  backdrop-filter: sepia(60%);
+  mix-blend-mode: hard-light;
   border-radius: 15px;
   padding: 1.5rem 1rem;
   box-shadow: -2px 2px 2px 2px ${props => hexToRGBA(props.theme.colors.greenDark)};
   padding-bottom: 2rem;
-  min-width: 330px;
+  width: clamp(300px, 90%, 600px);
   min-height: 600px;
 
   margin: auto;

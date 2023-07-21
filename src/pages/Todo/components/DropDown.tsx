@@ -1,5 +1,8 @@
+import { Button } from '@mui/material';
 import { hexToRGBA } from '@src/features';
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
 import React from 'react';
 
 import styled from 'styled-components';
@@ -9,7 +12,7 @@ const Container = styled.div`
   flex-direction: column;
   color: ${props => props.theme.colors.text};
   background-color: ${props => props.theme.colors.primary};
-  width: 96%;
+  width: 95%;
   gap: 0.5rem;
   margin: 0.1rem auto;
 
@@ -46,11 +49,6 @@ const ControlPanel = styled.div`
   gap: 1rem;
 `;
 
-const Button = styled.button`
-  font-size: 1rem;
-  font-weight: bold;
-`;
-
 const Title = styled.h1`
   font-size: 1.2rem;
   font-weight: bold;
@@ -80,75 +78,49 @@ const Content = styled.div`
   box-shadow: inset -2px 1px 1px 1px ${props => hexToRGBA(props.theme.colors.background, 0.3)};
 `;
 
-const Description = styled.p`
+const Description = styled.div`
+  display: flex;
+  justify-content: space-between;
   font-size: 1rem;
   font-weight: normal;
   padding: 1rem 1.2rem;
+  cursor: pointer;
 `;
 
 type DropDownProps = {
   title: string;
-  createdDate: string;
-  diffDate: string | number;
+  createdDate: dayjs.Dayjs;
   detail?: string;
 
   editTodo?: () => void;
   deleteTodo?: () => void;
 };
 
-const DISPLAY_DATE = ['day', 'hour', 'minutes'];
-
-const DropDown: React.FC<DropDownProps> = ({ title, createdDate, diffDate, detail, editTodo, deleteTodo }) => {
+const DropDown: React.FC<DropDownProps> = ({ title, createdDate, detail, editTodo, deleteTodo }) => {
   const [isLongDescription, setIsLongDescription] = React.useState(isLongContext(detail).status);
-  const mm = dayjs(diffDate)
-    .format('DD,,mm')
-    .split(',')
-    .map((value, index) => {
-      if (+value === 0) return null;
-
-      if (index === 0) {
-        if (+value === 1) return null;
-        return `${+value - 1} ${DISPLAY_DATE[index]} `;
-      }
-      return `${+value} ${DISPLAY_DATE[index]} `;
-    });
+  dayjs.extend(relativeTime);
+  const mm = dayjs(createdDate).fromNow();
 
   return (
     <Container>
       <Header>
         <Title>{title}</Title>
         <ControlPanel>
-          <Button className="text-blue-500 hover:text-blue-600" onClick={editTodo}>
+          <SubTitle>
+            {createdDate.format('MM.DD hh:mm')} | {mm}
+          </SubTitle>
+          <Button variant="contained" color="info" onClick={editTodo}>
             Edit
           </Button>
-          <Button className="text-red-500 hover:text-red-600" onClick={deleteTodo}>
+          <Button variant="contained" color="error" onClick={deleteTodo}>
             Delete
           </Button>
         </ControlPanel>
       </Header>
       <Content>
-        {isLongDescription ? (
-          <Description>
-            <SubTitle>
-              {createdDate} | {mm.map(e => e)}ago
-            </SubTitle>
-            {isLongContext(detail).context}
-            <span
-              style={{ cursor: 'pointer', textAlign: 'right' }}
-              className="text-green-300 hover:text-green-600"
-              onClick={() => setIsLongDescription(false)}>
-              {' '}
-              Show more
-            </span>
-          </Description>
-        ) : (
-          <Description>
-            <SubTitle>
-              {createdDate} | {mm.map(e => e)}ago
-            </SubTitle>
-            {detail}
-          </Description>
-        )}
+        <Description onClick={isLongContext(detail).status ? () => setIsLongDescription(prev => !prev) : undefined}>
+          <p className="text-ellipsis">{isLongDescription ? isLongContext(detail).context : detail}</p>
+        </Description>
       </Content>
     </Container>
   );
@@ -159,5 +131,5 @@ export default React.memo(DropDown);
 function isLongContext(context?: string) {
   if (!context) return { status: false, context: null };
 
-  return { status: context.trim().length > 100, context: context.trim().slice(0, 100) + '...' };
+  return { status: context.trim().length > 180, context: context.trim().slice(0, 180) + '...' };
 }
