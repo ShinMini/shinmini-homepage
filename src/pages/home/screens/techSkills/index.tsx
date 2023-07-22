@@ -19,21 +19,12 @@ const Header = styled.header`
 `;
 
 const HeaderButton = styled.h1<{ isActive: boolean }>`
-  color: ${props => (props.isActive ? props.theme.colors.warning : props.theme.colors.text)};
+  color: ${props => (props.isActive ? props.theme.colors.info : props.theme.colors.text)};
 
   background-color: ${props => hexToRGBA(props.theme.colors.background)};
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-
-  @media (min-width: 600px) {
-    &:hover {
-      color: ${props => props.theme.colors.info};
-    }
-  }
-
-  &:active {
-    color: ${props => props.theme.colors.warning};
-  }
+  transition: all 0.2s ease-in-out;
+  box-shadow: ${props => !props.isActive && 'inset'} ${props => props.theme.shadows.sm};
 
   &:not(:last-child) {
     margin-right: 15px;
@@ -44,13 +35,8 @@ const HeaderButton = styled.h1<{ isActive: boolean }>`
   font-size: clamp(1.2rem, 5vw, 2rem);
 
   padding: 0.5rem 1rem;
-
-  box-shadow: ${props => (props.isActive ? props.theme.shadows.sm : `inset ${props.theme.shadows.sm}`)};
-
   border-top-left-radius: 3px;
   border-top-right-radius: 15px;
-
-  /* transform: translateY(5px); */
 `;
 
 const Content = styled.div`

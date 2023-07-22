@@ -18,13 +18,13 @@ const Lab: React.FC = () => {
       <div className={se.header}>여권 사진 재조합기</div>
       <ImageResizer />
       <hr />
-      <h2 className={se.header}>This is a D3 & SVG components</h2>
+      <h2 className={se.header}>D3, SVG 갖고 놀아보기</h2>
       <Vector />
       <hr />
-      <h2 className={se.header}>This is a Mark Down creator</h2>
+      <h2 className={se.header}>Mark Down 만들어줘..</h2>
       <MarkDownConvertor />
       <hr />
-      <h2 className={se.header}>This is a component which get params type of styled component</h2>
+      <h2 className={se.header}>styled component 타입 분해해보기</h2>
       <RawCodes />
       {CustomStyledComponent}
     </Layout>

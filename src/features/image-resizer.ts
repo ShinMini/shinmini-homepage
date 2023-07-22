@@ -13,7 +13,7 @@ const byteArrayFromDecodedData = decodedData => {
   return byteArray;
 };
 
-const imageDownload = (selectedImage: string | null, outputFormat = 'png') => {
+const imageDownload = (selectedImage?: string | null, outputFormat = 'png') => {
   if (!selectedImage) return;
 
   const decodedData = decodeData(selectedImage);

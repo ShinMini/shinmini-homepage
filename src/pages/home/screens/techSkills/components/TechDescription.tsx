@@ -20,7 +20,6 @@ const Header = styled.div`
 
   h3 {
     font-size: clamp(1rem, 2vw, 1.4rem);
-    color: ${props => props.theme.colors.grayDarkest};
     font-family: ${props => props.theme.fonts.poppins.semiBold};
     transform: translateY(2px);
   }

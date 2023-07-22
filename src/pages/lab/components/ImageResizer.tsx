@@ -1,27 +1,42 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ChangeEvent, useState } from 'react';
-import { Card, CardContent, TextField, Select, MenuItem, InputLabel, FormControl, Button } from '@mui/material';
+import { Card, CardContent, Select, MenuItem, InputLabel, FormControl, Button } from '@mui/material';
 import imageDownload from '@src/features/image-resizer';
+import faceDetector from '@src/features/face-detector';
+import { Face } from '@tensorflow-models/face-detection';
+enum ProcessStage {
+  Uploaded = 'Uploaded',
+  Detected = 'Detected',
+  Resized = 'Resized',
+}
+
+const FIXED_WIDTH = 413;
+const FIXED_HEIGHT = 531;
 
 const ImageResizer: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [outputFormat, setOutputFormat] = useState<'png' | 'jpeg'>('jpeg');
-  const [maxSize, setMaxSize] = useState(413);
   const [fileName, setFileName] = useState('클릭해서 이미지 업로드');
-  const [fileSize, setFileSize] = useState({ width: 0, height: 0 });
-  const [resizedImage, setResizedImage] = useState({ width: 500, height: 0 });
+  const [fileSize, setFileSize] = useState({ width: FIXED_WIDTH, height: FIXED_HEIGHT });
+  const [resizedImageSize, setResizedImageSize] = useState({ width: FIXED_WIDTH, height: FIXED_HEIGHT });
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+  const [customCanvas, setCustomCanvas] = useState<HTMLCanvasElement | null>(null);
+  const [faceDetectionResult, setFaceDetectionResult] = useState<Face[]>([]); // [x, y, width, height
+  const [buttonState, setButtonState] = useState<ProcessStage | null>(null);
 
   // feature function
   const imageResizer = (image: HTMLImageElement) => {
     let width = image.width;
     let height = image.height;
 
-    const canvas = document.createElement('canvas');
+    const canvas = canvasRef.current;
+    if (!canvas) return;
     const ratio = height / width;
 
     setFileSize({ width: image.width, height: image.height });
 
-    width = maxSize;
-    height = maxSize * ratio;
+    width = FIXED_WIDTH;
+    height = FIXED_WIDTH * ratio;
 
     canvas.width = width;
     canvas.height = height;
@@ -30,31 +45,15 @@ const ImageResizer: React.FC = () => {
     context?.drawImage(image, 0, 0, width, height);
 
     const resizedImage = canvas.toDataURL(`image/${outputFormat}`);
-    setResizedImage({ width, height });
 
+    setCustomCanvas(canvas);
+    setResizedImageSize({ width, height });
     setSelectedImage(resizedImage);
   };
 
-  // event handler functions
-  const handleChangeDimensions = (event: ChangeEvent<HTMLInputElement>) => {
-    setMaxSize(parseInt(event.target.value));
-    if (!selectedImage) return;
-
-    const ratio = fileSize.height / fileSize.width;
-
-    const width = parseInt(event.target.value);
-    const height = Math.round(width * ratio);
-
-    setResizedImage({ width, height });
-  };
-
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files ? event.target.files[0] : null;
-
-    if (!file) {
-      return;
-    }
-
+    if (!event.target.files) return alert('파일을 선택해주세요.');
+    const file = event.target.files[0];
     setFileName(file.name); // Store file name
 
     const image = new Image();
@@ -62,21 +61,97 @@ const ImageResizer: React.FC = () => {
 
     image.onload = () => {
       imageResizer(image);
+      setButtonState(ProcessStage.Uploaded);
     };
   };
 
+  const handleFaceDetector = async () => {
+    if (!customCanvas) return;
+    const result = await faceDetector.estimateFaces(customCanvas);
+    setFaceDetectionResult(result);
+    setButtonState(ProcessStage.Detected);
+
+    // Draw keypoints
+    const context = customCanvas.getContext('2d');
+    if (!context || result.length === 0) return;
+
+    context.fillStyle = '#FF0000'; // red color
+    for (const keypoint of result[0].keypoints) {
+      const { x, y } = keypoint;
+      context.beginPath();
+      context.arc(x, y, 5, 0, 2 * Math.PI); // draws a circle
+      context.fill();
+    }
+  };
+
   const handleImageResize = () => {
-    if (!selectedImage) return;
+    if (!selectedImage || !faceDetectionResult) return;
+
     const image = new Image();
     image.src = selectedImage;
 
     image.onload = () => {
-      imageResizer(image);
+      imageCropper(image);
+      setButtonState(ProcessStage.Resized);
     };
+  };
+
+  const imageCropper = (image: HTMLImageElement) => {
+    const { keypoints } = faceDetectionResult[0];
+
+    const eyeRight = keypoints.find((point: any) => point.name === 'rightEye');
+    const eyeLeft = keypoints.find((point: any) => point.name === 'leftEye');
+    const noseTip = keypoints.find((point: any) => point.name === 'noseTip');
+    const mouthCenter = keypoints.find((point: any) => point.name === 'mouthCenter');
+    const earRight = keypoints.find((point: any) => point.name === 'rightEarTragion');
+    const earLeft = keypoints.find((point: any) => point.name === 'leftEarTragion');
+
+    if (!eyeRight || !eyeLeft || !noseTip || !mouthCenter) return alert('얼굴을 찾을 수 없습니다.');
+    if (!earRight || !earLeft) return alert('여권 사진의 경우 반드시 귀의 일정 부분 이상이 보여야합니다.');
+
+    // Calculate the center of the face.
+    const eyesY = Math.abs(eyeRight.y + eyeLeft.y) / 2;
+
+    // Calculate the new dimensions.
+    const eyesDistance = Math.abs(eyeRight.x - eyeLeft.x);
+    const eyeFromNose = Math.abs(eyesY - noseTip.y);
+    const headFromNose = eyeFromNose * 4.5;
+    const headFromMouth = Math.abs(mouthCenter.y - noseTip.y) * 3;
+
+    const faceWidth = eyesDistance * 1.5;
+    const faceHeight = headFromMouth + headFromNose;
+
+    const imageMargin = {
+      sx: Math.abs(noseTip.x - faceWidth / 2 - 30),
+      sy: Math.abs(noseTip.y - headFromNose / 2 - 40),
+    };
+
+    const newWidth = faceWidth + imageMargin.sx * 2;
+    const newHeight = faceHeight + imageMargin.sy * 2;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    canvas.width = FIXED_WIDTH;
+    canvas.height = FIXED_HEIGHT;
+
+    const context = canvas.getContext('2d');
+
+    const mx = Math.abs(FIXED_WIDTH / 2 - noseTip.x) / 2;
+    const my = Math.abs(FIXED_HEIGHT / 2 - noseTip.y) / 2;
+
+    const sx = noseTip.x - 180 - mx;
+    const sy = noseTip.y - 200 - my;
+    // Clear previous drawings.
+    context?.clearRect(0, 0, canvas.width, canvas.height);
+    context?.drawImage(image, sx, sy, newWidth, newHeight, 0, 0, FIXED_WIDTH, FIXED_HEIGHT);
   };
 
   const handleImageDownload = () => {
     imageDownload(selectedImage, fileName);
+
+    // Set stage to Resized after resizing the image
+    setButtonState(ProcessStage.Resized);
   };
 
   return (
@@ -101,16 +176,6 @@ const ImageResizer: React.FC = () => {
           </div>
         </div>
 
-        <FormControl fullWidth className="mb-6">
-          <TextField
-            type="number"
-            label="Max size(px)"
-            value={maxSize}
-            onChange={handleChangeDimensions}
-            variant="outlined"
-          />
-        </FormControl>
-
         <FormControl fullWidth variant="outlined" className="mb-6">
           <InputLabel id="output-format-label">Output format</InputLabel>
           <Select
@@ -123,21 +188,40 @@ const ImageResizer: React.FC = () => {
           </Select>
         </FormControl>
 
+        <canvas ref={canvasRef} className="mt-4 w-full h-full" />
         {selectedImage && (
           <div className="flex flex-col">
-            <div className="mt-6">
-              <strong>Change Dimensions to: </strong> {Math.round(resizedImage.width)} x{' '}
-              {Math.round(resizedImage.height)}
+            <div>
+              <strong>Change Dimensions to: </strong> {Math.round(resizedImageSize.width)} x{' '}
+              {Math.round(resizedImageSize.height)}
             </div>
             <div className="flex flex-col items-center">
-              <img src={selectedImage} alt="Resized" className="object-contain mt-4 w-full h-full rounded shadow-lg" />
-              <div className="flex w-full justify-between mt-6">
-                <Button variant="contained" color="info" className="mt-4" onClick={handleImageResize}>
-                  Resize
-                </Button>
-                <Button variant="contained" color="warning" className="mt-4" onClick={handleImageDownload}>
-                  Download
-                </Button>
+              <div className="flex w-full justify-between mt-4">
+                {buttonState === ProcessStage.Uploaded && (
+                  <Button
+                    variant="contained"
+                    color="success"
+                    fullWidth
+                    onClick={handleFaceDetector}
+                    sx={{ padding: 2 }}>
+                    Face Detector
+                  </Button>
+                )}
+                {buttonState === ProcessStage.Detected && (
+                  <Button variant="contained" color="info" fullWidth onClick={handleImageResize} sx={{ padding: 2 }}>
+                    Resize
+                  </Button>
+                )}
+                {buttonState === ProcessStage.Resized && (
+                  <Button
+                    variant="contained"
+                    color="warning"
+                    fullWidth
+                    onClick={handleImageDownload}
+                    sx={{ padding: 2 }}>
+                    Download
+                  </Button>
+                )}
               </div>
             </div>
           </div>
@@ -164,10 +248,10 @@ const ImageResizer: React.FC = () => {
         <Card>
           <h3 className="font-bold text-2xl m-2 text-slate-600">여권 사진 재조합기 사용 안내 </h3>
           <article className="flex flex-col p-4 ">
-            <h4>
-              <strong>주의사항</strong>
+            <h4 className="mb-2 text-lg">
+              여권 사진 재조합기
+              <strong> 사용 주의사항</strong>
             </h4>
-            <h4>여권 사진 재조합기는, </h4>
             <ul className="font-sans  list-decimal px-4 flex flex-col gap-1 text-slate-600">
               <li className="list-decimal">여권 사진 규격에 맞춰 사진을 재조합해주는 도구입니다.</li>
               <li className="list-decimal">
@@ -177,8 +261,14 @@ const ImageResizer: React.FC = () => {
                 </p>
               </li>
               <li className="list-decimal">변경된 사진은 외교부의 여권 사진 규격에 맞지 않을 수 있습니다.</li>
-              <li className="list-decimal">변경된 여권사진은 기존 사진의 비율을 준수합니다.</li>
+              <li className="list-decimal">
+                따라서, 재조합된 사진을 사용해 여권을 신청하시려면, 먼저 외교부의 여권 사진 규격을 확인하시기 바랍니다.
+              </li>
+              <li className="list-decimal">
+                여권 사진 재조합기를 사용한 사진으로 여권을 신청할 경우 발생하는 문제에 대해서는 책임지지 않습니다.
+              </li>
             </ul>
+            <p></p>
           </article>
         </Card>
       </div>

@@ -1,8 +1,11 @@
 const defaultColors = {
   primary: '#F31559',
   secondary: '#FF7C7C',
-  background: '#FCFCFC',
+
   text: '#4F4F4F',
+  background: '#FCFCFC',
+
+  linearBackground: 'linear-gradient(to right, #1a2980ba, #26d0ceba)',
 
   surface: '#D6D6D6',
   surfaceLight: '#F2F2F2',
@@ -42,8 +45,9 @@ const lightColors = {
 
 const darkColors = {
   ...defaultColors,
-  background: '#333333',
   text: '#F2F2F2',
+  background: '#333333',
+  linearBackground: 'linear-gradient(to right, #360033, #0b8793)',
 
   surface: '#5D5D5D',
   surfaceLight: '#7C7C7C',
@@ -74,7 +78,7 @@ const shadows = {
   xl: '2px 2px 6px 9px rgba(0, 0, 0, 0.2)',
 };
 
-const themes = {
+const lightTheme = {
   colors: {
     ...lightColors,
     opposite: {
@@ -85,6 +89,17 @@ const themes = {
   shadows,
 };
 
-export type ThemesType = typeof themes;
+const darkTheme = {
+  colors: {
+    ...darkColors,
+    opposite: {
+      ...lightColors,
+    },
+  },
+  fonts,
+  shadows,
+};
 
-export { themes, lightColors, darkColors, fonts };
+export type ThemesType = typeof lightTheme;
+
+export { lightTheme, darkTheme };

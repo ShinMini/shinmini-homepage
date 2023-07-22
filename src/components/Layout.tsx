@@ -2,7 +2,6 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 import Navbar from '@src/components/navbar';
-import { hexToRGBA } from '@src/features';
 import { ScrollRestoration } from 'react-router-dom';
 
 const Wrapper = styled.div`
@@ -11,14 +10,9 @@ const Wrapper = styled.div`
   overflow-x: hidden;
   transition: background-color 700ms linear 300ms;
 
-  background: linear-gradient(
-    ${props => hexToRGBA(props.theme.colors.opposite.background)} 30%,
-    ${props => props.theme.colors.background} 100%
-  );
+  background: ${props => props.theme.colors.linearBackground};
 
   /* background: linear-gradient(to right, #ff7e5f, #feb47b); */
-  background: linear-gradient(to right, #1a2980ba, #26d0ceba);
-
   /* background: linear-gradient(to right, #360033, #0b8793); */
   /* background: linear-gradient(to right, #5a3f37, #2c7744); */
   /* background: linear-gradient(to right, #e6dada, #274046); */
