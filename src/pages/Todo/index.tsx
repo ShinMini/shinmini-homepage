@@ -80,9 +80,7 @@ const Todo: React.FC = () => {
     <Layout>
       <S.Container>
         <S.Header>
-          <h1>
-            What's you going <span className=" font-bold text-blue-600">to do</span>
-          </h1>
+          <h1 className="font-bold">어우 하기싫어</h1>
         </S.Header>
         <S.TodoListContainer>
           {currentTodoList &&
@@ -140,14 +138,10 @@ function createStyled() {
   const Header = styled.div`
     display: flex;
     text-align: center;
-    padding: 0.5rem 2rem;
-
-    color: ${props => props.theme.colors.text};
-    mix-blend-mode: luminosity;
-
+    padding: 0.5rem 1rem;
     h1 {
       font-family: 'PoppinsSemiBold';
-      font-size: 1.8rem;
+      font-size: 1.6rem;
     }
   `;
 

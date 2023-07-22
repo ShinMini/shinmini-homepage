@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { hexToRGBA } from '@src/features';
+import Spacing from '@src/themes/Spacing';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
@@ -25,19 +26,34 @@ const Container = styled.div`
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
   color: ${props => props.theme.colors.text};
   background-color: ${props => props.theme.colors.background};
 
-  min-width: 360px;
   border-radius: 5px;
   padding: 0.6rem 1.2rem;
 
+  @media (max-width: ${Spacing.mobile}) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
   & > div {
     display: flex;
-    align-items: center;
   }
 `;
+
+const TitleContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: ${Spacing.mobile}) {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+`;
+
+const Title = styled.div``;
 
 const ControlPanel = styled.div`
   display: flex;
@@ -45,24 +61,11 @@ const ControlPanel = styled.div`
 
   justify-content: center;
   align-items: center;
-
   gap: 1rem;
-`;
 
-const Title = styled.h1`
-  font-size: 1.2rem;
-  font-weight: bold;
-`;
-
-const SubTitle = styled.h2`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 2px;
-  font-size: 1rem;
-  font-style: italic;
-
-  color: ${props => props.theme.colors.info};
+  @media (max-width: ${Spacing.mobile}) {
+    justify-content: flex-end;
+  }
 `;
 
 const Content = styled.div`
@@ -79,6 +82,7 @@ const Content = styled.div`
 `;
 
 const Description = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   font-size: 1rem;
@@ -104,11 +108,13 @@ const DropDown: React.FC<DropDownProps> = ({ title, createdDate, detail, editTod
   return (
     <Container>
       <Header>
-        <Title>{title}</Title>
+        <TitleContainer>
+          <Title className="flex justify-between pr-4">
+            <h2 className="text-xl font-bold">{title}</h2>
+            <span className="text-sm text-blue-300">{mm}</span>
+          </Title>
+        </TitleContainer>
         <ControlPanel>
-          <SubTitle>
-            {createdDate.format('MM.DD hh:mm')} | {mm}
-          </SubTitle>
           <Button variant="contained" color="info" onClick={editTodo}>
             Edit
           </Button>
@@ -119,7 +125,13 @@ const DropDown: React.FC<DropDownProps> = ({ title, createdDate, detail, editTod
       </Header>
       <Content>
         <Description onClick={isLongContext(detail).status ? () => setIsLongDescription(prev => !prev) : undefined}>
-          <p className="text-ellipsis">{isLongDescription ? isLongContext(detail).context : detail}</p>
+          <p className="text-ellipsis w-full">
+            {isLongDescription ? isLongContext(detail).context : detail}
+
+            <div className="w-full flex justify-end">
+              <span className="text-end font-semibold text-blue-300">{createdDate.format('YYYY. MMM.DD')}</span>
+            </div>
+          </p>
         </Description>
       </Content>
     </Container>
