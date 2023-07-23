@@ -27,6 +27,7 @@ If you want more options, you can pass in a second estimationConfig parameter.
   const estimationConfig = {flipHorizontal: false};
   const faces = await detector.estimateFaces(image, estimationConfig);
 **/
-const faceDetector = await faceDetection.createDetector(model, detectorConfig);
+const faceDetector = async (input: HTMLCanvasElement) =>
+  (await faceDetection.createDetector(model, detectorConfig)).estimateFaces(input);
 
 export default faceDetector;

@@ -67,7 +67,7 @@ const ImageResizer: React.FC = () => {
 
   const handleFaceDetector = async () => {
     if (!customCanvas) return;
-    const result = await faceDetector.estimateFaces(customCanvas);
+    const result = await faceDetector(customCanvas);
     setFaceDetectionResult(result);
     setButtonState(ProcessStage.Detected);
 
