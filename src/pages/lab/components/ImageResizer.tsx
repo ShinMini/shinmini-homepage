@@ -35,14 +35,26 @@ const ImageResizer: React.FC = () => {
 
     setFileSize({ width: image.width, height: image.height });
 
-    width = FIXED_WIDTH;
-    height = FIXED_WIDTH * ratio;
+    if (width > height) {
+      width = FIXED_WIDTH;
+      height = FIXED_WIDTH * ratio;
+    } else {
+      height = FIXED_HEIGHT;
+      width = FIXED_HEIGHT / ratio;
+    }
 
-    canvas.width = width;
-    canvas.height = height;
+    const dx = (FIXED_WIDTH - width) / 2;
+    const dy = (FIXED_HEIGHT - height) / 2;
+
+    canvas.width = FIXED_WIDTH;
+    canvas.height = FIXED_HEIGHT;
 
     const context = canvas.getContext('2d');
-    context?.drawImage(image, 0, 0, width, height);
+    if (!context) return;
+
+    context.fillStyle = '#fff';
+    context.fill();
+    context.drawImage(image, dx, dy, width, height);
 
     const resizedImage = canvas.toDataURL(`image/${outputFormat}`);
 
@@ -142,15 +154,20 @@ const ImageResizer: React.FC = () => {
 
     const sx = noseTip.x - 180 - mx;
     const sy = noseTip.y - 200 - my;
-    // Clear previous drawings.
-    context?.clearRect(0, 0, canvas.width, canvas.height);
-    context?.drawImage(image, sx, sy, newWidth, newHeight, 0, 0, FIXED_WIDTH, FIXED_HEIGHT);
+
+    if (!context) return;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = '#fff';
+    context.drawImage(image, sx, sy, newWidth, newHeight, sx, sy, FIXED_WIDTH, FIXED_HEIGHT);
+
+    const resizedImage = canvas.toDataURL(`image/${outputFormat}`);
+
+    setCustomCanvas(canvas);
+    setSelectedImage(resizedImage);
   };
 
   const handleImageDownload = () => {
     imageDownload(selectedImage, fileName);
-
-    // Set stage to Resized after resizing the image
     setButtonState(ProcessStage.Resized);
   };
 
@@ -188,7 +205,14 @@ const ImageResizer: React.FC = () => {
           </Select>
         </FormControl>
 
-        <canvas ref={canvasRef} className="mt-4 w-full h-full" />
+        <canvas ref={canvasRef} className={`mt-4 w-full h-full ${buttonState === ProcessStage.Resized && 'hidden'}`} />
+        {selectedImage && (
+          <img
+            src={selectedImage}
+            alt="resized"
+            className={`mt-4 w-full h-full ${buttonState !== ProcessStage.Resized && 'hidden'}`}
+          />
+        )}
         {selectedImage && (
           <div className="flex flex-col">
             <div>
@@ -231,8 +255,8 @@ const ImageResizer: React.FC = () => {
         <Card>
           <h3 className="font-bold text-2xl m-2 text-slate-600">
             <a href="https://www.passport.go.kr/home/kor/contents.do?menuPos=32" target="_blank" rel="noreferrer">
-              여권 사진 규격 안내{' '}
-              <span className="text-blue-500 underline-offset-4 underline text-sm">(외교부 규격 참조)</span>
+              여권 사진 규격 안내
+              <span className="ml-4 text-blue-500 underline-offset-4 underline text-sm">(외교부 규격 참조)</span>
             </a>
           </h3>
           <article className="flex flex-col p-4 ">
