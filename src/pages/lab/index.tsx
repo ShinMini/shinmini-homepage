@@ -5,6 +5,7 @@ import MarkDownConvertor from './components/MarkDownConvertor';
 import ImageResizer from './components/ImageResizer';
 import CustomStyledComponent from './components/CustomStyledComponent';
 import RawCodes from '@src/components/RawCodes';
+import QueryGenerator from './components/QueryGenerator';
 
 const se = {
   title: `text-3xl font-extrabold text-slate-800 bg-pink-200 rounded-xl p-5 my-10`,
@@ -14,6 +15,9 @@ const se = {
 const Lab: React.FC = () => {
   return (
     <Layout>
+      <h1 className={se.title}>query generateRandomSQLInsert</h1>
+      <QueryGenerator />
+
       <h1 className={se.title}>이거 될거같은데.. 모음집</h1>
       <div className={se.header}>여권 사진 재조합기</div>
       <ImageResizer />

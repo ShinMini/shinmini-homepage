@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/ko';
+import { faker } from '@faker-js/faker';
 
 export function generateRandomSQLInsert(count: number): string {
   const insertQueries: string[] = [];
