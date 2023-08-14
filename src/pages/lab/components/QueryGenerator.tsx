@@ -1,5 +1,5 @@
 import React from 'react';
-import { generateRandomSQLInsert } from '@features/query-generator';
+import ReviewGenerator from '@features/query-generator';
 
 import { BiCopy } from 'react-icons/bi';
 
@@ -8,7 +8,8 @@ const QueryGenerator = () => {
   const [query, setQuery] = React.useState('');
 
   const handleClickButton = () => {
-    const _query = generateRandomSQLInsert(count);
+    const generator = new ReviewGenerator(count);
+    const _query = generator.generateAll();
     setQuery(_query);
   };
 
