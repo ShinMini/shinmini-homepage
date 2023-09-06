@@ -50,7 +50,7 @@
       "@providers": ["./src/providers"],
       "@lib/*": ["./src/lib/*"],
 
-      "API": ["./src/api/index.ts"]
+      "api": ["./src/api/index.ts"]
     }
   },
   "include": [

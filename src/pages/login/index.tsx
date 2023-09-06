@@ -4,6 +4,7 @@ import React from 'react';
 import { AiOutlineGooglePlus, AiOutlineGithub, AiOutlineLinkedin } from 'react-icons/ai';
 import signInWithGooglePopup from '@features/authentication/sign-in-with-google-popup';
 import { test } from '@src/api';
+import { login } from '@src/api/user';
 
 const se = {
   input: `p-2 rounded-lg border-2 border-sky-300 shadow-sm`,
@@ -25,7 +26,12 @@ const Login: React.FC = () => {
     e?.stopPropagation();
     if (!loginInput || !pwdInput) return window.alert('the login & pwd value is must filled up!');
 
-    test().then(res => console.log(res));
+    const data = {
+      email: loginInput,
+      password: pwdInput,
+    };
+    const result = login(data);
+    console.log(result);
   };
 
   const onKeydownLoginForm = (e: React.KeyboardEvent<HTMLFormElement>) => {
