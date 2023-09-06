@@ -9,6 +9,7 @@ import Loading from './pages/Loading';
 
 const Todo = lazy(() => import('./pages/Todo'));
 const Lab = lazy(() => import('./pages/lab'));
+const Login = lazy(() => import('./pages/login'));
 
 export const routeName = ['Home', 'Todo', 'Lab'];
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: RoutePath.get('Lab'),
     element: <Lab />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
 ]);
 

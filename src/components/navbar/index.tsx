@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import ThemeIcon from './ThemeIcon';
 
-import { hexToRGBA, logout, signInWithGooglePopup } from '@src/features';
+import { hexToRGBA, logout } from '@src/features';
 import Spacing from '@src/themes/Spacing';
 import { toggleTheme } from '@store/slices/themeSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/useRedux';
@@ -144,12 +144,14 @@ const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
   const currentColor = useAppSelector(state => state.theme.type);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     if (user?.displayName) {
       window.confirm('로그아웃 하시겠습니까?') && logout();
+      return;
     } else {
-      signInWithGooglePopup();
+      return navigate('/login');
     }
   };
 

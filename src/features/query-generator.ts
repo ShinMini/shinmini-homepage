@@ -117,6 +117,9 @@ class Review {
 
 export default class ReviewGenerator {
   private readonly reviews: Review[] = [];
+  private readonly review_report_id: number[] = [];
+  private readonly review_order_history: number[] = [];
+
   private generateCount = 5;
 
   constructor(count: number) {
@@ -191,6 +194,7 @@ export default class ReviewGenerator {
         const imageQuery = `
         INSERT INTO image (id, created_at, updated_at, blind_reason, blinded, classified_at, classified_tag, image_url, modifier, sequence, review_id)
         VALUES (${imageId}, '${createdAt}', '${updatedAt}', '${blindReason}', ${blinded}, '${classifiedAt}', '${classifiedTag}', '${imageUrl}', '${modifier}', ${sequence}, ${reviewId});`;
+
         imageQueries.push(imageQuery);
       }
     }
@@ -212,7 +216,7 @@ export default class ReviewGenerator {
       const reviewId = this.reviews[i].id;
       const reviewable = faker.datatype.boolean() ? 1 : 0;
       const vendorProductId = this.reviews[i].vendorProductId;
-      const orderHistoryId = this.reviews[i].orderNumber;
+      const orderHistoryId = this.review_order_history[i];
 
       const query = `
         INSERT INTO reviewyo.menu_history (id, created_at, updated_at, image_url, name, price, product_id, quantity, review_id, reviewable, vendor_product_id, order_history_id)
@@ -226,7 +230,7 @@ export default class ReviewGenerator {
   generateOrderHistory(): string {
     const queries: string[] = [];
     for (let i = 0; i < this.generateCount; i++) {
-      const id = faker.number.int();
+      const id = faker.number.int({ min: 99, max: 999999 });
       const createdAt = this.createRandomDate();
       const updatedAt = this.createRandomDate();
       const acceptedAt = this.createRandomDate();
@@ -252,6 +256,7 @@ export default class ReviewGenerator {
         INSERT INTO reviewyo.order_history (id, created_at, updated_at, accepted_at, canceled_at, completed_at, customer_id, customer_nickname, etc_info, franchise_id, order_id, order_number, order_status, order_type, phone_number, platform, serving_type, user_agent, vendor_id, vendor_name, vendor_type)
         VALUES (${id}, '${createdAt}', '${updatedAt}', '${acceptedAt}', '${canceledAt}', '${completedAt}', ${customerId}, '${customerNickname}', '${etcInfo}', ${franchiseId}, ${orderId}, '${orderNumber}', '${orderStatus}', '${orderType}', '${phoneNumber}', '${platform}', '${servingType}', '${userAgent}', ${vendorId}, '${vendorName}', '${vendorType}');`;
 
+      this.review_order_history.push(id);
       queries.push(query);
     }
     return queries.join('\n');
@@ -260,7 +265,7 @@ export default class ReviewGenerator {
   generateReviewReport(): string {
     const queries: string[] = [];
     for (let i = 0; i < this.generateCount; i++) {
-      const id = faker.number.int();
+      const id = faker.number.int({ min: 99, max: 999999 });
       const createdAt = this.createRandomDate();
       const updatedAt = this.createRandomDate();
       const customerId = faker.number.int();
@@ -277,43 +282,45 @@ export default class ReviewGenerator {
         VALUES (${id}, '${createdAt}', '${updatedAt}', ${customerId}, '${modifier}', '${process}', '${processComment}', '${processedAt}', '${reportReason}', '${reportReasonComment}', ${reviewId});
         `;
 
+      this.review_report_id.push(id);
+      if (faker.datatype.boolean(0.6) && i > 0) --i;
       queries.push(query);
     }
     return queries.join('\n');
   }
 
-  // generateReviewReportHistory(): string {
-  //   const queries: string[] = [];
-  //   for (let i = 0; i < this.generateCount; i++) {
-  //     const id = faker.number.int({ min: 1, max: 9999 });
-  //     const createdAt = this.createRandomDate();
-  //     const updatedAt = this.createRandomDate();
-  //     const customerId = faker.number.int({ min: 1, max: 9999 });
-  //     const modifier = faker.internet.userName();
-  //     const process = faker.lorem.words(2);
-  //     const processComment = faker.lorem.sentence();
-  //     const processedAt = this.createRandomDate();
-  //     const reportReason = faker.lorem.words(3);
-  //     const reportReasonComment = faker.lorem.sentence();
-  //     const reviewReportId = this.reviews[i].id;
+  generateReviewReportHistory(): string {
+    const queries: string[] = [];
+    for (let i = 0; i < this.review_report_id.length; i++) {
+      const id = faker.number.int({ min: 1, max: 9999 });
+      const createdAt = this.createRandomDate();
+      const updatedAt = this.createRandomDate();
+      const customerId = faker.number.int({ min: 1, max: 9999 });
+      const modifier = faker.internet.userName();
+      const process = faker.lorem.words(2);
+      const processComment = faker.lorem.sentence();
+      const processedAt = this.createRandomDate();
+      const reportReason = faker.lorem.words(3);
+      const reportReasonComment = faker.lorem.sentence();
+      const reviewReportId = this.review_report_id[i];
 
-  //     const query = `
-  //       INSERT INTO reviewyo.review_report_history (id, created_at, updated_at, customer_id, modifier, process, process_comment, processed_at, report_reason, report_reason_comment, review_report_id)
-  //       VALUES (${id}, '${createdAt}', '${updatedAt}', ${customerId}, '${modifier}', '${process}', '${processComment}', '${processedAt}', '${reportReason}', '${reportReasonComment}', ${reviewReportId});`;
+      const query = `
+        INSERT INTO reviewyo.review_report_history (id, created_at, updated_at, customer_id, modifier, process, process_comment, processed_at, report_reason, report_reason_comment, review_report_id)
+        VALUES (${id}, '${createdAt}', '${updatedAt}', ${customerId}, '${modifier}', '${process}', '${processComment}', '${processedAt}', '${reportReason}', '${reportReasonComment}', ${reviewReportId});`;
 
-  //     queries.push(query);
-  //   }
-  //   return queries.join('\n');
-  // }
+      queries.push(query);
+    }
+    return queries.join('\n');
+  }
 
   generateAll(): string {
     return [
       this.generateReviewSQLInsert(),
       this.generateImageSQLInsert(),
       this.generateOrderHistory(),
-      this.generateMenuHistory(),
       this.generateReviewReport(),
-      // this.generateReviewReportHistory(),
+      this.generateReviewReportHistory(),
+      this.generateMenuHistory(),
     ].join('\n');
   }
 }

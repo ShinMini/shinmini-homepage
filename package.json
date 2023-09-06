@@ -27,6 +27,7 @@
     "@tensorflow/tfjs-backend-webgl": "^4.9.0",
     "@tensorflow/tfjs-converter": "^4.9.0",
     "@tensorflow/tfjs-core": "^4.9.0",
+    "axios": "^1.5.0",
     "d3": "^7.8.5",
     "dayjs": "^1.11.8",
     "dotenv": "^16.1.4",
