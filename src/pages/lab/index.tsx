@@ -2,7 +2,6 @@ import { Layout } from '@src/components';
 import React from 'react';
 import Vector from './components/Vector';
 import MarkDownConvertor from './components/MarkDownConvertor';
-import ImageResizer from './components/ImageResizer';
 import CustomStyledComponent from './components/CustomStyledComponent';
 import RawCodes from '@src/components/RawCodes';
 
@@ -15,8 +14,6 @@ const Lab: React.FC = () => {
   return (
     <Layout>
       <h1 className={se.title}>이거 될거같은데.. 모음집</h1>
-      <div className={se.header}>여권 사진 재조합기</div>
-      <ImageResizer />
       <hr />
       <h2 className={se.header}>D3, SVG 갖고 놀아보기</h2>
       <Vector />

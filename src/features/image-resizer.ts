@@ -20,7 +20,7 @@ const imageDownload = (selectedImage?: string | null, outputFormat = 'png') => {
   const byteArray = byteArrayFromDecodedData(decodedData);
 
   const blob = new Blob([byteArray], { type: `image/${outputFormat}` });
-  saveAs(blob, `resized-image.${outputFormat}`);
+  saveAs(blob, `passport-${outputFormat}`);
 };
 
 export default imageDownload;

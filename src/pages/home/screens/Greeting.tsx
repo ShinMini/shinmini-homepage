@@ -146,9 +146,9 @@ const Greeting: React.FC = () => {
             </TakeALookButton>
             <TakeALookButton
               type="button"
-              onClick={() => window.open('https://github.com/ShinMini', '_blank')}
+              onClick={() => window.open('https://www.notion.so/shinmini/9fa53b45e7c346f5ac271bdf3d6eaeee', '_blank')}
               borderColor="#F84F4F">
-              See My Work
+              My Blog
             </TakeALookButton>
           </footer>
         </Context>
