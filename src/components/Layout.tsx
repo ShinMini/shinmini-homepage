@@ -19,7 +19,6 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  max-width: 1980px;
   min-height: 100vh;
   color: ${props => props.theme.colors.text};
   transition:

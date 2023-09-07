@@ -4,6 +4,7 @@ import Vector from './components/Vector';
 import MarkDownConvertor from './components/MarkDownConvertor';
 import CustomStyledComponent from './components/CustomStyledComponent';
 import RawCodes from '@src/components/RawCodes';
+import QueryGenerator from './components/QueryGenerator';
 
 const se = {
   title: `text-3xl font-extrabold text-slate-800 bg-pink-200 rounded-xl p-5 my-10`,
@@ -13,6 +14,9 @@ const se = {
 const Lab: React.FC = () => {
   return (
     <Layout>
+      <h1 className={se.title}>query generateRandomSQLInsert</h1>
+      <QueryGenerator />
+
       <h1 className={se.title}>이거 될거같은데.. 모음집</h1>
       <hr />
       <h2 className={se.header}>D3, SVG 갖고 놀아보기</h2>

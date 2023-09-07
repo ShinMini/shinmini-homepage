@@ -49,9 +49,23 @@
       "@store/*": ["./src/store/*"],
       "@providers": ["./src/providers"],
       "@lib/*": ["./src/lib/*"],
-   },
+
+      "api": ["./src/api/index.ts"]
+    }
   },
-  "include": ["src/*.tsx", "src/*.css", "src/*.ts","src/**/*","global.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "index.js", "metro.config.js", "babel.config.js"],
-  "exclude": ["node_modules", "jest.config.ts", "tailwind.config.js", "postcss.config.js" ],
+  "include": [
+    "src/*.tsx",
+    "src/*.css",
+    "src/*.ts",
+    "src/**/*",
+    "global.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "index.js",
+    "metro.config.js",
+    "babel.config.js"
+  ],
+  "exclude": ["node_modules", "jest.config.ts", "tailwind.config.js", "postcss.config.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
