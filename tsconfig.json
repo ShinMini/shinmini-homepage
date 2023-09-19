@@ -3,7 +3,10 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable", ],
+
+    // "module": "CommonJS",
+    // "target": "ES2020",
 
     "module": "ES2022" /* Specify what module code is generated. */,
     "moduleResolution": "Bundler" /* Specify how TypeScript looks up a file from a given module specifier. */,
@@ -63,9 +66,7 @@
     "**/*.tsx",
     "**/*.js",
     "index.js",
-    "metro.config.js",
-    "babel.config.js"
   ],
-  "exclude": ["node_modules", "jest.config.ts", "tailwind.config.js", "postcss.config.js"],
+  "exclude": ["node_modules", "jest.config.ts", "tailwind.config.js", "postcss.config.js", ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

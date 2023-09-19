@@ -3,7 +3,6 @@ import React from 'react';
 
 import { AiOutlineGooglePlus, AiOutlineGithub, AiOutlineLinkedin } from 'react-icons/ai';
 import signInWithGooglePopup from '@features/authentication/sign-in-with-google-popup';
-import { test } from '@src/api';
 import { login } from '@src/api/user';
 
 const se = {
