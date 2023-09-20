@@ -20,7 +20,6 @@ public
 dist
 dist-electron
 
-
 # Editor directories and files
 .vscode
 !.vscode/extensions.json
@@ -36,3 +35,13 @@ dist-electron
 *.pem
 .env
 .env.*
+
+# FIREBASE
+CHANGELOG.md
+
+# jest
+jest.config.js
+.firebaserc
+
+scripts
+*.d.ts
