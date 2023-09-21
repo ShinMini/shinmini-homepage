@@ -11,8 +11,9 @@ const Todo = lazy(() => import('./pages/Todo'));
 const Lab = lazy(() => import('./pages/lab'));
 const ImageResizer = lazy(() => import('./pages/imageResizer/ImageResizer'));
 const Login = lazy(() => import('./pages/login'));
+const Feats = lazy(() => import('./pages/feats/index'));
 
-export const routeName = ['Home', 'Todo', 'Lab', 'Feat'];
+export const routeName = ['Home', 'Feats'];
 
 function createRoutePath(routeName: Array<string>) {
   const routePath: Array<[string, string]> = [['Home', '/']];
@@ -33,15 +34,20 @@ const router = createBrowserRouter([
     errorElement: <Error />,
   },
   {
-    path: RoutePath.get('Feat'),
+    path: RoutePath.get('Feats'),
+    element: <Feats />,
+    errorElement: <Error />,
+  },
+  {
+    path: '/feats/image-resizer',
     element: <ImageResizer />,
   },
   {
-    path: RoutePath.get('Todo'),
+    path: '/feats/todo',
     element: <Todo />,
   },
   {
-    path: RoutePath.get('Lab'),
+    path: '/feats/lab',
     element: <Lab />,
   },
   {

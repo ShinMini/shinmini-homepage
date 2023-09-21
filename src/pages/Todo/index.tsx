@@ -29,13 +29,7 @@ const Todo: React.FC = () => {
   const pushTodo = () => {
     const title = titleInput.current?.value;
     const detail = detailTextArea.current?.value;
-
-    console.log(titleInput.current);
-    console.log('title: ', title, 'detail: ', detail);
-
     const isValidData = validateFormData({ title, detail });
-
-    console.log(isValidData);
     const todo = {
       uid: uid,
       todoList: [
