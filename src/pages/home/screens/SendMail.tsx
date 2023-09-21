@@ -1,25 +1,30 @@
 import React, { memo, useRef, useState } from 'react';
-import { Button, Checkbox, FormControlLabel, Grid, TextField } from '@mui/material';
-import emailjs from '@emailjs/browser';
-import { emailjsConfig } from '@src/lib/emailjs/constants';
-import { z, ZodError } from 'zod';
+
 import styled from 'styled-components';
-import { hexToRGBA, randomEmail, randomName } from '@src/features';
+import { Button, Checkbox, FormControlLabel, Grid, TextField } from '@mui/material';
+
+import { emailjsConfig } from '@src/lib/emailjs/constants';
+import emailjs from '@emailjs/browser';
+
+import { randomEmail, randomName } from '@src/features';
+
+import { z, ZodError } from 'zod';
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
 
-  gap: clamp(1rem, 6vw, 8rem);
-  border: ${props => props.theme.colors.info} 2px solid;
-  background-color: ${props => hexToRGBA(props.theme.colors.gray, 0.9)};
-  mix-blend-mode: hard-light;
+  gap: clamp(1rem, 3vh, 4rem);
+  box-sizing: content-box;
+  border: ${props => props.theme.colors.warning} 4px solid;
+  background-color: ${({ theme }) => theme.colors.yellow};
+  mix-blend-mode: normal;
   border-radius: 10px;
   padding: 1.5rem 1rem;
   padding-bottom: 2rem;
 
-  width: clamp(300px, 100%, 900px);
-  height: clamp(400px, 100%, 460px);
+  width: clamp(300px, 95%, 1980px);
+  height: clamp(400px, 100%, 600px);
 
   margin: 5rem auto;
 `;
@@ -99,7 +104,7 @@ const SendMail: React.FC = () => {
 
   return (
     <Form id="contact-me" ref={form}>
-      <h4 className="lg:text-4xl text-2xl font-bold text-slate-800 italic">Hello HyeonMin :)</h4>
+      <h4 className="lg:text-4xl text-2xl font-bold text-slate-700 mb-2">Hi ShinMini</h4>
       <Grid className="flex gap-6 mb-2 box-border px-2">
         {!isAnonymous ? (
           <TextField
@@ -136,18 +141,18 @@ const SendMail: React.FC = () => {
           name="message"
           label="Message"
           multiline
-          minRows={4}
+          minRows={8}
           fullWidth
           error={Boolean(formErrors.message)}
           helperText={formErrors.message}
         />
       </Grid>
-      <Grid className="flex justify-between box-border px-2">
+      <Grid className="flex justify-between box-border px-2 text-slate-900">
         <FormControlLabel
           control={<Checkbox color="secondary" name="anonymous" value="yes" onChange={handleAnonymousChange} />}
           label="Anonymous"
         />
-        <Button type="submit" variant="contained" color="primary" onClick={sendEmail}>
+        <Button type="submit" variant="contained" color="success" onClick={sendEmail}>
           Send
         </Button>
       </Grid>

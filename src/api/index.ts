@@ -12,10 +12,4 @@ const API = axios.create({
 });
 axios.defaults.withCredentials = true;
 
-export const test = () => {
-  console.log(baseURL);
-  const result = API.get('/test');
-  return result;
-};
-
 export default API;
