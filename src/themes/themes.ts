@@ -1,11 +1,13 @@
 const defaultColors = {
-  primary: '#F31559',
+  primary: '#360033ab',
   secondary: '#FF7C7C',
+
+  button: '#FF7C7C',
 
   text: '#4F4F4F',
   background: '#FCFCFC',
 
-  linearBackground: 'linear-gradient(to right, #1a2980ba, #26d0ceba)',
+  linearBackground: 'linear-gradient(to right, #1a2980ca, #26d0ceba)',
 
   surface: '#D6D6D6',
   surfaceLight: '#F2F2F2',
@@ -47,7 +49,7 @@ const darkColors = {
   ...defaultColors,
   text: '#F2F2F2',
   background: '#333333',
-  linearBackground: 'linear-gradient(to right, #360033, #0b8793)',
+  linearBackground: 'linear-gradient(to right, #360033ab, #0b8793ab)',
 
   surface: '#5D5D5D',
   surfaceLight: '#7C7C7C',

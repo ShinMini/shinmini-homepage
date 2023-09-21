@@ -183,7 +183,7 @@ const ImageResizer: React.FC = () => {
       </div>
 
       <noscript>여권사진 재조합기, 여권 사진 규격 맞추기, 여권 사진 규격 맞추기 사이트, 여권 사진 사이즈</noscript>
-      <div className="flex sm:flex-row gap-6 flex-col justify-center w-fit min-h-80 mx-auto my-2 rounded-xl shadow-lg">
+      <div className="flex sm:flex-row gap-6 flex-col justify-center w-full min-h-80 mx-auto my-2 rounded-xl shadow-lg bg-slate-100 p-2">
         <CardContent className="flex flex-col gap-6  rounded p-6 min-w-[20rem] min-h-[20rem] max-w-[50%] w-full h-full">
           <div className="mb-2 w-full h-full">
             <input

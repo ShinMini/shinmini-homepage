@@ -15,15 +15,14 @@ const Form = styled.form`
   flex-direction: column;
 
   gap: clamp(1rem, 3vh, 4rem);
-  box-sizing: content-box;
   border: ${props => props.theme.colors.warning} 4px solid;
-  background-color: ${({ theme }) => theme.colors.yellow};
+  background-color: ${({ theme }) => theme.colors.white};
   mix-blend-mode: normal;
   border-radius: 10px;
   padding: 1.5rem 1rem;
   padding-bottom: 2rem;
 
-  width: clamp(300px, 95%, 1980px);
+  width: clamp(265px, 95%, 1980px);
   height: clamp(400px, 100%, 600px);
 
   margin: 5rem auto;

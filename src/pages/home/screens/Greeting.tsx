@@ -4,6 +4,10 @@ import Spacing from '@src/themes/Spacing';
 import React from 'react';
 import { styled } from 'styled-components';
 
+import Button from '@src/components/Button';
+import { BsGithub, BsInstagram, BsLinkedin } from 'react-icons/bs';
+import IconButton from '@src/components/IconButton';
+
 const Container = styled.div`
   display: flex;
   margin: 0 auto;
@@ -31,8 +35,8 @@ const Content = styled.div`
   padding: 2rem;
 
   img {
-    width: 80%;
-    margin: auto;
+    width: 70%;
+    margin: auto 5%;
   }
 
   @media (max-width: ${Spacing.mobile}) {
@@ -82,35 +86,24 @@ const Context = styled.div`
     display: flex;
 
     align-items: center;
+
     margin-top: 1rem;
     gap: clamp(1.5rem, 2vw, 2rem);
-    @media (max-width: 600px) {
-      justify-content: space-between;
-    }
 
     font-family: ${props => props.theme.fonts.poppins.medium};
   }
 `;
-
-const TakeALookButton = styled.button<{ borderColor: string }>`
-  font-size: clamp(0.8rem, 1.5vw, 1.2rem);
-  font-weight: 600;
-  padding: clamp(0.5rem, 3vw, 1rem) clamp(1rem, 4vw, 2rem);
-  border-color: ${props => props.borderColor};
-  border-width: 2px;
-  border-radius: 15px;
-
-  color: ${props => props.theme.colors.opposite.text};
-  background-color: ${props => hexToRGBA(props.borderColor, 0.9)};
-  box-shadow: 1px 2px 2px 1px ${props => props.theme.colors.opposite.background};
-  transition: color 0.2s ease-in-out;
-
-  &:hover {
-    cursor: pointer;
-    color: ${props => props.theme.colors.yellow};
+const openToPopup = (link: string) => {
+  try {
+    window.open(link, '_blank');
+    return;
+  } catch (e) {
+    if (e instanceof DOMException) {
+      return alert('팝업이 차단되었습니다. 팝업을 허용해주세요.');
+    }
+    throw e;
   }
-`;
-
+};
 const Greeting: React.FC = () => {
   return (
     <Container id="#Greeting">
@@ -138,21 +131,28 @@ const Greeting: React.FC = () => {
             <p>Now, I live in Seoul (서울), South Korea (한국)</p>
           </article>
           <footer>
-            <TakeALookButton
-              type="button"
-              borderColor="#007CED"
-              onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
-              Contact Me
-            </TakeALookButton>
-            <TakeALookButton
-              type="button"
+            <Button color="#007CED" onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
+              Contact
+            </Button>
+            <Button
               onClick={() => window.open('https://www.notion.so/shinmini/9fa53b45e7c346f5ac271bdf3d6eaeee', '_blank')}
-              borderColor="#F84F4F">
+              color="#F84F4F">
               My Blog
-            </TakeALookButton>
+            </Button>
           </footer>
         </Context>
       </Content>
+      <div className="flex self-end mr-6 gap-1">
+        <IconButton
+          icon={<BsInstagram size={25} color="hotpink" />}
+          onClick={() => openToPopup('https://www.instagram.com/shin__mini')}
+        />
+        <IconButton
+          icon={<BsLinkedin size={25} color="#007CED" />}
+          onClick={() => openToPopup('https://www.linkedin.com/in/shinmini/')}
+        />
+        <IconButton icon={<BsGithub size={25} />} onClick={() => openToPopup('https://www.github.com/shinmini')} />
+      </div>
     </Container>
   );
 };
