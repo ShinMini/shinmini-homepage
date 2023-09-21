@@ -7,9 +7,9 @@ import { app } from './lib/firebase';
 import { getAuth } from 'firebase/auth';
 import Loading from './pages/Loading';
 
-const Todo = lazy(() => import('./pages/Todo'));
-const Lab = lazy(() => import('./pages/lab'));
-const ImageResizer = lazy(() => import('./pages/imageResizer/ImageResizer'));
+const Todo = lazy(() => import('./pages/feats/Todo'));
+const Lab = lazy(() => import('./pages/feats/lab'));
+const ImageResizer = lazy(() => import('./pages/feats/imageResizer/ImageResizer'));
 const Login = lazy(() => import('./pages/login'));
 const Feats = lazy(() => import('./pages/feats/index'));
 
