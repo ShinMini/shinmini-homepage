@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { AiOutlineMenu } from 'react-icons/ai';
 
 import ThemeIcon from './ThemeIcon';
 
@@ -13,16 +12,18 @@ import { useAppDispatch, useAppSelector } from '@hooks/useRedux';
 import { RoutePath, routeName } from '@src/AppRouter';
 import { auth } from '@src/lib/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useOnOutsideClick } from '../../hooks/useOnOutSideClick';
 
 const Container = styled.nav`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: ${props => props.theme.colors.primary};
   box-sizing: border-box;
   padding: 0.5rem 1rem;
   overflow-x: hidden;
   box-shadow: ${props => props.theme.shadows.md};
+  color: white;
+  background-color: ${props => props.theme.colors.primary};
 `;
 
 const LogoBox = styled.div`
@@ -46,7 +47,6 @@ const MenuButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: ${props => props.theme.colors.text};
     background-color: ${props => hexToRGBA(props.theme.colors.background)};
     border-radius: 0.25rem;
     scale: 1;
@@ -55,7 +55,7 @@ const MenuButton = styled.button`
     margin-left: 0.2rem;
     cursor: pointer;
     &:hover {
-      color: ${props => props.theme.colors.opposite.text};
+      color: ${props => props.theme.colors.warning};
       scale: 1.1;
     }
   }
@@ -73,7 +73,7 @@ const NavBox = styled.nav<{ isMenuOpen: boolean }>`
   padding-top: 1rem;
   padding-bottom: 1rem;
   padding-right: 1.2rem;
-  z-index: 100;
+  z-index: 200;
 
   & > p {
     display: none;
@@ -96,6 +96,7 @@ const NavBox = styled.nav<{ isMenuOpen: boolean }>`
     border-radius: 5px;
     right: 0;
     top: 4rem;
+    color: ${props => props.theme.colors.grayDark};
     background-color: ${props => hexToRGBA(props.theme.colors.yellow, 0.9)};
 
     transition: all 0.2s ease-in-out;
@@ -109,7 +110,7 @@ const NavItem = styled(Link)`
   transition: color 0.2s ease-in-out;
   cursor: pointer;
   &:hover {
-    color: ${props => props.theme.colors.opposite.text};
+    color: ${props => props.theme.colors.warning};
     text-decoration: underline;
   }
 `;
@@ -121,21 +122,22 @@ const Logo = styled(Link)`
   text-shadow: ${props => props.theme.shadows.xl};
   transition: color 0.2s ease-in-out;
   &:hover {
-    color: ${props => props.theme.colors.opposite.text};
+    color: ${props => props.theme.colors.warning};
   }
 `;
 
 const LoginButton = styled.button`
   color: ${props => props.theme.colors.text};
+  border: 2px solid ${props => props.theme.colors.warning};
   background-color: ${props => props.theme.colors.background};
   font-size: clamp(0.9rem, 3vw, 1.4rem);
 
-  padding: 0.4rem 0.6rem;
-  border-radius: 0.25rem;
+  padding: 2px 8px;
+  border-radius: 0.5rem;
   font-weight: bold;
   &:hover {
     background-color: ${props => props.theme.colors.opposite.background};
-    color: ${props => props.theme.colors.opposite.text};
+    color: ${props => props.theme.colors.warning};
   }
 `;
 
@@ -144,7 +146,14 @@ const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
   const currentColor = useAppSelector(state => state.theme.type);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const mobileMenuRef = React.useRef(null);
   const navigate = useNavigate();
+
+  const onClickOutside = () => {
+    setIsMenuOpen(false);
+  };
+
+  useOnOutsideClick([mobileMenuRef], onClickOutside);
 
   const handleLogin = () => {
     if (user?.displayName) {
@@ -165,11 +174,7 @@ const Navbar: React.FC = () => {
       </LogoBox>
       <MenuBox>
         <DropDownBox>
-          <MenuButton onClick={() => setIsMenuOpen(prev => !prev)}>
-            <AiOutlineMenu />
-          </MenuButton>
-
-          <NavBox isMenuOpen={isMenuOpen} onClick={() => setIsMenuOpen(prev => !prev)}>
+          <NavBox ref={mobileMenuRef} isMenuOpen={isMenuOpen} onClick={() => setIsMenuOpen(prev => !prev)}>
             <p>menu</p>
             <div className="flex sm:flex-row sm:gap-4 md:gap-6 flex-col gap-2">
               {routeName.map((value, index) => (
