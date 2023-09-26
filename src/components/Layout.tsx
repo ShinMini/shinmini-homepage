@@ -12,6 +12,9 @@ const Wrapper = styled.div`
 
   background: ${props => props.theme.colors.linearBackground};
 
+  scroll-snap-type: y mandatory;
+  // scroll snapping set up
+
   /* background: linear-gradient(to right, #ff7e5f, #feb47b); */
   /* background: linear-gradient(to right, #360033, #0b8793); */
   /* background: linear-gradient(to right, #5a3f37, #2c7744); */

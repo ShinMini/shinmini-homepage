@@ -6,6 +6,6 @@ type LoginData = {
 };
 
 export const login = async (data: LoginData) => {
-  const result = await API.post('user/login', data);
+  const result = await API.post('user/login', data, { timeout: 1500 });
   return result;
 };

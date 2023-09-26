@@ -11,13 +11,14 @@ import { randomEmail, randomName } from '@src/features';
 import { z, ZodError } from 'zod';
 
 const Form = styled.form`
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
 
   gap: clamp(1rem, 3vh, 4rem);
   border: ${props => props.theme.colors.warning} 4px solid;
-  background-color: ${({ theme }) => theme.colors.white};
-  mix-blend-mode: normal;
+  background-color: ${({ theme }) => theme.colors.greenLight};
+  mix-blend-mode: luminosity;
   border-radius: 10px;
   padding: 1.5rem 1rem;
   padding-bottom: 2rem;

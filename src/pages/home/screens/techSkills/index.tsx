@@ -7,6 +7,7 @@ import SkillDescription from './components/TechDescription';
 import TechGraph from './components/TechGraph';
 
 const Container = styled.div`
+  scroll-snap-align: start;
   margin: 2rem auto;
   padding: 2rem 0;
 `;

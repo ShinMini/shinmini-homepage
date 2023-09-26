@@ -9,6 +9,7 @@ import { BsGithub, BsInstagram, BsLinkedin } from 'react-icons/bs';
 import IconButton from '@src/components/IconButton';
 
 const Container = styled.div`
+  scroll-snap-align: start;
   display: flex;
   margin: 0 auto;
   padding: clamp(0.5rem, 2vw, 2rem) 0;

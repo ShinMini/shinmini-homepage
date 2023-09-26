@@ -13,6 +13,8 @@ const ImageResizer = lazy(() => import('./pages/feats/imageResizer/ImageResizer'
 const Login = lazy(() => import('./pages/login'));
 const Feats = lazy(() => import('./pages/feats/index'));
 
+// TODO
+// create the DOCS page
 export const routeName = ['Home', 'Feats'];
 
 function createRoutePath(routeName: Array<string>) {

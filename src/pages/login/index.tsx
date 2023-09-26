@@ -5,26 +5,33 @@ import { AiOutlineGooglePlus, AiOutlineGithub, AiOutlineLinkedin } from 'react-i
 import signInWithGooglePopup from '@features/authentication/sign-in-with-google-popup';
 import { login } from '@src/api/user';
 import { AxiosError } from 'axios';
+import { loginSchema } from '@src/features/type-schema';
 
 const se = {
-  input: `p-2 rounded-lg border-2 border-sky-300 shadow-sm`,
+  input: `p-2 rounded-lg border-2 border-sky-300 shadow-sm text-slate-900`,
 };
 
 // TODO
-// 1. add the login logic
-// 2. add the login with google logic
-// 3. add the login with github logic
-// 4. add the login with linkedin logic
-// 5. create the validation logic with zod
-// 6. add the error handling logic
-// 7. add the loading logic
-// 8. add the redirect logic
-// 9. add the refresh token logic
-// 10. add the remember me logic
+// 1. add the login logic - done
+// 2. add the login with google logic - done
+// 5. create the validation logic with zod - done
+
+// PRIORITY 1
+// 15. create EC2 instance for the backend - most important
 // 11. add the forgot password logic
 // 12. add the find id logic
 // 13. add the find password logic
-// 14. add the sign up logic
+// 14. add the sign up logic - 50% / backend done
+
+// PRIORITY 2
+// 6. add the error handling logic - 50%
+// 7. add the loading logic
+// 9. add the refresh token logic
+
+// PRIORITY 3
+// 3. add the login with github logic
+// 4. add the login with linkedin logic
+// 10. add the remember me logic
 
 const Login: React.FC = () => {
   const [loginInput, setLoginInput] = React.useState('');
@@ -47,9 +54,14 @@ const Login: React.FC = () => {
       password: pwdInput,
     };
 
+    const validatedLoginSchema = loginSchema.safeParse(data);
+    if (!validatedLoginSchema.success) {
+      const err = validatedLoginSchema.error.flatten().fieldErrors;
+      return window.alert(err.email || err.password);
+    }
+
     try {
-      const result = await login(data);
-      // need to add the token to the local storage
+      const result = await login(validatedLoginSchema.data);
       console.log(result);
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -62,6 +74,8 @@ const Login: React.FC = () => {
             }
           }
         }
+      } else {
+        return console.error(err);
       }
     }
   };
@@ -72,12 +86,12 @@ const Login: React.FC = () => {
 
   return (
     <Layout>
-      <h1 className="text-orange-400 text-4xl font-bold mt-6">Hey you, Join on me</h1>
-      <section className="min-w-[360px] max-w-[1660px] w-[60%] mx-auto min-h-[40%] max-h-[860px]">
+      <h1 className="text-green-500 text-2xl font-bold lg:my-6 mt-2 max-w-sm italic lg:text-4xl">Shall we dance?</h1>
+      <section className="min-w-[340px] max-w-[1660px] w-[60%] mx-auto min-h-[40%] max-h-[860px] py-8">
         <form
-          className="bg-slate-100 rounded-lg flex flex-col gap-3 px-6 pt-12 pb-6 mt-[10rem] shadow-lg"
+          className="bg-slate-100 rounded-lg flex flex-col lg:gap-3 px-6 pt-12 pb-6 shadow-lg mix-blend-screen"
           onKeyDown={onKeydownLoginForm}>
-          <label htmlFor="login-id-input" className="text-lg font-bold text-slate-700">
+          <label htmlFor="login-id-input" className="lg:text-lg font-bold text-slate-700 mb-1">
             Don't worry, I'm not a hacker :)
           </label>
           <input
@@ -88,9 +102,8 @@ const Login: React.FC = () => {
             placeholder="email"
             className={se.input}
           />
-
-          <label htmlFor="login-pwd-input" className="text-lg font-bold text-slate-700 mt-8">
-            I'll keep your password secret with hashing
+          <label htmlFor="login-pwd-input" className="lg:text-lg font-bold text-slate-700 lg:mt-8 mt-4 mb-1">
+            Would you?
           </label>
           <input
             value={pwdInput}
@@ -101,16 +114,16 @@ const Login: React.FC = () => {
             className={se.input}
           />
 
-          <div className="flex items-center justify-between mt-8">
-            <div className="flex gap-3">
-              <div className="rounded-full p-2 cursor-pointer" onClick={signInWithGooglePopup}>
-                <AiOutlineGooglePlus size={40} color="hotpink" />
+          <div className="flex items-center justify-between lg:mt-4 mt-2">
+            <div className="flex lg:gap-3 gap-2">
+              <div className="rounded-full cursor-pointer" onClick={signInWithGooglePopup}>
+                <AiOutlineGooglePlus size={30} color="hotpink" />
               </div>
-              <div className="rounded-full p-2 cursor-pointer">
-                <AiOutlineLinkedin size={40} color="#1989fa" />
+              <div className="rounded-full cursor-pointer">
+                <AiOutlineLinkedin size={30} color="#1989fa" />
               </div>
-              <div className="rounded-full p-2 cursor-pointer">
-                <AiOutlineGithub size={40} />
+              <div className="rounded-full cursor-pointer">
+                <AiOutlineGithub size={30} color="black" />
               </div>
             </div>
 
@@ -121,20 +134,23 @@ const Login: React.FC = () => {
               value="Login"
             />
           </div>
-          <div className="under-box flex justify-between px-2 mt-1">
+          <div className="under-box flex justify-between mt-2 text-xs">
             <div className="find-id-password">
-              <a href="#" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
-                Find ID
-              </a>
-              <span className="text-slate-700"> / </span>
-              <a href="#" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
-                Find Password
-              </a>
+              <span className="text-slate-700">Forget your</span>
+              <div>
+                <a href="#" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
+                  ID
+                </a>
+                <span className="text-slate-700">/</span>
+                <a href="#" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
+                  Password?
+                </a>
+              </div>
             </div>
 
-            <div className="sign-up">
-              <span className="text-slate-700">Don't have an account? </span>
-              <a href="#" className="text-blue-600 hover:text-rose-400 transition-colors font-bold">
+            <div className="sign-up flex flex-col text-end">
+              <div className="text-slate-700">Don't have an account?</div>
+              <a href="#" className="text-blue-600 hover:text-rose-400 transition-colors font-bold p-0">
                 Sign Up
               </a>
             </div>
