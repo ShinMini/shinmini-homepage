@@ -135,10 +135,16 @@ const Greeting: React.FC = () => {
             <Button color="#007CED" onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
               Contact
             </Button>
+            <Button color="#4FED7D" onClick={() => window.open('https://dev.shinmini.com', '_blank')}>
+              Blog
+            </Button>
+
             <Button
-              onClick={() => window.open('https://www.notion.so/shinmini/9fa53b45e7c346f5ac271bdf3d6eaeee', '_blank')}
+              onClick={() =>
+                window.open('https://docs.google.com/document/d/1G0RCOXg1JHimk4klJ4GsxbxgjNcggG3Y/edit', '_blank')
+              }
               color="#F84F4F">
-              My Blog
+              CV
             </Button>
           </footer>
         </Context>

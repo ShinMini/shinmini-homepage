@@ -18,7 +18,8 @@
     "tslint": "tsc --noEmit && eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "preview": "vite preview --mode production"
+    "preview": "vite preview --mode production",
+    "multi-compile": "NODE_ENV=production ts-node scripts/multi-compile.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",

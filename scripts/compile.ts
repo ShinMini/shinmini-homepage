@@ -1,8 +1,8 @@
-import { exec as execCb } from 'child_process';
-import Spinnies from 'spinnies';
-import { promisify } from 'util';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const promisify = require('util').promisify;
+const Spinnies = require('spinnies');
+const exec = promisify(require('child_process').exec);
 
-const exec = promisify(execCb);
 const spinnies = new Spinnies();
 
 async function lint(): Promise<boolean> {
