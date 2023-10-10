@@ -16,7 +16,9 @@ dist-ssr
 
 # Deploy
 public
+public/*
 .firebase
+.firebase/*
 dist
 dist-electron
 
