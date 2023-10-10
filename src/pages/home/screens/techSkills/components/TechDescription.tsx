@@ -36,13 +36,14 @@ const Context = styled.div`
   flex-direction: column;
   gap: 0.4rem;
 
+  color: ${props => props.theme.colors.grayDarkest};
   font-size: clamp(0.8rem, 1.5vw, 1rem);
   padding: 1rem;
   border-radius: 5px;
   box-shadow: inset -1px 1px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
 
   background-color: ${props => hexToRGBA(props.theme.colors.opposite.background, 0.3)};
-  mix-blend-mode: difference;
+  mix-blend-mode: none;
 `;
 
 const Border = styled.div`

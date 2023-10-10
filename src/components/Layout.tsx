@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import Navbar from '@src/components/navbar';
 import { ScrollRestoration } from 'react-router-dom';
 import Footer from './Footer';
+import { hexToRGBA } from '@src/features';
 
 const Wrapper = styled.div`
   min-width: 330px;
@@ -20,9 +21,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   min-height: 100vh;
   color: ${props => props.theme.colors.text};
-  transition:
-    background-color 300ms linear,
-    color 300ms linear;
+  background-color: ${props => hexToRGBA(props.theme.colors.background, 0.6)};
 `;
 
 const InnerSpacing = styled.div`

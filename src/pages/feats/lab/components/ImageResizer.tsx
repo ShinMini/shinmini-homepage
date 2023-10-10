@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ChangeEvent, useState } from 'react';
 import { Card, CardContent, Select, MenuItem, InputLabel, FormControl, Button } from '@mui/material';
-import imageDownload from '@src/features/machine-leaning/image-resizer';
-import faceDetector from '@src/features/machine-leaning/face-detector';
+import imageDownload from '@src/pages/feats/passport-resizer/utils/image-resizer';
+import faceDetector from '@src/pages/feats/passport-resizer/utils/face-detector';
 import { Face } from '@tensorflow-models/face-detection';
 enum ProcessStage {
   Uploaded = 'Uploaded',
@@ -13,7 +13,7 @@ enum ProcessStage {
 const FIXED_WIDTH = 413;
 const FIXED_HEIGHT = 531;
 
-const ImageResizer: React.FC = () => {
+const PassportResizer: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [outputFormat, setOutputFormat] = useState<'png' | 'jpeg'>('jpeg');
   const [fileName, setFileName] = useState('클릭해서 이미지 업로드');
@@ -300,4 +300,4 @@ const ImageResizer: React.FC = () => {
   );
 };
 
-export default ImageResizer;
+export default PassportResizer;

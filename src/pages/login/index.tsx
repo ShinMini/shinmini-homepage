@@ -1,11 +1,13 @@
 import { Layout } from '@src/components';
 import React from 'react';
 
-import { AiOutlineGooglePlus, AiOutlineGithub, AiOutlineLinkedin } from 'react-icons/ai';
-import signInWithGooglePopup from '@features/authentication/sign-in-with-google-popup';
+import { AiOutlineGooglePlus, AiOutlineGithub } from 'react-icons/ai';
+import { googleLogin, githubLogin } from '@src/features/authentication/sign-in';
 import { login } from '@src/api/user';
 import { AxiosError } from 'axios';
 import { loginSchema } from '@src/features/validator/type-schema';
+import { SiNestjs, SiPostgresql, SiPrisma } from 'react-icons/si';
+import { Link } from 'react-router-dom';
 
 const se = {
   input: `p-2 rounded-lg border-2 border-sky-300 shadow-sm text-slate-900`,
@@ -86,13 +88,21 @@ const Login: React.FC = () => {
 
   return (
     <Layout>
-      <h1 className="text-green-500 text-2xl font-bold lg:my-6 mt-2 max-w-sm italic lg:text-4xl">Shall we dance?</h1>
-      <section className="min-w-[340px] max-w-[1660px] w-[60%] mx-auto min-h-[40%] max-h-[860px] py-8">
+      <div className="flex flex-wrap gap-3 items-center w-fit">
+        <h1 className="text-lg font-bold pb-2 mr-2 italic lg:text-4xl">Login Page</h1>
+        <SiNestjs size={25} color="#e0234e" />
+        <SiPrisma size={25} color="#1b222d" />
+        <SiPostgresql size={25} color="#336791" />
+        <a href="https://github.com/ShinMini/shinmini-server" className="italic underline text-sky-600 font-semibold">
+          Take a look!
+        </a>
+      </div>
+      <section className="min-w-[340px] max-w-2xl w-[60%] mx-auto min-h-[40%] py-8 mt-[10%]">
         <form
-          className="bg-slate-100 rounded-lg flex flex-col lg:gap-3 px-6 pt-12 pb-6 shadow-lg mix-blend-normal"
+          className="bg-slate-100 rounded-lg flex flex-col lg:gap-1 px-6 pt-12 pb-6 shadow-lg mix-blend-normal"
           onKeyDown={onKeydownLoginForm}>
-          <label htmlFor="login-id-input" className="lg:text-lg font-bold text-slate-700 mb-1">
-            Don't worry, I'm not a hacker :)
+          <label htmlFor="login-id-input" className="lg:text-xl font-bold text-slate-700 mb-2">
+            Don't worry bro, I'm not a hacker :)
           </label>
           <input
             value={loginInput}
@@ -102,8 +112,8 @@ const Login: React.FC = () => {
             placeholder="email"
             className={se.input}
           />
-          <label htmlFor="login-pwd-input" className="lg:text-lg font-bold text-slate-700 lg:mt-8 mt-4 mb-1">
-            Would you?
+          <label htmlFor="login-pwd-input" className="lg:text-xl font-bold text-slate-700 mt-4 mb-2">
+            Password Please 😎
           </label>
           <input
             value={pwdInput}
@@ -114,19 +124,15 @@ const Login: React.FC = () => {
             className={se.input}
           />
 
-          <div className="flex items-center justify-between lg:mt-4 mt-2">
+          <div className="flex items-center justify-between lg:mt-6 mt-4">
             <div className="flex lg:gap-3 gap-2">
-              <div className="rounded-full cursor-pointer" onClick={signInWithGooglePopup}>
+              <div className="rounded-full cursor-pointer" onClick={googleLogin}>
                 <AiOutlineGooglePlus size={30} color="hotpink" />
               </div>
-              <div className="rounded-full cursor-pointer">
-                <AiOutlineLinkedin size={30} color="#1989fa" />
-              </div>
-              <div className="rounded-full cursor-pointer">
+              <div className="rounded-full cursor-pointer" onClick={githubLogin}>
                 <AiOutlineGithub size={30} color="black" />
               </div>
             </div>
-
             <input
               type="button"
               onClick={handleSubmit}
@@ -134,25 +140,26 @@ const Login: React.FC = () => {
               value="Login"
             />
           </div>
-          <div className="under-box flex justify-between mt-2 text-xs">
-            <div className="find-id-password">
+
+          <div className="flex justify-between mt-4 text-xs">
+            <div className="">
               <span className="text-slate-700 pointer-events-none">Forget your</span>
               <div>
-                <a href="forget#id" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
+                <Link to="find-my#id" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
                   ID
-                </a>
+                </Link>
                 <span className="text-slate-700 pointer-events-none">/</span>
-                <a href="forget#pwd" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
+                <Link to="find-my#pwd" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
                   Password?
-                </a>
+                </Link>
               </div>
             </div>
 
             <div className="sign-up flex flex-col text-end">
               <div className="text-slate-700">Don't have an account?</div>
-              <a href="#" className="text-blue-600 hover:text-rose-400 transition-colors font-bold p-0">
+              <Link to="sign-up" className="text-blue-600 hover:text-rose-400 transition-colors font-bold p-0">
                 Sign Up
-              </a>
+              </Link>
             </div>
           </div>
         </form>

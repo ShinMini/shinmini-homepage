@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import dayjs from 'dayjs';
-import replaceQuotes from './replace-quotes';
+import replaceQuotes from '../../../../features/replace-quotes';
 
 export const BLIND_REASON = {
   UNRELATED_REVIEW: 'UNRELATED_REVIEW',

@@ -50,12 +50,12 @@ const jumpAnimation = keyframes`
   }
 `;
 
-const Icon = styled.div<{ jump: boolean; delay: number }>`
+const Icon = styled.div<{ $jump: boolean; $delay: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: clamp(1.5rem, 3vw, 2rem);
-  animation: ${({ jump }) => jump && jumpAnimation} 500ms ease-in-out ${({ delay }) => delay * 70 + 50}ms;
+  animation: ${({ $jump }) => $jump && jumpAnimation} 500ms ease-in-out ${({ $delay }) => $delay * 70 + 50}ms;
 `;
 
 const GraphBox = styled.div`
@@ -103,7 +103,7 @@ const TechGraph = memo(({ field }: { field: TechField }) => {
         <div className="flex flex-col gap-2 mb-2" key={`tech-graph-${index}-${graph.title}`}>
           <Header>
             <Title>
-              <Icon jump={!!entry?.isIntersecting} delay={index}>
+              <Icon $jump={!!entry?.isIntersecting} $delay={index}>
                 {graph.icon}
               </Icon>
               <h3>{graph.title}</h3>

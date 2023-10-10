@@ -46,7 +46,7 @@ const DropDownBox = styled.div`
   gap: min(0.8rem, 2vw);
 `;
 
-const NavBox = styled.nav<{ isMenuOpen: boolean }>`
+const NavBox = styled.nav<{ $isMenuOpen: boolean }>`
   display: flex;
   gap: min(0.8rem, 2vw);
   padding-top: 1rem;
@@ -79,7 +79,7 @@ const NavBox = styled.nav<{ isMenuOpen: boolean }>`
     background-color: ${props => hexToRGBA(props.theme.colors.yellow, 0.9)};
 
     transition: all 0.2s ease-in-out;
-    transform: ${props => (props.isMenuOpen ? 'translateX(10%)' : 'translateX(72%) ')};
+    transform: ${props => (props.$isMenuOpen ? 'translateX(10%)' : 'translateX(72%) ')};
   }
 `;
 
@@ -107,7 +107,6 @@ const Logo = styled(Link)`
 
 const LoginButton = styled.button`
   color: ${props => props.theme.colors.text};
-  /* border: 2px solid ${props => props.theme.colors.warning}; */
   background-color: ${props => props.theme.colors.background};
   font-size: clamp(0.9rem, 3vw, 1.4rem);
 
@@ -153,7 +152,7 @@ const Navbar: React.FC = () => {
       </LogoBox>
       <MenuBox>
         <DropDownBox>
-          <NavBox ref={mobileMenuRef} isMenuOpen={isMenuOpen} onClick={() => setIsMenuOpen(prev => !prev)}>
+          <NavBox ref={mobileMenuRef} $isMenuOpen={isMenuOpen} onClick={() => setIsMenuOpen(prev => !prev)}>
             <p>menu</p>
             <div className="flex sm:flex-row sm:gap-4 md:gap-6 flex-col gap-2">
               {routeName.map((value, index) => (

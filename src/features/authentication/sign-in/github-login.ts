@@ -1,11 +1,11 @@
-import { app, googleAuthProvider } from '@src/lib/firebase';
-import { signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth';
+import { app, githubAuthProvider } from '@src/lib/firebase';
+import { signInWithPopup, getAuth, GithubAuthProvider } from 'firebase/auth';
 
-export default function signInWithGooglePopup() {
+export default function githubLogin() {
   const auth = getAuth(app);
-  signInWithPopup(auth, googleAuthProvider)
+  signInWithPopup(auth, githubAuthProvider)
     .then(result => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const credential = GithubAuthProvider.credentialFromResult(result);
       const token = credential?.accessToken;
       const user = result.user;
 
@@ -15,7 +15,7 @@ export default function signInWithGooglePopup() {
       const errorCode = error.code;
       const errorMessage = error.message;
       const email = error.customData.email;
-      const credential = GoogleAuthProvider.credentialFromError(error);
+      const credential = GithubAuthProvider.credentialFromError(error);
 
       console.error(errorCode, errorMessage, email, credential);
     });

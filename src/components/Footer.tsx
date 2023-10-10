@@ -48,7 +48,7 @@ const Footer = () => {
             </u>
           </p>
           <BsGithub
-            class="ml-2 cursor-pointer"
+            className="ml-2 cursor-pointer"
             size={20}
             onClick={() => openToPopup('https://www.github.com/shinmini')}
           />

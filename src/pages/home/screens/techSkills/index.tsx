@@ -15,17 +15,16 @@ const Container = styled.div`
 const Header = styled.header`
   display: flex;
   align-items: center;
-
   overflow: hidden;
 `;
 
-const HeaderButton = styled.h1<{ isActive: boolean }>`
-  color: ${props => (props.isActive ? props.theme.colors.info : props.theme.colors.text)};
+const HeaderButton = styled.h1<{ $isActive: boolean }>`
+  color: ${props => (props.$isActive ? props.theme.colors.info : props.theme.colors.text)};
 
-  background-color: ${props => hexToRGBA(props.theme.colors.background)};
+  background-color: ${props => hexToRGBA(props.theme.colors.background, 0.6)};
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  box-shadow: ${props => !props.isActive && 'inset'} ${props => props.theme.shadows.sm};
+  box-shadow: ${props => !props.$isActive && 'inset'} ${props => props.theme.shadows.sm};
 
   &:not(:last-child) {
     margin-right: 15px;
@@ -51,9 +50,9 @@ const Content = styled.div`
 
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  /* box-shadow: -2px 2px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)}; */
+  border-top-right-radius: 5px;
 
-  background-color: ${props => hexToRGBA(props.theme.colors.background)};
+  background-color: ${props => hexToRGBA(props.theme.colors.background, 0.6)};
   @media (max-width: ${Spacing.mobile}) {
     grid-template-columns: 1fr;
   }
@@ -80,10 +79,10 @@ const TechSkills = memo(() => {
   return (
     <Container>
       <Header>
-        <HeaderButton isActive={frontEnd === field} onClick={() => setField(frontEnd)}>
+        <HeaderButton $isActive={frontEnd === field} onClick={() => setField(frontEnd)}>
           {frontEnd}
         </HeaderButton>
-        <HeaderButton isActive={backEnd === field} onClick={() => setField(backEnd)}>
+        <HeaderButton $isActive={backEnd === field} onClick={() => setField(backEnd)}>
           {backEnd}
         </HeaderButton>
       </Header>

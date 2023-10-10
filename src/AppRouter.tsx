@@ -1,17 +1,18 @@
 import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { lazy } from 'react';
 
-import Home from './pages/home';
-import Error from './pages/Error';
-import { app } from './lib/firebase';
+import { app } from '@lib/firebase';
 import { getAuth } from 'firebase/auth';
-import Loading from './pages/Loading';
 
-const Todo = lazy(() => import('./pages/feats/Todo'));
-const Lab = lazy(() => import('./pages/feats/lab'));
-const ImageResizer = lazy(() => import('./pages/feats/imageResizer/ImageResizer'));
-const Login = lazy(() => import('./pages/login'));
-const Feats = lazy(() => import('./pages/feats/index'));
+import Error from '@pages/Error';
+import Feats from '@pages/feats/index';
+import Home from '@pages/home';
+import PassportResizer from '@src/pages/feats/passport-resizer/PassportResizer';
+import Lab from '@pages/feats/lab';
+import Loading from '@pages/Loading';
+import Login from '@pages/login';
+import Todo from '@src/pages/feats/todo';
+import FindMy from './pages/login/find-my/FindMy';
+import SignUp from './pages/login/sign-up/SignUp';
 
 export const routeName = ['Home', 'Feats'];
 
@@ -36,8 +37,8 @@ const routeElement: RouteObject[] = [
     element: <Feats />,
   },
   {
-    path: '/feats/image-resizer',
-    element: <ImageResizer />,
+    path: '/feats/passport-resizer',
+    element: <PassportResizer />,
   },
   {
     path: '/feats/todo',
@@ -50,6 +51,14 @@ const routeElement: RouteObject[] = [
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/login/find-my',
+    element: <FindMy />,
+  },
+  {
+    path: '/login/sign-up',
+    element: <SignUp />,
   },
 ];
 

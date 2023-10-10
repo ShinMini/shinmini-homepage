@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics, logEvent } from 'firebase/analytics';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getAuth, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import type { FirebaseOptions } from 'firebase/app';
@@ -15,7 +15,9 @@ export const firebaseConfig: FirebaseOptions = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID || process.env.FIREBASE_APP_ID,
 };
 
-const googleAuthProvider = new GoogleAuthProvider();
+export const googleAuthProvider = new GoogleAuthProvider();
+export const githubAuthProvider = new GithubAuthProvider();
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
@@ -29,4 +31,4 @@ logEvent(analytics, 'page_view', {
   page_path: '/',
 });
 
-export { app, auth, googleAuthProvider, firestore, storage, analytics };
+export { app, auth, firestore, storage, analytics };

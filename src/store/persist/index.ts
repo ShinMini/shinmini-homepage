@@ -5,5 +5,4 @@ export const persistConfig = {
   storage: storage,
   version: 1,
   whitelist: ['theme', 'todo'],
-  debug: true,
 };

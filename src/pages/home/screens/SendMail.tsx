@@ -26,14 +26,16 @@ const Form = styled.form`
 
   gap: clamp(1rem, 3vh, 4rem);
   border: ${props => props.theme.colors.warning} 4px solid;
+  color: #2a2a2a;
   background-color: ${({ theme }) => theme.colors.greenLight};
+
   mix-blend-mode: luminosity;
   border-radius: 10px;
   padding: 1.5rem 1rem;
   padding-bottom: 2rem;
 
-  width: clamp(265px, 100%, 1980px);
-  height: clamp(400px, 100%, 800px);
+  width: clamp(265px, 100%, 2440px);
+  height: clamp(400px, 100%, 1080px);
 
   margin: auto;
 `;
@@ -114,7 +116,7 @@ const SendMail: React.FC = () => {
   return (
     <Container>
       <Form id="contact-me" ref={form}>
-        <h4 className="lg:text-4xl text-2xl font-bold text-slate-700 mb-2">Hi ShinMini</h4>
+        <h4 className="lg:text-4xl sm:text-sm md:text-xl font-bold mb-2">안녕, 현민!</h4>
         <Grid className="flex gap-6 mb-2 box-border px-2">
           {!isAnonymous ? (
             <TextField
@@ -157,7 +159,7 @@ const SendMail: React.FC = () => {
             helperText={formErrors.message}
           />
         </Grid>
-        <Grid className="flex justify-between box-border px-2 text-slate-900">
+        <Grid className="flex justify-between box-border px-2">
           <FormControlLabel
             control={<Checkbox color="secondary" name="anonymous" value="yes" onChange={handleAnonymousChange} />}
             label="Anonymous"

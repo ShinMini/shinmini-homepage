@@ -12,21 +12,20 @@ const FeatureList = styled.ul`
   justify-content: space-between;
   transition: all 0.2s ease-in-out;
   li {
+    font-size: 1.2rem;
     font-weight: 600;
     background-color: ${props => props.theme.colors.background};
     min-width: 30%;
     width: 100%;
-    max-width: 40rem;
     margin-bottom: 1rem;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    border: 2px solid #ccc;
+    border-radius: 10px;
     cursor: pointer;
 
     &:hover {
-      color: ${props => props.theme.colors.primary};
-      border-color: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.warning};
+      border-color: ${props => props.theme.colors.success};
 
       &::before {
         content: '👉';
@@ -42,7 +41,7 @@ const Feats = () => {
   return (
     <Layout>
       <FeatureList>
-        <li onClick={() => navigate('image-resizer')}>Image Resizer</li>
+        <li onClick={() => navigate('passport-resizer')}>Passport resizer</li>
         <li onClick={() => navigate('todo')}>Todo</li>
         <li onClick={() => navigate('lab')}>Lab</li>
       </FeatureList>

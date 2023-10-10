@@ -1,5 +1,4 @@
 import { Layout } from '@src/components';
-import DropDown from './components/DropDown';
 import { useAppSelector, useAppDispatch } from '@src/hooks/useRedux';
 import {
   TodoListState,
@@ -9,13 +8,14 @@ import {
   deleteTodoList,
 } from '@src/store/slices/todoSlice';
 import React from 'react';
-import { validateFormData } from './utils/validateFormData';
+import { validateFormData } from './utils/validate-todo-format';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { hexToRGBA } from '@src/features';
 import { getAuth } from 'firebase/auth';
 import { app } from '@src/lib/firebase';
 import { Button } from '@mui/material';
+import DropDown from './components/DropDown';
 
 const Todo: React.FC = () => {
   const titleInput = React.useRef<HTMLInputElement>(null);

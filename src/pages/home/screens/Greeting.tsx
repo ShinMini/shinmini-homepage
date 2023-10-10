@@ -123,22 +123,26 @@ const Greeting: React.FC = () => {
             </p>
             <p>Now, I live in Seoul (서울), South Korea (한국)</p>
           </article>
-          <footer>
-            <Button color="#007CED" onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
+          <div className="flex w-full justify-center items-center gap-2 mt-4 max-w-lg">
+            <Button className="w-1/3" color="#007CED" onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
               Contact
             </Button>
-            <Button color="#4FED7D" onClick={() => window.open('https://dev-shinmini.web.app/', '_blank')}>
+            <Button
+              className="w-1/3"
+              color="#4FED7D"
+              onClick={() => window.open('https://dev-shinmini.web.app/', '_blank')}>
               Blog
             </Button>
 
             <Button
+              className="w-1/3"
               onClick={() =>
                 window.open('https://docs.google.com/document/d/1G0RCOXg1JHimk4klJ4GsxbxgjNcggG3Y/edit', '_blank')
               }
               color="#F84F4F">
               CV
             </Button>
-          </footer>
+          </div>
         </Context>
       </Content>
       <div className="flex self-end mr-6 gap-1">

@@ -4,14 +4,14 @@ const defaultColors = {
 
   button: '#FF7C7C',
 
-  text: '#4F4F4F',
+  text: '#2F2F2F',
   background: '#FCFCFC',
 
   /* background: linear-gradient(to right, #ff7e5f, #feb47b); */
   /* background: linear-gradient(to right, #360033, #0b8793); */
   /* background: linear-gradient(to right, #5a3f37, #2c7744); */
   /* background: linear-gradient(to right, #e6dada, #274046); */
-  linearBackground: 'linear-gradient(to right, #1a2980, #26d0ce)',
+  linearBackground: 'linear-gradient(to right, #1a29A0, #26d0ce)',
 
   surface: '#D6D6D6',
   surfaceLight: '#F2F2F2',
@@ -53,7 +53,7 @@ const darkColors = {
   ...defaultColors,
   text: '#F2F2F2',
   background: '#333333',
-  linearBackground: 'linear-gradient(to right, #360033DE, #2c7744)',
+  linearBackground: 'linear-gradient(to right, #3600339E, #2c77D4)',
 
   surface: '#5D5D5D',
   surfaceLight: '#7C7C7C',
