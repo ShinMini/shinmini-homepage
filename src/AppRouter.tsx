@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { lazy } from 'react';
 
 import Home from './pages/home';
@@ -13,8 +13,6 @@ const ImageResizer = lazy(() => import('./pages/feats/imageResizer/ImageResizer'
 const Login = lazy(() => import('./pages/login'));
 const Feats = lazy(() => import('./pages/feats/index'));
 
-// TODO
-// create the DOCS page
 export const routeName = ['Home', 'Feats'];
 
 function createRoutePath(routeName: Array<string>) {
@@ -28,17 +26,14 @@ function createRoutePath(routeName: Array<string>) {
 }
 
 export const RoutePath = new Map<string, string>(createRoutePath(routeName));
-
-const router = createBrowserRouter([
+const routeElement: RouteObject[] = [
   {
     path: RoutePath.get('Home'),
     element: <Home />,
-    errorElement: <Error />,
   },
   {
     path: RoutePath.get('Feats'),
     element: <Feats />,
-    errorElement: <Error />,
   },
   {
     path: '/feats/image-resizer',
@@ -56,7 +51,17 @@ const router = createBrowserRouter([
     path: '/login',
     element: <Login />,
   },
-]);
+];
+
+const routes = routeElement.reduce<RouteObject[]>((acc, route) => {
+  route.errorElement = <Error />;
+  route.hasErrorBoundary = true;
+
+  acc.push(route);
+  return acc;
+}, []);
+
+const router = createBrowserRouter(routes);
 
 export default function AppRouter() {
   getAuth(app);
