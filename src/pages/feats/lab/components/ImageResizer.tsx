@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ChangeEvent, useState } from 'react';
 import { Card, CardContent, Select, MenuItem, InputLabel, FormControl, Button } from '@mui/material';
-import imageDownload from '@src/features/image-resizer';
-import faceDetector from '@src/features/face-detector';
+import imageDownload from '@src/features/machine-leaning/image-resizer';
+import faceDetector from '@src/features/machine-leaning/face-detector';
 import { Face } from '@tensorflow-models/face-detection';
 enum ProcessStage {
   Uploaded = 'Uploaded',

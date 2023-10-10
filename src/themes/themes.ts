@@ -7,7 +7,11 @@ const defaultColors = {
   text: '#4F4F4F',
   background: '#FCFCFC',
 
-  linearBackground: 'linear-gradient(to right, #1a2980ca, #26d0ceba)',
+  /* background: linear-gradient(to right, #ff7e5f, #feb47b); */
+  /* background: linear-gradient(to right, #360033, #0b8793); */
+  /* background: linear-gradient(to right, #5a3f37, #2c7744); */
+  /* background: linear-gradient(to right, #e6dada, #274046); */
+  linearBackground: 'linear-gradient(to right, #1a2980, #26d0ce)',
 
   surface: '#D6D6D6',
   surfaceLight: '#F2F2F2',
@@ -49,13 +53,14 @@ const darkColors = {
   ...defaultColors,
   text: '#F2F2F2',
   background: '#333333',
-  linearBackground: 'linear-gradient(to right, #360033ab, #0b8793ab)',
+  linearBackground: 'linear-gradient(to right, #360033DE, #2c7744)',
 
   surface: '#5D5D5D',
   surfaceLight: '#7C7C7C',
   surfaceDark: '#212121',
 
   gray: '#949494',
+  grayDarkest: '#1A1A1A',
 
   green: '#2C8451',
   greenLight: '#58AB6F',

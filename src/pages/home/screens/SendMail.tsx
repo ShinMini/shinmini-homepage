@@ -10,8 +10,17 @@ import { randomEmail, randomName } from '@src/features';
 
 import { z, ZodError } from 'zod';
 
-const Form = styled.form`
+const Container = styled.div`
   scroll-snap-align: start;
+  display: flex;
+  padding: clamp(0.5rem, 2vw, 2rem) 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+`;
+
+const Form = styled.form`
   display: flex;
   flex-direction: column;
 
@@ -23,10 +32,10 @@ const Form = styled.form`
   padding: 1.5rem 1rem;
   padding-bottom: 2rem;
 
-  width: clamp(265px, 95%, 1980px);
-  height: clamp(400px, 100%, 600px);
+  width: clamp(265px, 100%, 1980px);
+  height: clamp(400px, 100%, 800px);
 
-  margin: 5rem auto;
+  margin: auto;
 `;
 
 // Defining schema for validation
@@ -103,60 +112,62 @@ const SendMail: React.FC = () => {
   };
 
   return (
-    <Form id="contact-me" ref={form}>
-      <h4 className="lg:text-4xl text-2xl font-bold text-slate-700 mb-2">Hi ShinMini</h4>
-      <Grid className="flex gap-6 mb-2 box-border px-2">
-        {!isAnonymous ? (
+    <Container>
+      <Form id="contact-me" ref={form}>
+        <h4 className="lg:text-4xl text-2xl font-bold text-slate-700 mb-2">Hi ShinMini</h4>
+        <Grid className="flex gap-6 mb-2 box-border px-2">
+          {!isAnonymous ? (
+            <TextField
+              ref={nameRef}
+              fullWidth
+              required
+              name="user_name"
+              label="Name"
+              autoComplete="name"
+              variant="standard"
+              error={Boolean(formErrors.user_name)}
+              helperText={formErrors.user_name}
+            />
+          ) : (
+            <TextField fullWidth name="user_name" autoComplete="name" value={anonymousUser.user_name} disabled />
+          )}
+          {!isAnonymous ? (
+            <TextField
+              ref={emailRef}
+              fullWidth
+              required
+              name="user_email"
+              label="Email"
+              variant="standard"
+              error={Boolean(formErrors.user_email)}
+              helperText={formErrors.user_email}
+            />
+          ) : (
+            <TextField fullWidth name="user_email" value={anonymousUser.user_email} disabled />
+          )}
+        </Grid>
+        <Grid>
           <TextField
-            ref={nameRef}
+            name="message"
+            label="Message"
+            multiline
+            minRows={8}
             fullWidth
-            required
-            name="user_name"
-            label="Name"
-            autoComplete="name"
-            variant="standard"
-            error={Boolean(formErrors.user_name)}
-            helperText={formErrors.user_name}
+            error={Boolean(formErrors.message)}
+            helperText={formErrors.message}
           />
-        ) : (
-          <TextField fullWidth name="user_name" autoComplete="name" value={anonymousUser.user_name} disabled />
-        )}
-        {!isAnonymous ? (
-          <TextField
-            ref={emailRef}
-            fullWidth
-            required
-            name="user_email"
-            label="Email"
-            variant="standard"
-            error={Boolean(formErrors.user_email)}
-            helperText={formErrors.user_email}
+        </Grid>
+        <Grid className="flex justify-between box-border px-2 text-slate-900">
+          <FormControlLabel
+            control={<Checkbox color="secondary" name="anonymous" value="yes" onChange={handleAnonymousChange} />}
+            label="Anonymous"
           />
-        ) : (
-          <TextField fullWidth name="user_email" value={anonymousUser.user_email} disabled />
-        )}
-      </Grid>
-      <Grid>
-        <TextField
-          name="message"
-          label="Message"
-          multiline
-          minRows={8}
-          fullWidth
-          error={Boolean(formErrors.message)}
-          helperText={formErrors.message}
-        />
-      </Grid>
-      <Grid className="flex justify-between box-border px-2 text-slate-900">
-        <FormControlLabel
-          control={<Checkbox color="secondary" name="anonymous" value="yes" onChange={handleAnonymousChange} />}
-          label="Anonymous"
-        />
-        <Button type="submit" variant="contained" color="success" onClick={sendEmail}>
-          Send
-        </Button>
-      </Grid>
-    </Form>
+          <Button type="submit" variant="contained" color="success" onClick={sendEmail}>
+            Send
+          </Button>
+        </Grid>
+      </Form>
+    </Container>
   );
 };
 

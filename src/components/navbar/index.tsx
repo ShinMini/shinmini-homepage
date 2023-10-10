@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/useRedux';
 import { RoutePath, routeName } from '@src/AppRouter';
 import { auth } from '@src/lib/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useOnOutsideClick } from '../../hooks/useOnOutSideClick';
+import { useOnOutsideClick } from '@hooks/useOnOutSideClick';
 
 const Container = styled.nav`
   width: 100%;
@@ -23,7 +23,7 @@ const Container = styled.nav`
   overflow-x: hidden;
   box-shadow: ${props => props.theme.shadows.md};
   color: white;
-  background-color: ${props => props.theme.colors.primary};
+  background-color: ${props => props.theme.colors.grayDarkest};
 `;
 
 const LogoBox = styled.div`
@@ -37,27 +37,6 @@ const MenuBox = styled.ul`
   align-items: center;
   @media (max-width: ${Spacing.mobile}) {
     flex-direction: row-reverse;
-  }
-`;
-
-const MenuButton = styled.button`
-  display: none;
-
-  @media (max-width: ${Spacing.mobile}) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${props => hexToRGBA(props.theme.colors.background)};
-    border-radius: 0.25rem;
-    scale: 1;
-    transition: scale 0.2s ease-in-out;
-    padding: 0.6rem;
-    margin-left: 0.2rem;
-    cursor: pointer;
-    &:hover {
-      color: ${props => props.theme.colors.warning};
-      scale: 1.1;
-    }
   }
 `;
 
@@ -128,12 +107,12 @@ const Logo = styled(Link)`
 
 const LoginButton = styled.button`
   color: ${props => props.theme.colors.text};
-  border: 2px solid ${props => props.theme.colors.warning};
+  /* border: 2px solid ${props => props.theme.colors.warning}; */
   background-color: ${props => props.theme.colors.background};
   font-size: clamp(0.9rem, 3vw, 1.4rem);
 
-  padding: 2px 8px;
-  border-radius: 0.5rem;
+  padding: 4px 12px;
+  border-radius: 0.25rem;
   font-weight: bold;
   &:hover {
     background-color: ${props => props.theme.colors.opposite.background};
@@ -185,7 +164,6 @@ const Navbar: React.FC = () => {
             </div>
           </NavBox>
         </DropDownBox>
-
         <LoginButton onClick={handleLogin}>{user?.displayName || 'Log In'}</LoginButton>
       </MenuBox>
     </Container>

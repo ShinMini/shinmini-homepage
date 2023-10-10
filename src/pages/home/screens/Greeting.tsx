@@ -1,12 +1,15 @@
-import { Images } from '@src/assets';
-import { hexToRGBA } from '@src/features';
-import Spacing from '@src/themes/Spacing';
 import React from 'react';
 import { styled } from 'styled-components';
 
-import Button from '@src/components/Button';
 import { BsGithub, BsInstagram, BsLinkedin } from 'react-icons/bs';
-import IconButton from '@src/components/IconButton';
+
+import { Images } from '@src/assets';
+import { hexToRGBA } from '@src/features';
+import Spacing from '@src/themes/Spacing';
+
+import Button from '@components/Button';
+import IconButton from '@components/IconButton';
+import { openToPopup } from '@features/open-to-popup';
 
 const Container = styled.div`
   scroll-snap-align: start;
@@ -94,17 +97,6 @@ const Context = styled.div`
     font-family: ${props => props.theme.fonts.poppins.medium};
   }
 `;
-const openToPopup = (link: string) => {
-  try {
-    window.open(link, '_blank');
-    return;
-  } catch (e) {
-    if (e instanceof DOMException) {
-      return alert('팝업이 차단되었습니다. 팝업을 허용해주세요.');
-    }
-    throw e;
-  }
-};
 const Greeting: React.FC = () => {
   return (
     <Container id="#Greeting">
@@ -135,7 +127,7 @@ const Greeting: React.FC = () => {
             <Button color="#007CED" onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
               Contact
             </Button>
-            <Button color="#4FED7D" onClick={() => window.open('https://dev.shinmini.com', '_blank')}>
+            <Button color="#4FED7D" onClick={() => window.open('https://dev-shinmini.web.app/', '_blank')}>
               Blog
             </Button>
 
