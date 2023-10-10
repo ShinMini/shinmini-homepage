@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 
 import Navbar from '@src/components/navbar';
 import { ScrollRestoration } from 'react-router-dom';
+import Footer from './Footer';
 
 const Wrapper = styled.div`
   min-width: 330px;
@@ -13,12 +14,7 @@ const Wrapper = styled.div`
   background: ${props => props.theme.colors.linearBackground};
 
   scroll-snap-type: y mandatory;
-  // scroll snapping set up
-
-  /* background: linear-gradient(to right, #ff7e5f, #feb47b); */
-  /* background: linear-gradient(to right, #360033, #0b8793); */
-  /* background: linear-gradient(to right, #5a3f37, #2c7744); */
-  /* background: linear-gradient(to right, #e6dada, #274046); */
+  scroll-behavior: smooth;
 `;
 
 const Container = styled.div`
@@ -47,6 +43,7 @@ const Layout = ({ children }: Props) => {
         <InnerSpacing>{children}</InnerSpacing>
       </Container>
       <ScrollRestoration />
+      <Footer />
     </Wrapper>
   );
 };

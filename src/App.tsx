@@ -5,9 +5,7 @@ import { app } from './lib/firebase';
 
 function App() {
   const auth = getAuth(app);
-  const [user] = useAuthState(auth);
-
-  user?.displayName && console.log(`Hello ${user?.displayName}!`);
+  useAuthState(auth);
 
   return <AppRouter />;
 }

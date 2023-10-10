@@ -5,7 +5,7 @@ import { AiOutlineGooglePlus, AiOutlineGithub, AiOutlineLinkedin } from 'react-i
 import signInWithGooglePopup from '@features/authentication/sign-in-with-google-popup';
 import { login } from '@src/api/user';
 import { AxiosError } from 'axios';
-import { loginSchema } from '@src/features/type-schema';
+import { loginSchema } from '@src/features/validator/type-schema';
 
 const se = {
   input: `p-2 rounded-lg border-2 border-sky-300 shadow-sm text-slate-900`,
@@ -89,7 +89,7 @@ const Login: React.FC = () => {
       <h1 className="text-green-500 text-2xl font-bold lg:my-6 mt-2 max-w-sm italic lg:text-4xl">Shall we dance?</h1>
       <section className="min-w-[340px] max-w-[1660px] w-[60%] mx-auto min-h-[40%] max-h-[860px] py-8">
         <form
-          className="bg-slate-100 rounded-lg flex flex-col lg:gap-3 px-6 pt-12 pb-6 shadow-lg mix-blend-screen"
+          className="bg-slate-100 rounded-lg flex flex-col lg:gap-3 px-6 pt-12 pb-6 shadow-lg mix-blend-normal"
           onKeyDown={onKeydownLoginForm}>
           <label htmlFor="login-id-input" className="lg:text-lg font-bold text-slate-700 mb-1">
             Don't worry, I'm not a hacker :)
@@ -136,13 +136,13 @@ const Login: React.FC = () => {
           </div>
           <div className="under-box flex justify-between mt-2 text-xs">
             <div className="find-id-password">
-              <span className="text-slate-700">Forget your</span>
+              <span className="text-slate-700 pointer-events-none">Forget your</span>
               <div>
-                <a href="#" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
+                <a href="forget#id" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
                   ID
                 </a>
-                <span className="text-slate-700">/</span>
-                <a href="#" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
+                <span className="text-slate-700 pointer-events-none">/</span>
+                <a href="forget#pwd" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
                   Password?
                 </a>
               </div>
