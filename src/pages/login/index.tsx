@@ -5,7 +5,7 @@ import { AiOutlineGooglePlus, AiOutlineGithub } from 'react-icons/ai';
 import { googleLogin, githubLogin } from '@src/features/authentication/sign-in';
 import { login } from '@src/api/user';
 import { AxiosError } from 'axios';
-import { loginSchema } from '@src/features/validator/type-schema';
+import { loginSchema } from '@src/api/user/validator/type-schema';
 import { SiNestjs, SiPostgresql, SiPrisma } from 'react-icons/si';
 import { Link } from 'react-router-dom';
 
