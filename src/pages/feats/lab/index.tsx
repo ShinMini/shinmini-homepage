@@ -3,8 +3,8 @@ import React from 'react';
 import Vector from './components/Vector';
 import MarkDownConvertor from './components/MarkDownConvertor';
 import CustomStyledComponent from './components/CustomStyledComponent';
-import RawCodes from '@src/components/RawCodes';
 import QueryGenerator from './components/QueryGenerator';
+import RawCodes from '@pages/feats/lab/components/RawCodes';
 
 const se = {
   title: `text-3xl font-extrabold text-slate-800 bg-pink-200 rounded-xl p-5 my-10`,
