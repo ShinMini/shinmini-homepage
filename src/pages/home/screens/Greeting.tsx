@@ -8,8 +8,7 @@ import { hexToRGBA } from '@src/features';
 import Spacing from '@src/themes/Spacing';
 
 import Button from '@components/Button';
-import IconButton from '@components/IconButton';
-import { openToPopup } from '@features/open-to-popup';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   scroll-snap-align: start;
@@ -46,6 +45,23 @@ const Content = styled.div`
   @media (max-width: ${Spacing.mobile}) {
     grid-template-columns: 1fr;
   }
+`;
+
+const IconButton = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 3rem;
+
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem;
+
+  backdrop-filter: blur(10px);
+
+  cursor: pointer;
 `;
 
 const Context = styled.div`
@@ -97,6 +113,7 @@ const Context = styled.div`
     font-family: ${props => props.theme.fonts.poppins.medium};
   }
 `;
+
 const Greeting: React.FC = () => {
   return (
     <Container id="#Greeting">
@@ -146,15 +163,15 @@ const Greeting: React.FC = () => {
         </Context>
       </Content>
       <div className="flex self-end mr-6 gap-1">
-        <IconButton
-          icon={<BsInstagram size={25} color="hotpink" />}
-          onClick={() => openToPopup('https://www.instagram.com/shin__mini')}
-        />
-        <IconButton
-          icon={<BsLinkedin size={25} color="#007CED" />}
-          onClick={() => openToPopup('https://www.linkedin.com/in/shinmini/')}
-        />
-        <IconButton icon={<BsGithub size={25} />} onClick={() => openToPopup('https://www.github.com/shinmini')} />
+        <IconButton to="https://www.instagram.com/shin__mini" target="_blank" rel="noopener noreferrer">
+          <BsInstagram size={25} color="hotpink" />
+        </IconButton>
+        <IconButton to="https://www.linkedin.com/in/shinmini/" target="_blank" rel="noopener noreferrer">
+          <BsLinkedin size={25} color="#007CED" />
+        </IconButton>
+        <IconButton to="https://www.github.com/shinmini" target="_blank" rel="noopener noreferrer">
+          <BsGithub size={25} />
+        </IconButton>
       </div>
     </Container>
   );

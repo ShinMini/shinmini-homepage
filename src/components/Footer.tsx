@@ -2,10 +2,10 @@ import { BsGithub } from 'react-icons/bs';
 import styled from 'styled-components';
 import { useAppDispatch } from '@hooks/useRedux';
 
-import { openToPopup } from '@src/features/open-to-popup';
 import { copyText } from '@src/features/copy-text';
 import ToastEvent from '@src/ToastEvent';
 import { getToastAction } from '@src/store/slices/toastSlice';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100%;
@@ -47,11 +47,13 @@ const Footer = () => {
               gusals121234@gmail.com
             </u>
           </p>
-          <BsGithub
+          <Link
+            to="https://www.github.com/shinmini"
             className="ml-2 cursor-pointer"
-            size={20}
-            onClick={() => openToPopup('https://www.github.com/shinmini')}
-          />
+            rel="noopener noreferrer"
+            target="_blank">
+            <BsGithub className="ml-2 cursor-pointer" size={20} />
+          </Link>
         </div>
       </Content>
       <ToastEvent />
