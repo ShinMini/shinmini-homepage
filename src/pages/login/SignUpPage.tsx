@@ -13,11 +13,10 @@ import Container from '@mui/material/Container';
 import { HiLockClosed } from 'react-icons/hi';
 
 import { Layout } from '@src/components';
-import { StyledComponentProps } from '@mui/material';
 import { registerSchema } from '@src/api/user/validator/type-schema';
 import { z } from 'zod';
 
-function Copyright(props: StyledComponentProps) {
+function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 5 }}>
       {'Copyright © '}
@@ -58,7 +57,7 @@ export default function SignUp() {
       return;
     }
 
-    console.log('result', result.data);
+    console.log('result', { ...result.data, allowExtraEmails });
 
     // currently not working only works with SNS login
     alert('currently not working please sign in via SNS account');

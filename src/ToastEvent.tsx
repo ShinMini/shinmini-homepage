@@ -1,5 +1,5 @@
 import { useAppSelector } from './hooks/useRedux';
-import Loading from './pages/Loading';
+import Loading from './pages/LoadingPage';
 
 const se = {
   container: `w-full h-full fixed top-0 left-0 flex justify-center items-center bg-black bg-opacity-30 z-50`,

@@ -3,16 +3,24 @@ import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-d
 import { app } from '@lib/firebase';
 import { getAuth } from 'firebase/auth';
 
-import Error from '@pages/Error';
-import Feats from '@pages/feats/index';
-import Home from '@pages/home';
-import PassportResizer from '@src/pages/feats/passport-resizer/PassportResizer';
-import Lab from '@pages/feats/lab';
-import Loading from '@pages/Loading';
-import Login from '@pages/login';
-import Todo from '@src/pages/feats/todo';
-import FindMy from './pages/login/find-my/FindMy';
-import SignUp from './pages/login/sign-up/SignUp';
+/** Home */
+import HomePage from '@src/pages/home/HomePage';
+/** Memo */
+import MemoPage from '@src/pages/memo/MemoPage';
+/** Feature List */
+import FeatureListPage from '@src/pages/featureList/featureListPage';
+import TestingPage from '@src/pages/featureList/lab/TestingPage';
+import PassportResizer from '@src/pages/featureList/passport-resizer/PassportResizer';
+
+/** Login */
+import LoginPage from '@src/pages/login/LoginPage';
+/** Sign up */
+import SignUpPage from '@pages/login/SignUpPage';
+/** Find my id & pwd */
+import FindMyPage from '@pages/login/FindMyPage';
+
+import LoadingPage from '@src/pages/LoadingPage';
+import ErrorPage from '@src/pages/ErrorPage';
 
 export const routeName = ['Home', 'Feats'];
 
@@ -30,40 +38,40 @@ export const RoutePath = new Map<string, string>(createRoutePath(routeName));
 const routeElement: RouteObject[] = [
   {
     path: RoutePath.get('Home'),
-    element: <Home />,
+    element: <HomePage />,
   },
   {
     path: RoutePath.get('Feats'),
-    element: <Feats />,
+    element: <FeatureListPage />,
   },
   {
     path: '/feats/passport-resizer',
     element: <PassportResizer />,
   },
   {
-    path: '/feats/todo',
-    element: <Todo />,
+    path: '/feats/memo',
+    element: <MemoPage />,
   },
   {
-    path: '/feats/lab',
-    element: <Lab />,
+    path: '/feats/testing',
+    element: <TestingPage />,
   },
   {
     path: '/login',
-    element: <Login />,
+    element: <LoginPage />,
   },
   {
-    path: '/login/find-my',
-    element: <FindMy />,
+    path: '/find-my',
+    element: <FindMyPage />,
   },
   {
-    path: '/login/sign-up',
-    element: <SignUp />,
+    path: '/sign-up',
+    element: <SignUpPage />,
   },
 ];
 
 const routes = routeElement.reduce<RouteObject[]>((acc, route) => {
-  route.errorElement = <Error />;
+  route.errorElement = <ErrorPage />;
   route.hasErrorBoundary = true;
 
   acc.push(route);
@@ -75,5 +83,5 @@ const router = createBrowserRouter(routes);
 export default function AppRouter() {
   getAuth(app);
 
-  return <RouterProvider router={router} fallbackElement={<Loading />} />;
+  return <RouterProvider router={router} fallbackElement={<LoadingPage />} />;
 }

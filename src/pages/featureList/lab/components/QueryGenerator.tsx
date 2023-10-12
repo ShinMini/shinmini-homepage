@@ -1,5 +1,5 @@
 import React from 'react';
-import ReviewGenerator from '@src/pages/feats/lab/utils/query-generator';
+import ReviewGenerator from '@src/pages/featureList/lab/utils/query-generator';
 
 import { BiCopy } from 'react-icons/bi';
 

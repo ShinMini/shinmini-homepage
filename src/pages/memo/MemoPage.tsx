@@ -1,23 +1,41 @@
-import { Layout } from '@src/components';
-import { useAppSelector, useAppDispatch } from '@src/hooks/useRedux';
-import {
-  TodoListState,
-  pushTodoList,
-  TodoListProps,
-  updateTodoList,
-  deleteTodoList,
-} from '@src/store/slices/todoSlice';
-import React from 'react';
-import { validateFormData } from './utils/validate-todo-format';
+import React, { memo } from 'react';
 import dayjs from 'dayjs';
-import styled from 'styled-components';
-import { hexToRGBA } from '@src/features';
-import { getAuth } from 'firebase/auth';
-import { app } from '@src/lib/firebase';
+
+import styled, { keyframes } from 'styled-components';
 import { Button } from '@mui/material';
+
+import { useAppSelector, useAppDispatch } from '@hooks/useRedux';
+
+import { getAuth } from 'firebase/auth';
+import { app } from '@lib/firebase';
+
+import { Layout } from '@src/components';
+
+import { TodoListState, pushTodoList, TodoListProps, updateTodoList, deleteTodoList } from '@store/slices/todoSlice';
+
+import { validateFormData } from './utils/validate-todo-format';
 import DropDown from './components/DropDown';
 
-const Todo: React.FC = () => {
+const slideDown = keyframes({
+  '0%': {
+    transform: 'translateY(-100%)',
+  },
+  '100%': {
+    transform: 'translateY(0)',
+    opacity: 1,
+  },
+});
+
+const AnimationWrapper = styled.div`
+  width: 100%;
+  &:first-child {
+    opacity: 0;
+    animation: ${slideDown} 600ms ease-in-out 300ms forwards;
+  }
+  animation: ${slideDown} 600ms ease-in-out forwards;
+`;
+
+const MemoPage: React.FC = () => {
   const titleInput = React.useRef<HTMLInputElement>(null);
   const detailTextArea = React.useRef<HTMLTextAreaElement>(null);
 
@@ -72,42 +90,38 @@ const Todo: React.FC = () => {
 
   return (
     <Layout>
+      <h1 className="font-bold text-xl mb-1">Memo</h1>
       <S.Container>
-        <S.Header>
-          <h1 className="font-bold">어우 하기싫어</h1>
-        </S.Header>
         <S.TodoListContainer>
           {currentTodoList &&
-            currentTodoList.map(({ date, title, detail }, index) => {
+            currentTodoList.toReversed().map(({ date, title, detail }, index) => {
               const key = `currentTodoList-${title}${index}`;
               const createdDate = dayjs(date);
 
               return (
-                <DropDown
-                  key={key}
-                  editTodo={() => editTodo(date)}
-                  deleteTodo={() => deleteTodo(date)}
-                  title={title}
-                  createdDate={createdDate}
-                  detail={detail}
-                />
+                <AnimationWrapper key={key}>
+                  <DropDown
+                    editTodo={() => editTodo(date)}
+                    deleteTodo={() => deleteTodo(date)}
+                    title={title}
+                    createdDate={createdDate}
+                    detail={detail}
+                  />
+                </AnimationWrapper>
               );
             })}
         </S.TodoListContainer>
-        <div className="flex flex-col mt-2 box-border p-2">
+        <div className="flex flex-col mt-2 box-border p-2 bg-slate-200 rounded">
           <div className="flex gap-4">
-            <input ref={titleInput} placeholder="Todo Title" className="w-full rounded px-2 bg-blue-100" />
-            <Button
-              variant="contained"
-              onClick={pushTodo}
-              sx={{ paddingRight: 4, paddingLeft: 4, fontWeight: 700, fontSize: 20 }}>
-              Add
+            <input ref={titleInput} placeholder="Title" className="text-lg w-full rounded px-2 bg-slate-100" />
+            <Button variant="contained" onClick={pushTodo}>
+              save
             </Button>
           </div>
           <textarea
             ref={detailTextArea}
-            className="p-2 rounded w-full min-h-[6rem] text-slate-900 mt-2 backdrop-blur-md bg-yellow-100"
-            placeholder="details..."
+            className="p-2 text-lg rounded w-full min-h-[6rem] text-slate-100 mt-2 backdrop-blur-md bg-slate-900"
+            placeholder="Detail(Optional)"
           />
         </div>
       </S.Container>
@@ -115,18 +129,16 @@ const Todo: React.FC = () => {
   );
 };
 
-export default Todo;
+export default memo(MemoPage);
 
 function createStyled() {
   const Container = styled.div`
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 
     color: ${props => props.theme.colors.text};
-    background-color: ${props => hexToRGBA(props.theme.colors.background, 0.5)};
     border-radius: 0.4rem;
-
-    backdrop-filter: blur(5px);
   `;
 
   const Header = styled.div`
@@ -140,49 +152,25 @@ function createStyled() {
   `;
 
   const TodoListContainer = styled.div`
+    box-shadow: inset -1px 2px 4px 2px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    height: max(35rem, 60vh);
-    box-sizing: border-box;
-    padding: 0.7rem 0;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+    height: 60vh;
+    &:first-child {
+      padding-top: 0.7rem;
+    }
     border-radius: 0.2rem;
     overflow-y: scroll;
-    box-shadow: inset -2px 4px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
-  `;
-
-  const TodoList = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    height: max(35rem, 60vh);
-    box-sizing: border-box;
-    padding: 0.7rem 0;
-    border-radius: 0.2rem;
-    overflow-y: scroll;
-    box-shadow: inset -2px 4px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
-  `;
-
-  const TodoItem = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.7rem 0;
-    border-radius: 0.2rem;
-    overflow-y: scroll;
-    box-shadow: inset -2px 4px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
   `;
 
   return {
     Container,
     Header,
     TodoListContainer,
-    TodoList,
-    TodoItem,
   };
 }

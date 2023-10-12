@@ -1,5 +1,4 @@
 import { Button } from '@mui/material';
-import { hexToRGBA } from '@src/features';
 import Spacing from '@src/themes/Spacing';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -11,80 +10,49 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  color: ${props => props.theme.colors.text};
-  background-color: ${props => props.theme.colors.primary};
-  width: 95%;
-  gap: 0.5rem;
-  margin: 0.1rem auto;
-
-  box-sizing: border-box;
-  padding: 0.6rem 0.5rem;
-  border-radius: 0.5rem;
-  box-shadow: -2px 2px 1px 1px ${props => hexToRGBA(props.theme.colors.opposite.background)};
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  color: ${props => props.theme.colors.text};
-  background-color: ${props => props.theme.colors.background};
-
-  border-radius: 5px;
-  padding: 0.6rem 1.2rem;
-
-  @media (max-width: ${Spacing.mobile}) {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  & > div {
-    display: flex;
-  }
-`;
-
-const TitleContainer = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  gap: 4px;
+  padding: 5px;
+`;
 
+const DropBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  color: #1f2937;
+  background-color: #efefef;
+  border-radius: 3px;
+  padding: 6px 10px;
+  gap: 10px;
+`;
+
+const Title = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   @media (max-width: ${Spacing.mobile}) {
-    flex-direction: column;
     justify-content: flex-start;
   }
 `;
 
-const Title = styled.div``;
-
 const ControlPanel = styled.div`
   display: flex;
-  flex-direction: row;
-
-  justify-content: center;
   align-items: center;
-  gap: 1rem;
-
-  @media (max-width: ${Spacing.mobile}) {
-    justify-content: flex-end;
-  }
+  justify-content: center;
+  gap: 10px;
 `;
 
 const Content = styled.div`
   width: 100%;
-  transition:
-    height 150ms linear 50ms,
-    transform 200ms linear 50ms;
-  box-sizing: border-box;
-  margin: auto;
-  border-radius: 0.5rem;
-  color: ${props => props.theme.colors.opposite.text};
-  background-color: ${props => props.theme.colors.opposite.background};
-  box-shadow: inset -2px 1px 1px 1px ${props => hexToRGBA(props.theme.colors.background, 0.3)};
+  border-radius: 3px;
+  color: #efefef;
+  background-color: #1f2937;
 `;
 
 const Description = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  position: relative;
+  overflow-wrap: break-word;
   font-size: 1rem;
   font-weight: normal;
   padding: 1rem 1.2rem;
@@ -107,22 +75,20 @@ const DropDown: React.FC<DropDownProps> = ({ title, createdDate, detail, editTod
 
   return (
     <Container>
-      <Header>
-        <TitleContainer>
-          <Title className="flex justify-between pr-4">
-            <h2 className="text-xl font-bold">{title}</h2>
-            <span className="text-sm text-blue-300">{mm}</span>
-          </Title>
-        </TitleContainer>
+      <DropBox>
+        <Title>
+          <h2 className="text-xl font-bold">{title}</h2>
+          <span className="text-sm text-slate-400 pl-4">{mm}</span>
+        </Title>
         <ControlPanel>
-          <Button variant="contained" color="info" onClick={editTodo}>
+          <Button variant="contained" color="success" onClick={editTodo}>
             Edit
           </Button>
           <Button variant="contained" color="error" onClick={deleteTodo}>
             Delete
           </Button>
         </ControlPanel>
-      </Header>
+      </DropBox>
       <Content>
         <Description onClick={isLongContext(detail).status ? () => setIsLongDescription(prev => !prev) : undefined}>
           <p className="text-ellipsis w-full">

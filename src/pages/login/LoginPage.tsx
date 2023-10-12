@@ -145,11 +145,11 @@ const Login: React.FC = () => {
             <div className="">
               <span className="text-slate-700 pointer-events-none">Forget your</span>
               <div>
-                <Link to="find-my#id" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
+                <Link to="/find-my#id" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
                   ID
                 </Link>
                 <span className="text-slate-700 pointer-events-none">/</span>
-                <Link to="find-my#pwd" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
+                <Link to="/find-my#pwd" className="hover:text-rose-400 transition-colors font-semibold text-slate-500">
                   Password?
                 </Link>
               </div>
@@ -157,7 +157,7 @@ const Login: React.FC = () => {
 
             <div className="sign-up flex flex-col text-end">
               <div className="text-slate-700">Don't have an account?</div>
-              <Link to="sign-up" className="text-blue-600 hover:text-rose-400 transition-colors font-bold p-0">
+              <Link to="/sign-up" className="text-blue-600 hover:text-rose-400 transition-colors font-bold p-0">
                 Sign Up
               </Link>
             </div>

@@ -41,9 +41,9 @@ const Feats = () => {
   return (
     <Layout>
       <FeatureList>
-        <li onClick={() => navigate('passport-resizer')}>Passport resizer</li>
-        <li onClick={() => navigate('todo')}>Todo</li>
-        <li onClick={() => navigate('lab')}>Lab</li>
+        <li onClick={() => navigate('passport-resizer')}>여권 재조합기</li>
+        <li onClick={() => navigate('memo')}>메모장</li>
+        <li onClick={() => navigate('testing')}>Testing page</li>
       </FeatureList>
     </Layout>
   );

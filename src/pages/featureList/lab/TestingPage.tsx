@@ -4,14 +4,14 @@ import Vector from './components/Vector';
 import MarkDownConvertor from './components/MarkDownConvertor';
 import CustomStyledComponent from './components/CustomStyledComponent';
 import QueryGenerator from './components/QueryGenerator';
-import RawCodes from '@pages/feats/lab/components/RawCodes';
+import RawCodes from '@src/pages/featureList/lab/components/RawCodes';
 
 const se = {
   title: `text-3xl font-extrabold text-slate-800 bg-pink-200 rounded-xl p-5 my-10`,
   header: `flex bg-slate-200 rounded-xl items-center text-xl p-5 text-extrabold my-10 text-slate-600`,
 };
 
-const Lab: React.FC = () => {
+const TestingPage: React.FC = () => {
   return (
     <Layout>
       <h1 className={se.title}>query generateRandomSQLInsert</h1>
@@ -32,4 +32,4 @@ const Lab: React.FC = () => {
   );
 };
 
-export default Lab;
+export default TestingPage;
