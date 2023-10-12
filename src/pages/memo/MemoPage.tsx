@@ -121,7 +121,11 @@ const MemoPage: React.FC = () => {
         </S.TodoListContainer>
         <div className="flex flex-col mt-2 box-border p-2 bg-slate-200 rounded">
           <div className="flex gap-4">
-            <input ref={titleInput} placeholder="Title" className="text-lg w-full rounded px-2 bg-slate-100" />
+            <input
+              ref={titleInput}
+              placeholder="Title"
+              className="text-lg w-full rounded px-2 bg-slate-100 text-zinc-800"
+            />
             <Button variant="contained" onClick={pushTodo}>
               save
             </Button>

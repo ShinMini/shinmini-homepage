@@ -12,9 +12,27 @@ interface MemoListState {
 const initialState: MemoListState = {
   memo: [
     {
-      date: new Date('1999-07-03'),
+      date: new Date('1999-07-13'),
       title: 'Happy Birthday',
-      detail: 'HyeonMin!',
+      detail: 'ShinMini!',
+    },
+    {
+      date: new Date('2020-07-13'),
+      title: 'Redux',
+      detail:
+        'A state management library that helps you manage global state in a predictable manner. It has a single store, and changes to the state are made through actions and reducers.',
+    },
+    {
+      date: new Date('2021-07-13'),
+      title: 'Redux-Persist',
+      detail:
+        'A library that integrates with Redux to save the Redux store state to local storage, so that it can be persisted across browser sessions. It helps to reload the app with the same state as it had before a reload or restart.',
+    },
+    {
+      date: new Date('2022-07-13'),
+      title: 'Redux-Saga',
+      detail:
+        'A middleware library used in conjunction with Redux to handle side effects like asynchronous actions more efficiently. It makes use of ES6 generators to make asynchronous code look synchronous and more manageable.',
     },
   ],
 };

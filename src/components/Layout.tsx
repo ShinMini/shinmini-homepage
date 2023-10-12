@@ -10,7 +10,6 @@ const Wrapper = styled.div`
   min-width: 330px;
   width: 100%;
   overflow-x: hidden;
-  transition: background-color 700ms linear 300ms;
 
   background: ${props => props.theme.colors.linearBackground};
 
@@ -21,6 +20,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   min-height: 100vh;
   color: ${props => props.theme.colors.text};
+  transition: background 700ms linear 100ms;
   background-color: ${props => hexToRGBA(props.theme.colors.background, 0.6)};
 `;
 

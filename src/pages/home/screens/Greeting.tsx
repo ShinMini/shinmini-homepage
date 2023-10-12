@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled } from 'styled-components';
+import { keyframes, styled } from 'styled-components';
 
 import { BsGithub, BsInstagram, BsLinkedin } from 'react-icons/bs';
 
@@ -10,8 +10,48 @@ import Spacing from '@src/themes/Spacing';
 import Button from '@components/Button';
 import { Link } from 'react-router-dom';
 
+const slideUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+`;
+
+const popUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(10%);
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+    transform: scale(1);
+  }
+`;
+
+const slideLeft = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateX(30%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+`;
+
 const Container = styled.div`
   scroll-snap-align: start;
+  overflow-x: hidden;
+  opacity: 0;
   display: flex;
   margin: 0 auto;
   padding: clamp(0.5rem, 2vw, 2rem) 0;
@@ -25,6 +65,7 @@ const Container = styled.div`
   );
   border-radius: 10px;
   box-shadow: 0px 0px 0.4rem 0.4rem ${props => props.theme.colors.shadow};
+  animation: ${slideUp} 1s ease-in-out forwards;
 `;
 
 const Content = styled.div`
@@ -38,8 +79,11 @@ const Content = styled.div`
   padding: 2rem;
 
   img {
-    width: 70%;
-    margin: auto 5%;
+    opacity: 0;
+    width: 80%;
+    margin: 5%;
+
+    animation: ${popUp} 500ms ease-in-out 0.3s forwards;
   }
 
   @media (max-width: ${Spacing.mobile}) {
@@ -75,6 +119,8 @@ const Context = styled.div`
   gap: max(1.5rem, 2.5vh);
 
   margin: 0 auto;
+  opacity: 0;
+  animation: ${slideLeft} 500ms ease-in-out 700ms forwards;
 
   & > header {
     h1 {
@@ -121,7 +167,7 @@ const Greeting: React.FC = () => {
         <img
           src={Images.ProfileImage.Medium}
           draggable="false"
-          className="rounded-full shadow-xl border-zinc-800 backdrop-hue-rotate-30"
+          className="rounded-full shadow-xl"
           srcSet={`${Images.ProfileImage.Small} 180w, ${Images.ProfileImage.Medium} 360w, ${Images.ProfileImage.Large} 500w`}
           sizes="(max-width: 428px) 180px, (min-width: 640px) 360px, 500px"
           alt="Profile"
