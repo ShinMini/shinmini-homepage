@@ -22,7 +22,7 @@ import FindMyPage from '@pages/login/FindMyPage';
 import LoadingPage from '@src/pages/LoadingPage';
 import ErrorPage from '@src/pages/ErrorPage';
 
-export const routeName = ['Home', 'Feats'];
+export const routeName = ['Home', 'Memo', 'Feats'];
 
 function createRoutePath(routeName: Array<string>) {
   const routePath: Array<[string, string]> = [['Home', '/']];
@@ -49,7 +49,7 @@ const routeElement: RouteObject[] = [
     element: <PassportResizer />,
   },
   {
-    path: '/feats/memo',
+    path: '/memo',
     element: <MemoPage />,
   },
   {

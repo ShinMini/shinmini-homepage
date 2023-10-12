@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
-import Spacing from '@src/themes/Spacing';
+import { useAppDispatch } from '@src/hooks/useRedux';
+import { MemoState, deleteMemo } from '@src/store/slices/memoSlice';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
@@ -17,7 +18,6 @@ const Container = styled.div`
 
 const DropBox = styled.div`
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   color: #1f2937;
   background-color: #efefef;
@@ -28,11 +28,8 @@ const DropBox = styled.div`
 
 const Title = styled.div`
   display: flex;
+  overflow-wrap: break-word;
   flex-wrap: wrap;
-  justify-content: space-between;
-  @media (max-width: ${Spacing.mobile}) {
-    justify-content: flex-start;
-  }
 `;
 
 const ControlPanel = styled.div`
@@ -55,33 +52,36 @@ const Description = styled.div`
   overflow-wrap: break-word;
   font-size: 1rem;
   font-weight: normal;
-  padding: 1rem 1.2rem;
+  padding: clamp(0.5rem, 1vw, 1rem);
   cursor: pointer;
 `;
 
 type DropDownProps = {
-  title: string;
-  createdDate: dayjs.Dayjs;
-  detail?: string;
+  memo: MemoState;
 
-  editTodo?: () => void;
-  deleteTodo?: () => void;
+  editMemo: Generator;
 };
 
-const DropDown: React.FC<DropDownProps> = ({ title, createdDate, detail, editTodo, deleteTodo }) => {
-  const [isLongDescription, setIsLongDescription] = React.useState(isLongContext(detail).status);
+const DropDown: React.FC<DropDownProps> = ({ memo, editMemo }) => {
+  const [isLongDescription, setIsLongDescription] = React.useState(isLongContext(memo.detail).status);
+  const dispatch = useAppDispatch();
   dayjs.extend(relativeTime);
-  const mm = dayjs(createdDate).fromNow();
+  const createdDate = dayjs(memo.date);
+  const mm = dayjs(memo.date).fromNow();
+
+  const deleteTodo = () => {
+    dispatch(deleteMemo(memo.date));
+  };
 
   return (
     <Container>
       <DropBox>
         <Title>
-          <h2 className="text-xl font-bold">{title}</h2>
-          <span className="text-sm text-slate-400 pl-4">{mm}</span>
+          <h2 className="text-ellipsis w-full">{memo.title}</h2>
+          <span className="text-xs text-gray-400">{mm}</span>
         </Title>
         <ControlPanel>
-          <Button variant="contained" color="success" onClick={editTodo}>
+          <Button variant="contained" color="success" onClick={() => editMemo.next()}>
             Edit
           </Button>
           <Button variant="contained" color="error" onClick={deleteTodo}>
@@ -90,14 +90,13 @@ const DropDown: React.FC<DropDownProps> = ({ title, createdDate, detail, editTod
         </ControlPanel>
       </DropBox>
       <Content>
-        <Description onClick={isLongContext(detail).status ? () => setIsLongDescription(prev => !prev) : undefined}>
-          <p className="text-ellipsis w-full">
-            {isLongDescription ? isLongContext(detail).context : detail}
+        <Description
+          onClick={isLongContext(memo.detail).status ? () => setIsLongDescription(prev => !prev) : undefined}>
+          <p className="text-ellipsis w-full">{isLongDescription ? isLongContext(memo.detail).context : memo.detail}</p>
 
-            <div className="w-full flex justify-end">
-              <span className="text-end font-semibold text-blue-300">{createdDate.format('YYYY. MMM.DD')}</span>
-            </div>
-          </p>
+          <div className="w-full h-fit flex justify-end">
+            <span className="text-end font-thin text-sm text-blue-300">{createdDate.format('MM/DD | YYYY')}</span>
+          </div>
         </Description>
       </Content>
     </Container>

@@ -1,17 +1,13 @@
-import React, { memo } from 'react';
-import dayjs from 'dayjs';
+import React, { memo, useCallback, useLayoutEffect } from 'react';
 
 import styled, { keyframes } from 'styled-components';
 import { Button } from '@mui/material';
 
 import { useAppSelector, useAppDispatch } from '@hooks/useRedux';
 
-import { getAuth } from 'firebase/auth';
-import { app } from '@lib/firebase';
-
 import { Layout } from '@src/components';
 
-import { TodoListState, pushTodoList, TodoListProps, updateTodoList, deleteTodoList } from '@store/slices/todoSlice';
+import { MemoState, addMemo, updateMemo } from '@src/store/slices/memoSlice';
 
 import { validateFormData } from './utils/validate-todo-format';
 import DropDown from './components/DropDown';
@@ -22,69 +18,88 @@ const slideDown = keyframes({
   },
   '100%': {
     transform: 'translateY(0)',
-    opacity: 1,
   },
 });
 
-const AnimationWrapper = styled.div`
+const slideUp = keyframes({
+  '0%': {
+    transform: 'translateY(100%)',
+  },
+  '100%': {
+    transform: 'translateY(0)',
+  },
+});
+
+const AnimationWrapper = styled.div<{ $isDelete: boolean }>`
+  position: relative;
+  display: flex;
   width: 100%;
-  &:first-child {
-    opacity: 0;
-    animation: ${slideDown} 600ms ease-in-out 300ms forwards;
+
+  & > div {
+    animation: ${props => (props.$isDelete ? slideUp : slideDown)} 500ms ease-out forwards;
   }
-  animation: ${slideDown} 600ms ease-in-out forwards;
 `;
 
 const MemoPage: React.FC = () => {
+  const [prevMemoLength, setPrevMemoLength] = React.useState(0);
+  const [isDelete, setIsDelete] = React.useState(false);
+
   const titleInput = React.useRef<HTMLInputElement>(null);
   const detailTextArea = React.useRef<HTMLTextAreaElement>(null);
 
-  const currentTodoList = useAppSelector(state => state.todo.todoList);
-  const auth = getAuth(app);
-  const uid = auth.currentUser?.uid;
+  const memoState = useAppSelector(state => state.memo.memo);
   const dispatch = useAppDispatch();
+
+  // reset call back current text input section
+  const reset = useCallback(() => {
+    if (!titleInput.current || !detailTextArea.current)
+      return console.log('Unexpected Error Occurred: Check your network connection or try again later.');
+    titleInput.current.value = '';
+    detailTextArea.current.value = '';
+  }, [titleInput, detailTextArea]);
+
+  useLayoutEffect(() => {
+    const memoLength = memoState.length;
+
+    if (prevMemoLength !== memoLength) {
+      // 변경이 발생한 경우
+      const isDeleted = memoLength < prevMemoLength;
+      setIsDelete(isDeleted);
+      setPrevMemoLength(memoLength);
+    }
+  }, [memoState.length, prevMemoLength, setIsDelete]);
 
   const pushTodo = () => {
     const title = titleInput.current?.value;
     const detail = detailTextArea.current?.value;
-    const isValidData = validateFormData({ title, detail });
-    const todo = {
-      uid: uid,
-      todoList: [
-        {
-          date: isValidData.date,
-          title: isValidData.title,
-          detail: isValidData.detail,
-        },
-      ],
-    } satisfies TodoListState;
+    const validatedSchema = validateFormData({ title, detail });
 
-    dispatch(pushTodoList(todo));
+    if (!validatedSchema.success) {
+      alert(Object.values(validatedSchema.error.formErrors.fieldErrors).flat());
+      return reset();
+    }
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    titleInput.current!.value = '';
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    detailTextArea.current!.value = '';
+    const payload = validatedSchema.data satisfies MemoState;
+
+    dispatch(addMemo(payload));
+    return reset();
   };
 
-  const editTodo = (date: Date) => {
-    const title = titleInput.current?.value;
-    const detail = detailTextArea.current?.value;
+  function* editTodo(targetDate: Date) {
+    if (!titleInput.current || !detailTextArea.current)
+      return alert(`Unexpected Error Occurred: Check your network connection or try again later.`);
 
-    const isValidData = validateFormData({ title, detail });
+    yield titleInput.current.focus();
 
-    const todo = {
-      date,
-      title: isValidData.title,
-      detail: isValidData.detail,
-    } satisfies TodoListProps;
+    const title = titleInput.current.value;
+    const detail = detailTextArea.current.value;
+    const isValidatedSchema = validateFormData({ title, detail });
 
-    dispatch(updateTodoList(todo));
-  };
+    if (!isValidatedSchema.success) return console.log(isValidatedSchema.error.cause);
+    const memo = isValidatedSchema.data;
 
-  const deleteTodo = (targetDate: Date) => {
-    dispatch(deleteTodoList({ targetDate }));
-  };
+    yield dispatch(updateMemo({ targetDate, memo }));
+  }
 
   const S = createStyled();
 
@@ -93,20 +108,13 @@ const MemoPage: React.FC = () => {
       <h1 className="font-bold text-xl mb-1">Memo</h1>
       <S.Container>
         <S.TodoListContainer>
-          {currentTodoList &&
-            currentTodoList.toReversed().map(({ date, title, detail }, index) => {
-              const key = `currentTodoList-${title}${index}`;
-              const createdDate = dayjs(date);
+          {memoState &&
+            memoState.toReversed().map(memo => {
+              const key = `currentTodoList-${memo.date.toString()}`;
 
               return (
-                <AnimationWrapper key={key}>
-                  <DropDown
-                    editTodo={() => editTodo(date)}
-                    deleteTodo={() => deleteTodo(date)}
-                    title={title}
-                    createdDate={createdDate}
-                    detail={detail}
-                  />
+                <AnimationWrapper key={key} $isDelete={isDelete}>
+                  <DropDown editMemo={editTodo(memo.date)} memo={memo} />
                 </AnimationWrapper>
               );
             })}

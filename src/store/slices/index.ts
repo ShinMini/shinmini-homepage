@@ -1,5 +1,5 @@
 import themeSlice from './themeSlice';
-import todoSlice from './todoSlice';
+import memoSlice from './memoSlice';
 import toastSlice from './toastSlice';
 
-export { themeSlice, todoSlice, toastSlice };
+export { themeSlice, memoSlice, toastSlice };

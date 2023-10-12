@@ -1,18 +1,18 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { persistStore, persistReducer } from 'redux-persist';
-import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
+// import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 
 import { persistConfig } from './persist';
 import rootSaga from './saga';
 
-import { themeSlice, todoSlice, toastSlice } from './slices';
+import { themeSlice, memoSlice, toastSlice } from './slices';
 
 export const rootReducer = combineReducers({
   toast: toastSlice,
   theme: themeSlice,
-  todo: todoSlice,
+  memo: memoSlice,
 });
 
 export const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -23,9 +23,11 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware => {
     return getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PURGE, PAUSE, PERSIST, REGISTER],
-      },
+      serializableCheck: false,
+      // serializableCheck: {
+      // ignoredActions: [FLUSH, REHYDRATE, PURGE, PAUSE, PERSIST, REGISTER],
+      // },
+      sagaMiddleware: true,
     }).concat(sagaMiddleware);
   },
 });

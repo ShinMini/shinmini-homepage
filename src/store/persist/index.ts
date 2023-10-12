@@ -4,5 +4,5 @@ export const persistConfig = {
   key: 'root',
   storage: storage,
   version: 1,
-  whitelist: ['theme', 'todo'],
+  whitelist: ['theme', 'memo'],
 };
