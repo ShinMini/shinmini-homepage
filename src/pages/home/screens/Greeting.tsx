@@ -120,8 +120,10 @@ const Greeting: React.FC = () => {
       <Content>
         <img
           src={Images.ProfileImage.Medium}
-          srcSet={`${Images.ProfileImage.Small} 260w, ${Images.ProfileImage.Medium} 400w, ${Images.ProfileImage.Large} 628w`}
-          sizes="(max-width: 628px) 260px, (max-width: 1024px) 400px, 628px"
+          draggable="false"
+          className="rounded-full shadow-xl border-zinc-800 backdrop-hue-rotate-30"
+          srcSet={`${Images.ProfileImage.Small} 180w, ${Images.ProfileImage.Medium} 360w, ${Images.ProfileImage.Large} 500w`}
+          sizes="(max-width: 428px) 180px, (min-width: 640px) 360px, 500px"
           alt="Profile"
         />
 

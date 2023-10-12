@@ -3,9 +3,9 @@ import FavIcon from './icons/logo.svg';
 
 // IMAGES
 import GreetingBackground from './images/greeting-background.png';
-import ProfileImageLarge from './images/home/profile-image:626X626.png';
-import ProfileImageMedium from './images/home/profile-image:400X400.png';
-import ProfileImageSmall from './images/home/profile-image:260X260.png';
+import ProfileImageLarge from './images/home/profile-image:500X500.png';
+import ProfileImageMedium from './images/home/profile-image:360X360.png';
+import ProfileImageSmall from './images/home/profile-image:180X180.png';
 
 const Icons = {
   FavIcon,
