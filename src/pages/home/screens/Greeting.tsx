@@ -4,7 +4,6 @@ import { keyframes, styled } from 'styled-components';
 import { BsGithub, BsInstagram, BsLinkedin } from 'react-icons/bs';
 
 import { Images } from '@src/assets';
-import { hexToRGBA } from '@src/features';
 import Spacing from '@src/themes/Spacing';
 
 import Button from '@components/Button';
@@ -59,10 +58,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   color: ${props => props.theme.colors.text};
-  background: linear-gradient(
-    ${props => hexToRGBA(props.theme.colors.opposite.background)} 30%,
-    ${props => props.theme.colors.background} 100%
-  );
+  background: ${props => props.theme.colors.linearFilter};
   border-radius: 10px;
   box-shadow: 0px 0px 0.4rem 0.4rem ${props => props.theme.colors.shadow};
   animation: ${slideUp} 1s ease-in-out forwards;
@@ -189,12 +185,12 @@ const Greeting: React.FC = () => {
             <p>Now, I live in Seoul (서울), South Korea (한국)</p>
           </article>
           <div className="flex w-full justify-center items-center gap-2 mt-4 max-w-lg">
-            <Button className="w-1/3" color="#007CED" onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
+            <Button className="w-1/3" color="#264653" onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
               Contact
             </Button>
             <Button
               className="w-1/3"
-              color="#4FED7D"
+              color="#2A9D8F"
               onClick={() => window.open('https://dev-shinmini.web.app/', '_blank')}>
               Blog
             </Button>
@@ -204,7 +200,7 @@ const Greeting: React.FC = () => {
               onClick={() =>
                 window.open('https://docs.google.com/document/d/1G0RCOXg1JHimk4klJ4GsxbxgjNcggG3Y/edit', '_blank')
               }
-              color="#F84F4F">
+              color="#E9C46A">
               CV
             </Button>
           </div>

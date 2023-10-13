@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import { styled } from 'styled-components';
 
-import { hexToRGBA } from '@src/features';
 import techDescription from '../contexts/tech-description';
 import { TechField } from '..';
 
@@ -19,7 +18,7 @@ const Header = styled.div`
   margin-bottom: 0.4rem;
 
   h3 {
-    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-size: clamp(0.8rem, 2vw, 1.4rem);
     font-family: ${props => props.theme.fonts.poppins.semiBold};
     transform: translateY(2px);
   }
@@ -36,13 +35,26 @@ const Context = styled.div`
   flex-direction: column;
   gap: 0.4rem;
 
+  max-height: 100px;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+
+  overflow-y: scroll;
+  overflow-wrap: break-word;
+
+  scrollbar-width: thin;
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+
   color: ${props => props.theme.colors.grayDarkest};
   font-size: clamp(0.8rem, 1.5vw, 1rem);
   padding: 1rem;
   border-radius: 5px;
-  box-shadow: inset -1px 1px 2px 2px ${props => hexToRGBA(props.theme.colors.opposite.background)};
+  box-shadow: inset -2px 1.5px 3px 1px rgba(0, 0, 0, 0.1);
 
-  background-color: ${props => hexToRGBA(props.theme.colors.opposite.background, 0.3)};
+  background-color: ${props => props.theme.colors.white};
   mix-blend-mode: none;
 `;
 
@@ -69,7 +81,9 @@ const TechDescription = memo(({ field }: { field: TechField }) => {
           </Header>
           <Context>
             {skill.description.map((item, index) => (
-              <span key={`skill-context-span-${index}-${item}`}>{item}</span>
+              <span className="snap-center" key={`skill-context-span-${index}-${item}`}>
+                {item}
+              </span>
             ))}
           </Context>
           <Border />

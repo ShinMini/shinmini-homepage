@@ -11,9 +11,7 @@ import { randomEmail, randomName } from '@src/features';
 import { z, ZodError } from 'zod';
 
 const Container = styled.div`
-  scroll-snap-align: start;
   display: flex;
-  padding: clamp(0.5rem, 2vw, 2rem) 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -22,14 +20,15 @@ const Container = styled.div`
 
 const Form = styled.form`
   display: flex;
+  scroll-snap-align: end;
   flex-direction: column;
 
   gap: clamp(1rem, 3vh, 4rem);
-  border: ${props => props.theme.colors.warning} 4px solid;
   color: #2a2a2a;
-  background-color: ${({ theme }) => theme.colors.greenLight};
 
-  mix-blend-mode: luminosity;
+  background: linear-gradient(rgba(255, 255, 155, 0.5) 30%, rgba(255, 255, 255, 0.7) 100%);
+  box-shadow: ${props => props.theme.shadows.sm};
+
   border-radius: 10px;
   padding: 1.5rem 1rem;
   padding-bottom: 2rem;
@@ -116,7 +115,7 @@ const SendMail: React.FC = () => {
   return (
     <Container>
       <Form id="contact-me" ref={form}>
-        <h4 className="lg:text-4xl sm:text-sm md:text-xl font-bold mb-2">안녕, 현민!</h4>
+        <h4 className="lg:text-2xl sm:text-lg md:text-xl font-semibold mb-2">Hello, HYEON MIN SHIN!</h4>
         <Grid className="flex gap-6 mb-2 box-border px-2">
           {!isAnonymous ? (
             <TextField
@@ -164,7 +163,7 @@ const SendMail: React.FC = () => {
             control={<Checkbox color="secondary" name="anonymous" value="yes" onChange={handleAnonymousChange} />}
             label="Anonymous"
           />
-          <Button type="submit" variant="contained" color="success" onClick={sendEmail}>
+          <Button type="submit" variant="contained" color="info" onClick={sendEmail}>
             Send
           </Button>
         </Grid>
