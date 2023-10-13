@@ -1,7 +1,7 @@
 [submodule "shinmini-server"]
     path = server
     url = git@github.com:ShinMini/shinmini-server.git
-    branch = shinmini-server
+    branch = shinmini-nextjs
 [submodule "shinmini-svelte"]
     path = svelte
     url = git@github.com:ShinMini/shinmini-svelte.git
