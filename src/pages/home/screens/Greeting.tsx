@@ -4,7 +4,7 @@ import { keyframes, styled } from 'styled-components';
 import { BsGithub, BsInstagram, BsLinkedin } from 'react-icons/bs';
 
 import { Images } from '@src/assets';
-import Spacing from '@src/themes/Spacing';
+import { sp } from '@themes';
 
 import Button from '@components/Button';
 import { Link } from 'react-router-dom';
@@ -66,7 +66,7 @@ const Container = styled.div`
 
 const Content = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 
   justify-content: center;
   align-items: center;
@@ -82,8 +82,8 @@ const Content = styled.div`
     animation: ${popUp} 500ms ease-in-out 0.3s forwards;
   }
 
-  @media (max-width: ${Spacing.mobile}) {
-    grid-template-columns: 1fr;
+  @media ${sp.sm} {
+    grid-template-columns: 1fr 1fr;
   }
 `;
 
@@ -172,7 +172,7 @@ const Greeting: React.FC = () => {
         <Context>
           <header>
             <h1>
-              Hi, I&apos;m <span style={{ color: '#FFD700', fontWeight: 600 }}>HyeonMin Shin</span>
+              Hi, I&apos;m <span style={{ color: '#0d6a09', fontWeight: 600 }}>HyeonMin Shin</span>
             </h1>
             <h2>A Full Stack Developer</h2>
           </header>

@@ -1,4 +1,4 @@
-import { useAppSelector } from './hooks/useRedux';
+import { useAppSelector } from '@hooks/useRedux';
 import Loading from './pages/LoadingPage';
 
 const se = {

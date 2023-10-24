@@ -53,7 +53,7 @@ const MemoPage: React.FC = () => {
   // reset call back current text input section
   const reset = useCallback(() => {
     if (!titleInput.current || !detailTextArea.current)
-      return console.log('Unexpected Error Occurred: Check your network connection or try again later.');
+      return console.error('Unexpected Error Occurred: Check your network connection or try again later.');
     titleInput.current.value = '';
     detailTextArea.current.value = '';
   }, [titleInput, detailTextArea]);

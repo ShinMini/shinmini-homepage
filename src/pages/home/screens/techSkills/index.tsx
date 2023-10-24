@@ -2,7 +2,8 @@ import React, { memo } from 'react';
 import { styled } from 'styled-components';
 
 import { hexToRGBA } from '@src/features';
-import Spacing from '@src/themes/Spacing';
+import { sp } from '@themes';
+
 import SkillDescription from './components/TechDescription';
 import TechGraph from './components/TechGraph';
 
@@ -70,8 +71,8 @@ const Content = styled.div<{ $isActive: boolean }>`
   border-top-left-radius: ${props => (props.$isActive ? '5px' : 0)};
 
   background-color: ${props => props.theme.colors.background};
-  box-shadow: ${props => props.theme.shadows.sm};
-  @media (max-width: ${Spacing.mobile}) {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  @media ${sp.sm} {
     grid-template-columns: 1fr;
   }
 

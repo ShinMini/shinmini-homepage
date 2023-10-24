@@ -101,17 +101,6 @@
   "resolutions": {
     "crypto-js": "3.3.0"
   },
-  "jest": {
-    "preset": "react",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
-  },
   "pre-push": [
     "compile"
   ],

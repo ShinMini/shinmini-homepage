@@ -35,7 +35,7 @@ const Container = styled.div\`
   width: 300px;
   height: 300px;
   transition: all 0.3s ease-in-out;
-  box-shadow: \${props => props.theme.shadows.sm};
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 
   &:hover {
     background-color: #d23a3a;

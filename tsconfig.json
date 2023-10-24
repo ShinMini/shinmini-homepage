@@ -46,6 +46,8 @@
 
       "@hooks/*": ["./src/hooks/*"],
       "@styles/*": ["./src/styles/*"],
+      "@themes/*": ["./src/themes/*"],
+      "@themes": ["./src/themes/"],
       "@features/*": ["src/features/*"],
 
       "@store": ["./src/store"],

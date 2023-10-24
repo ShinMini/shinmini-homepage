@@ -27,7 +27,7 @@ const Form = styled.form`
   color: #2a2a2a;
 
   background: linear-gradient(rgba(255, 255, 155, 0.5) 30%, rgba(255, 255, 255, 0.7) 100%);
-  box-shadow: ${props => props.theme.shadows.sm};
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 
   border-radius: 10px;
   padding: 1.5rem 1rem;
@@ -69,16 +69,15 @@ const SendMail: React.FC = () => {
 
     try {
       const parsedData = schema.parse(formData);
-      console.log('anonymous: ', parsedData.anonymous);
 
       emailjs
         .send(
           emailjsConfig.serviceID,
           emailjsConfig.templateID,
           {
-            from_name: formData.user_name,
-            message: formData.message,
-            reply_to: formData.user_email,
+            from_name: parsedData.user_name,
+            message: parsedData.message,
+            reply_to: parsedData.user_email,
           },
           emailjsConfig.publicKey,
         )
@@ -87,7 +86,7 @@ const SendMail: React.FC = () => {
             alert('Message Sent, I will get back to you shortly');
           },
           error => {
-            console.log(error.text);
+            console.error(error.text);
             alert('There was an error sending the message, please try again later. :(');
           },
         );

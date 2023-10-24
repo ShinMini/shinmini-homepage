@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { useAppDispatch } from '@src/hooks/useRedux';
+import { useAppDispatch } from '@hooks/useRedux';
 import { MemoState, deleteMemo } from '@src/store/slices/memoSlice';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';

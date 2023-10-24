@@ -1,3 +1,10 @@
+/**
+ * Spacing theme
+ * @packageDocumentation
+ * @module Spacing
+ * @preferred
+ * @see {@link https://chakra-ui.com/docs/theming/theme#spacing|Chakra-UI}
+ */
 const defaultColors = {
   primary: '#360033ab',
   secondary: '#FF7C7C',
@@ -71,21 +78,15 @@ const darkColors = {
 };
 
 const fonts = {
+  poppin: 'poppins-regular',
   poppins: {
-    light: 'PoppinsLight',
-    regular: 'PoppinsRegular',
-    medium: 'PoppinsMedium',
-    semiBold: 'PoppinsSemiBold',
-    bold: 'PoppinsBold',
+    light: 'poppins-light',
+    regular: 'poppins-regular',
+    medium: 'poppins-medium',
+    semiBold: 'poppins-semibold',
+    bold: 'poppins-bold',
   },
-};
-
-const shadows = {
-  shadows: '2px 2px 4px 3px rgba(0, 0, 0, 0.2)',
-  sm: '2px 2px 4px 3px rgba(0, 0, 0, 0.2)',
-  md: '2px 2px 5px 6px rgba(0, 0, 0, 0.2)',
-  xl: '2px 2px 6px 9px rgba(0, 0, 0, 0.2)',
-};
+} as const;
 
 const lightTheme = {
   colors: {
@@ -95,8 +96,7 @@ const lightTheme = {
     },
   },
   fonts,
-  shadows,
-};
+} as const;
 
 const darkTheme = {
   colors: {
@@ -106,9 +106,8 @@ const darkTheme = {
     },
   },
   fonts,
-  shadows,
-};
+} as const;
 
-export type ThemesType = typeof lightTheme;
+export type ColorType = typeof lightTheme;
 
-export { lightTheme, darkTheme };
+export { lightTheme, darkTheme, fonts };

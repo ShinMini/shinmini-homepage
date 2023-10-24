@@ -1,4 +1,5 @@
 import ReduxProvider from './ReduxProvider';
 import StyledProvider from './StyledProvider';
+import { ReactRouterProvider } from './ReactRouterProvider';
 
-export { ReduxProvider, StyledProvider };
+export { ReduxProvider, StyledProvider, ReactRouterProvider };

@@ -5,14 +5,13 @@ import { styled } from 'styled-components';
 import ThemeIcon from './ThemeIcon';
 
 import { hexToRGBA, logout } from '@src/features';
-import Spacing from '@src/themes/Spacing';
 import { toggleTheme } from '@store/slices/themeSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/useRedux';
 
-import { RoutePath, routeName } from '@src/AppRouter';
 import { auth } from '@src/lib/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useOnOutsideClick } from '@hooks/useOnOutSideClick';
+import { sp } from '@src/themes';
 
 const Container = styled.nav`
   width: 100%;
@@ -21,7 +20,7 @@ const Container = styled.nav`
   box-sizing: border-box;
   padding: 0.5rem 1rem;
   overflow-x: hidden;
-  box-shadow: ${props => props.theme.shadows.md};
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   color: white;
   background-color: ${props => props.theme.colors.grayDarkest};
 `;
@@ -33,10 +32,11 @@ const LogoBox = styled.div`
 
 const MenuBox = styled.ul`
   display: flex;
+  flex-direction: row-reverse;
   gap: clamp(0.5rem, 2vw, 1rem);
   align-items: center;
-  @media (max-width: ${Spacing.mobile}) {
-    flex-direction: row-reverse;
+  @media ${sp.sm} {
+    flex-direction: row;
   }
 `;
 
@@ -58,7 +58,7 @@ const NavBox = styled.nav<{ $isMenuOpen: boolean }>`
     display: none;
   }
 
-  @media (max-width: ${Spacing.mobile}) {
+  @media (max-width: 640px) {
     position: fixed;
     & > p {
       display: block;
@@ -98,7 +98,7 @@ const Logo = styled(Link)`
   font-family: 'PoppinsBold';
   font-size: clamp(1.5rem, 6vw, 2.5rem);
   font-style: italic;
-  text-shadow: ${props => props.theme.shadows.xl};
+  text-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   transition: color 0.2s ease-in-out;
   &:hover {
     color: ${props => props.theme.colors.warning};
@@ -155,11 +155,9 @@ const Navbar: React.FC = () => {
           <NavBox ref={mobileMenuRef} $isMenuOpen={isMenuOpen} onClick={() => setIsMenuOpen(prev => !prev)}>
             <p>menu</p>
             <div className="flex sm:flex-row sm:gap-4 md:gap-6 flex-col gap-2">
-              {routeName.map((value, index) => (
-                <NavItem key={`nav-item-${index}-${value}`} to={RoutePath.get(value) || '/'}>
-                  {value}
-                </NavItem>
-              ))}
+              <NavItem to="/">Home</NavItem>
+              <NavItem to="/memo">Memo</NavItem>
+              <NavItem to="/feats">Feature</NavItem>
             </div>
           </NavBox>
         </DropDownBox>

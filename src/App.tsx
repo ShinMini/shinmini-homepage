@@ -1,13 +1,17 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
-import AppRouter from './AppRouter';
 import { getAuth } from 'firebase/auth';
 import { app } from './lib/firebase';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   const auth = getAuth(app);
   useAuthState(auth);
 
-  return <AppRouter />;
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 }
 
 export default App;

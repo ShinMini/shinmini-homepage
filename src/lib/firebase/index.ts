@@ -27,8 +27,39 @@ const analytics = getAnalytics(app);
 // firebase analytics set up
 logEvent(analytics, 'page_view', {
   page_title: 'ShinMini',
-  page_location: 'https://shinmini.com',
+  page_location: 'https://www.shinmini.com',
   page_path: '/',
 });
 
+logEvent(analytics, 'page_view', {
+  page_title: 'ShinMini',
+  page_location: 'https://www.shinmini.com',
+  page_path: '/login',
+});
+
+logEvent(analytics, 'page_view', {
+  page_title: 'ShinMini',
+  page_location: 'https://www.shinmini.com',
+  page_path: '/signup',
+});
+
+logEvent(analytics, 'page_view', {
+  page_title: 'ShinMini',
+  page_location: 'https://www.shinmini.com',
+  page_path: '/feats',
+});
+
+logEvent(analytics, 'page_view', {
+  page_title: 'ShinMini',
+  page_location: 'https://www.shinmini.com',
+  page_path: '/memo',
+});
+
+logEvent(analytics, 'login', {
+  method: 'google',
+});
+
+logEvent(analytics, 'login', {
+  method: 'github',
+});
 export { app, auth, firestore, storage, analytics };

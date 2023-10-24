@@ -1,16 +1,14 @@
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import GlobalStyle from '../themes/GlobalStyle';
-import { useAppSelector } from '@src/hooks/useRedux';
-import { darkTheme, lightTheme } from '@src/themes/themes';
+import { themes, globalStyle as GlobalStyle } from '@themes';
+import { useAppSelector } from '@hooks/useRedux';
 
 const StyledProvider = ({ children }: { children: ReactNode }) => {
-  const themeType = useAppSelector(state => state.theme.type);
-  const theme = themeType === 'light' ? lightTheme : darkTheme;
+  const theme = useAppSelector(state => state.theme.type);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme === 'light' ? themes.light : themes.dark}>
       <GlobalStyle />
       {children}
     </ThemeProvider>

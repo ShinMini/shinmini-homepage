@@ -1,8 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-
-type ThemeType = 'light' | 'dark';
 export interface ThemeState {
-  type: ThemeType;
+  type: 'light' | 'dark';
 }
 
 const initialState: ThemeState = {
@@ -14,12 +12,10 @@ const themeSlice = createSlice({
   initialState,
   reducers: {
     toggleTheme: state => {
-      const isCurrentLightType = state.type === 'light';
-      state.type = isCurrentLightType ? 'dark' : 'light';
+      state.type = state.type === 'light' ? 'dark' : 'light';
     },
-    setTheme: (state, payload: PayloadAction<ThemeType>) => {
-      const selectType = payload.payload;
-      state.type = selectType;
+    setTheme: (state, { payload }: PayloadAction<'light' | 'dark'>) => {
+      state.type = payload;
     },
   },
 });
