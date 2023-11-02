@@ -10,7 +10,7 @@
   },
   "scripts": {
     "ci": "rm -rf node_modules && yarn install",
-    "dev": "vite --mode dev",
+    "dev": "vite --mode development",
     "test": "NODE_ENV=development jest --config=jest.config.ts --coverage",
     "build": "yarn format && vite build --mode production",
     "deploy": "yarn build && firebase deploy --only hosting",
