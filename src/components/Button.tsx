@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
 const Button = styled.button<{ color?: string }>`
-  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
   font-weight: 600;
 
-  padding: clamp(4px, 1vw, 12px) clamp(8px, 1vw, 12px);
+  padding: clamp(3px, 1vw, 10px) clamp(6px, 1vw, 8px);
 
   border-top: 0px;
   border-right: 0px;
   border-width: 2px;
 
-  border-radius: 10px;
+  border-radius: 5px;
   border-color: ${props => props.theme.colors.shadowDark};
 
-  color: #fff;
+  color: ${props => props.theme.colors.white};
   background-color: ${props => props.color || props.theme.colors.button};
   transition: all 0.2s ease-in-out;
 

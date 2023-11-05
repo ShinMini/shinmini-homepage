@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { ObservedPayloadType } from '../saga/event-saga';
 
 export type ToastStateType = {
@@ -21,6 +21,7 @@ export const toastSlice = createSlice({
   reducers: {
     getToastAction: (state: ToastStateType, { payload }: ObservedPayloadType) => {
       state.isLoading = true;
+      console.log(payload);
     },
     getToastSuccessAction: (state: ToastStateType, { payload }: ObservedPayloadType) => {
       state.message = payload.message;

@@ -25,11 +25,6 @@ const Container = styled.nav`
   background-color: ${props => props.theme.colors.grayDarkest};
 `;
 
-const LogoBox = styled.div`
-  display: flex;
-  gap: clamp(0.5rem, 2vw, 1rem);
-`;
-
 const MenuBox = styled.ul`
   display: flex;
   flex-direction: row-reverse;
@@ -94,12 +89,17 @@ const NavItem = styled(Link)`
   }
 `;
 
+const LogoBox = styled.div`
+  display: flex;
+  gap: clamp(0.2rem, 2vw, 0.5rem);
+`;
+
 const Logo = styled(Link)`
-  font-family: 'PoppinsBold';
   font-size: clamp(1.5rem, 6vw, 2.5rem);
-  font-style: italic;
   text-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   transition: color 0.2s ease-in-out;
+  font-family: ${props => props.theme.fonts.poppins.bold};
+  font-weight: 700;
   &:hover {
     color: ${props => props.theme.colors.warning};
   }
@@ -108,7 +108,7 @@ const Logo = styled(Link)`
 const LoginButton = styled.button`
   color: ${props => props.theme.colors.text};
   background-color: ${props => props.theme.colors.background};
-  font-size: clamp(0.9rem, 3vw, 1.4rem);
+  font-size: clamp(0.6rem, 3vw, 1.2rem);
 
   padding: 4px 12px;
   border-radius: 0.25rem;

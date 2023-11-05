@@ -2,12 +2,11 @@ import React from 'react';
 import { keyframes, styled } from 'styled-components';
 
 import { BsGithub, BsInstagram, BsLinkedin } from 'react-icons/bs';
-
-import { Images } from '@src/assets';
 import { sp } from '@themes';
 
 import Button from '@components/Button';
 import { Link } from 'react-router-dom';
+import AsciiImage from '@src/assets/images/ascii';
 
 const slideUp = keyframes`
   from {
@@ -17,22 +16,6 @@ const slideUp = keyframes`
   to {
     opacity: 1;
     transform: translateY(0%);
-  }
-`;
-
-const popUp = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(10%);
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 0.7;
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0%);
-    transform: scale(1);
   }
 `;
 
@@ -73,17 +56,11 @@ const Content = styled.div`
 
   margin: auto;
   padding: 2rem;
-
-  img {
-    opacity: 0;
-    width: 80%;
-    margin: 5%;
-
-    animation: ${popUp} 500ms ease-in-out 0.3s forwards;
-  }
+  gap: 1rem;
 
   @media ${sp.sm} {
     grid-template-columns: 1fr 1fr;
+    gap: 0.2rem;
   }
 `;
 
@@ -107,12 +84,13 @@ const IconButton = styled(Link)`
 const Context = styled.div`
   display: flex;
   width: 100%;
+  height: 100%;
   flex-direction: column;
 
-  justify-content: center;
+  justify-content: space-around;
   align-items: flex-start;
 
-  gap: max(1.5rem, 2.5vh);
+  gap: min(1rem, 2.5vh);
 
   margin: 0 auto;
   opacity: 0;
@@ -124,8 +102,7 @@ const Context = styled.div`
       font-family: ${props => props.theme.fonts.poppins.semiBold};
     }
     h2 {
-      font-size: clamp(1.2rem, 2vw, 1.5rem);
-      color: ${props => props.theme.colors.primary};
+      font-size: clamp(1rem, 2vw, 1.2rem);
       font-family: ${props => props.theme.fonts.poppins.medium};
     }
   }
@@ -133,26 +110,16 @@ const Context = styled.div`
   & > article {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
     p {
       width: 95%;
       word-wrap: break-word;
       word-break: break-word;
       color: ${props => props.theme.colors.text};
-      font-size: clamp(0.9rem, 1vw, 1.5rem);
+      font-size: clamp(0.9rem, 1vw, 1.2rem);
+      font-family: ${props => props.theme.fonts.poppins.regular};
+      font-weight: 550;
       line-height: 1.2;
     }
-  }
-  & > footer {
-    width: 100%;
-    display: flex;
-
-    align-items: center;
-
-    margin-top: 1rem;
-    gap: clamp(1.5rem, 2vw, 2rem);
-
-    font-family: ${props => props.theme.fonts.poppins.medium};
   }
 `;
 
@@ -160,21 +127,13 @@ const Greeting: React.FC = () => {
   return (
     <Container id="#Greeting">
       <Content>
-        <img
-          src={Images.ProfileImage.Medium}
-          draggable="false"
-          className="rounded-full shadow-xl"
-          srcSet={`${Images.ProfileImage.Small} 180w, ${Images.ProfileImage.Medium} 360w, ${Images.ProfileImage.Large} 500w`}
-          sizes="(max-width: 428px) 180px, (min-width: 640px) 360px, 500px"
-          alt="Profile"
-        />
-
+        <AsciiImage />
         <Context>
           <header>
-            <h1>
-              Hi, I&apos;m <span style={{ color: '#0d6a09', fontWeight: 600 }}>HyeonMin Shin</span>
+            <h1 className="font-bold">
+              Hello, I&apos;m <span style={{ color: '#0d6a09', fontWeight: 600 }}>ShinMini</span>
             </h1>
-            <h2>A Full Stack Developer</h2>
+            <h2 className="font-semibold">A Full Stack Developer</h2>
           </header>
           <article>
             <p>Hello, my name is HyeonMin Shin.</p>
@@ -185,13 +144,18 @@ const Greeting: React.FC = () => {
             <p>Now, I live in Seoul (서울), South Korea (한국)</p>
           </article>
           <div className="flex w-full justify-center items-center gap-2 mt-4 max-w-lg">
-            <Button className="w-1/3" color="#264653" onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
+            <Button className="w-1/3" onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
               Contact
             </Button>
             <Button
               className="w-1/3"
               color="#2A9D8F"
-              onClick={() => window.open('https://dev-shinmini.web.app/', '_blank')}>
+              onClick={() =>
+                window.open(
+                  'https://shinmini.notion.site/shinmini/Hello-ShinMini-16e4dedcb2e14d7bae6a85520d5bb83b',
+                  '_blank',
+                )
+              }>
               Blog
             </Button>
 

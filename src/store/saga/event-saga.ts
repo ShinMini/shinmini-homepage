@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { ToastStateType, closeToastAction, getToastErrorAction, getToastSuccessAction } from '../slices/toastSlice';
 
 export type ObservedPayloadType = PayloadAction<Pick<ToastStateType, 'message' | 'error'>>;

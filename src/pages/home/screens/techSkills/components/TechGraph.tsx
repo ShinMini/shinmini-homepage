@@ -57,8 +57,7 @@ const Icon = styled.div<{ $jump: boolean; $delay: number }>`
   justify-content: center;
   align-items: center;
   font-size: clamp(1.2rem, 3vw, 2rem);
-  animation: ${({ $jump }) => $jump && jumpAnimation} 500ms ease-in-out ${({ $delay }) => 30 + $delay * 70 + 50}ms
-    forwards;
+  animation: ${({ $jump }) => $jump && jumpAnimation} 500ms ease-in-out ${({ $delay }) => 30 + $delay * 70}ms forwards;
 `;
 
 const GraphBox = styled.div`
@@ -86,7 +85,7 @@ const Bar = styled.div<{ percentage: number; delay: number }>`
   background-color: ${({ theme }) => theme.colors.deepPink};
   border-radius: 10px;
   opacity: 0;
-  animation: ${({ percentage }) => fillUpAnimation(percentage)} 600ms ease-in-out ${({ delay }) => 30 + delay * 70}ms
+  animation: ${({ percentage }) => fillUpAnimation(percentage)} 900ms ease-in-out ${({ delay }) => 130 + delay * 70}ms
     forwards;
 `;
 
