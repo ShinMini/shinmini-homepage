@@ -5,7 +5,6 @@ import HomePage from '@src/pages/home/HomePage';
 import MemoPage from '@src/pages/memo/MemoPage';
 
 import FeatureListPage from '@src/pages/featureList/featureListPage';
-import TestingPage from '@src/pages/featureList/lab/TestingPage';
 import PassportResizer from '@src/pages/featureList/passport-resizer/PassportResizer';
 
 import LoginPage from '@src/pages/login/LoginPage';
@@ -22,7 +21,6 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<HomePage />} />
       <Route path="/feats" element={<FeatureListPage />} />
       <Route path="/feats/passport-resizer" element={<PassportResizer />} />
-      <Route path="/feats/testing" element={<TestingPage />} />
       <Route path="/memo" element={<MemoPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/sign-up" element={<SignUpPage />} />

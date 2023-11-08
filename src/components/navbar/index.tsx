@@ -108,11 +108,12 @@ const Logo = styled(Link)`
 const LoginButton = styled.button`
   color: ${props => props.theme.colors.text};
   background-color: ${props => props.theme.colors.background};
-  font-size: clamp(0.6rem, 3vw, 1.2rem);
+  font-size: clamp(0.8rem, 3vw, 1.2rem);
 
   padding: 4px 12px;
   border-radius: 0.25rem;
-  font-weight: bold;
+  font-family: ${props => props.theme.fonts.poppins.bold};
+  font-weight: 700;
   &:hover {
     background-color: ${props => props.theme.colors.opposite.background};
     color: ${props => props.theme.colors.warning};

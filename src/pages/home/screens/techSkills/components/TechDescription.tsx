@@ -8,19 +8,23 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 `;
 
 const Header = styled.div`
   display: flex;
   font-size: clamp(1.4rem, 2.5vw, 1.8rem);
 
-  gap: 0.7rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 4px;
 
   h3 {
     font-size: clamp(0.8rem, 2vw, 1.4rem);
     font-family: ${props => props.theme.fonts.poppins.semiBold};
+    font-weight: 600;
     transform: translateY(2px);
+    text-indent: 3mm;
   }
 `;
 
@@ -34,14 +38,6 @@ const Context = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-
-  max-height: 100px;
-
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-
-  overflow-y: scroll;
-  overflow-wrap: break-word;
 
   scrollbar-width: thin;
   ::-webkit-scrollbar {

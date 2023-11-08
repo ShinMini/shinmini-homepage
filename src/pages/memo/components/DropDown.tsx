@@ -1,12 +1,12 @@
-import { Button } from '@mui/material';
 import { useAppDispatch } from '@hooks/useRedux';
 import { MemoState, deleteMemo } from '@src/store/slices/memoSlice';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
+import { sp } from '@src/themes';
 
 const Container = styled.div`
   display: flex;
@@ -22,8 +22,12 @@ const DropBox = styled.div`
   color: #1f2937;
   background-color: #efefef;
   border-radius: 3px;
-  padding: 6px 10px;
   gap: 10px;
+  padding: 3px 5px;
+
+  @media ${sp.sm} {
+    padding: 6px 10px;
+  }
 `;
 
 const Title = styled.div`
@@ -46,14 +50,25 @@ const Content = styled.div`
   background-color: #1f2937;
 `;
 
-const Description = styled.div`
+const Description = styled.div<{ $isExpand: boolean }>`
   width: 100%;
+  max-height: ${props => (props.$isExpand ? '100%' : '55px')};
+
+  overflow-y: clip;
+  text-overflow: ellipsis;
+
   position: relative;
   overflow-wrap: break-word;
   font-size: 1rem;
   font-weight: normal;
   padding: clamp(0.5rem, 1vw, 1rem);
   cursor: pointer;
+
+  font-size: 0.8rem;
+
+  @media ${sp.sm} {
+    font-size: 1rem;
+  }
 `;
 
 type DropDownProps = {
@@ -63,15 +78,11 @@ type DropDownProps = {
 };
 
 const DropDown: React.FC<DropDownProps> = ({ memo, editMemo }) => {
-  const [isLongDescription, setIsLongDescription] = React.useState(isLongContext(memo.detail).status);
+  const [isExpand, setIsExpand] = useState(false);
   const dispatch = useAppDispatch();
   dayjs.extend(relativeTime);
   const createdDate = dayjs(memo.date);
   const mm = dayjs(memo.date).fromNow();
-
-  const deleteTodo = () => {
-    dispatch(deleteMemo(memo.date));
-  };
 
   return (
     <Container>
@@ -81,18 +92,21 @@ const DropDown: React.FC<DropDownProps> = ({ memo, editMemo }) => {
           <span className="text-xs text-gray-400">{mm}</span>
         </Title>
         <ControlPanel>
-          <Button variant="contained" color="success" onClick={() => editMemo.next()}>
+          <button
+            className="px-4 py-2 text-center font-semibold rounded bg-teal-700 text-gray-100"
+            onClick={() => editMemo.next()}>
             Edit
-          </Button>
-          <Button variant="contained" color="error" onClick={deleteTodo}>
+          </button>
+          <button
+            className="px-4 py-2 text-center font-semibold rounded bg-rose-700 text-gray-200"
+            onClick={() => dispatch(deleteMemo(memo.date))}>
             Delete
-          </Button>
+          </button>
         </ControlPanel>
       </DropBox>
       <Content>
-        <Description
-          onClick={isLongContext(memo.detail).status ? () => setIsLongDescription(prev => !prev) : undefined}>
-          <p className="text-ellipsis w-full">{isLongDescription ? isLongContext(memo.detail).context : memo.detail}</p>
+        <Description onClick={() => setIsExpand(prev => !prev)} $isExpand={isExpand}>
+          <p className="text-ellipsis w-full">{memo.detail}</p>
 
           <div className="w-full h-fit flex justify-end">
             <span className="text-end font-thin text-sm text-blue-300">{createdDate.format('MM/DD | YYYY')}</span>
@@ -104,9 +118,3 @@ const DropDown: React.FC<DropDownProps> = ({ memo, editMemo }) => {
 };
 
 export default React.memo(DropDown);
-
-function isLongContext(context?: string) {
-  if (!context) return { status: false, context: null };
-
-  return { status: context.trim().length > 180, context: context.trim().slice(0, 180) + '...' };
-}

@@ -3,7 +3,7 @@ import React from 'react';
 
 import { AiOutlineGooglePlus, AiOutlineGithub } from 'react-icons/ai';
 import { googleLogin, githubLogin } from '@src/features/authentication/sign-in';
-import { login } from '@src/api/user';
+// import { login } from '@src/api/user';
 import { AxiosError } from 'axios';
 import { loginSchema } from '@src/api/user/validator/type-schema';
 import { SiNestjs, SiPostgresql, SiPrisma } from 'react-icons/si';
@@ -63,8 +63,9 @@ const Login: React.FC = () => {
     }
 
     try {
-      const result = await login(validatedLoginSchema.data);
-      console.log(result);
+      alert('currently not supported, please login in via SNS');
+      // const result = await login(validatedLoginSchema.data);
+      // console.log(result);
     } catch (err) {
       if (err instanceof AxiosError) {
         if (err.response?.status === 401) {

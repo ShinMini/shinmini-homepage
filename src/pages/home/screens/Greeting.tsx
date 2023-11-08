@@ -36,7 +36,7 @@ const Container = styled.div`
   opacity: 0;
   display: flex;
   margin: 0 auto;
-  padding: clamp(0.5rem, 2vw, 2rem) 0;
+  padding: 1rem 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -50,6 +50,8 @@ const Container = styled.div`
 const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr;
+  height: 100%;
+  overflow-y: clip;
 
   justify-content: center;
   align-items: center;

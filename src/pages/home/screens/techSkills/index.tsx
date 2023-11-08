@@ -58,7 +58,7 @@ const HeaderButton = styled.h1<{ $isActive: boolean }>`
 
 const Content = styled.div<{ $isActive: boolean }>`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
 
   justify-content: center;
   box-sizing: border-box;
@@ -73,7 +73,7 @@ const Content = styled.div<{ $isActive: boolean }>`
   background-color: ${props => props.theme.colors.background};
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   @media ${sp.sm} {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   & > article {

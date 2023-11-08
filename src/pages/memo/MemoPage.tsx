@@ -1,7 +1,6 @@
 import React, { memo, useCallback, useLayoutEffect } from 'react';
 
 import styled, { keyframes } from 'styled-components';
-import { Button } from '@mui/material';
 
 import { useAppSelector, useAppDispatch } from '@hooks/useRedux';
 
@@ -11,6 +10,7 @@ import { MemoState, addMemo, updateMemo } from '@src/store/slices/memoSlice';
 
 import { validateFormData } from './utils/validate-todo-format';
 import DropDown from './components/DropDown';
+import { sp } from '@src/themes';
 
 const slideDown = keyframes({
   '0%': {
@@ -38,6 +38,41 @@ const AnimationWrapper = styled.div<{ $isDelete: boolean }>`
   & > div {
     animation: ${props => (props.$isDelete ? slideUp : slideDown)} 500ms ease-out forwards;
   }
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  max-width: 1080px;
+  margin: 0 auto;
+
+  color: ${props => props.theme.colors.text};
+  border-radius: 0.4rem;
+
+  font-size: 0.8rem;
+
+  @media ${sp.sm} {
+    font-size: 1rem;
+  }
+`;
+
+const TodoListContainer = styled.div`
+  box-shadow: inset -1px 2px 4px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+  height: 60vh;
+  &:first-child {
+    padding-top: 0.7rem;
+  }
+  border-radius: 0.2rem;
+  overflow-y: scroll;
 `;
 
 const MemoPage: React.FC = () => {
@@ -101,13 +136,11 @@ const MemoPage: React.FC = () => {
     yield dispatch(updateMemo({ targetDate, memo }));
   }
 
-  const S = createStyled();
-
   return (
     <Layout>
-      <h1 className="font-bold text-xl mb-1">Memo</h1>
-      <S.Container>
-        <S.TodoListContainer>
+      <h1 className="font-bold text-lg lg:text-3xl mb-1">Memo</h1>
+      <Container>
+        <TodoListContainer>
           {memoState &&
             memoState.toReversed().map(memo => {
               const key = `currentTodoList-${memo.date.toString()}`;
@@ -118,71 +151,23 @@ const MemoPage: React.FC = () => {
                 </AnimationWrapper>
               );
             })}
-        </S.TodoListContainer>
-        <div className="flex flex-col mt-2 box-border p-2 bg-slate-200 rounded">
-          <div className="flex gap-4">
-            <input
-              ref={titleInput}
-              placeholder="Title"
-              className="text-lg w-full rounded px-2 bg-slate-100 text-zinc-800"
-            />
-            <Button variant="contained" onClick={pushTodo}>
-              save
-            </Button>
+        </TodoListContainer>
+        <div className="flex flex-col box-border rounded bg-zinc-800 text-zinc-800 text-sm lg:text-md gap-1 p-1">
+          <div className="flex gap-1">
+            <input ref={titleInput} placeholder="Title" className="w-full rounded px-2 bg-slate-50 text-zinc-900" />
+            <button className="px-4 py-2 text-center font-semibold rounded bg-sky-600 text-gray-100" onClick={pushTodo}>
+              Save
+            </button>
           </div>
           <textarea
             ref={detailTextArea}
-            className="p-2 text-lg rounded w-full min-h-[6rem] text-slate-100 mt-2 backdrop-blur-md bg-slate-900"
+            className="p-2 rounded w-full min-h-[6rem] bg-gray-200 backdrop-blur-md"
             placeholder="Detail(Optional)"
           />
         </div>
-      </S.Container>
+      </Container>
     </Layout>
   );
 };
 
 export default memo(MemoPage);
-
-function createStyled() {
-  const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    color: ${props => props.theme.colors.text};
-    border-radius: 0.4rem;
-  `;
-
-  const Header = styled.div`
-    display: flex;
-    text-align: center;
-    padding: 0.5rem 1rem;
-    h1 {
-      font-family: 'PoppinsSemiBold';
-      font-size: 1.6rem;
-    }
-  `;
-
-  const TodoListContainer = styled.div`
-    box-shadow: inset -1px 2px 4px 2px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      width: 0;
-    }
-    height: 60vh;
-    &:first-child {
-      padding-top: 0.7rem;
-    }
-    border-radius: 0.2rem;
-    overflow-y: scroll;
-  `;
-
-  return {
-    Container,
-    Header,
-    TodoListContainer,
-  };
-}
