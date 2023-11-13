@@ -18,7 +18,7 @@ const Container = styled.nav`
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 1rem;
   overflow-x: hidden;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   color: white;
@@ -44,9 +44,6 @@ const DropDownBox = styled.div`
 const NavBox = styled.nav<{ $isMenuOpen: boolean }>`
   display: flex;
   gap: min(0.8rem, 2vw);
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-right: 1.2rem;
   z-index: 200;
 
   & > p {
@@ -54,9 +51,13 @@ const NavBox = styled.nav<{ $isMenuOpen: boolean }>`
   }
 
   @media (max-width: 640px) {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1.2rem;
     position: fixed;
     & > p {
       display: block;
+      padding: 0.2rem 0;
       color: ${props => props.theme.colors.success};
       font-size: 1.2rem;
       margin: 0 0.2rem;
@@ -79,7 +80,7 @@ const NavBox = styled.nav<{ $isMenuOpen: boolean }>`
 `;
 
 const NavItem = styled(Link)`
-  font-size: clamp(0.9rem, 5vw, 1.4rem);
+  font-size: clamp(0.9rem, 2vw, 1.4rem);
   font-weight: bold;
   transition: color 0.2s ease-in-out;
   cursor: pointer;
@@ -95,7 +96,7 @@ const LogoBox = styled.div`
 `;
 
 const Logo = styled(Link)`
-  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
   text-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   transition: color 0.2s ease-in-out;
   font-family: ${props => props.theme.fonts.poppins.bold};
@@ -108,7 +109,7 @@ const Logo = styled(Link)`
 const LoginButton = styled.button`
   color: ${props => props.theme.colors.text};
   background-color: ${props => props.theme.colors.background};
-  font-size: clamp(0.8rem, 3vw, 1.2rem);
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
 
   padding: 4px 12px;
   border-radius: 0.25rem;
@@ -158,7 +159,7 @@ const Navbar: React.FC = () => {
             <div className="flex sm:flex-row sm:gap-4 md:gap-6 flex-col gap-2">
               <NavItem to="/">Home</NavItem>
               <NavItem to="/memo">Memo</NavItem>
-              <NavItem to="/feats">Feature</NavItem>
+              <NavItem to="/feats">Feat</NavItem>
             </div>
           </NavBox>
         </DropDownBox>

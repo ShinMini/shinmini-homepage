@@ -41,7 +41,7 @@ const frontEndContext: SkillContextType[] = [
     icon: <BsGraphUpArrow color="#F34B7D" />,
     description: [
       'Knowledge of web performance optimization - Frontend Developers need to ensure that their websites',
-      'and applications load quickly and perform well on different devices and platforms. essential for creating the user interface and user experience of a website or web application.',
+      'essential for creating the user interface and user experience of a website or web application.',
     ],
   },
 ];

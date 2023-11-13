@@ -4,7 +4,7 @@ const Button = styled.button<{ color?: string }>`
   font-size: clamp(1rem, 2.5vw, 1.4rem);
   font-weight: 600;
 
-  padding: clamp(3px, 1vw, 10px) clamp(6px, 1vw, 8px);
+  padding: clamp(3px, 0.6vh, 6px) clamp(6px, 1vw, 8px);
 
   border-top: 0px;
   border-right: 0px;

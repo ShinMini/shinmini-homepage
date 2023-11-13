@@ -31,13 +31,13 @@ const slideLeft = keyframes`
 `;
 
 const Container = styled.div`
-  scroll-snap-align: start;
-  overflow-x: hidden;
-  opacity: 0;
   display: flex;
-  margin: 0 auto;
-  padding: 1rem 0;
   flex-direction: column;
+  overflow-x: hidden;
+  height: 100%;
+  opacity: 0;
+  margin: 0 auto;
+  padding: 0.5rem 0;
   justify-content: center;
   align-items: center;
   color: ${props => props.theme.colors.text};
@@ -50,19 +50,23 @@ const Container = styled.div`
 const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
   height: 100%;
-  overflow-y: clip;
 
   justify-content: center;
   align-items: center;
 
   margin: auto;
-  padding: 2rem;
-  gap: 1rem;
+  padding: 1rem;
 
   @media ${sp.sm} {
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
     gap: 0.2rem;
+  }
+
+  @media ${sp.sm} and (min-height: 600px) {
+    padding: 2rem;
   }
 `;
 
@@ -92,7 +96,7 @@ const Context = styled.div`
   justify-content: space-around;
   align-items: flex-start;
 
-  gap: min(1rem, 2.5vh);
+  gap: min(0.7rem, 2.5vh);
 
   margin: 0 auto;
   opacity: 0;
@@ -117,7 +121,7 @@ const Context = styled.div`
       word-wrap: break-word;
       word-break: break-word;
       color: ${props => props.theme.colors.text};
-      font-size: clamp(0.9rem, 1vw, 1.2rem);
+      font-size: clamp(0.6rem, 1.2vw, 1.2rem);
       font-family: ${props => props.theme.fonts.poppins.regular};
       font-weight: 550;
       line-height: 1.2;
@@ -132,10 +136,10 @@ const Greeting: React.FC = () => {
         <AsciiImage />
         <Context>
           <header>
-            <h1 className="font-bold">
-              Hello, I&apos;m <span style={{ color: '#0d6a09', fontWeight: 600 }}>ShinMini</span>
+            <h1>
+              Hi, I&apos;m <span style={{ color: '#0d6a09', fontWeight: 600 }}>HyeonMin Shin</span>
             </h1>
-            <h2 className="font-semibold">A Full Stack Developer</h2>
+            <h2>A Full Stack Developer</h2>
           </header>
           <article>
             <p>Hello, my name is HyeonMin Shin.</p>
@@ -146,18 +150,13 @@ const Greeting: React.FC = () => {
             <p>Now, I live in Seoul (서울), South Korea (한국)</p>
           </article>
           <div className="flex w-full justify-center items-center gap-2 mt-4 max-w-lg">
-            <Button className="w-1/3" onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
+            <Button className="w-1/3" color="#264653" onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
               Contact
             </Button>
             <Button
               className="w-1/3"
               color="#2A9D8F"
-              onClick={() =>
-                window.open(
-                  'https://shinmini.notion.site/shinmini/Hello-ShinMini-16e4dedcb2e14d7bae6a85520d5bb83b',
-                  '_blank',
-                )
-              }>
+              onClick={() => window.open('https://dev-shinmini.web.app/', '_blank')}>
               Blog
             </Button>
 

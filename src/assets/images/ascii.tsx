@@ -25,7 +25,7 @@ const asciiArr = [
   '+==+*#%@@%%*@@@@@@%@%%@@#==#@@%%%%%%@@%%%%@++**##%+',
 ];
 
-const textclip = keyframes`
+const textClip = keyframes`
   to {
     background-position: 200% center;
   }
@@ -42,31 +42,24 @@ const AnimText = styled.pre`
   text-fill-color: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: ${textclip} 2s linear infinite;
-  display: inline-block;
+  animation: ${textClip} 2s linear infinite;
 
   line-height: 1;
 
-  @media ${sp.xs} {
-    font-size: 8px;
+  font-size: 8px;
+
+  @media ${sp.md} and (min-height: 450px) {
+    font-size: 12px;
   }
 
-  @media ${sp.sm} {
-    font-size: 11px;
-  }
-
-  @media ${sp.md} {
+  @media ${sp.lg} and (min-height: 450px) {
     font-size: 14px;
-  }
-
-  @media ${sp.lg} {
-    font-size: 17px;
   }
 `;
 
 const AsciiImage = () => {
   return (
-    <div className="flex flex-col w-fit h-fit p-4 items-center justify-center m-auto">
+    <div className="flex flex-col p-2 items-center justify-center m-auto">
       {asciiArr.map((text, index) => {
         return (
           <AnimText className="w-full h-fit leading-4 font-black" key={`${text}-${index}`}>
