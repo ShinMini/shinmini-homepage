@@ -1,6 +1,5 @@
 import { Layout } from '@src/components';
 import { memo } from 'react';
-import { Link } from 'react-router-dom';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 
