@@ -37,8 +37,15 @@ const Footer = () => {
   return (
     <Container>
       <Content>
-        <div>
+        <div className='flex'>
           <p>© 2021 - All rights reserved</p>
+          <Link to="/terms" className="ml-2 cursor-pointer text-gray-300">
+            Terms of Use
+          </Link>
+          <p className="ml-2">|</p>
+          <Link to="/privacy" className="ml-2 cursor-pointer text-gray-300">
+            Privacy Policy
+          </Link>
         </div>
         <div className="flex">
           <p>

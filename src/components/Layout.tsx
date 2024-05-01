@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { styled } from 'styled-components';
 
-import Navbar from '@src/components/navbar';
+import Navbar from '@src/components/Header';
 import { ScrollRestoration } from 'react-router-dom';
 import Footer from './Footer';
 import { hexToRGBA } from '@src/features';
@@ -30,11 +30,7 @@ const InnerSpacing = styled.div`
   padding: 1rem;
 `;
 
-type Props = {
-  children: React.ReactNode;
-};
-
-const Layout = ({ children }: Props) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
       <Container>
@@ -47,4 +43,4 @@ const Layout = ({ children }: Props) => {
   );
 };
 
-export default Layout;
+export default memo(Layout);

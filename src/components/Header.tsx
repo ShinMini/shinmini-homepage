@@ -2,8 +2,6 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-import ThemeIcon from './ThemeIcon';
-
 import { hexToRGBA, logout } from '@src/features';
 import { toggleTheme } from '@store/slices/themeSlice';
 import { useAppDispatch, useAppSelector } from '@hooks/useRedux';
@@ -12,6 +10,15 @@ import { auth } from '@src/lib/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useOnOutsideClick } from '@hooks/useOnOutSideClick';
 import { sp } from '@src/themes';
+
+import { HiMoon, HiSun } from 'react-icons/hi';
+import { motion } from 'framer-motion';
+
+const ThemeIcon: React.FC<{ currentColor: 'light' | 'dark' }> = ({ currentColor }) => (
+  <motion.div initial={{ y: 0, scale: 1 }} whileTap={{ y: [80, 0], scale: 0.1 }}>
+    {currentColor === 'light' ? <HiSun size={25} color="f3AEBE" /> : <HiMoon size={25} color="yellow" />}
+  </motion.div>
+);
 
 const Container = styled.nav`
   width: 100%;
@@ -121,7 +128,7 @@ const LoginButton = styled.button`
   }
 `;
 
-const Navbar: React.FC = () => {
+const Header = () => {
   const [user] = useAuthState(auth);
   const dispatch = useAppDispatch();
   const currentColor = useAppSelector(state => state.theme.type);
@@ -169,4 +176,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default Header;
