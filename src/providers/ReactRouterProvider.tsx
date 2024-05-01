@@ -14,12 +14,14 @@ import FindMyPage from '@pages/login/FindMyPage';
 import LoadingPage from '@src/pages/LoadingPage';
 import ErrorPage from '@src/pages/ErrorPage';
 import App from '@src/App';
+import TermsScreen from '@src/pages/terms/TermsScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} errorElement={<ErrorPage />}>
       <Route index={true} path="/" element={<HomePage />} />
       <Route path="/feats" element={<FeatureListPage />} />
+      <Route path='/terms' element={<TermsScreen />} />
       <Route path="/feats/passport-resizer" element={<PassportResizer />} />
       <Route path="/memo" element={<MemoPage />} />
       <Route path="/login" element={<LoginPage />} />
