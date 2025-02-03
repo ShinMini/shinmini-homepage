@@ -5,6 +5,10 @@ import signInErrorHandler from './sign-in-error-handler';
 export default function githubLogin() {
   const auth = getAuth(app);
   signInWithPopup(auth, githubAuthProvider)
-    .then(result => GithubAuthProvider.credentialFromResult(result))
-    .catch(error => alert(signInErrorHandler(error)));
+  .then(result => {
+    const credential = GithubAuthProvider.credentialFromResult(result);
+    if (credential) {
+      window.location.href = '/';
+    }
+    }).catch(error => alert(signInErrorHandler(error)));
 }

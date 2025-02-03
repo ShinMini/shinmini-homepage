@@ -128,10 +128,10 @@ const Login: React.FC = () => {
           <div className="flex items-center justify-between lg:mt-6 mt-4">
             <div className="flex lg:gap-3 gap-2">
               <div className="rounded-full cursor-pointer" onClick={googleLogin}>
-                <AiOutlineGooglePlus size={30} color="hotpink" />
+                <AiOutlineGooglePlus size={30}  />
               </div>
               <div className="rounded-full cursor-pointer" onClick={githubLogin}>
-                <AiOutlineGithub size={30} color="black" />
+                <AiOutlineGithub size={25} color="black" />
               </div>
             </div>
             <input

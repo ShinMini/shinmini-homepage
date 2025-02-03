@@ -55,7 +55,7 @@ const SendMail: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
 
   const sendEmail = async e => {
-    e.preventDefault();
+    e?.preventDefault();
     if (form.current === null) return console.error('Form is null');
 
     const formFields = new FormData(form.current);
@@ -65,10 +65,8 @@ const SendMail: React.FC = () => {
       formData.user_name = anonymousUser.user_name;
       formData.user_email = anonymousUser.user_email;
     }
-
     try {
       const parsedData = schema.parse(formData);
-
       emailjs
         .send(
           emailjsConfig.serviceID,
